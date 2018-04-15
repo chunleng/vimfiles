@@ -167,7 +167,7 @@ hi QuickFixLine cterm=bold ctermfg=NONE ctermbg=NONE
 hi DiffAdd cterm=NONE ctermfg=Green ctermbg=NONE " Green
 hi DiffDelete cterm=NONE ctermfg=1 ctermbg=NONE " Red
 hi DiffChange cterm=bold ctermfg=NONE ctermbg=NONE " Blue
-hi DiffText cterm=bold,underline ctermfg=232 ctermbg=25 " Blue
+hi DiffText cterm=bold,underline ctermfg=25 ctermbg=NONE " Blue
 hi EndOfBuffer ctermfg=Black ctermbg=Black
 hi Folded cterm=bold ctermfg=243 ctermbg=235
 
