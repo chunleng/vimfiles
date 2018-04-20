@@ -33,6 +33,7 @@ set incsearch
 set hlsearch
 set laststatus=2
 set wildmenu
+set wildmode=list:longest,full
 set showcmd
 set timeout ttimeout timeoutlen=3000 ttimeoutlen=1000
 if has('nvim')
