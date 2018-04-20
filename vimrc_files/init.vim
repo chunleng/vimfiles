@@ -93,10 +93,10 @@ nnoremap <leader>tw :set wrap!<cr>
 "" Close Tab <leader>x
 nnoremap <leader>x :close!<cr>
 "" Mapping mac keys to the appropriate function
-nnoremap <left> :vsp<cr><c-w><left>
-nnoremap <right> :vsp<cr>
-nnoremap <up> :sp<cr><c-w><up>
-nnoremap <down> :sp<cr>
+nnoremap <left> :leftabove vsplit<cr>
+nnoremap <right> :rightbelow vsplit<cr>
+nnoremap <up> :leftabove split<cr>
+nnoremap <down> :rightbelow split<cr>
 "" Important Files
 nnoremap !% :source ~/.config/nvim/init.vim<cr>
 nnoremap !rv :e ~/.config/nvim/init.vim<cr>
