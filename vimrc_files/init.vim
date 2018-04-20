@@ -69,6 +69,7 @@ runtime languageclient-neovim.vim
 runtime neco-syntax.vim
 runtime vim-obssesion.vim
 runtime vim-localvimrc.vim
+runtime vim-grepper.vim
 runtime vim-gitgutter.vim
 runtime vim-lengthmatters.vim
 runtime vim-multiple-cursors.vim
