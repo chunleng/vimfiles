@@ -1,4 +1,6 @@
-#!/usr/bin/env bash -eu
+#!/usr/bin/env bash
+
+set eu
 
 APP_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
 
@@ -14,6 +16,6 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh -
 sh /tmp/installer.sh $HOME/.local/share/dein
 
 # install nvim setting
-pip install neovim-python
-pip3 install neovim-python
+pip install neovim
+pip3 install neovim
 nvim -c "call dein#update()" -c "qall" --headless
