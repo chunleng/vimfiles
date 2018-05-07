@@ -27,7 +27,7 @@ set complete=.,w
 set completeopt-=preview
 set sessionoptions+=resize,winpos
 set list
-set listchars=tab:»\ ,trail:·,extends:,precedes:,nbsp:+,eol:¶
+set listchars=tab:»\ ,trail:·,extends:,precedes:,nbsp:+,eol:¶
 set fillchars=vert:\ ,stlnc:\ ,diff:·
 set incsearch
 set hlsearch

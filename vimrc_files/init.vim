@@ -157,7 +157,7 @@ hi Visual ctermbg=236
 hi StatusLine cterm=NONE ctermfg=243 ctermbg=NONE
 hi StatusLineNC cterm=NONE ctermfg=236 ctermbg=NONE
 hi Menu cterm=reverse
-hi VertSplit cterm=bold ctermfg=243 ctermbg=NONE
+hi VertSplit cterm=NONE ctermfg=235 ctermbg=NONE
 hi Search cterm=NONE ctermfg=White ctermbg=NONE
 hi IncSearch cterm=NONE ctermbg=White
 hi SpellCap cterm=NONE ctermfg=Black ctermbg=Yellow
