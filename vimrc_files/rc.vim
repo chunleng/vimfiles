@@ -28,7 +28,7 @@ set completeopt-=preview
 set sessionoptions+=resize,winpos
 set list
 set listchars=tab:»\ ,trail:·,extends:,precedes:,nbsp:+,eol:¶
-set fillchars=vert:\│,stlnc:\─,diff:·
+set fillchars=vert:│,stlnc:\ ,diff:·
 set incsearch
 set hlsearch
 set laststatus=2
