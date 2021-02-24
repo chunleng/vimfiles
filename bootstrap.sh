@@ -15,11 +15,4 @@ echo $DEIN_INSTALL_PATH
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh -o /tmp/installer.sh
 sh /tmp/installer.sh $HOME/.local/share/dein
 
-# install nvim setting
-pip install pynvim
-pip3 install pynvim
-gem install neovim
 nvim -c "call dein#update()" -c "qall" --headless
-
-# install for plugin
-pip3 install notedown
