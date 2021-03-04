@@ -4,23 +4,25 @@ let &runtimepath.=','.g:dein_install_path
 
 if dein#load_state(g:dein_plugin_path)
     call dein#begin(g:dein_plugin_path)
-    call dein#add(g:dein_install_path)
 
+    " Allow to assign same key to navigate between vim and tmux pane
     call dein#add('christoomey/vim-tmux-navigator')
+
+    " Show the menu for leader key
     call dein#add('hecal3/vim-leader-guide')
+
+    " 
     call dein#add('ctrlpvim/ctrlp.vim')
     call dein#add('scrooloose/nerdtree')
-    call dein#add('Xuyuanp/nerdtree-git-plugin')
     call dein#add('ryanoasis/vim-devicons')
+    call dein#add('tiagofumo/vim-nerdtree-syntax-highlight', {'depends':'ryanoasis/vim-devicons'})
+    call dein#add('Xuyuanp/nerdtree-git-plugin')
     call dein#add('sjl/gundo.vim')
     call dein#add('Yggdroot/indentLine')
     call dein#add('AndrewRadev/linediff.vim')
-    call dein#add('thinca/vim-quickrun', {'depends':'tyru/open-browser.vim'})
-    call dein#add('tyru/open-browser.vim')
     call dein#add('tpope/vim-fugitive')
     call dein#add('vim-airline/vim-airline')
     call dein#add('vim-airline/vim-airline-themes')
-    call dein#add('vim-syntastic/syntastic')
     call dein#add('majutsushi/tagbar')
     call dein#add('SirVer/ultisnips')
     call dein#add('Shougo/deoplete.nvim')
@@ -37,12 +39,9 @@ if dein#load_state(g:dein_plugin_path)
     call dein#add('whatyouhide/vim-lengthmatters')
     call dein#add('terryma/vim-multiple-cursors')
     call dein#add('tpope/vim-surround')
-    call dein#add('dhruvasagar/vim-table-mode')
-    call dein#add('janko-m/vim-test')
     call dein#add('Shougo/neco-vim')
     call dein#add('qpkorr/vim-bufkill')
     call dein#add('Chiel92/vim-autoformat')
-    call dein#add('sheerun/vim-polyglot')
     call dein#add('git@bitbucket.org:chunleng/ultisnips-snippet.git')
 
     call dein#end()
@@ -56,25 +55,20 @@ runtime ctrlp.vim
 runtime nerdtree.vim
 runtime nerdtree-git-plugin.vim
 runtime gundo.vim
-runtime indentline.vim
-runtime vim-quickrun.vim
+runtime indentLine.vim
 runtime vim-fugitive.vim
 runtime vim-airline.vim
 runtime vim-airline-themes.vim
-runtime vim-syntastic.vim
 runtime tagbar.vim
 runtime ultisnips.vim
 runtime deoplete.vim
-runtime languageclient-neovim.vim
+runtime LanguageClient-neovim.vim
 runtime neco-syntax.vim
-runtime vim-obssesion.vim
 runtime vim-localvimrc.vim
 runtime vim-grepper.vim
 runtime vim-gitgutter.vim
 runtime vim-lengthmatters.vim
 runtime vim-multiple-cursors.vim
-runtime vim-table-mode.vim
-runtime vim-test.vim
 runtime vim-autoformat.vim
 
 " mappings ----------------------------- {{{
@@ -133,7 +127,7 @@ hi NonText ctermfg=236 ctermbg=black " Gray
 hi Normal ctermfg=246 " White
 hi NormalNC ctermfg=240 " White
 hi Conceal cterm=NONE ctermfg=238 ctermbg=NONE " Gray
-                    
+
 "" Syntax
 hi Comment cterm=NONE ctermfg=240 ctermbg=NONE " Gray
 hi Constant cterm=italic ctermfg=NONE
@@ -205,4 +199,3 @@ augroup snippet
     autocmd FileType snippets setlocal noet
 augroup END
 
-" vi: et sw=4 sts=4 ts=4

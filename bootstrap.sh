@@ -16,3 +16,6 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh -
 sh /tmp/installer.sh $HOME/.local/share/dein
 
 nvim -c "call dein#update()" -c "qall" --headless
+
+# deoplete
+nvim -c "UpdateRemotePlugins" -c "qall" --headless

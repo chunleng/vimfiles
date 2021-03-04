@@ -49,7 +49,5 @@ set bg=dark
 colorscheme default
 
 
-" Allow more % start-end matching
-runtime macros/matchit.vim
 
 let g:mapleader="\<space>"
