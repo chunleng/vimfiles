@@ -11,20 +11,31 @@ if dein#load_state(g:dein_plugin_path)
     " Show the menu for leader key
     call dein#add('hecal3/vim-leader-guide')
 
-    " 
+    " File finder
     call dein#add('ctrlpvim/ctrlp.vim')
+
+    " File navigator & plugins
     call dein#add('scrooloose/nerdtree')
-    call dein#add('ryanoasis/vim-devicons')
     call dein#add('tiagofumo/vim-nerdtree-syntax-highlight', {'depends':'ryanoasis/vim-devicons'})
     call dein#add('Xuyuanp/nerdtree-git-plugin')
+
+    " Beautify
+    call dein#add('ryanoasis/vim-devicons')
+    call dein#add('vim-airline/vim-airline')
+    call dein#add('vim-airline/vim-airline-themes')
+
+    " Allow to view edit history
     call dein#add('sjl/gundo.vim')
     call dein#add('Yggdroot/indentLine')
     call dein#add('AndrewRadev/linediff.vim')
+
+    " Git integration
     call dein#add('tpope/vim-fugitive')
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('vim-airline/vim-airline-themes')
-    call dein#add('majutsushi/tagbar')
+    call dein#add('airblade/vim-gitgutter')
+
+    call dein#add('preservim/tagbar')
     call dein#add('SirVer/ultisnips')
+    call dein#add('terryma/vim-multiple-cursors')
     call dein#add('Shougo/deoplete.nvim')
     call dein#add('autozimu/LanguageClient-neovim', {'build':'bash install.sh'})
     call dein#add('Shougo/neco-syntax')
@@ -34,10 +45,8 @@ if dein#load_state(g:dein_plugin_path)
     call dein#add('mhinz/vim-grepper')
     call dein#add('tpope/vim-commentary')
     call dein#add('itchyny/vim-cursorword')
-    call dein#add('airblade/vim-gitgutter')
     call dein#add('michaeljsmith/vim-indent-object')
     call dein#add('whatyouhide/vim-lengthmatters')
-    call dein#add('terryma/vim-multiple-cursors')
     call dein#add('tpope/vim-surround')
     call dein#add('Shougo/neco-vim')
     call dein#add('qpkorr/vim-bufkill')
@@ -70,9 +79,9 @@ runtime vim-gitgutter.vim
 runtime vim-lengthmatters.vim
 runtime vim-multiple-cursors.vim
 runtime vim-autoformat.vim
+runtime vim-bufkill.vim
 
 " mappings ----------------------------- {{{
-noremap <silent><leader>bd :<c-u>BD!<cr>
 nnoremap <silent><esc> :nohl<cr>
 nnoremap <silent><c-n> :bn<cr>
 nnoremap <silent><c-p> :bp<cr>
@@ -169,9 +178,6 @@ hi Folded cterm=bold ctermfg=243 ctermbg=235
 "" Gutter
 hi LineNr cterm=NONE ctermfg=237 ctermbg=NONE
 hi CursorLineNr cterm=NONE ctermfg=240 ctermbg=NONE
-hi GitGutterAddDefault ctermfg=2 ctermbg=NONE
-hi GitGutterChangeDefault ctermfg=3 ctermbg=NONE
-hi GitGutterDeleteDefault ctermfg=1 ctermbg=NONE
 hi SignColumn ctermbg=NONE
 hi FoldColumn ctermfg=238 ctermbg=NONE
 " }}}

@@ -41,7 +41,6 @@ if has('nvim')
 endif
 set fileencodings=ucs-bom,utf-8,sjis,default
 set synmaxcol=160
-set textwidth=80
 set nowrap
 scriptencoding utf-8
 
