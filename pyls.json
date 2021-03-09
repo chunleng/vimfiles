@@ -1,0 +1,8 @@
+{
+    "pyls.plugins": {
+        "pycodestyle": {
+            "maxLineLength": 120,
+            "ignore": ["E302","E305"]
+        }
+    }
+}
