@@ -1,3 +1,3 @@
-let g:NERDTreeGitStatusShowIgnored = 1
-let g:NERDTreeGitStatusUntrackedFilesMode = 'all'
+let g:NERDTreeGitStatusShowIgnored = 0
+let g:NERDTreeGitStatusUntrackedFilesMode = 'normal'
 let g:NERDTreeGitStatusUseNerdFonts = 1

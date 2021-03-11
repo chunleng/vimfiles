@@ -17,3 +17,4 @@ let g:gitgutter_sign_priority= 1
 hi GitGutterAdd ctermfg=22 ctermbg=NONE
 hi GitGutterChange ctermfg=25 ctermbg=NONE
 hi GitGutterDelete ctermfg=89 ctermbg=NONE
+hi GitGutterChangeDelete ctermfg=89 ctermbg=NONE
