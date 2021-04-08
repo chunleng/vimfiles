@@ -1,5 +1,8 @@
 runtime config.vim
 
+" Plugins config that has to be loaded before the plugin
+runtime before-vim-polyglot.vim
+
 let &runtimepath.=','.g:dein_install_path
 
 if dein#load_state(g:dein_plugin_path)
@@ -35,7 +38,6 @@ if dein#load_state(g:dein_plugin_path)
 
     call dein#add('preservim/tagbar')
     call dein#add('SirVer/ultisnips')
-    call dein#add('terryma/vim-multiple-cursors')
     call dein#add('Shougo/deoplete.nvim')
     call dein#add('autozimu/LanguageClient-neovim', {'build':'bash install.sh'})
     call dein#add('Shougo/neco-syntax')
@@ -51,6 +53,8 @@ if dein#load_state(g:dein_plugin_path)
     call dein#add('Shougo/neco-vim')
     call dein#add('qpkorr/vim-bufkill')
     call dein#add('Chiel92/vim-autoformat')
+    call dein#add('sheerun/vim-polyglot')
+    call dein#add('mattn/emmet-vim')
     call dein#add('git@bitbucket.org:chunleng/ultisnips-snippet.git')
 
     call dein#end()
@@ -77,9 +81,9 @@ runtime vim-localvimrc.vim
 runtime vim-grepper.vim
 runtime vim-gitgutter.vim
 runtime vim-lengthmatters.vim
-runtime vim-multiple-cursors.vim
 runtime vim-autoformat.vim
 runtime vim-bufkill.vim
+runtime emmet-vim.vim
 
 " mappings ----------------------------- {{{
 nnoremap <silent><esc> :nohl<cr>
