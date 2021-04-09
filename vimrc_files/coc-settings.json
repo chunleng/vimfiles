@@ -1,0 +1,10 @@
+// This file is referred to when command :CocConfig is entered
+{
+    "diagnostic.virtualText": true,
+    "diagnostic.virtualTextCurrentLineOnly": false,
+    "diagnostic.virtualTextPrefix": "         ",
+    "diagnostic.errorSign":"",
+    "diagnostic.warningSign":"",
+    "diagnostic.infoSign":"",
+    "diagnostic.hintSign":"ﯦ"
+}

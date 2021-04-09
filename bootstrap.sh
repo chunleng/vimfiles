@@ -15,11 +15,7 @@ echo $DEIN_INSTALL_PATH
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh -o /tmp/installer.sh
 sh /tmp/installer.sh $HOME/.local/share/dein
 
-# python-language-server settings
-mkdir $HOME/.vim
-ln -sn ${APP_PATH}/pyls.json $HOME/.vim/settings.json
+nvim -c "call dein#update()|qall" --headless
 
-nvim -c "call dein#update()" -c "qall" --headless
-
-# deoplete
-nvim -c "UpdateRemotePlugins" -c "qall" --headless
+# coc.nvim
+nvim -c "CocInstall -sync coc-json coc-yaml coc-ultisnips coc-html coc-css coc-tabnine coc-neco coc-tsserver coc-java coc-jedi|qall" --headless

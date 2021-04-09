@@ -38,23 +38,20 @@ if dein#load_state(g:dein_plugin_path)
 
     call dein#add('preservim/tagbar')
     call dein#add('SirVer/ultisnips')
-    call dein#add('Shougo/deoplete.nvim')
-    call dein#add('autozimu/LanguageClient-neovim', {'build':'bash install.sh'})
-    call dein#add('Shougo/neco-syntax')
     call dein#add('tpope/vim-obsession')
     call dein#add('embear/vim-localvimrc')
+
+    " Parentheses formatting
     call dein#add('cohama/lexima.vim')
     call dein#add('mhinz/vim-grepper')
     call dein#add('tpope/vim-commentary')
     call dein#add('itchyny/vim-cursorword')
-    call dein#add('michaeljsmith/vim-indent-object')
     call dein#add('whatyouhide/vim-lengthmatters')
     call dein#add('tpope/vim-surround')
-    call dein#add('Shougo/neco-vim')
     call dein#add('qpkorr/vim-bufkill')
-    call dein#add('Chiel92/vim-autoformat')
     call dein#add('sheerun/vim-polyglot')
     call dein#add('mattn/emmet-vim')
+    call dein#add('neoclide/coc.nvim', {'branch':'release'})
     call dein#add('git@bitbucket.org:chunleng/ultisnips-snippet.git')
 
     call dein#end()
@@ -74,14 +71,11 @@ runtime vim-airline.vim
 runtime vim-airline-themes.vim
 runtime tagbar.vim
 runtime ultisnips.vim
-runtime deoplete.vim
-runtime LanguageClient-neovim.vim
-runtime neco-syntax.vim
+runtime coc.nvim.vim
 runtime vim-localvimrc.vim
 runtime vim-grepper.vim
 runtime vim-gitgutter.vim
 runtime vim-lengthmatters.vim
-runtime vim-autoformat.vim
 runtime vim-bufkill.vim
 runtime emmet-vim.vim
 
@@ -188,7 +182,6 @@ hi FoldColumn ctermfg=238 ctermbg=NONE
 
 augroup python
     autocmd!
-    autocmd FileType python setlocal keywordprg=":terminal pydoc"
     autocmd FileType python setlocal foldmethod=indent
 augroup END
 
