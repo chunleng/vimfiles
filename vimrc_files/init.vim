@@ -3,60 +3,55 @@ runtime config.vim
 " Plugins config that has to be loaded before the plugin
 runtime before-vim-polyglot.vim
 
-let &runtimepath.=','.g:dein_install_path
+call plug#begin('~/.vim/plugged')
 
-if dein#load_state(g:dein_plugin_path)
-    call dein#begin(g:dein_plugin_path)
+" Allow to assign same key to navigate between vim and tmux pane
+Plug 'christoomey/vim-tmux-navigator'
 
-    " Allow to assign same key to navigate between vim and tmux pane
-    call dein#add('christoomey/vim-tmux-navigator')
+" Show the menu for leader key
+Plug 'spinks/vim-leader-guide'
 
-    " Show the menu for leader key
-    call dein#add('hecal3/vim-leader-guide')
+" File navigator & plugins
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
 
-    " File navigator & plugins
-    call dein#add('scrooloose/nerdtree')
-    call dein#add('tiagofumo/vim-nerdtree-syntax-highlight', {'depends':'ryanoasis/vim-devicons'})
-    call dein#add('Xuyuanp/nerdtree-git-plugin')
+" Beautify
+Plug 'ryanoasis/vim-devicons'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-    " Beautify
-    call dein#add('ryanoasis/vim-devicons')
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('vim-airline/vim-airline-themes')
+" Allow to view edit history
+Plug 'sjl/gundo.vim'
+Plug 'Yggdroot/indentLine'
+Plug 'AndrewRadev/linediff.vim'
 
-    " Allow to view edit history
-    call dein#add('sjl/gundo.vim')
-    call dein#add('Yggdroot/indentLine')
-    call dein#add('AndrewRadev/linediff.vim')
+" Git integration
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
-    " Git integration
-    call dein#add('tpope/vim-fugitive')
-    call dein#add('airblade/vim-gitgutter')
+Plug 'preservim/tagbar'
+Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-obsession'
+Plug 'embear/vim-localvimrc'
 
-    call dein#add('preservim/tagbar')
-    call dein#add('SirVer/ultisnips')
-    call dein#add('tpope/vim-obsession')
-    call dein#add('embear/vim-localvimrc')
+" Parentheses formatting
+Plug 'cohama/lexima.vim'
+Plug 'tpope/vim-commentary'
+Plug 'itchyny/vim-cursorword'
+Plug 'whatyouhide/vim-lengthmatters'
+Plug 'tpope/vim-surround'
+Plug 'qpkorr/vim-bufkill'
+Plug 'sheerun/vim-polyglot'
+Plug 'mattn/emmet-vim'
+Plug 'neoclide/coc.nvim'
+Plug 'git@bitbucket.org:chunleng/ultisnips-snippet.git'
 
-    " Parentheses formatting
-    call dein#add('cohama/lexima.vim')
-    call dein#add('tpope/vim-commentary')
-    call dein#add('itchyny/vim-cursorword')
-    call dein#add('whatyouhide/vim-lengthmatters')
-    call dein#add('tpope/vim-surround')
-    call dein#add('qpkorr/vim-bufkill')
-    call dein#add('sheerun/vim-polyglot')
-    call dein#add('mattn/emmet-vim')
-    call dein#add('neoclide/coc.nvim', {'branch':'release'})
-    call dein#add('git@bitbucket.org:chunleng/ultisnips-snippet.git')
+" Fuzzy finder for files, grep and more
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
-    " Fuzzy finder for files, grep and more
-    call dein#add('junegunn/fzf')
-    call dein#add('junegunn/fzf.vim')
-
-    call dein#end()
-    call dein#save_state()
-endif
+call plug#end()
 
 runtime rc.vim
 runtime vim-tmux-navigator.vim
