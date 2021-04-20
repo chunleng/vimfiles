@@ -14,9 +14,6 @@ if dein#load_state(g:dein_plugin_path)
     " Show the menu for leader key
     call dein#add('hecal3/vim-leader-guide')
 
-    " File finder
-    call dein#add('ctrlpvim/ctrlp.vim')
-
     " File navigator & plugins
     call dein#add('scrooloose/nerdtree')
     call dein#add('tiagofumo/vim-nerdtree-syntax-highlight', {'depends':'ryanoasis/vim-devicons'})
@@ -43,7 +40,6 @@ if dein#load_state(g:dein_plugin_path)
 
     " Parentheses formatting
     call dein#add('cohama/lexima.vim')
-    call dein#add('mhinz/vim-grepper')
     call dein#add('tpope/vim-commentary')
     call dein#add('itchyny/vim-cursorword')
     call dein#add('whatyouhide/vim-lengthmatters')
@@ -54,6 +50,10 @@ if dein#load_state(g:dein_plugin_path)
     call dein#add('neoclide/coc.nvim', {'branch':'release'})
     call dein#add('git@bitbucket.org:chunleng/ultisnips-snippet.git')
 
+    " Fuzzy finder for files, grep and more
+    call dein#add('junegunn/fzf')
+    call dein#add('junegunn/fzf.vim')
+
     call dein#end()
     call dein#save_state()
 endif
@@ -61,7 +61,6 @@ endif
 runtime rc.vim
 runtime vim-tmux-navigator.vim
 runtime vim-leader-guide.vim
-runtime ctrlp.vim
 runtime nerdtree.vim
 runtime nerdtree-git-plugin.vim
 runtime gundo.vim
@@ -73,11 +72,11 @@ runtime tagbar.vim
 runtime ultisnips.vim
 runtime coc.nvim.vim
 runtime vim-localvimrc.vim
-runtime vim-grepper.vim
 runtime vim-gitgutter.vim
 runtime vim-lengthmatters.vim
 runtime vim-bufkill.vim
 runtime emmet-vim.vim
+runtime fzf.vim
 
 " mappings ----------------------------- {{{
 nnoremap <silent><esc> :nohl<cr>
