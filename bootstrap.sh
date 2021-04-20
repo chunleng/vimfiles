@@ -18,4 +18,7 @@ sh /tmp/installer.sh $HOME/.local/share/dein
 nvim -c "call dein#update()|qall" --headless
 
 # coc.nvim
-nvim -c "CocInstall -sync coc-json coc-yaml coc-ultisnips coc-html coc-css coc-tabnine coc-neco coc-tsserver coc-java coc-jedi|qall" --headless
+nvim -c "CocInstall -sync coc-json coc-yaml coc-ultisnips coc-html coc-htmlhint coc-css coc-tabnine coc-neco coc-tsserver coc-java coc-jedi coc-solargraph|qall" --headless
+  # coc-neco: viml
+  # coc-jedi: python
+  # coc-solargraph: ruby

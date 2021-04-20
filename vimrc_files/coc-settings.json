@@ -6,5 +6,12 @@
     "diagnostic.errorSign":"",
     "diagnostic.warningSign":"",
     "diagnostic.infoSign":"",
-    "diagnostic.hintSign":"ﯦ"
+    "diagnostic.hintSign":"ﯦ",
+    "java.home": "~/.jenv/versions/15",
+    "tabnine.priority": 50,
+    "yaml.format.enable": true,
+    "yaml.schemaStore.enable": true,
+    "solargraph.diagnostics": true,
+    "html.autoClosingTags": true,
+    "html.format.wrapLineLength": 0
 }
