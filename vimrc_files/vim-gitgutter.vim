@@ -1,3 +1,4 @@
+let g:gitgutter_map_keys = 0
 nnoremap <leader>gn :GitGutterNextHunk<cr>
 nnoremap <leader>gp :GitGutterPrevHunk<cr>
 let g:gitgutter_sign_added = ''

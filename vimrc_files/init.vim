@@ -6,15 +6,15 @@ runtime before-vim-polyglot.vim
 call plug#begin('~/.vim/plugged')
 
 " Allow to assign same key to navigate between vim and tmux pane
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator', { 'on': ['TmuxNavigateUp', 'TmuxNavigateDown', 'TmuxNavigateLeft', 'TmuxNavigateRight'] }
 
 " Show the menu for leader key
 Plug 'spinks/vim-leader-guide'
 
 " File navigator & plugins
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on':  'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin', { 'on':  'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Beautify
 Plug 'ryanoasis/vim-devicons'
@@ -22,9 +22,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Allow to view edit history
-Plug 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim', { 'on': 'GundoToggle' }
 Plug 'Yggdroot/indentLine'
-Plug 'AndrewRadev/linediff.vim'
+Plug 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
 
 " Git integration
 Plug 'tpope/vim-fugitive'
@@ -60,6 +60,7 @@ runtime nerdtree.vim
 runtime nerdtree-git-plugin.vim
 runtime gundo.vim
 runtime indentLine.vim
+runtime linediff.vim
 runtime vim-fugitive.vim
 runtime vim-airline.vim
 runtime vim-airline-themes.vim
@@ -77,8 +78,6 @@ runtime fzf.vim
 nnoremap <silent><esc> :nohl<cr>
 nnoremap <silent><c-n> :bn<cr>
 nnoremap <silent><c-p> :bp<cr>
-"" Difference <leader>d
-vmap <leader>d :Linediff<cr>
 "" Format <leader>f
 nnoremap <leader>fi gg=G``
 vnoremap <leader>fi =
