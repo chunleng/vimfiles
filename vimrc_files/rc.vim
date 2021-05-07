@@ -4,7 +4,7 @@ set shell=/bin/bash
 filetype plugin indent on
 syntax enable
 set mouse=n
-nnoremap <LeftMouse> <Nop>
+" nnoremap <LeftMouse> <Nop>
 set number
 set shiftwidth=4
 set softtabstop=4
@@ -35,10 +35,7 @@ set laststatus=2
 set wildmenu
 set wildmode=list:longest,full
 set showcmd
-set timeout ttimeout timeoutlen=3000 ttimeoutlen=1000
-if has('nvim')
-    set timeout ttimeout timeoutlen=3000 ttimeoutlen=-1
-endif
+set timeout ttimeout timeoutlen=300 ttimeoutlen=-1
 set fileencodings=ucs-bom,utf-8,sjis,default
 set synmaxcol=160
 set nowrap
