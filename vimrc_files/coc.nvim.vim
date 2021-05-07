@@ -1,13 +1,16 @@
 augroup coc
     autocmd!
-    autocmd FileType java,python,ruby,typescript,typescriptreact nmap <buffer> <silent> gd <plug>(coc-definition)
-    autocmd FileType java,python,ruby,typescript,typescriptreact nmap <buffer> <silent> K <plug>(coc-definition)
-    autocmd FileType java,python,ruby,typescript,typescriptreact nmap <buffer> <silent> <leader>cr <plug>(coc-rename)
-    autocmd FileType java,python,ruby,typescript,typescriptreact nmap <buffer> <silent> <leader>cf <plug>(coc-references)
-    autocmd FileType java,python,ruby,typescript,typescriptreact nmap <buffer> <silent> <leader>cn <plug>(coc-diagnostic-previous)
-    autocmd FileType java,python,ruby,typescript,typescriptreact nmap <buffer> <silent> <leader>cn <plug>(coc-diagnostic-next)
-    autocmd FileType java,python,typescript,typescriptreact nmap <buffer> <silent> = <plug>(coc-format)
-    autocmd FileType java,python,typescript,typescriptreact vmap <buffer> <silent> = <plug>(coc-format-selected)
+    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact nmap <buffer> <silent> gd <plug>(coc-definition)
+    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact nmap <buffer> <silent> K <plug>(coc-definition)
+    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact nmap <buffer> <silent> <leader>cr <plug>(coc-rename)
+    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact nmap <buffer> <silent> <leader>cu <plug>(coc-references)
+    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact nmap <buffer> <silent> <leader>cp <plug>(coc-diagnostic-previous)
+    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact nmap <buffer> <silent> <leader>cn <plug>(coc-diagnostic-next)
+    " TODO coc-format-selected is bugged and does not take in the range in normal mode
+    " autocmd FileType java,python,typescript,typescriptreact nmap <buffer> <silent> = <plug>(coc-format)
+    autocmd FileType java,python,javascript,typescript,typescriptreact nmap <buffer> <silent> <leader>c= <plug>(coc-format)
+    autocmd FileType java,python,javascript,typescript,typescriptreact vmap <buffer> <silent> = <plug>(coc-format-selected)
+    autocmd FileType python nmap <buffer> <silent> <leader>c= <plug>(coc-format)
 augroup END
 
 hi CocErrorSign ctermfg=red

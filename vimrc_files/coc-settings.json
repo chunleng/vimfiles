@@ -13,5 +13,9 @@
     "yaml.schemaStore.enable": true,
     "solargraph.diagnostics": true,
     "html.autoClosingTags": true,
-    "html.format.wrapLineLength": 0
+    "html.format.wrapLineLength": 0,
+    "python.formatting.provider": "black",
+    // Somehow pyright does not detect $PATH
+    // Inserting path that brew install to
+    "python.formatting.blackPath": "/usr/local/bin/black"
 }

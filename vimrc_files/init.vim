@@ -12,7 +12,7 @@ Plug 'christoomey/vim-tmux-navigator', { 'on': ['TmuxNavigateUp', 'TmuxNavigateD
 Plug 'spinks/vim-leader-guide'
 
 " File navigator & plugins
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
@@ -44,12 +44,16 @@ Plug 'tpope/vim-surround'
 Plug 'qpkorr/vim-bufkill'
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim'
-Plug 'neoclide/coc.nvim'
 Plug 'git@bitbucket.org:chunleng/ultisnips-snippet.git'
 
 " Fuzzy finder for files, grep and more
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+Plug 'neoclide/coc.nvim'
+Plug 'Shougo/neco-vim', { 'for': 'vim' } " Vim autocomplete
+Plug 'neoclide/coc-neco', { 'for': 'vim' } " Vim autocomplete coc.nvim integration
+Plug 'antoinemadec/coc-fzf'
 
 call plug#end()
 
@@ -73,6 +77,7 @@ runtime vim-lengthmatters.vim
 runtime vim-bufkill.vim
 runtime emmet-vim.vim
 runtime fzf.vim
+runtime coc-fzf.vim
 
 " mappings ----------------------------- {{{
 nnoremap <silent><esc> :nohl<cr>
@@ -193,5 +198,10 @@ augroup END
 augroup snippet
     autocmd!
     autocmd FileType snippets setlocal noet
+augroup END
+
+augroup yaml
+    autocmd!
+    autocmd FileType yaml setlocal foldmethod=indent
 augroup END
 

@@ -14,7 +14,6 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 nvim -c "PlugInstall|qall" --headless
 
 # coc.nvim
-nvim -c "CocInstall -sync coc-json coc-yaml coc-ultisnips coc-html coc-htmlhint coc-css coc-tabnine coc-neco coc-tsserver coc-java coc-jedi coc-solargraph|qall" --headless
-  # coc-neco: viml
-  # coc-jedi: python
+nvim -c "CocInstall -sync coc-json coc-yaml coc-ultisnips coc-html coc-htmlhint coc-css coc-tabnine coc-tsserver coc-java coc-pyright coc-solargraph coc-prettier|qall" --headless
+  # coc-pyright: python
   # coc-solargraph: ruby
