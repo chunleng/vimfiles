@@ -55,6 +55,9 @@ Plug 'Shougo/neco-vim', { 'for': 'vim' } " Vim autocomplete
 Plug 'neoclide/coc-neco', { 'for': 'vim' } " Vim autocomplete coc.nvim integration
 Plug 'antoinemadec/coc-fzf'
 
+" Tmux Integration
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
 call plug#end()
 
 runtime rc.vim
