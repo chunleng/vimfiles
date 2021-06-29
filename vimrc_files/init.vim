@@ -26,9 +26,18 @@ call plug#begin('~/.vim/plugged')
     Plug 'SirVer/ultisnips'
     Plug 'embear/vim-localvimrc'
 
+    " Markdown
+    Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'}
+
     " Parentheses formatting
     Plug 'cohama/lexima.vim'
+    " TODO https://github.com/windwp/nvim-autopairs
+    "      able to use with treesitter
+
+    " For Commenting
     Plug 'tpope/vim-commentary'
+
+    " Underline all other instance of word under cursor
     Plug 'itchyny/vim-cursorword'
     Plug 'whatyouhide/vim-lengthmatters'
     Plug 'tpope/vim-surround'
@@ -38,6 +47,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 
+    " Code Intellisense
     Plug 'neoclide/coc.nvim'
     Plug 'Shougo/neco-vim', { 'for': 'vim' } " Vim autocomplete
     Plug 'neoclide/coc-neco', { 'for': 'vim' } " Vim autocomplete coc.nvim integration
@@ -46,24 +56,23 @@ call plug#begin('~/.vim/plugged')
     " Colorscheme
     Plug 'chriskempson/base16-vim'
 
-    " Rails
-    Plug 'tpope/vim-rails'
-
     " Scrollbar
     Plug 'dstein64/nvim-scrollview'
 
-    " Multi cursor
+    " Multi cursor edit
     Plug 'mg979/vim-visual-multi'
 
-    " TreeSitter
+    " TreeSitter: Better highlight and autoindent information
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+    " Allow autodetect of file indent
+    Plug 'tpope/vim-sleuth'
+
     " TODO https://github.com/lewis6991/gitsigns.nvim
-    " TODO persistent_undo?
 call plug#end()
 " }}}
 
-runtime rc.vim
+runtime before-plugin.vim
 
 " Plugin settings ------------------------------------------------------- {{{
 runtime nvim-scrollview.vim
@@ -85,6 +94,7 @@ runtime vim-bufkill.vim
 runtime which-key.nvim.lua
 runtime fzf.vim
 runtime coc-fzf.vim
+runtime markdown-preview.vim
 " }}}
 
 runtime after-plugin.vim

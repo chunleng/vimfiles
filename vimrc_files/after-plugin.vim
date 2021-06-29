@@ -32,9 +32,7 @@ augroup vim
     autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
-" Format using the more frequently used settings in the community
-augroup jsx
-    autocmd!
-    autocmd FileType javascript,typescript,typescriptreact setlocal shiftwidth=2
-    autocmd FileType javascript,typescript,typescriptreact setlocal softtabstop=2
-augroup END
+" r,o: Continue comment
+" M,B: Don't insert space when joining Multibyte characters (e.g Chinese characters)
+" j: Remove comment leader when joining comment
+autocmd FileType * set formatoptions=roMBj

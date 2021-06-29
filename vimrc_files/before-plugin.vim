@@ -1,44 +1,56 @@
-" Default Vim
+" Turn on syntax (in case treesitter is not working)
 filetype plugin indent on
 syntax enable
+
+" Side bar numbering
 set number
+set relativenumber
+
+" Indent Information
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set autoindent
 set expandtab
 set smarttab
-set nocompatible
-set hidden
-set relativenumber
-set lazyredraw
+
+
+" Make more consistent splitting for easier key setting later
 set splitbelow
 set splitright
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-set foldlevelstart=99
-set formatoptions-=r
-set formatoptions-=o
+
 set complete=.,w
 set completeopt-=preview
-set sessionoptions+=resize,winpos
 set list
 set listchars=tab:»\ ,trail:·,extends:,precedes:,nbsp:+,eol:¶
 set fillchars=vert:│,stlnc:\ ,diff:·,eob:\ ,
+
+" '/' Search related
 set incsearch
 set hlsearch
+
+" Show statusline always
 set laststatus=2
-set wildmenu
-set wildmode=list:longest,full
+
+" Show to characters typed on the bottom right
 set showcmd
+
 set timeout ttimeout timeoutlen=300 ttimeoutlen=-1
 set fileencodings=ucs-bom,utf-8,sjis,default
 set synmaxcol=160
+set textwidth=120
+set sidescrolloff=20
 set nowrap
 scriptencoding utf-8
 
+" Other preferred settings
+set nocompatible
+set hidden
+set lazyredraw
+
 let g:mapleader="\<space>"
 
+" Highlight Formatting -------------------------------------------------- {{{
 set termguicolors
 let base16colorspace=256
 colorscheme base16-tomorrow-night
@@ -62,3 +74,4 @@ hi LineNr guibg=NONE
 hi CursorLineNr guibg=NONE
 hi SignColumn guibg=NONE
 hi FoldColumn guibg=NONE
+" }}}
