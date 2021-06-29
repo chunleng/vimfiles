@@ -1,0 +1,19 @@
+# Common Function
+
+global !p
+def getFileName(default='untitled'):
+	return snip.basename or default
+endglobal
+
+# Snippets
+
+snippet class "Class declaration" b
+class ${1:`!p snip.rv = getFileName()`}:
+	def __init__(self${2:, args}):
+		$0
+endsnippet
+
+snippet temp_function_main "Main function declaration" b
+if __name__ == '__main__':
+	$0
+endsnippet

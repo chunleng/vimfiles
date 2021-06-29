@@ -10,12 +10,7 @@ let g:gitgutter_sign_modified_removed = ''
 " Lower priority for other signs
 let g:gitgutter_sign_priority= 1
 
-
-"""""""""""""
-"  Display  "
-"""""""""""""
-
-hi GitGutterAdd ctermfg=22 ctermbg=NONE
-hi GitGutterChange ctermfg=25 ctermbg=NONE
-hi GitGutterDelete ctermfg=89 ctermbg=NONE
-hi GitGutterChangeDelete ctermfg=89 ctermbg=NONE
+hi GitGutterAdd guibg=NONE
+hi GitGutterChange guibg=NONE
+hi GitGutterDelete guibg=NONE
+hi GitGutterChangeDelete guibg=NONE

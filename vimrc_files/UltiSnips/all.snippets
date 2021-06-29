@@ -1,0 +1,14 @@
+# To lower priority due to generality
+priority -10
+
+snippet temp_date "Insert date"
+`!p
+from datetime import datetime
+snip.rv = datetime.now().strftime("%Y-%m-%d %a %X")`
+endsnippet
+
+snippet temp_time "Insert time"
+`!p
+from datetime import datetime
+snip.rv = datetime.now().strftime("%X")`
+endsnippet

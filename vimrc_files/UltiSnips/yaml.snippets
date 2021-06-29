@@ -1,0 +1,10 @@
+# Snippets
+
+snippet temp_docker_compose "Docker-compose minimum template" b
+services:
+	${1}:
+		ports:
+			- ${2}"host:docker"
+		volumes:
+			- ${}:/code
+endsnippet

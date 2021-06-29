@@ -1,10 +1,6 @@
-set shell=/bin/bash
-
 " Default Vim
 filetype plugin indent on
 syntax enable
-set mouse=n
-" nnoremap <LeftMouse> <Nop>
 set number
 set shiftwidth=4
 set softtabstop=4
@@ -18,9 +14,9 @@ set relativenumber
 set lazyredraw
 set splitbelow
 set splitright
-set foldmethod=syntax
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 set foldlevelstart=99
-noremap za :setlocal foldcolumn=3<cr>za
 set formatoptions-=r
 set formatoptions-=o
 set complete=.,w
@@ -28,7 +24,7 @@ set completeopt-=preview
 set sessionoptions+=resize,winpos
 set list
 set listchars=tab:»\ ,trail:·,extends:,precedes:,nbsp:+,eol:¶
-set fillchars=vert:│,stlnc:\ ,diff:·
+set fillchars=vert:│,stlnc:\ ,diff:·,eob:\ ,
 set incsearch
 set hlsearch
 set laststatus=2
@@ -41,9 +37,28 @@ set synmaxcol=160
 set nowrap
 scriptencoding utf-8
 
-set bg=dark
-colorscheme default
-
-
-
 let g:mapleader="\<space>"
+
+set termguicolors
+let base16colorspace=256
+colorscheme base16-tomorrow-night
+hi NonText guifg=#333333 guibg=None
+
+"" Syntax
+hi Comment gui=italic guifg=#777777 guibg=None
+
+"" Other Visuals
+hi MatchParen gui=bold,italic guibg=NONE guifg=NONE
+hi StatusLine gui=NONE guifg=#333333 guibg=NONE
+hi StatusLineNC gui=NONE guifg=#333333 guibg=NONE
+hi VertSplit gui=NONE guifg=#333333 guibg=NONE
+hi DiffAdd guifg=black guibg=s:gui0B
+hi DiffDelete guifg=black guibg=red
+hi DiffChange gui=bold guifg=NONE guibg=NONE
+hi DiffText gui=bold guifg=black guibg=blue
+
+"" Gutter
+hi LineNr guibg=NONE
+hi CursorLineNr guibg=NONE
+hi SignColumn guibg=NONE
+hi FoldColumn guibg=NONE

@@ -1,0 +1,13 @@
+# Snippets
+
+snippet if "If statement" b
+if ${1:expr}
+	${2:# if expr is true}
+endif
+endsnippet
+
+snippet temp_fold "Fold for vim" b
+" ${1} `!p snip.rv = "-" * (70 - len(t[1]))` {{{
+${0:${VISUAL}}
+" }}}
+endsnippet

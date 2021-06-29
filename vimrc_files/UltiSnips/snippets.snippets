@@ -1,0 +1,15 @@
+snippet snippet "Snippet definition" b
+`!p snip.rv = "snippet"` ${2:Tab_trigger} "${3:Description}" ${4:b}
+${0:${VISUAL}}
+`!p snip.rv = "endsnippet"`
+endsnippet
+
+snippet global "Global definition" b
+global !p
+${0:${VISUAL}}
+endglobal
+endsnippet
+
+snippet `!p "Description"
+\`!p snip.rv = "$0"\`
+endsnippet
