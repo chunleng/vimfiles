@@ -1,4 +1,4 @@
-nmap <silent><esc> :nohl<cr>:call minimap#vim#ClearColorSearch()<cr>
+nnoremap <silent><esc> :nohl<cr>
 
 nnoremap <silent><c-n> :bn<cr>
 nnoremap <silent><c-p> :bp<cr>

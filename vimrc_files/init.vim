@@ -77,7 +77,7 @@ runtime before-plugin.vim
 " Plugin settings ------------------------------------------------------- {{{
 runtime nvim-scrollview.vim
 runtime vim-visual-multi.vim
-runtime nvim-treesitter.lua
+runtime nvim-treesitter.vim
 runtime nvim-tree.vim
 runtime mundo.vim
 runtime indentLine.vim
