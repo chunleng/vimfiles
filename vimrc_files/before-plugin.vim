@@ -64,7 +64,7 @@ hi MatchParen gui=bold,italic guibg=NONE guifg=NONE
 hi StatusLine gui=NONE guifg=#333333 guibg=NONE
 hi StatusLineNC gui=NONE guifg=#333333 guibg=NONE
 hi VertSplit gui=NONE guifg=#333333 guibg=NONE
-hi DiffAdd guifg=black guibg=s:gui0B
+hi DiffAdd guifg=black guibg=green
 hi DiffDelete guifg=black guibg=red
 hi DiffChange gui=bold guifg=NONE guibg=NONE
 hi DiffText gui=bold guifg=black guibg=blue
@@ -75,3 +75,8 @@ hi CursorLineNr guibg=NONE
 hi SignColumn guibg=NONE
 hi FoldColumn guibg=NONE
 " }}}
+
+augroup plist
+    autocmd!
+    autocmd BufRead,BufNewFile *.plist setlocal ft=xml
+augroup END
