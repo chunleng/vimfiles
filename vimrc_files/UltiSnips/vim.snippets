@@ -11,3 +11,8 @@ snippet temp_fold "Fold for vim" b
 ${0:${VISUAL}}
 " }}}
 endsnippet
+
+snippet temp_vim_test "Setup for vimtest" b
+let test#${1:<language>}#runner = '${2:<runner>}'
+${3:let test#$1#$2#executable = '${4:path/to/executable}'}
+endsnippet

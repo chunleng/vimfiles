@@ -26,6 +26,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'SirVer/ultisnips'
     Plug 'embear/vim-localvimrc'
 
+    " Vim test
+    Plug 'vim-test/vim-test'
+
     " Markdown
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'}
 
@@ -95,6 +98,7 @@ runtime which-key.nvim.lua
 runtime fzf.vim
 runtime coc-fzf.vim
 runtime markdown-preview.vim
+runtime vim-test.vim
 " }}}
 
 runtime after-plugin.vim

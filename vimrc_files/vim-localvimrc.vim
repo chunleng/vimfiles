@@ -1,6 +1,6 @@
 " Vim localvimrc
-nnoremap !rV :e vimrc<cr>
-let g:localvimrc_name = ["vimrc"]
+nnoremap !rV :e .vim/local.vim<cr>
+let g:localvimrc_name = [".vim/local.vim"]
 
 let g:localvimrc_file_directory_only = 0
 
