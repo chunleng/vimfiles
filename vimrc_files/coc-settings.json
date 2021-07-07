@@ -1,5 +1,6 @@
 // This file is referred to when command :CocConfig is entered
 {
+    "suggest.maxCompleteItemCount": 50,
     "diagnostic.virtualText": true,
     "diagnostic.virtualTextCurrentLineOnly": false,
     "diagnostic.virtualTextPrefix": "         ",
@@ -7,6 +8,8 @@
     "diagnostic.warningSign":"",
     "diagnostic.infoSign":"",
     "diagnostic.hintSign":"ﯦ",
+    "java.completion.maxResults": 20,
+    "java.format.onType.enabled": true,
     "java.home": "~/.jenv/versions/15",
     "tabnine.priority": 50,
     "yaml.format.enable": true,
