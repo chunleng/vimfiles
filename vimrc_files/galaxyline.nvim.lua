@@ -2,7 +2,7 @@ local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
 local gls = gl.section
-gl.short_line_list = {'NvimTree','vista','dbui','packer','minimap'}
+gl.short_line_list = {'NvimTree'}
 
 gls.left[1] ={
   FileIcon = {
@@ -22,7 +22,9 @@ gls.left[2] = {
 
 gls.left[3] = {
   LineInfo = {
-    provider = 'LineColumn',
+    provider = function ()
+      return vim.b.coc_current_function
+    end,
     separator = ' ',
     separator_highlight = {'NONE',colors.bg},
     highlight = {colors.fg,colors.bg},

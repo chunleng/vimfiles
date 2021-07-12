@@ -94,7 +94,7 @@ runtime vim-localvimrc.vim
 runtime vim-gitgutter.vim
 runtime vim-lengthmatters.vim
 runtime vim-bufkill.vim
-runtime which-key.nvim.lua
+runtime which-key.nvim.vim
 runtime fzf.vim
 runtime coc-fzf.vim
 runtime markdown-preview.vim

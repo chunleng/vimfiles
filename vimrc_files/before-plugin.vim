@@ -13,6 +13,7 @@ set tabstop=4
 set autoindent
 set expandtab
 set smarttab
+set noswapfile
 
 
 " Make more consistent splitting for easier key setting later
@@ -35,7 +36,10 @@ set laststatus=2
 " Show to characters typed on the bottom right
 set showcmd
 
-set timeout ttimeout timeoutlen=300 ttimeoutlen=-1
+" CursorHold event trigger frequency, currently needed for updating b:coc_current_function
+set updatetime=300
+
+set timeout ttimeout timeoutlen=2000 ttimeoutlen=-1
 set fileencodings=ucs-bom,utf-8,sjis,default
 set synmaxcol=160
 set textwidth=120
@@ -50,31 +54,9 @@ set lazyredraw
 
 let g:mapleader="\<space>"
 
-" Highlight Formatting -------------------------------------------------- {{{
 set termguicolors
 let base16colorspace=256
 colorscheme base16-tomorrow-night
-hi NonText guifg=#333333 guibg=None
-
-"" Syntax
-hi Comment gui=italic guifg=#777777 guibg=None
-
-"" Other Visuals
-hi MatchParen gui=bold,italic guibg=NONE guifg=NONE
-hi StatusLine gui=NONE guifg=#333333 guibg=NONE
-hi StatusLineNC gui=NONE guifg=#333333 guibg=NONE
-hi VertSplit gui=NONE guifg=#333333 guibg=NONE
-hi DiffAdd guifg=black guibg=green
-hi DiffDelete guifg=black guibg=red
-hi DiffChange gui=bold guifg=NONE guibg=NONE
-hi DiffText gui=bold guifg=black guibg=blue
-
-"" Gutter
-hi LineNr guibg=NONE
-hi CursorLineNr guibg=NONE
-hi SignColumn guibg=NONE
-hi FoldColumn guibg=NONE
-" }}}
 
 augroup plist
     autocmd!

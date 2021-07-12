@@ -8,7 +8,7 @@ Some coc-settings is needed to make lombok work on Java language server
 REF: https://github.com/neoclide/coc-java/issues/27
 
 1. Download lombok (https://projectlombok.org/download or whatever version necessary)
-2. Create ".vim/coc-settings.json" and add "Lombok VM settings"
+2. Create ".vim/coc-settings.json" by pressing `!rC` and add "Lombok VM settings"
 3. Enter vim command `:CocRestart`
 
 ```
@@ -18,6 +18,17 @@ REF: https://github.com/neoclide/coc-java/issues/27
 ```
 
 Recommended to add jar to `.vim` folder
+
+### Autosave
+
+Create to create autosave for each language server, use the following config
+
+```
+{
+  "eslint.autoFixOnSave": true // javascript","javascriptreact","typescript","typescriptreact","html","vue","markdown""
+}
+```
+
 
 ## vim-test setup
 
