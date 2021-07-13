@@ -18,9 +18,9 @@ augroup coc
     autocmd FileType java,python,ruby,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> <leader>cp <plug>(coc-diagnostic-prev)
     autocmd FileType java,python,ruby,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> <leader>cn <plug>(coc-diagnostic-next)
     autocmd FileType java,ruby,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> <leader>cf <plug>(coc-fix-current)
-    autocmd FileType java,javascript,typescript,typescriptreact,html nmap <buffer> <silent> = <plug>(coc-format-selected)
-    autocmd FileType java,javascript,typescript,typescriptreact,html xmap <buffer> <silent> = <plug>(coc-format-selected)
-    autocmd FileType java,python,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> <leader>c= <plug>(coc-format)
+    autocmd FileType java,ruby,javascript,typescript,typescriptreact,html nmap <buffer> <silent> = <plug>(coc-format-selected)
+    autocmd FileType java,ruby,javascript,typescript,typescriptreact,html xmap <buffer> <silent> = <plug>(coc-format-selected)
+    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> <leader>c= <plug>(coc-format)
 augroup END
 
 hi CocErrorVirtualText gui=italic guifg=#555555

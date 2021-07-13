@@ -1,1 +1,1 @@
-vmap <leader>d :Linediff<cr>
+vnoremap <silent><leader>d :Linediff<cr>

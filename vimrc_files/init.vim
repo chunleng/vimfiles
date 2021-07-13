@@ -21,6 +21,7 @@ call plug#begin('~/.vim/plugged')
 
     " Git integration
     Plug 'tpope/vim-fugitive'
+    Plug 'f-person/git-blame.nvim'
     Plug 'airblade/vim-gitgutter'
 
     Plug 'SirVer/ultisnips'
@@ -71,6 +72,9 @@ call plug#begin('~/.vim/plugged')
     " Allow autodetect of file indent
     Plug 'tpope/vim-sleuth'
 
+    " Rails Development
+    Plug 'tpope/vim-rails'
+
     " TODO https://github.com/lewis6991/gitsigns.nvim
 call plug#end()
 " }}}
@@ -86,6 +90,7 @@ runtime mundo.vim
 runtime indentLine.vim
 runtime linediff.vim  
 runtime vim-fugitive.vim
+runtime git-blame.nvim.vim
 runtime nvim-bufferline.lua
 runtime galaxyline.nvim.lua
 runtime ultisnips.vim
