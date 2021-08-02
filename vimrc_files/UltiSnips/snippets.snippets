@@ -10,6 +10,10 @@ ${0:${VISUAL}}
 endglobal
 endsnippet
 
-snippet `!p "Description"
+snippet `!p "Code"
 \`!p snip.rv = "$0"\`
+endsnippet
+
+snippet $ "Parameterize text"
+\${${1:1}${2::${VISUAL:}}}
 endsnippet

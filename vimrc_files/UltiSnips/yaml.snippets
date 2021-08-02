@@ -1,10 +1,43 @@
 # Snippets
 
-snippet temp_docker_compose "Docker-compose minimum template" b
+snippet temp_docker_compose_new "Docker-compose template" b
 services:
 	${1}:
 		ports:
 			- ${2}"host:docker"
 		volumes:
 			- ${}:/code
+endsnippet
+
+snippet temp_rubocop_new "Rubocop lint config template" b
+AllCops:
+	TargetRubyVersion: ${1:2.7.2}
+	Include:
+		- "app/**/*.rb"
+		- "Gemfile"
+		- "Rakefile"
+	Exclude:
+		- "db/**/*.rb"
+
+Style/FrozenStringLiteralComment:
+	Enabled: false
+
+Documentation:
+	Enabled: false
+
+Style/AsciiComments:
+	Enabled: false
+
+Metrics/MethodLength:
+	Max: 50
+
+Metrics/BlockLength:
+	Exclude:
+		- 'spec/**/*'
+
+Metrics/AbcSize:
+	Enabled: false
+
+Style/PercentLiteralDelimiters:
+	Enabled: false
 endsnippet

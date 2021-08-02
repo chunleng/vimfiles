@@ -13,6 +13,12 @@ class ${1:`!p snip.rv = getFileName()`} {
 }
 endsnippet
 
+snippet enum "Autofill enum name with filename" b
+enum ${1:`!p snip.rv = getFileName()`} {
+	$0
+}
+endsnippet
+
 snippet temp_class_main "Class with main method"
 class ${1:`!p snip.rv = getFileName()`} {
 	public static void main(String[] args){
@@ -20,3 +26,4 @@ class ${1:`!p snip.rv = getFileName()`} {
 	}
 }
 endsnippet
+

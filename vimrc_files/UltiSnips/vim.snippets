@@ -16,3 +16,10 @@ snippet temp_vim_test "Setup for vimtest" b
 let test#${1:<language>}#runner = '${2:<runner>}'
 ${3:let test#$1#$2#executable = '${4:path/to/executable}'}
 endsnippet
+
+snippet temp_autocommand_new "Template for commonly used autocommand" b
+augroup ${1:group_name}
+	autocmd!
+	autocmd FileType,BufWinEnter ${2:file_type} ${3:setlocal noet}
+augroup END
+endsnippet

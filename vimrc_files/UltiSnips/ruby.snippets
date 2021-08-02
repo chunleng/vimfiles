@@ -68,30 +68,30 @@ endsnippet
 #TODO find a way to call "each" snippet to invoke "foreach" content
 snippet foreach "For-each statement" b
 ${1:expr}.each do |${2:i}|
-    ${3:${VISUAL:# expr still contains variable}}
+	${3:${VISUAL:# expr still contains variable}}
 end
 endsnippet
 snippet each "For-each statement" b
 ${1:expr}.each do |${2:i}|
-    ${3:${VISUAL:# expr still contains variable}}
+	${3:${VISUAL:# expr still contains variable}}
 end
 endsnippet
 
 #TODO find a way to call "beginrescue" snippet to invoke "trycatch" content
 snippet trycatch "Description" b
 begin
-    ${1:${VISUAL:# Do something}}
+	${1:${VISUAL:# Do something}}
 rescue ${2:${3:SomeExceptionClass} => ${4:ex}}
-    ${5:# Something went wrong}
+	${5:# Something went wrong}
 ${6:ensure
     ${7:# Always Run}
 }end
 endsnippet
 snippet beginrescue "Description" b
 begin
-    ${1:${VISUAL:# Do something}}
+	${1:${VISUAL:# Do something}}
 rescue ${2:${3:SomeExceptionClass} => ${4:ex}}
-    ${5:# Something went wrong}
+	${5:# Something went wrong}
 ${6:ensure
     ${7:# Always Run}
 }end

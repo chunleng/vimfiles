@@ -1,0 +1,22 @@
+snippet temp_component "Starter for component file" b
+<template>
+	$1
+</template>
+<script>
+${2:import ${3:Component} from '${4:./X.vue}'}
+export default {`!p if (t[3]):
+	snip.rv = f'''
+	components: {{
+		{t[3]}
+	}},'''
+else:
+	snip.rv = ''`
+	props: {
+		${0:name}: {
+			type: Number,
+			default: null
+		}
+	}
+};
+</script>
+endsnippet
