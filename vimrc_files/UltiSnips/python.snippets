@@ -23,27 +23,26 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-app = FastAPI(docs_url=None, redoc_url=None)
+app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 endsnippet
 
 snippet temp_fastapi_get "FastAPI get method" b
 @app.get("/${1:path}", response_class=JSONResponse)
 async def ${2:foo}(${3:arg:int}) -> ${4:ret}:
-    $0
+	$0
 endsnippet
 
 snippet temp_fastapi_post "FastAPI post method" b
 @app.get("/${1:path}", response_class=JSONResponse)
 async def ${2:foo}(${3:arg:int}) -> ${4:ret}:
-    $0
+	$0
 endsnippet
 
 snippet temp_fastapi_model "FastAPI model" b
 class ${1:Item}(BaseModel):
-	$0
-    name: str
-    description: Optional[str] = None
-    price: float
-    tax: Optional[float] = None
-    tags: list = []
+	name: str
+	description: Optional[str] = None
+	price: float
+	tax: Optional[float] = None
+	tags: list = []
 endsnippet

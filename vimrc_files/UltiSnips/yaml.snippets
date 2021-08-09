@@ -11,13 +11,12 @@ endsnippet
 
 snippet temp_rubocop_new "Rubocop lint config template" b
 AllCops:
-	TargetRubyVersion: ${1:2.7.2}
-	Include:
-		- "app/**/*.rb"
-		- "Gemfile"
-		- "Rakefile"
+	TargetRubyVersion: 2.7.1
+	NewCops: enable
 	Exclude:
-		- "db/**/*.rb"
+		- "db/**"
+		- "spec/**"
+		- "vendor/**"
 
 Style/FrozenStringLiteralComment:
 	Enabled: false
@@ -30,10 +29,6 @@ Style/AsciiComments:
 
 Metrics/MethodLength:
 	Max: 50
-
-Metrics/BlockLength:
-	Exclude:
-		- 'spec/**/*'
 
 Metrics/AbcSize:
 	Enabled: false

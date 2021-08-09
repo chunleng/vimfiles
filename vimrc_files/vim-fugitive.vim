@@ -1,3 +1,5 @@
+nnoremap <silent><leader>gb :GBrowse<cr>
+nnoremap <silent><leader>gc :Git mergetool<cr>
 nnoremap <silent><leader>d :Gvdiff!<cr>
 nnoremap <silent><leader>gd :Gvdiff!<cr>
 nnoremap <silent><leader>gh :diffget //2<cr>:diffupdate<cr>

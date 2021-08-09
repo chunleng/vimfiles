@@ -24,6 +24,9 @@ nnoremap <silent><c-h> <c-w>h
 nnoremap <silent><c-j> <c-w>j
 nnoremap <silent><c-k> <c-w>k
 
+" ensure plugin don't overwrite
+let g:netrw_http_cmd="open"
+
 augroup vim
     autocmd!
     autocmd FileType,BufWinEnter vim setlocal foldmethod=marker
@@ -39,24 +42,23 @@ augroup allfile
 augroup END
 
 " Highlight Formatting ------------------------------------------------- {{{
-hi NonText guifg=#333333 guibg=None
+exec "hi NonText guifg=#".g:base16_gui02." guibg=None"
 
 " Swap base16 tomorrow IncSearch and Search
-hi Search guibg=#de935f
-hi IncSearch guibg=#f0c674
+exec "hi Search guibg=#".g:base16_gui09
+exec "hi IncSearch guibg=#".g:base16_gui0A
 
 "" Syntax
-hi Comment gui=italic guifg=#777777 guibg=None
+exec "hi Comment gui=italic guifg=#".g:base16_gui03." guibg=None"
 
 "" Other Visuals
 hi MatchParen gui=bold,italic guibg=NONE guifg=NONE
-hi StatusLine gui=NONE guifg=#333333 guibg=NONE
-hi StatusLineNC gui=NONE guifg=#333333 guibg=NONE
-hi VertSplit gui=NONE guifg=#333333 guibg=NONE
-hi DiffAdd guifg=black guibg=green
-hi DiffDelete guifg=black guibg=red
-hi DiffChange gui=bold guifg=NONE guibg=NONE
-hi DiffText gui=bold guifg=black guibg=blue
+exec "hi StatusLine gui=NONE guifg=#".g:base16_gui02." guibg=None"
+exec "hi StatusLineNC gui=NONE guifg=#".g:base16_gui02." guibg=None"
+exec "hi VertSplit gui=NONE guifg=#".g:base16_gui02." guibg=None"
+exec "hi DiffAdd gui=NONE guifg=NONE guibg=NONE"
+exec "hi DiffDelete gui=NONE guifg=#".g:base16_gui01." guibg=#".g:base16_gui01
+exec "hi DiffText gui=undercurl guifg=#".g:base16_gui00." guibg=#".g:base16_gui0D
 
 "" Gutter
 hi LineNr guibg=NONE

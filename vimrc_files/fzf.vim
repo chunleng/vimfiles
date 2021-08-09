@@ -13,8 +13,5 @@ nnoremap <silent><leader>su :call fzf#vim#ag(expand('<cword>'), fzf#vim#with_pre
 " Buffer
 nnoremap <silent><leader>bb :call fzf#vim#buffers('', fzf#vim#with_preview(g:default_layout_with_preview))<cr>
 
-" Git Conflict List
-nnoremap <silent><leader>gc :call fzf#vim#buffers('', fzf#vim#with_preview(g:default_layout_with_preview))<cr>
-
 " Show all commands
 nnoremap <silent><leader>? :call fzf#vim#commands(g:default_layout)<cr>

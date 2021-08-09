@@ -1,27 +1,57 @@
+" Data structure related
+let g:coc_global_extensions = ['coc-json', 'coc-yaml', 'coc-docker']
+
+" Vim related
+let g:coc_global_extensions = g:coc_global_extensions + ['coc-ultisnips']
+
+" Non-language related
+let g:coc_global_extensions = g:coc_global_extensions + ['coc-markdownlint']
+
+" Language related
+let g:coc_global_extensions = g:coc_global_extensions + ['coc-tsserver', 'coc-prettier', 'coc-vetur', 'coc-eslint'] " javascript
+let g:coc_global_extensions = g:coc_global_extensions + ['coc-java'] " java
+let g:coc_global_extensions = g:coc_global_extensions + ['coc-pyright'] " python
+let g:coc_global_extensions = g:coc_global_extensions + ['coc-solargraph'] " ruby
+let g:coc_global_extensions = g:coc_global_extensions + ['coc-lua'] " lua
+
+" Others
+let g:coc_global_extensions = g:coc_global_extensions + ['coc-tabnine', 'coc-syntax']
+
 function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+endfunction
+
+function! s:GoToDefinition()
+  if CocAction('jumpDefinition')
+    return v:true
+  endif
+
+  let ret = execute("silent! normal \<C-]>")
+  if ret =~ "Error" || ret =~ "错误"
+    call searchdecl(expand('<cword>'))
   endif
 endfunction
 
-augroup coc
-    autocmd!
-    autocmd FileType java nnoremap <silent> K :call <SID>show_documentation()<CR>
-    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> gd <plug>(coc-definition)
-    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact,html nmap <buffer> <silent> <leader>cr <plug>(coc-rename)
-    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> <leader>cu <plug>(coc-references)
-    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> <leader>ci <plug>(coc-implementation)
-    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> <leader>cp <plug>(coc-diagnostic-prev)
-    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> <leader>cn <plug>(coc-diagnostic-next)
-    autocmd FileType java,ruby,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> <leader>cf <plug>(coc-fix-current)
-    autocmd FileType java,ruby,javascript,typescript,typescriptreact,html nmap <buffer> <silent> = <plug>(coc-format-selected)
-    autocmd FileType java,ruby,javascript,typescript,typescriptreact,html xmap <buffer> <silent> = <plug>(coc-format-selected)
-    autocmd FileType java,python,ruby,javascript,typescript,typescriptreact,purescript,vue,html nmap <buffer> <silent> <leader>c= <plug>(coc-format)
-augroup END
+" nnoremap <expr> <silent> gd CocHasProvider('definition') ? "\<plug>(coc-definition)" : ":call searchdecl(expand('<cword>'))<cr>"
+" nnoremap <expr> <silent> K CocHasProvider('hover') ? ":call CocActionAsync('doHover')<cr>" : ":execute '!' . &keywordprg . ' ' . expand('<cword>')<cr>"
+
+nmap <silent> gd <plug>(coc-definition)
+nmap <silent> <leader>cr <plug>(coc-rename)
+nmap <silent> <leader>cu <plug>(coc-references)
+nmap <silent> <leader>ci <plug>(coc-implementation)
+nmap <silent> <leader>cp <plug>(coc-diagnostic-prev)
+nmap <silent> <leader>cn <plug>(coc-diagnostic-next)
+nmap <silent> <leader>cf <plug>(coc-fix-current)
+nmap <silent> = <plug>(coc-format-selected)
+vmap <silent> = <plug>(coc-format-selected)
+" xmap <silent> = <plug>(coc-format-selected)
+nmap <silent> <leader>c= <plug>(coc-format)
 
 hi CocErrorVirtualText gui=italic guifg=#555555
 hi CocWarningVirtualText gui=italic guifg=#555555

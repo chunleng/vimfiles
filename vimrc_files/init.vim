@@ -1,6 +1,8 @@
 " For vim related configuration
 runtime config.vim
 
+" http://google.com
+
 " Plugins --------------------------------------------------------------- {{{
 call plug#begin('~/.vim/plugged')
     " Show the menu for leader key
@@ -19,10 +21,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'Yggdroot/indentLine'
     Plug 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
 
-    " Git integration
     Plug 'tpope/vim-fugitive'
-    Plug 'f-person/git-blame.nvim'
-    Plug 'airblade/vim-gitgutter'
+    Plug 'tpope/vim-rhubarb'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'lewis6991/gitsigns.nvim'
 
     Plug 'SirVer/ultisnips'
     Plug 'embear/vim-localvimrc'
@@ -37,6 +39,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'cohama/lexima.vim'
     " TODO https://github.com/windwp/nvim-autopairs
     "      able to use with treesitter
+
+    " Show highlight when there is trailing whitespace
+    Plug 'bronson/vim-trailing-whitespace'
 
     " For Commenting
     Plug 'tpope/vim-commentary'
@@ -75,9 +80,28 @@ call plug#begin('~/.vim/plugged')
     " Rails Development
     Plug 'tpope/vim-rails'
 
-    " TODO https://github.com/lewis6991/gitsigns.nvim
+    " TODO https://github.com/puremourning/vimspector
 call plug#end()
 " }}}
+
+lua << EOF
+require('gitsigns').setup {
+    signs = {
+        add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+        change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+        delete       = {hl = 'GitSignsDelete', text = '│', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+        topdelete    = {hl = 'GitSignsDelete', text = '│', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+        changedelete = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    },
+    keymaps = {
+        buffer = false,
+        ['n <leader>gn'] = '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>',
+        ['n <leader>gp'] = '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>',
+        ['n <leader>gp'] = '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>',
+    },
+    current_line_blame = true,
+}
+EOF
 
 runtime before-plugin.vim
 
@@ -88,15 +112,13 @@ runtime nvim-treesitter.vim
 runtime nvim-tree.vim
 runtime mundo.vim
 runtime indentLine.vim
-runtime linediff.vim  
+runtime linediff.vim
 runtime vim-fugitive.vim
-runtime git-blame.nvim.vim
 runtime nvim-bufferline.lua
 runtime galaxyline.nvim.lua
 runtime ultisnips.vim
 runtime coc.nvim.vim
 runtime vim-localvimrc.vim
-runtime vim-gitgutter.vim
 runtime vim-lengthmatters.vim
 runtime vim-bufkill.vim
 runtime which-key.nvim.vim
@@ -104,6 +126,9 @@ runtime fzf.vim
 runtime coc-fzf.vim
 runtime markdown-preview.vim
 runtime vim-test.vim
+runtime vim-rails.vim
+runtime vim-sleuth.vim
+runtime trailing-whitespace.vim
 " }}}
 
 runtime after-plugin.vim
