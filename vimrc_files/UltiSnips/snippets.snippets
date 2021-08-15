@@ -10,8 +10,9 @@ ${0:${VISUAL}}
 endglobal
 endsnippet
 
+# Omit last ` because autoclose expected
 snippet `!p "Code"
-\`!p snip.rv = "$0"\`
+\`!p snip.rv = ${1:t[1]}
 endsnippet
 
 snippet $ "Parameterize text"

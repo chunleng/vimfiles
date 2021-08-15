@@ -22,3 +22,15 @@ const ${1:Foo} = (props: $1Props) => {
 
 export default $1
 endsnippet
+
+snippet temp_react_hook "Making react hook" b
+const [${1:foo}, set`!p snip.rv = t[1].title()`] = React.useState(${2:null})
+endsnippet
+
+snippet temp_react_hook_with_effect "Making react hook with effect" b
+const [${1:foo}, set`!p snip.rv = t[1].title()`] = React.useState(${2:null})
+
+React.useEffect(() => {
+	${3:${VISUAL:console.log($1)}}
+}, [$1])
+endsnippet
