@@ -1,6 +1,3 @@
-" For vim related configuration
-runtime config.vim
-
 " http://google.com
 
 " Plugins --------------------------------------------------------------- {{{
