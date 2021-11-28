@@ -3,10 +3,12 @@
 snippet temp_docker_compose_new "Docker-compose template" b
 services:
 	${1}:
+		image: ${2:imagename:version}
 		ports:
-			- ${2}"host:docker"
+			- "${3:host:docker}"
 		volumes:
-			- ${}:/code
+			- ${4:local_path:docker_path}
+	$0
 endsnippet
 
 snippet temp_rubocop_new "Rubocop lint config template" b

@@ -33,13 +33,13 @@ set hlsearch
 " Show statusline always
 set laststatus=2
 
-" Show to characters typed on the bottom right
+" Show characters typed on the bottom right
 set showcmd
 
 " CursorHold event trigger frequency, currently needed for updating b:coc_current_function
 set updatetime=300
 
-set timeout ttimeout timeoutlen=2000 ttimeoutlen=-1
+set timeout ttimeout timeoutlen=2000 ttimeoutlen=100
 set fileencodings=ucs-bom,utf-8,sjis,default
 set synmaxcol=160
 set textwidth=120

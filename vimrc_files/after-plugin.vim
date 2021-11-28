@@ -25,20 +25,45 @@ nnoremap <silent><c-j> <c-w>j
 nnoremap <silent><c-k> <c-w>k
 
 " ensure plugin don't overwrite
-let g:netrw_http_cmd="open"
-
-augroup vim
-    autocmd!
-    autocmd FileType,BufWinEnter vim setlocal foldmethod=marker
-augroup END
+" let g:netrw_http_cmd="open"
 
 augroup allfile
-    " Contains configuration that I don't want the plugin to overwrite
     autocmd!
+    " BufWinEnter here is to override plugin that force the option
     " r,o: Continue comment
     " M,B: Don't insert space when joining Multibyte characters (e.g Chinese characters)
     " j: Remove comment leader when joining comment
-    autocmd FileType,BufWinEnter * setlocal formatoptions=roMBj
+    " q: Allow to use gq to format the selected block in visual mode
+    " c: Autowrap comment
+    " l: Don't autowrap if the line is already longer than text width
+    autocmd BufWinEnter * setlocal formatoptions=roMBjqcl
+augroup END
+
+augroup vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
+augroup markdown
+    autocmd!
+    " Set textwidth-related formatoptions
+    " t: Autowrap text/code
+    autocmd BufWinEnter *.md setlocal formatoptions+=t
+
+    " Allow bullet points or quote format to continue on line break
+    " + shift-enter to not continue
+    autocmd FileType markdown setlocal comments=fb:*,fb:-,fb:+,n:>,fb:1.
+
+    " Shorten textwidth to markdown standard
+    autocmd FileType markdown setlocal textwidth=80
+
+    " Allow spelling on markdown
+    autocmd FileType markdown setlocal spell
+augroup END
+
+augroup snippets
+    autocmd!
+    autocmd FileType snippets setlocal foldlevel=0
 augroup END
 
 " Highlight Formatting ------------------------------------------------- {{{

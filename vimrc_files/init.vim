@@ -12,10 +12,11 @@ call plug#begin('~/.vim/plugged')
     " Beautify
     Plug 'glepnir/galaxyline.nvim'
     Plug 'akinsho/nvim-bufferline.lua'
+    Plug 'SmiteshP/nvim-gps'
 
     " Allow to view edit history
     Plug 'simnalamburt/vim-mundo', { 'on': 'MundoToggle' }
-    Plug 'Yggdroot/indentLine'
+    Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'AndrewRadev/linediff.vim', { 'on': 'Linediff' }
 
     Plug 'tpope/vim-fugitive'
@@ -31,6 +32,7 @@ call plug#begin('~/.vim/plugged')
 
     " Markdown
     Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'}
+    Plug 'amiorin/vim-fenced-code-blocks'
 
     " Parentheses formatting
     Plug 'cohama/lexima.vim'
@@ -77,11 +79,27 @@ call plug#begin('~/.vim/plugged')
     " Rails Development
     Plug 'tpope/vim-rails'
 
+    " For language that are not yet covered by treesitter
+    Plug 'purescript-contrib/purescript-vim'
+
+    " Following plugin to fix `gx`
+    " https://github.com/vim/vim/issues/4738
+    "   -> this however doesn't fix `:e https://example.com`
+    Plug 'felipec/vim-sanegx'
+
+    " Additional Syntax Support
+    Plug 'aklt/plantuml-syntax'
+
     " TODO https://github.com/puremourning/vimspector
 call plug#end()
 " }}}
 
 lua << EOF
+require("indent_blankline").setup {
+    char = "│",
+    filetype_exclude = {'WhichKey','markdown'},
+    use_treesitter = true
+}
 require('gitsigns').setup {
     signs = {
         add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
@@ -98,6 +116,7 @@ require('gitsigns').setup {
     },
     current_line_blame = true,
 }
+require("nvim-gps").setup()
 EOF
 
 runtime before-plugin.vim
@@ -108,7 +127,6 @@ runtime vim-visual-multi.vim
 runtime nvim-treesitter.vim
 runtime nvim-tree.vim
 runtime mundo.vim
-runtime indentLine.vim
 runtime linediff.vim
 runtime vim-fugitive.vim
 runtime nvim-bufferline.lua
@@ -122,6 +140,7 @@ runtime which-key.nvim.vim
 runtime fzf.vim
 runtime coc-fzf.vim
 runtime markdown-preview.vim
+runtime vim-fenced-code-blocks.vim
 runtime vim-test.vim
 runtime vim-rails.vim
 runtime vim-sleuth.vim

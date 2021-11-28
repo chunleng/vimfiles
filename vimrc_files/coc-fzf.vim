@@ -2,9 +2,6 @@ let g:coc_fzf_opts = ['--layout=reverse']
 let g:coc_fzf_preview = 'right:50%'
 let g:coc_fzf_preview_toggle_key = 'ctrl-/'
 
-" Code Outline
-nnoremap <silent><leader>cc :CocFzfList outline<cr>
-
 " Code Diagnostic
 nnoremap <silent><leader>c? :CocFzfList diagnostics<cr>
 nnoremap <silent><leader>cd :CocFzfList diagnostics --current-buf<cr>

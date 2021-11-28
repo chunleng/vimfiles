@@ -1,6 +1,7 @@
 local gl = require('galaxyline')
 local colors = require('galaxyline.theme').default
 local condition = require('galaxyline.condition')
+local gps = require("nvim-gps")
 local gls = gl.section
 gl.short_line_list = {'NvimTree'}
 
@@ -16,53 +17,43 @@ gls.left[2] = {
   FileName = {
     provider = 'FileName',
     condition = condition.buffer_not_empty,
-    highlight = {colors.magenta,colors.bg,'bold'}
+    highlight = {colors.magenta,colors.bg,'bold'},
+    separator = ' ',
+    separator_highlight = {'NONE',colors.bg},
   }
 }
 
 gls.left[3] = {
-  LineInfo = {
-    provider = function ()
-      return vim.b.coc_current_function
+  nvimGPS = {
+    provider = function()
+      return gps.get_location()
     end,
+    condition = function()
+      return gps.is_available()
+    end,
+    highlight = {colors.fg,colors.bg},
+  }
+}
+
+gls.right[1] = {
+  LineInfo = {
+    provider = 'LineColumn',
     separator = ' ',
     separator_highlight = {'NONE',colors.bg},
     highlight = {colors.fg,colors.bg},
   },
 }
 
-gls.left[4] = {
-  DiagnosticError = {
-    provider = 'DiagnosticError',
-    icon = '  ',
-    highlight = {colors.red,colors.bg}
-  }
-}
-gls.left[5] = {
-  DiagnosticWarn = {
-    provider = 'DiagnosticWarn',
-    icon = '  ',
-    highlight = {colors.yellow,colors.bg},
+gls.right[2] = {
+  PerCent = {
+    provider = 'LinePercent',
+    separator = ' ',
+    separator_highlight = {'NONE',colors.bg},
+    highlight = {colors.fg,colors.bg,'bold'},
   }
 }
 
-gls.left[6] = {
-  DiagnosticHint = {
-    provider = 'DiagnosticHint',
-    icon = ' ﯦ ',
-    highlight = {colors.cyan,colors.bg},
-  }
-}
-
-gls.left[7] = {
-  DiagnosticInfo = {
-    provider = 'DiagnosticInfo',
-    icon = '  ',
-    highlight = {colors.blue,colors.bg},
-  }
-}
-
-gls.right[1] = {
+gls.right[3] = {
   FileEncode = {
     provider = 'FileEncode',
     condition = condition.hide_in_width,
@@ -72,7 +63,7 @@ gls.right[1] = {
   }
 }
 
-gls.right[2] = {
+gls.right[4] = {
   FileFormat = {
     provider = 'FileFormat',
     condition = condition.hide_in_width,
@@ -82,7 +73,7 @@ gls.right[2] = {
   }
 }
 
-gls.right[3] = {
+gls.right[5] = {
   GitIcon = {
     provider = function() return '  ' end,
     condition = condition.check_git_workspace,
@@ -92,38 +83,11 @@ gls.right[3] = {
   }
 }
 
-gls.right[4] = {
+gls.right[6] = {
   GitBranch = {
     provider = 'GitBranch',
     condition = condition.check_git_workspace,
     highlight = {colors.violet,colors.bg,'bold'},
-  }
-}
-
-gls.right[5] = {
-  DiffAdd = {
-    provider = 'DiffAdd',
-    condition = condition.hide_in_width,
-    icon = '  ',
-    highlight = {colors.green,colors.bg},
-  }
-}
-
-gls.right[6] = {
-  DiffModified = {
-    provider = 'DiffModified',
-    condition = condition.hide_in_width,
-    icon = ' 柳',
-    highlight = {colors.orange,colors.bg},
-  }
-}
-
-gls.right[7] = {
-  DiffRemove = {
-    provider = 'DiffRemove',
-    condition = condition.hide_in_width,
-    icon = '  ',
-    highlight = {colors.red,colors.bg},
   }
 }
 

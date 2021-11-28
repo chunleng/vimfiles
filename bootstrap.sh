@@ -14,6 +14,3 @@ test -f ~/.vim/autoload/plug.vim || \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 nvim -c "PlugInstall|qall" --headless
-
-# TreeSitter
-nvim -c "TSInstallSync all" -c "qall" --headless

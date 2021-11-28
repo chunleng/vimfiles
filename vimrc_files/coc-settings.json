@@ -1,18 +1,67 @@
 // This file is referred to when command :CocConfig is entered
 {
+    // Ultisnips
     "coc.source.ultisnips.priority": 99,
     "tabnine.priority": 98,
     "suggest.languageSourcePriority": 97,
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-    "coc.preferences.extensionUpdateCheck": "weekly",
+    "coc.preferences.extensionUpdateCheck": "daily",
     "coc.source.around.priority": 1,
+    "suggest.triggerAfterInsertEnter": true,
+
+    // ESLint
     "eslint.packageManager": "yarn",
     "eslint.validate": ["javascript","javascriptreact","typescript","typescriptreact","html","vue"],
-    "prettier.eslintIntegration": true,
+    "eslint.format.enable": true,
+
+    // Python
+    "python.formatting.provider": "black",
+    "python.sortImports.path": "isort",
+    "pyright.organizeimports.provider": "isort",
+
+    // JSON
+    "json.format.enable": true,
+
+    // Outline
+    "outline.sortBy": "position",
+    "outline.expandLevel": 0,
+    "tree.key.activeFilter": "/",
+    "tree.key.selectNext": "<C-n>",
+    "tree.key.selectPrevious": "<C-p>",
+    "tree.key.close": "q",
+    "tree.key.toggleSelection": "<tab>",
+    "tree.key.toggle": "za",
+
     "suggest.maxCompleteItemCount": 50,
-    "diagnostic.virtualText": true,
-    "diagnostic.virtualTextCurrentLineOnly": false,
-    "diagnostic.virtualTextPrefix": "         ",
+    "suggest.completionItemKindLabels": {
+        "keyword": "",
+        "variable": "",
+        "value": "\uf89f",
+        "operator": "\u03a8",
+        "constructor": "\uf0ad",
+        "function": "ƒ",
+        "reference": "渚",
+        "constant": "",
+        "method": "",
+        "struct": "פּ",
+        "class": "",
+        "interface": "",
+        "text": "",
+        "enum": "",
+        "enumMember": "",
+        "module": "",
+        "color": "",
+        "property": "",
+        "field": "料",
+        "unit": "",
+        "event": "鬒",
+        "file": "",
+        "folder": "",
+        "snippet": "",
+        "typeParameter": "",
+        "default": ""
+    },
+    "suggest.removeDuplicateItems": true,
     "diagnostic.errorSign":"",
     "diagnostic.warningSign":"",
     "diagnostic.infoSign":"",
@@ -31,10 +80,14 @@
     "workspace.bottomUpFiletypes": ["ruby"],
     "html.format.wrapLineLength": 0,
     "html.autoClosingTags": true,
-    "python.formatting.provider": "black",
-    // Somehow pyright does not detect $PATH
-    // Inserting path that brew install to
-    "python.formatting.blackPath": "/usr/local/bin/black",
+    "markdownlint.config": {
+        "MD013": {
+            "code_blocks": false,
+            "tables": false
+        },
+        // Allow HTML
+        "MD033": false
+    },
     // For manual installation
     "languageserver": {
         "terraform": {

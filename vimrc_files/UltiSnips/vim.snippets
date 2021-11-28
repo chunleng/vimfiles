@@ -13,6 +13,7 @@ ${0:${VISUAL}}
 endsnippet
 
 snippet temp_vim_test "Setup for vimtest" b
+" https://github.com/vim-test/vim-test#features
 let test#${1:<language>}#runner = '${2:<runner>}'
 ${3:let test#$1#$2#executable = '${4:path/to/executable}'}
 endsnippet
@@ -20,6 +21,14 @@ endsnippet
 snippet temp_autocommand_new "Template for commonly used autocommand" b
 augroup ${1:group_name}
 	autocmd!
-	autocmd FileType,BufWinEnter ${2:file_type} ${3:setlocal noet}
+	autocmd FileType ${2:filetype} ${3:setlocal noet}
+	autocmd BufWinEnter *.${4:ext} ${3:setlocal noet}
+augroup END
+endsnippet
+
+snippet temp_coc_python_autoformat_on_save "Template for Coc.nvim python to format on save" b
+augroup cocautoformatpy
+	au!
+	au BufWritePre *.py call CocAction('format') | CocCommand python.sortImports
 augroup END
 endsnippet
