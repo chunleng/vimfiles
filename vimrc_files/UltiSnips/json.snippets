@@ -1,0 +1,62 @@
+snippet temp_react_typescript_tsconfig_new "Create template for TypeScript tsconfig.json" b
+// For TypeScript 4.4.3
+{
+	"compilerOptions": {
+		"target": "es5",
+		"baseUrl": "./",
+		"module": "esnext",
+		"moduleResolution": "node",
+
+		"removeComments": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"jsx": "react-jsx",
+
+		"strict": true,
+
+		"skipLibCheck": true,
+		"resolveJsonModule": true,
+		"allowJs": true,
+		"noEmit": true,
+		"isolatedModules": true,
+		"allowSyntheticDefaultImports": true,
+		"lib": ["dom", "dom.iterable", "esnext"]
+	},
+	"include": ["**/*.ts", "**/*.tsx"${1:, ...}],
+	"exclude": ["node_modules"]
+}
+endsnippet
+
+snippet temp_typescript_eslint_new "Create template for TypeScript eslint" b
+// yarn add -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-prettier eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y
+// yarn add -D -E prettier
+{
+	"root": true,
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"plugin:react/jsx-runtime",
+		"plugin:react-hooks/recommended",
+		"plugin:jsx-a11y/recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/recommended-requiring-type-checking",
+		"plugin:prettier/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"sourceType": "module",
+		"project": "./tsconfig.json"
+	},
+	"plugins": [],
+	"rules": {}
+}
+endsnippet

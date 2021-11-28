@@ -1,0 +1,126 @@
+# Snippets
+
+# ERD
+
+snippet temp_erd_new "A new template for ERD diagram" b
+@startuml
+' https://plantuml.com/ie-diagram
+title ${1:Title}
+
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity owner {
+	🔑id: number
+	--
+	* age: number
+	* weight: decimal
+}
+
+entity animal {
+	🔑id: number
+	--
+	* owner_id: number <<FK>>
+	* not_null: text
+	null: text
+	default: number (default: 0)
+}
+
+owner ||-ri-o{ animal
+
+' }|--o| Cardinality and Optionality
+' ||-ri-|| With direction: up/do/le/ri
+@enduml
+endsnippet
+
+snippet temp_erd_table "Template for table" b
+entity ${1:table_name} {
+	🔑id: number
+	--
+	${2:* owner_id: number <<FK>>
+	* not_null: text
+	null: text
+	ddefault: number (default: 0)}
+}
+endsnippet
+
+# Sequence Diagram
+
+snippet temp_sequence_new "A new template for sequence diagram" b
+@startuml
+' https://plantuml.com/sequence-diagram
+title ${1:Title}
+
+participant participant1
+actor actor1
+boundary boundary1
+control control1
+entity entity1
+database database1
+queue queue1
+
+participant1 -> actor1 : To actor
+note right
+	Multi-line
+	notes
+end note
+
+alt case x
+	participant1 -> boundary1 : To boundary
+else case y
+	participant1 -> control1 : To control
+end
+
+loop 100 times
+	participant1 -> entity1 : To entity
+end
+
+participant1 -> database1 : To database
+ref over participant1, actor1: some method
+activate participant1
+participant1 -> queue1 : To queue
+return 1
+
+' Other way to place note and ref
+' note right: message
+' note across: message
+@enduml
+endsnippet
+
+# State Diagram
+
+snippet temp_state_new "A new template for state diagram" b
+@startuml
+' https://plantuml.com/state-diagram
+title ${1:Title}
+
+hide empty description
+
+state drive {
+	[*] --> straight
+	straight -ri-> right : [Steering wheel turn right]
+	right -le-> straight
+	straight -le-> left
+	left -ri-> straight
+	straight --> [*]
+
+	left : entry: turn wheel left
+	left : do: spin the engine
+	left : exit: turn wheel straight
+}
+
+note top of drive
+	Watch where you're going!
+end note
+
+[*] --> stop
+stop -ri-> drive
+drive -le-> stop
+stop -do-> [*]
+
+' -ri-> With direction: up/do/le/ri
+@enduml
+endsnippet
