@@ -56,7 +56,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf.vim'
 
     " Code Intellisense
-    Plug 'neoclide/coc.nvim'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'Shougo/neco-vim', { 'for': 'vim' } " Vim autocomplete
     Plug 'neoclide/coc-neco', { 'for': 'vim' } " Vim autocomplete coc.nvim integration
     Plug 'antoinemadec/coc-fzf'
