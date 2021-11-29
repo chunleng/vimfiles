@@ -1,5 +1,4 @@
 nnoremap <silent><leader><space> :NvimTreeFindFile<cr>
-let g:nvim_tree_ignore = [ '__pycache__' ]
 let g:nvim_tree_group_empty = 1
 let g:nvim_tree_git_hl = 1
 let g:nvim_tree_icons = {
@@ -29,6 +28,9 @@ require'nvim-tree'.setup {
   },
   view = {
     auto_resize = true,
-  }
+  },
+  filters = {
+    custom = { "__pycache__" }
+    }
 }
 EOF
