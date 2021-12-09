@@ -32,16 +32,26 @@ app.add_middleware(CORSMiddleware, allow_origins=['*'])
 endsnippet
 
 snippet temp_fastapi_get "FastAPI get object method" b
-@app.get('/`!p snip.rv = snake_to_upper_camel_case(t[1])`', operation_id='`!p snip.rv = snake_to_upper_camel_case(t[1])`',
-		response_class=JSONResponse, response_model=$3, tags=['$4'])
-async def ${1:get_foo}(${2:arg:int}) -> ${3:Model}:
+@app.get(
+	'/`!p snip.rv = snake_to_upper_camel_case(t[1])`',
+	operation_id='`!p snip.rv = snake_to_upper_camel_case(t[1])`',
+	response_class=JSONResponse,
+	response_model=${3:Model},
+	tags=['$4']
+)
+async def ${1:get_foo}(${2:arg:int}):
 	$0
 endsnippet
 
 snippet temp_fastapi_create "FastAPI create object method" b
-@app.post('/`!p snip.rv = snake_to_upper_camel_case(t[1])`', operation_id='`!p snip.rv = snake_to_upper_camel_case(t[1])`',
-		response_class=JSONResponse, response_model=$3, tags=['$4'])
-async def ${1:create_foo}(${2:arg:int}) -> ${3:Model}:
+@app.post(
+	'/`!p snip.rv = snake_to_upper_camel_case(t[1])`',
+	operation_id='`!p snip.rv = snake_to_upper_camel_case(t[1])`',
+	response_class=JSONResponse,
+	response_model=${3:Model},
+	tags=['$4']
+)
+async def ${1:create_foo}(${2:arg:int}):
 	$0
 endsnippet
 
