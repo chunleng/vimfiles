@@ -13,6 +13,7 @@ let g:coc_global_extensions = g:coc_global_extensions + ['coc-java'] " java
 let g:coc_global_extensions = g:coc_global_extensions + ['coc-pyright'] " python
 let g:coc_global_extensions = g:coc_global_extensions + ['coc-solargraph'] " ruby
 let g:coc_global_extensions = g:coc_global_extensions + ['coc-lua'] " lua
+let g:coc_global_extensions = g:coc_global_extensions + ['coc-rls'] " rust
 let g:coc_global_extensions = g:coc_global_extensions + ['coc-html', 'coc-emmet'] " html
 
 " Others
