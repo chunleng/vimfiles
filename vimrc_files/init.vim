@@ -1,4 +1,11 @@
 " http://google.com
+if filereadable('/usr/local/bin/python3')
+    let g:python3_host_prog='/usr/local/bin/python3'
+endif
+
+if filereadable('/usr/local/bin/neovim-node-host')
+    let g:node_host_prog='/usr/local/bin/neovim-node-host'
+endif
 
 " Plugins --------------------------------------------------------------- {{{
 call plug#begin('~/.vim/plugged')
