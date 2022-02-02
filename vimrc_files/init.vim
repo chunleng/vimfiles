@@ -89,11 +89,6 @@ call plug#begin('~/.vim/plugged')
     " For language that are not yet covered by treesitter
     Plug 'purescript-contrib/purescript-vim'
 
-    " Following plugin to fix `gx`
-    " https://github.com/vim/vim/issues/4738
-    "   -> this however doesn't fix `:e https://example.com`
-    " Plug 'felipec/vim-sanegx'
-
     " Additional Syntax Support
     Plug 'aklt/plantuml-syntax'
 
