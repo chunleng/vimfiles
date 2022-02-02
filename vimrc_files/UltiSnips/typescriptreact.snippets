@@ -57,15 +57,15 @@ function ${1:Foo}(props: $1Props): ReactElement {
 }
 endsnippet
 
-snippet temp_react_hook "Making react hook" b
-const [${1:foo}, set`!p snip.rv = upper_camel(t[1])`] = useState<${2:string}>(${3:null})
+snippet temp_react_use_state "Making react useState" b
+const [${1:foo}, set`!p snip.rv = upper_camel(t[1])`] = useState<${2:string}>()
 endsnippet
 
-snippet temp_react_hook_with_effect "Making react hook with effect" b
-const [${1:foo}, set`!p snip.rv = upper_camel(t[1])`] = useState<${2:string}>(${3:null})
+snippet temp_react_use_state_with_effect "Making react useState with useEffect" b
+const [${1:foo}, set`!p snip.rv = upper_camel(t[1])`] = useState<${2:string}>()
 
 useEffect(() => {
-	${4:${VISUAL:console.log("test")}}
+	${3:${VISUAL:console.log("test")}}
 }, [$1])
 endsnippet
 
