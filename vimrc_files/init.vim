@@ -7,6 +7,10 @@ if filereadable('/usr/local/bin/neovim-node-host')
     let g:node_host_prog='/usr/local/bin/neovim-node-host'
 endif
 
+if filereadable('/usr/local/bin/neovim-node-host')
+    let g:ruby_host_prog='/usr/local/bin/neovim-ruby-host'
+endif
+
 " Plugins --------------------------------------------------------------- {{{
 call plug#begin('~/.vim/plugged')
     " Show the menu for leader key
@@ -79,6 +83,7 @@ call plug#begin('~/.vim/plugged')
 
     " TreeSitter: Better highlight and autoindent information
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/playground'
 
     " Allow autodetect of file indent
     Plug 'tpope/vim-sleuth'
