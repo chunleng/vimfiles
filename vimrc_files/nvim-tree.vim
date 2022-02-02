@@ -15,6 +15,7 @@ let g:nvim_tree_icons = {
 
 lua << EOF
 require'nvim-tree'.setup {
+  disable_netrw       = false,
   open_on_setup       = true,
   hijack_cursor       = true,
   diagnostics         = {

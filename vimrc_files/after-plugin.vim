@@ -24,9 +24,6 @@ nnoremap <silent><c-h> <c-w>h
 nnoremap <silent><c-j> <c-w>j
 nnoremap <silent><c-k> <c-w>k
 
-" ensure plugin don't overwrite
-" let g:netrw_http_cmd="open"
-
 augroup allfile
     autocmd!
     " BufWinEnter here is to override plugin that force the option
