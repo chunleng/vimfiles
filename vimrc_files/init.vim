@@ -46,9 +46,9 @@ call plug#begin('~/.vim/plugged')
     Plug 'amiorin/vim-fenced-code-blocks'
 
     " Parentheses formatting
-    Plug 'cohama/lexima.vim'
-    " TODO https://github.com/windwp/nvim-autopairs
-    "      able to use with treesitter
+    Plug 'andymass/vim-matchup'
+    Plug 'windwp/nvim-autopairs'
+    Plug 'windwp/nvim-ts-autotag'
 
     " Show highlight when there is trailing whitespace
     Plug 'bronson/vim-trailing-whitespace'
@@ -67,10 +67,18 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf.vim'
 
     " Code Intellisense
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'Shougo/neco-vim', { 'for': 'vim' } " Vim autocomplete
-    Plug 'neoclide/coc-neco', { 'for': 'vim' } " Vim autocomplete coc.nvim integration
-    Plug 'antoinemadec/coc-fzf'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'williamboman/nvim-lsp-installer'
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+    Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+    Plug 'stevearc/aerial.nvim'
+    Plug 'b0o/schemastore.nvim'
+    Plug 'folke/trouble.nvim'
 
     " Colorscheme
     Plug 'chriskempson/base16-vim'
@@ -84,6 +92,7 @@ call plug#begin('~/.vim/plugged')
     " TreeSitter: Better highlight and autoindent information
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/playground'
+    Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
     " Allow autodetect of file indent
     Plug 'tpope/vim-sleuth'
@@ -119,12 +128,245 @@ require('gitsigns').setup {
         buffer = false,
         ['n <leader>gn'] = '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>',
         ['n <leader>gp'] = '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>',
-        ['n <leader>gp'] = '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>',
+        ['n <leader>gr'] = '<cmd>lua require\"gitsigns.actions\".reset_hunk()<CR>',
     },
     current_line_blame = true,
 }
 require("nvim-gps").setup()
+
+local lsp_installer_servers = require('nvim-lsp-installer.servers')
+
+-- configuration: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+-- installer: https://github.com/williamboman/nvim-lsp-installer#available-lsps
+local servers = {
+    "tsserver",
+    "tailwindcss",
+    "eslint",
+    "pyright",
+    "efm",
+    "jsonls",
+    "sumneko_lua",
+    "jdtls",
+    "vimls",
+    "html",
+    "emmet_ls",
+    "yamlls",
+}
+
+local kind_icons = {
+  Text = "",
+  Method = "",
+  Function = "ƒ",
+  Constructor = "",
+  Field = "",
+  Variable = "",
+  Class = "",
+  Interface = "",
+  Module = "",
+  Property = "",
+  Unit = "",
+  Value = "",
+  Enum = "",
+  Keyword = "",
+  Snippet = "",
+  Color = "",
+  File = "",
+  Reference = "",
+  Folder = "",
+  EnumMember = "",
+  Constant = "",
+  Struct = "פּ",
+  Event = "",
+  Operator = "",
+  TypeParameter = "",
+  Array = "",
+  Number = "",
+  Boolean = "ﰰﰴ",
+  String = ""
+}
+
+require("aerial").setup({
+  min_width = 40,
+  max_width = 40,
+  show_guide = true,
+  icons = kind_icons,
+  filter_kind = {
+    ['_'] = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct" },
+    ['typescriptreact'] = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct", "Constant", "Variable", "Field" },
+    json = { "Module", "Number", "Array", "Boolean", "String"}
+  },
+  default_direction = "right",
+})
+
+local signs = { Error = "", Warn = "", Hint = "ﯦ", Info = "" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = '●',
+    severity_sort = true,
+  }
+})
+
+-- Loop through the servers listed above and set them up. If a server is
+-- not already installed, install it.
+for _, server_name in pairs(servers) do
+    local server_available, server = lsp_installer_servers.get_server(server_name)
+    if server_available then
+        server:on_ready(function ()
+            local keymap_opts = { noremap=true, silent=true }
+            local common_on_attach = function(client, bufnr)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', keymap_opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', keymap_opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', keymap_opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cf', '<cmd>lua vim.lsp.buf.code_action()<CR>', keymap_opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>', keymap_opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>c=', '<cmd>lua vim.lsp.buf.formatting()<CR>', keymap_opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cu', '<cmd>lua vim.lsp.buf.references()<CR>', keymap_opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'i', '<c-space>', '<cmd>lua vim.lsp.buf.completion()<CR>', keymap_opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'v', '=', ':\'<,\'>lua vim.lsp.buf.range_formatting()<CR>', keymap_opts)
+                vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>Trouble document_diagnostics<CR>', keymap_opts)
+                vim.api.nvim_set_keymap('n', '<leader>c?', '<cmd>Trouble workspace_diagnostics<CR>', keymap_opts)
+                vim.api.nvim_set_keymap('n', '<leader>cp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', keymap_opts)
+                vim.api.nvim_set_keymap('n', '<leader>cn', '<cmd>lua vim.diagnostic.goto_next()<CR>', keymap_opts)
+                vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cc', '<cmd>AerialOpen<CR><cmd>AerialTreeCloseAll<CR>', keymap_opts)
+                require("aerial").on_attach(client, bufnr)
+            end
+            local server_opts = {
+                on_attach = common_on_attach,
+                flags = {
+                  -- This will be the default in neovim 0.7+
+                  debounce_text_changes = 150,
+                },
+            }
+            if server.name == "tsserver" then
+                server_opts.on_attach = function (client, bufnr)
+                    client.resolved_capabilities.document_formatting = false -- Prefer eslint
+                    common_on_attach(client, bufnr)
+                end
+            elseif server.name == "eslint" then
+                server_opts.on_attach = function (client, bufnr)
+                    client.resolved_capabilities.document_formatting = true
+                    common_on_attach(client, bufnr)
+                end
+            elseif server.name == "efm" then
+                server_opts.init_options = { documentFormatting = true }
+                server_opts.filetypes = { "python" }
+                -- https://github.com/mattn/efm-langserver#example-for-configyaml
+                -- TODO markdown-lint
+                server_opts.settings = {
+                  languages = {
+                    python = {
+                      {
+                        formatCommand = "black --quiet -",
+                        formatStdin = true,
+                        rootMarkers = { ".python-version" }
+                      },
+                      {
+                        formatCommand = "isort --quiet -",
+                        formatStdin = true,
+                        rootMarkers = { ".python-version" }
+                      }
+                    }
+                  }
+                }
+            elseif server.name == "jsonls" then
+              local capabilities = vim.lsp.protocol.make_client_capabilities()
+              capabilities.textDocument.completion.completionItem.snippetSupport = true
+              server_opts.capabilities = capabilities
+              server_opts.settings = {
+                json = {
+                  schemas = require('schemastore').json.schemas(),
+                },
+              }
+            elseif server.name == "html" then
+              local capabilities = vim.lsp.protocol.make_client_capabilities()
+              capabilities.textDocument.completion.completionItem.snippetSupport = true
+              server_opts.capabilities = capabilities
+            elseif server.name == "emmet_ls" then
+              server_opts.filetypes = { "html", "css", "typescriptreact", "javascriptreact" }
+            elseif server.name == "yamlls" then
+              server_opts.settings = {
+                yaml = {
+                  format = {
+                    enable = true
+                  }
+                }
+              }
+            end
+            server:setup(server_opts)
+        end)
+        if not server:is_installed() then
+            -- Queue the server to be installed.
+            server:install()
+        end
+    end
+end
+
+local cmp = require'cmp'
+local compare = require'cmp.config.compare'
+
+cmp.setup({
+  formatting = {
+    format = function(entry, vim_item)
+      local prsnt, lspkind = pcall(require, "lspkind")
+        if not prsnt then
+          -- Kind icons
+          vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+          -- Source
+          vim_item.menu = ({
+            path = "│",
+            ultisnips = "│",
+            cmp_tabnine = "│ Tabnine",
+            nvim_lsp = "│ LSP",
+            buffer = "│ Buffer",
+          })[entry.source.name]
+          return vim_item
+        else
+          return lspkind.cmp_format()
+        end
+      end
+  },
+  sorting = {
+    comparators = {
+      compare.score,
+      compare.kind,
+    }
+  },
+  sources = {
+    { name = 'path' },
+    { name = 'ultisnips' },
+    { name = 'cmp_tabnine' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'nvim_lsp', max_item_count = 100 },
+    { name = 'buffer' },
+  },
+  mapping = {
+      ['<CR>'] = cmp.mapping.confirm {
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      },
+  },
+  snippet = {
+    expand = function(args)
+      vim.fn["UltiSnips#Anon"](args.body)
+    end,
+  },
+})
+
+local tabnine = require('cmp_tabnine.config')
+tabnine:setup({
+  max_num_results = 2;
+})
+require("trouble").setup {}
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+require('nvim-autopairs').setup{}
+cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+
 EOF
+let g:matchup_matchparen_offscreen = {'method': ''}
 
 runtime before-plugin.vim
 
@@ -139,13 +381,11 @@ runtime vim-fugitive.vim
 runtime nvim-bufferline.lua
 runtime galaxyline.nvim.lua
 runtime ultisnips.vim
-runtime coc.nvim.vim
 runtime vim-localvimrc.vim
 runtime vim-lengthmatters.vim
 runtime vim-bufkill.vim
 runtime which-key.nvim.vim
 runtime fzf.vim
-runtime coc-fzf.vim
 runtime markdown-preview.vim
 runtime vim-fenced-code-blocks.vim
 runtime vim-test.vim
@@ -156,3 +396,34 @@ runtime trailing-whitespace.vim
 
 runtime after-plugin.vim
 
+" gray
+exec "hi CmpItemMenuDefault gui=italic guifg=#".g:base16_gui03." guibg=NONE"
+exec "hi CmpItemAbbrDeprecated gui=strikethrough guifg=#".g:base16_gui03." guibg=NONE"
+" blue
+exec "hi CmpItemAbbrMatch gui=NONE guifg=#".g:base16_gui0D." guibg=NONE"
+exec "hi CmpItemAbbrMatchFuzzy gui=NONE guifg=#".g:base16_gui0D." guibg=NONE"
+" orange
+exec "hi CmpItemKindFunction gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
+exec "hi CmpItemKindMethod gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
+exec "hi CmpItemKindConstructor gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
+exec "hi CmpItemKindClass gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
+exec "hi CmpItemKindInterface gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
+exec "hi CmpItemKindModule gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
+exec "hi CmpItemKindEnum gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
+exec "hi CmpItemKindStruct gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
+" turquoise
+exec "hi CmpItemKindVariable gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
+exec "hi CmpItemKindText gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
+exec "hi CmpItemKindField gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
+exec "hi CmpItemKindProperty gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
+exec "hi CmpItemKindValue gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
+exec "hi CmpItemKindEnumMember gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
+exec "hi CmpItemKindTypeParameter gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
+exec "hi CmpItemKindConstant gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
+" yellow
+exec "hi CmpItemKindUnit gui=NONE guifg=#".g:base16_gui0A." guibg=NONE"
+exec "hi CmpItemKindKeyword gui=NONE guifg=#".g:base16_gui0A." guibg=NONE"
+exec "hi CmpItemKindOperator gui=NONE guifg=#".g:base16_gui0A." guibg=NONE"
+exec "hi CmpItemKindColor gui=NONE guifg=#".g:base16_gui0A." guibg=NONE"
+" default
+exec "hi CmpItemKind gui=NONE guifg=#".g:base16_gui03." guibg=NONE"
