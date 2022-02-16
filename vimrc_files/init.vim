@@ -185,6 +185,9 @@ local kind_icons = {
   String = ""
 }
 
+local js_kind = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct", "Constant", "Variable", "Field" }
+local data_kind = { "Module", "Number", "Array", "Boolean", "String"}
+
 require("aerial").setup({
   min_width = 40,
   max_width = 40,
@@ -192,8 +195,12 @@ require("aerial").setup({
   icons = kind_icons,
   filter_kind = {
     ['_'] = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct" },
-    ['typescriptreact'] = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct", "Constant", "Variable", "Field" },
-    json = { "Module", "Number", "Array", "Boolean", "String"}
+    typescriptreact = js_kind,
+    javascriptreact = js_kind,
+    typescript = js_kind,
+    javascript = js_kind,
+    json = data_kind,
+    yaml = data_kind,
   },
   default_direction = "right",
 })
@@ -344,7 +351,7 @@ cmp.setup({
     { name = 'buffer' },
   },
   mapping = {
-      ['<CR>'] = cmp.mapping.confirm {
+      ['<tab>'] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
       },
