@@ -151,6 +151,8 @@ local servers = {
     "html",
     "emmet_ls",
     "yamlls",
+    "terraformls",
+    "tflint",
 }
 
 local kind_icons = {
@@ -348,7 +350,19 @@ cmp.setup({
     { name = 'cmp_tabnine' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'nvim_lsp', max_item_count = 100 },
-    { name = 'buffer' },
+    { name = 'buffer',
+      option = {
+        -- https://github.com/hrsh7th/cmp-buffer#visible-buffers
+        get_bufnrs = function()
+          local bufs = {}
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            -- TODO https://github.com/hrsh7th/cmp-buffer#performance-on-large-text-files
+            bufs[vim.api.nvim_win_get_buf(win)] = true
+          end
+          return vim.tbl_keys(bufs)
+        end
+      }
+    },
   },
   mapping = {
       ['<tab>'] = cmp.mapping.confirm {
@@ -402,6 +416,9 @@ runtime trailing-whitespace.vim
 " }}}
 
 runtime after-plugin.vim
+
+" direnv settings
+autocmd BufRead,BufNewFile .envrc :set ft=sh
 
 " gray
 exec "hi CmpItemMenuDefault gui=italic guifg=#".g:base16_gui03." guibg=NONE"
