@@ -125,3 +125,8 @@ endsnippet
 snippet temp_app_path "Command to retrieve directory of script no matter where it is called from" b
 APP_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
 endsnippet
+
+snippet temp_direnv_virtualenv_setting "Command to auto virtualenv when entering a folder" b
+export VIRTUAL_ENV=\`pwd\`/.venv
+export PATH=$VIRTUAL_ENV/bin:$PATH
+endsnippet

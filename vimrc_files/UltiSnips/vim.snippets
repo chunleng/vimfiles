@@ -26,9 +26,9 @@ augroup ${1:group_name}
 augroup END
 endsnippet
 
-snippet temp_coc_python_autoformat_on_save "Template for Coc.nvim python to format on save" b
-augroup cocautoformatpy
-	au!
-	au BufWritePre *.py call CocAction('format') | CocCommand python.sortImports
+snippet temp_lsp_autoformat_on_save "Template for LSP autoformat on save" b
+augroup LspFormatting
+    autocmd! * <buffer>
+    autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
 augroup END
 endsnippet

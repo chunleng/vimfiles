@@ -38,3 +38,13 @@ Metrics/AbcSize:
 Style/PercentLiteralDelimiters:
 	Enabled: false
 endsnippet
+
+snippet temp_serverless_aws_new "Serverless framework AWS template" b
+service: ${1:service_name}
+frameworkVersion: '3'
+
+provider:
+  name: aws
+	runtime: nodejs14.x
+	region: ap-northeast-1
+endsnippet
