@@ -38,8 +38,7 @@ require('packer').startup(function(use)
     end}
     use {'kyazdani42/nvim-tree.lua', config = function ()
         require('nvim-tree-config')
-    end}
-    use 'kyazdani42/nvim-web-devicons'
+    end, requires = 'kyazdani42/nvim-web-devicons'}
 
     -- Beautify
     use {'glepnir/galaxyline.nvim', config = function ()
@@ -56,7 +55,7 @@ require('packer').startup(function(use)
     end}
     use {'SmiteshP/nvim-gps', config = function ()
         require("nvim-gps").setup()
-    end}
+    end, requires = "nvim-treesitter/nvim-treesitter"}
 
     -- Allow to view edit history
     use {'simnalamburt/vim-mundo', config = function ()
@@ -173,7 +172,9 @@ require('packer').startup(function(use)
         require('nvim-autopairs').setup {}
         cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
     end}
-    use 'windwp/nvim-ts-autotag'
+    use {'windwp/nvim-ts-autotag', requires = "nvim-treesitter/nvim-treesitter", config = function ()
+        require('nvim-ts-autotag').setup()
+    end}
 
     -- Show highlight when there is trailing whitespace
     use {'bronson/vim-trailing-whitespace', config = function ()
@@ -228,8 +229,6 @@ require('packer').startup(function(use)
 
     -- Code Intellisense
     use {'williamboman/nvim-lsp-installer',
-        'b0o/schemastore.nvim',
-        'folke/lua-dev.nvim',
     config= function ()
         local lsp_installer_servers = require('nvim-lsp-installer.servers')
         -- configuration: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
@@ -349,7 +348,11 @@ require('packer').startup(function(use)
             end
         end
     end,
-    requires = {'stevearc/aerial.nvim','neovim/nvim-lspconfig'} }
+    requires = {
+        'neovim/nvim-lspconfig',
+        'folke/lua-dev.nvim',
+        'b0o/schemastore.nvim'
+    }}
     use {'stevearc/aerial.nvim', config = function ()
         local kind_icons = require("kind-icons")
         local js_kind = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct", "Constant", "Variable", "Field" }
@@ -559,10 +562,11 @@ require('packer').startup(function(use)
     end}
 
     -- TreeSitter: Better highlight and autoindent information
-    use {'nvim-treesitter/nvim-treesitter', 'nvim-treesitter/playground', run = ':TSUpdate', config = function ()
+    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = function ()
         require('nvim-treesitter-config')
     end}
-    use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use {'nvim-treesitter/playground', requires = "nvim-treesitter/nvim-treesitter"}
+    use {'JoosepAlviste/nvim-ts-context-commentstring', requires = "nvim-treesitter/nvim-treesitter"}
 
     -- Allow autodetect of file indent
     use {'tpope/vim-sleuth', config = function ()
