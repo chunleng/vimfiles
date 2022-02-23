@@ -1,0 +1,13 @@
+snippet resource "Create new resource"
+resource "$1" "$2" {
+	$0
+}
+endsnippet
+
+snippet variable "Create new variable" b
+variable "$1" {
+	type    = ${2:string}
+	${3:default = ${4:"default"}}
+}
+
+endsnippet
