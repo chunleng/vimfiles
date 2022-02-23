@@ -195,6 +195,7 @@ require('packer').startup(function(use)
         require('nvim-autopairs').setup {}
         cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
     end, after = "nvim-cmp" }
+    use {"RRethy/nvim-treesitter-endwise", after = "nvim-treesitter"}
 
     use {'windwp/nvim-ts-autotag', after = "nvim-treesitter", config = function ()
         require('nvim-ts-autotag').setup()
@@ -502,20 +503,17 @@ require('packer').startup(function(use)
         vim.highlight.create("CmpItemKindColor", {guifg = base16.colors.base0A}, false)
         -- default
         vim.highlight.create("CmpItemKind", {guifg = base16.colors.base03}, false)
-    end,
-    after = 'nvim-base16'}
-    use {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-buffer',
-      {"tzachar/cmp-tabnine", run = './install.sh', config= function ()
-        local tabnine = require('cmp_tabnine.config')
-        tabnine:setup({
-          max_num_results = 2;
-        })
-      end},
-    after = { "nvim-cmp" }}
+    end, after = 'nvim-base16'}
+    use {'hrsh7th/cmp-nvim-lsp', after = "nvim-cmp"}
+    use {'hrsh7th/cmp-nvim-lsp-signature-help', after = "nvim-cmp"}
+    use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
+    use {'hrsh7th/cmp-path', after = "nvim-cmp"}
+    use {"tzachar/cmp-tabnine", run = './install.sh', config= function ()
+      local tabnine = require('cmp_tabnine.config')
+      tabnine:setup({
+        max_num_results = 2;
+      })
+    end, after = "nvim-cmp"}
 
     -- Scrollbar
     use {'dstein64/nvim-scrollview', config = function ()

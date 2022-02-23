@@ -11,5 +11,6 @@ require'nvim-treesitter.configs'.setup {
   -- Disabled because plugin is still unstable
   -- indent = { enable = true },
   playground = { enable = true },
-  context_commentstring = { enable = true }
+  context_commentstring = { enable = true },
+  endwise = { enable = true, },
 }
