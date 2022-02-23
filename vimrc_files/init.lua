@@ -91,14 +91,11 @@ require('packer').startup(function(use)
 
     use {'tpope/vim-fugitive', config = function ()
         vim.cmd[[
-            nnoremap <silent><leader>gb :GBrowse<cr>
-            nnoremap <silent><leader>gc :Git mergetool<cr>
-            nnoremap <silent><leader>d :Gvdiff!<cr>
-            nnoremap <silent><leader>gd :Gvdiff!<cr>
-            nnoremap <silent><leader>gh :diffget //2<cr>:diffupdate<cr>
-            nnoremap <silent><leader>gl :diffget //3<cr>:diffupdate<cr>
+            nnoremap <silent><leader>gf :GBrowse<cr>
+            nnoremap <silent><leader>gb :Git blame<cr>
         ]]
     end}
+
     use 'tpope/vim-rhubarb'
     use {'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }, config = function ()
         require('gitsigns').setup {
@@ -114,10 +111,23 @@ require('packer').startup(function(use)
                 ['n <leader>gn'] = '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>',
                 ['n <leader>gp'] = '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>',
                 ['n <leader>gr'] = '<cmd>lua require\"gitsigns.actions\".reset_hunk()<CR>',
+                ['n <leader>d'] = '<cmd>Gitsigns diffthis<CR>',
             },
             current_line_blame = true,
+            current_line_blame_formatter = ' <author>, <author_time:%Y-%m-%d> - <summary>',
+            numhl = true,
         }
-    end}
+
+        local base16 = require("base16-colorscheme")
+        vim.highlight.create("GitSignsAdd", { guifg = base16.colors.base0B, guibg = base16.colors.base01 }, false)
+        vim.highlight.create("GitSignsAddLn", { guibg = base16.colorschemes["schemer-medium"].base00 }, false)
+        vim.highlight.create("GitSignsChange", { guifg = base16.colors.base0D, guibg = base16.colors.base01 }, false)
+        vim.highlight.create("GitSignsChangeLn", { guibg = base16.colorschemes["schemer-medium"].base00 }, false)
+        vim.highlight.create("GitSignsDelete", { guifg = base16.colors.base0F, guibg = base16.colors.base01 }, false)
+        vim.highlight.create("GitSignsDeleteLn", { guibg = "bg" }, false)
+
+        vim.highlight.create("GitSignsCurrentLineBlame", { gui = "italic", guifg = base16.colors.base03 , guibg = "bg" }, false)
+    end, after = {"nvim-base16"}}
 
     use {'quangnguyen30192/cmp-nvim-ultisnips', run="./install.sh", config = function ()
       require("cmp_nvim_ultisnips").setup { filetype_source = "ultisnips_default" }
@@ -202,8 +212,8 @@ require('packer').startup(function(use)
 
     -- Underline all other instance of word under cursor
     use {'itchyny/vim-cursorword', config = function ()
-      vim.highlight.create("CursorWord0", { gui = "bold,underline" }, false)
-      vim.highlight.create("CursorWord1", { gui = "bold,underline" }, false)
+      vim.highlight.create("CursorWord0", { gui = "bold,underline", guifg = "none", guibg = "none" }, false)
+      vim.highlight.create("CursorWord1", { gui = "bold,underline", guifg = "none", guibg = "none" }, false)
     end}
     use {'whatyouhide/vim-lengthmatters', config = function ()
         vim.cmd[[
@@ -586,17 +596,18 @@ require('packer').startup(function(use)
         vim.highlight.create("MatchParen", {gui = "bold,italic", guifg = "none", guibg = "none"}, false)
         vim.highlight.create("VertSplit", {guifg = base16.colors.base02, guibg = "none"}, false)
         vim.highlight.create("DiffAdd", {guifg = "none", guibg = "none"}, false)
-        vim.highlight.create("DiffDelete", {guifg = base16.colors.base01, guibg = base16.colors.base01}, false)
-        vim.highlight.create("DiffText", {gui = "undercurl", guifg = base16.colors.base00, guibg = base16.colors.base0D}, false)
+        vim.highlight.create("DiffDelete", {guifg = base16.colorschemes["schemer-dark"].base00, guibg = base16.colorschemes["schemer-dark"].base00}, false)
+        vim.highlight.create("DiffText", { guifg = "none", guibg = base16.colorschemes["schemer-medium"].base01}, false)
+        vim.highlight.create("DiffChange", { guifg="none", guibg = "bg" }, false)
 
         -- LSP Diagnostics
-        vim.highlight.create("DiagnosticError", {gui = "none", guifg = base16.colors.base08, guibg = "none"}, false)
+        vim.highlight.create("DiagnosticError", {guifg = base16.colors.base08}, false)
         vim.highlight.create("DiagnosticUnderlineError", {gui = "undercurl", guisp = base16.colors.base08}, false)
-        vim.highlight.create("DiagnosticWarn", {gui = "none", guifg = base16.colors.base0A, guibg = "none"}, false)
+        vim.highlight.create("DiagnosticWarn", {guifg = base16.colors.base0A,}, false)
         vim.highlight.create("DiagnosticUnderlineWarn", {gui = "undercurl", guisp = base16.colors.base0A}, false)
-        vim.highlight.create("DiagnosticInfo", {gui = "none", guifg = base16.colors.base0B, guibg = "none"}, false)
+        vim.highlight.create("DiagnosticInfo", {guifg = base16.colors.base0B}, false)
         vim.highlight.create("DiagnosticUnderlineInfo", {gui = "undercurl", guisp = base16.colors.base0B}, false)
-        vim.highlight.create("DiagnosticHint", {gui = "none", guifg = base16.colors.base0D, guibg = "none"}, false)
+        vim.highlight.create("DiagnosticHint", {guifg = base16.colors.base0D}, false)
         vim.highlight.create("DiagnosticUnderlineHint", {gui = "undercurl", guisp = base16.colors.base0D}, false)
         vim.highlight.create("DiagnosticVirtualText", {gui = "undercurl,bold", guifg = base16.colors.base02, guibg = "none"}, false)
         vim.highlight.link("DiagnosticVirtualTextError", "DiagnosticVirtualText", false)
@@ -610,7 +621,7 @@ require('packer').startup(function(use)
         vim.highlight.create("SignColumn", {guibg = "none"}, false)
         vim.highlight.create("FoldColumn", {guibg = "none"}, false)
 
-        end }
+      end }
 end)
 
 
