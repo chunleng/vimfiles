@@ -5,11 +5,14 @@ set eu
 APP_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
 
 # install vimrc
-mkdir -p $HOME/.config/
-ln -sn ${APP_PATH}/vimrc_files $HOME/.config/nvim
+mkdir -p $HOME/.config/nvim
+ln -sn ${APP_PATH}/vimrc_files/init.lua $HOME/.config/nvim/
+ln -sn ${APP_PATH}/vimrc_files/src $HOME/.config/nvim/src
+ln -sn ${APP_PATH}/vimrc_files/lua $HOME/.config/nvim/lua
+ln -sn ${APP_PATH}/vimrc_files/UltiSnips $HOME/.config/nvim/UltiSnips
 
-test -f ~/.vim/autoload/plug.vim || \
-    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+test -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim || \
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim \
+    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-nvim -c "PlugInstall|qall" --headless
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

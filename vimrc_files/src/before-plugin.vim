@@ -43,6 +43,10 @@ set timeout ttimeout timeoutlen=2000 ttimeoutlen=100
 set fileencodings=ucs-bom,utf-8,sjis,default
 set synmaxcol=160
 set textwidth=120
+autocmd BufReadPre *.md setlocal textwidth=80
+autocmd BufReadPre *.min.* set ft=min " Allow no highlighting for min files
+" direnv settings
+autocmd BufRead,BufNewFile .env* :set ft=sh
 set sidescrolloff=20
 set nowrap
 scriptencoding utf-8
@@ -53,10 +57,6 @@ set hidden
 set lazyredraw
 
 let g:mapleader="\<space>"
-
-set termguicolors
-let base16colorspace=256
-colorscheme base16-tomorrow-night
 
 augroup plist
     autocmd!
