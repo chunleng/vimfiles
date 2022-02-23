@@ -43,16 +43,27 @@ require('packer').startup(function(use)
     -- Beautify
     use {'glepnir/galaxyline.nvim', config = function ()
         require("galaxyline-nvim-config")
-    end}
+    end, after = "nvim-base16"}
     use {'akinsho/nvim-bufferline.lua', config = function ()
+        local base16 = require("base16-colorscheme")
+        local bgcolor = base16.colorschemes["schemer-dark"].base00
         require("bufferline").setup{
             options = {
                 show_buffer_close_icons = false,
                 show_close_icon = false,
                 separator_style = "slant",
+            },
+            highlights = {
+                fill = { guifg = "none", guibg = bgcolor },
+                buffer_visible = { guifg = base16.colors.base03, guibg = base16.colors.base00 },
+                buffer_selected = { guifg = base16.colors.base05, gui = "bold" },
+                background = { guifg = base16.colors.base03, guibg = bgcolor },
+                separator_selected = { guifg = bgcolor, guibg = base16.colors.base00 },
+                separator_visible = { guifg = bgcolor, guibg = base16.colors.base00 },
+                separator = { guifg = bgcolor, guibg = bgcolor }
             }
         }
-    end}
+    end, requires = 'kyazdani42/nvim-web-devicons', after = "nvim-base16" }
     use {'SmiteshP/nvim-gps', config = function ()
         require("nvim-gps").setup()
     end, requires = "nvim-treesitter/nvim-treesitter"}
@@ -108,13 +119,15 @@ require('packer').startup(function(use)
         }
     end}
 
-    use {'SirVer/ultisnips', 'quangnguyen30192/cmp-nvim-ultisnips', config = function ()
+    use {'quangnguyen30192/cmp-nvim-ultisnips', run="./install.sh", config = function ()
+      require("cmp_nvim_ultisnips").setup { filetype_source = "ultisnips_default" }
+    end, after = {"ultisnips", "nvim-cmp"}}
+    use {'SirVer/ultisnips', config = function ()
         vim.cmd[[
             nnoremap !ru :UltiSnipsEdit!<cr>
             let g:UltiSnipsJumpForwardTrigger="<c-j>"
             let g:UltiSnipsJumpBackwardTrigger="<c-k>"
         ]]
-        require("cmp_nvim_ultisnips").setup { filetype_source = "ultisnips_default" }
     end}
     use {'embear/vim-localvimrc', config = function ()
         vim.cmd[[
@@ -171,8 +184,9 @@ require('packer').startup(function(use)
         local cmp_autopairs = require('nvim-autopairs.completion.cmp')
         require('nvim-autopairs').setup {}
         cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
-    end}
-    use {'windwp/nvim-ts-autotag', requires = "nvim-treesitter/nvim-treesitter", config = function ()
+    end, after = "nvim-cmp" }
+
+    use {'windwp/nvim-ts-autotag', after = "nvim-treesitter", config = function ()
         require('nvim-ts-autotag').setup()
     end}
 
@@ -187,7 +201,10 @@ require('packer').startup(function(use)
     use 'tpope/vim-commentary'
 
     -- Underline all other instance of word under cursor
-    use 'itchyny/vim-cursorword'
+    use {'itchyny/vim-cursorword', config = function ()
+      vim.highlight.create("CursorWord0", { gui = "bold,underline" }, false)
+      vim.highlight.create("CursorWord1", { gui = "bold,underline" }, false)
+    end}
     use {'whatyouhide/vim-lengthmatters', config = function ()
         vim.cmd[[
             nnoremap <leader>to :LengthmattersToggle<cr>
@@ -443,102 +460,52 @@ require('packer').startup(function(use)
             end,
           },
         })
+
+        local base16 = require("base16-colorscheme")
+        vim.highlight.create("CmpItemMenuDefault", {gui = "italic", guifg = base16.colors.base03}, false)
+        vim.highlight.create("CmpItemMenuDefault", {gui = "italic", guifg = base16.colors.base03}, false)
+        -- blue
+        vim.highlight.create("CmpItemAbbrMatch", {guifg = base16.colors.base0D}, false)
+        vim.highlight.create("CmpItemAbbrMatchFuzzy", {guifg = base16.colors.base0D}, false)
+        -- orange
+        vim.highlight.create("CmpItemKindFunction", {guifg = base16.colors.base09}, false)
+        vim.highlight.create("CmpItemKindMethod", {guifg = base16.colors.base09}, false)
+        vim.highlight.create("CmpItemKindConstructor", {guifg = base16.colors.base09}, false)
+        vim.highlight.create("CmpItemKindClass", {guifg = base16.colors.base09}, false)
+        vim.highlight.create("CmpItemKindInterface", {guifg = base16.colors.base09}, false)
+        vim.highlight.create("CmpItemKindModule", {guifg = base16.colors.base09}, false)
+        vim.highlight.create("CmpItemKindEnum", {guifg = base16.colors.base09}, false)
+        vim.highlight.create("CmpItemKindStruct", {guifg = base16.colors.base09}, false)
+        -- turquoise
+        vim.highlight.create("CmpItemKindVariable", {guifg = base16.colors.base0C}, false)
+        vim.highlight.create("CmpItemKindText", {guifg = base16.colors.base0C}, false)
+        vim.highlight.create("CmpItemKindField", {guifg = base16.colors.base0C}, false)
+        vim.highlight.create("CmpItemKindProperty", {guifg = base16.colors.base0C}, false)
+        vim.highlight.create("CmpItemKindValue", {guifg = base16.colors.base0C}, false)
+        vim.highlight.create("CmpItemKindEnumMember", {guifg = base16.colors.base0C}, false)
+        vim.highlight.create("CmpItemKindTypeParameter", {guifg = base16.colors.base0C}, false)
+        vim.highlight.create("CmpItemKindConstant", {guifg = base16.colors.base0C}, false)
+        -- yellow
+        vim.highlight.create("CmpItemKindUnit", {guifg = base16.colors.base0A}, false)
+        vim.highlight.create("CmpItemKindKeyword", {guifg = base16.colors.base0A}, false)
+        vim.highlight.create("CmpItemKindOperator", {guifg = base16.colors.base0A}, false)
+        vim.highlight.create("CmpItemKindColor", {guifg = base16.colors.base0A}, false)
+        -- default
+        vim.highlight.create("CmpItemKind", {guifg = base16.colors.base03}, false)
     end,
-    requires = {
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-nvim-lsp-signature-help",
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-buffer',
-        'quangnguyen30192/cmp-nvim-ultisnips',
-        {"tzachar/cmp-tabnine", run = './install.sh', config= function ()
-            local tabnine = require('cmp_tabnine.config')
-            tabnine:setup({
-              max_num_results = 2;
-            })
-        end}}}
-
-    -- Colorscheme
-    use {'chriskempson/base16-vim', config = function ()
-        vim.cmd[[
-            colorscheme base16-tomorrow-night
-            set termguicolors
-            let base16colorspace=256
-
-            " Highlight Formatting ------------------------------------------------- {{{
-            exec "hi NonText guifg=#".g:base16_gui02." guibg=None"
-
-            " Swap base16 tomorrow IncSearch and Search
-            exec "hi Search guibg=#".g:base16_gui09
-            exec "hi IncSearch guibg=#".g:base16_gui0A
-
-            "" Syntax
-            exec "hi Comment gui=italic guifg=#".g:base16_gui03." guibg=None"
-
-            "" Other Visuals
-            hi MatchParen gui=bold,italic guibg=NONE guifg=NONE
-            exec "hi StatusLine gui=NONE guifg=#".g:base16_gui02." guibg=None"
-            exec "hi StatusLineNC gui=NONE guifg=#".g:base16_gui02." guibg=None"
-            exec "hi VertSplit gui=NONE guifg=#".g:base16_gui02." guibg=None"
-            exec "hi DiffAdd gui=NONE guifg=NONE guibg=NONE"
-            exec "hi DiffDelete gui=NONE guifg=#".g:base16_gui01." guibg=#".g:base16_gui01
-            exec "hi DiffText gui=undercurl guifg=#".g:base16_gui00." guibg=#".g:base16_gui0D
-
-            exec "hi DiagnosticError gui=NONE guifg=#".g:base16_gui08." guibg=None"
-            exec "hi DiagnosticUnderlineError gui=undercurl guisp=#".g:base16_gui08
-            exec "hi DiagnosticWarn gui=NONE guifg=#".g:base16_gui0A." guibg=None"
-            exec "hi DiagnosticUnderlineWarn gui=undercurl guisp=#".g:base16_gui0A
-            exec "hi DiagnosticInfo gui=NONE guifg=#".g:base16_gui0B." guibg=None"
-            exec "hi DiagnosticUnderlineInfo gui=undercurl guisp=#".g:base16_gui0B
-
-            exec "hi DiagnosticHint gui=NONE guifg=#".g:base16_gui0D." guibg=None"
-            exec "hi DiagnosticUnderlineHint gui=undercurl guisp=#".g:base16_gui0D
-            exec "hi DiagnosticVirtualText gui=undercurl,bold guifg=#".g:base16_gui02." guibg=None"
-            hi! link DiagnosticVirtualTextError DiagnosticVirtualText
-            hi! link DiagnosticVirtualTextWarn DiagnosticVirtualText
-            hi! link DiagnosticVirtualTextInfo DiagnosticVirtualText
-            hi! link DiagnosticVirtualTextHint DiagnosticVirtualText
-
-            "" Gutter
-            hi LineNr guibg=NONE
-            hi CursorLineNr guibg=NONE
-            hi SignColumn guibg=NONE
-            hi FoldColumn guibg=NONE
-            " }}}
-
-            "" Cmp
-            " gray
-            exec "hi CmpItemMenuDefault gui=italic guifg=#".g:base16_gui03." guibg=NONE"
-            exec "hi CmpItemAbbrDeprecated gui=strikethrough guifg=#".g:base16_gui03." guibg=NONE"
-            " blue
-            exec "hi CmpItemAbbrMatch gui=NONE guifg=#".g:base16_gui0D." guibg=NONE"
-            exec "hi CmpItemAbbrMatchFuzzy gui=NONE guifg=#".g:base16_gui0D." guibg=NONE"
-            " orange
-            exec "hi CmpItemKindFunction gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
-            exec "hi CmpItemKindMethod gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
-            exec "hi CmpItemKindConstructor gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
-            exec "hi CmpItemKindClass gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
-            exec "hi CmpItemKindInterface gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
-            exec "hi CmpItemKindModule gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
-            exec "hi CmpItemKindEnum gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
-            exec "hi CmpItemKindStruct gui=NONE guifg=#".g:base16_gui09." guibg=NONE"
-            " turquoise
-            exec "hi CmpItemKindVariable gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
-            exec "hi CmpItemKindText gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
-            exec "hi CmpItemKindField gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
-            exec "hi CmpItemKindProperty gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
-            exec "hi CmpItemKindValue gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
-            exec "hi CmpItemKindEnumMember gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
-            exec "hi CmpItemKindTypeParameter gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
-            exec "hi CmpItemKindConstant gui=NONE guifg=#".g:base16_gui0C." guibg=NONE"
-            " yellow
-            exec "hi CmpItemKindUnit gui=NONE guifg=#".g:base16_gui0A." guibg=NONE"
-            exec "hi CmpItemKindKeyword gui=NONE guifg=#".g:base16_gui0A." guibg=NONE"
-            exec "hi CmpItemKindOperator gui=NONE guifg=#".g:base16_gui0A." guibg=NONE"
-            exec "hi CmpItemKindColor gui=NONE guifg=#".g:base16_gui0A." guibg=NONE"
-            " default
-            exec "hi CmpItemKind gui=NONE guifg=#".g:base16_gui03." guibg=NONE"
-            ]]
-        end }
+    after = 'nvim-base16'}
+    use {
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
+      {"tzachar/cmp-tabnine", run = './install.sh', config= function ()
+        local tabnine = require('cmp_tabnine.config')
+        tabnine:setup({
+          max_num_results = 2;
+        })
+      end},
+    after = { "nvim-cmp" }}
 
     -- Scrollbar
     use {'dstein64/nvim-scrollview', config = function ()
@@ -602,6 +569,48 @@ require('packer').startup(function(use)
 
     -- Additional Syntax Support
     use 'aklt/plantuml-syntax'
+
+    -- Colorscheme
+    use {'RRethy/nvim-base16', config = function ()
+        local base16 = require("base16-colorscheme")
+
+        -- https://github.com/RRethy/nvim-base16/blob/master/colors/base16-tomorrow-night.vim
+        vim.cmd[[
+            colorscheme base16-tomorrow-night
+            set termguicolors
+        ]]
+        vim.highlight.create("NonText", {guifg = base16.colors.base02, guibg="none"}, false)
+        vim.highlight.create("Search", {guibg = base16.colors.base09}, false)
+        vim.highlight.create("IncSearch", {guibg = base16.colors.base0A}, false)
+        vim.highlight.create("Comment", {gui = "italic", guifg = base16.colors.base03, guibg = "none"}, false)
+        vim.highlight.create("MatchParen", {gui = "bold,italic", guifg = "none", guibg = "none"}, false)
+        vim.highlight.create("VertSplit", {guifg = base16.colors.base02, guibg = "none"}, false)
+        vim.highlight.create("DiffAdd", {guifg = "none", guibg = "none"}, false)
+        vim.highlight.create("DiffDelete", {guifg = base16.colors.base01, guibg = base16.colors.base01}, false)
+        vim.highlight.create("DiffText", {gui = "undercurl", guifg = base16.colors.base00, guibg = base16.colors.base0D}, false)
+
+        -- LSP Diagnostics
+        vim.highlight.create("DiagnosticError", {gui = "none", guifg = base16.colors.base08, guibg = "none"}, false)
+        vim.highlight.create("DiagnosticUnderlineError", {gui = "undercurl", guisp = base16.colors.base08}, false)
+        vim.highlight.create("DiagnosticWarn", {gui = "none", guifg = base16.colors.base0A, guibg = "none"}, false)
+        vim.highlight.create("DiagnosticUnderlineWarn", {gui = "undercurl", guisp = base16.colors.base0A}, false)
+        vim.highlight.create("DiagnosticInfo", {gui = "none", guifg = base16.colors.base0B, guibg = "none"}, false)
+        vim.highlight.create("DiagnosticUnderlineInfo", {gui = "undercurl", guisp = base16.colors.base0B}, false)
+        vim.highlight.create("DiagnosticHint", {gui = "none", guifg = base16.colors.base0D, guibg = "none"}, false)
+        vim.highlight.create("DiagnosticUnderlineHint", {gui = "undercurl", guisp = base16.colors.base0D}, false)
+        vim.highlight.create("DiagnosticVirtualText", {gui = "undercurl,bold", guifg = base16.colors.base02, guibg = "none"}, false)
+        vim.highlight.link("DiagnosticVirtualTextError", "DiagnosticVirtualText", false)
+        vim.highlight.link("DiagnosticVirtualTextWarn", "DiagnosticVirtualText", false)
+        vim.highlight.link("DiagnosticVirtualTextInfo", "DiagnosticVirtualText", false)
+        vim.highlight.link("DiagnosticVirtualTextHint", "DiagnosticVirtualText", false)
+
+        -- Gutter
+        vim.highlight.create("LineNr", {guibg = "none"}, false)
+        vim.highlight.create("CursorLineNr", {guibg = "none"}, false)
+        vim.highlight.create("SignColumn", {guibg = "none"}, false)
+        vim.highlight.create("FoldColumn", {guibg = "none"}, false)
+
+        end }
 end)
 
 
