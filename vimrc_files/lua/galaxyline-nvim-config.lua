@@ -3,13 +3,13 @@ local condition = require('galaxyline.condition')
 local gps = require("nvim-gps")
 local gls = gl.section
 local base16 = require("base16-colorscheme")
-gl.short_line_list = {'NvimTree'}
+gl.short_line_list = {'NvimTree', 'Trouble', 'aerial'}
 
 local bgcolor = base16.colorschemes["schemer-medium"].base00
 local fgcolor = base16.colorschemes["schemer-medium"].base05
 
-vim.highlight.create("StatusLine", { guibg = bgcolor}, false)
-vim.highlight.create("StatusLineNC", { guibg = bgcolor}, false)
+vim.highlight.create("StatusLine", { gui="none", guibg = bgcolor}, false)
+vim.highlight.create("StatusLineNC", { gui="none", guibg = bgcolor}, false)
 
 gls.left[1] ={
   FileIcon = {

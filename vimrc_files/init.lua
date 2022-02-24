@@ -24,7 +24,7 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     use {'folke/which-key.nvim', config = function ()
-        vim.cmd[[set timeoutlen=200]]
+        vim.cmd[[set timeoutlen=1000]]
         local wk = require("which-key")
         wk.register({
             b = { name = "buffer" },
@@ -81,7 +81,7 @@ require('packer').startup(function(use)
     use {'lukas-reineke/indent-blankline.nvim', config = function ()
         require("indent_blankline").setup {
             char = "│",
-            filetype_exclude = { 'WhichKey', 'markdown' },
+            filetype_exclude = { 'WhichKey', 'markdown', 'aerial' },
             use_treesitter = true
         }
     end}
@@ -130,7 +130,9 @@ require('packer').startup(function(use)
     end, after = {"nvim-base16"}}
 
     use {'quangnguyen30192/cmp-nvim-ultisnips', run="./install.sh", config = function ()
-      require("cmp_nvim_ultisnips").setup { filetype_source = "ultisnips_default" }
+        -- TODO report issue, there's a problem with treesitter mode where it doesn't fallback to ultisnips_default,
+        --      causing a problem to language that does not have treesitter
+        require("cmp_nvim_ultisnips").setup { filetype_source = "ultisnips_default" }
     end, after = {"ultisnips", "nvim-cmp"}}
     use {'SirVer/ultisnips', config = function ()
         vim.cmd[[
@@ -204,7 +206,7 @@ require('packer').startup(function(use)
     -- Show highlight when there is trailing whitespace
     use {'bronson/vim-trailing-whitespace', config = function ()
         vim.cmd[[
-            let g:extra_whitespace_ignored_filetypes = ['Mundo','MundoDiff']
+            let g:extra_whitespace_ignored_filetypes = ['Mundo','MundoDiff','aerial']
         ]]
     end}
 
@@ -227,8 +229,8 @@ require('packer').startup(function(use)
     use {'qpkorr/vim-bufkill', config = function ()
         vim.cmd[[
             let g:BufKillCreateMappings = 0
-            noremap <silent><leader>bd :<c-u>BW!<cr>
-            noremap <silent><leader>ba :<c-u>bufdo BW<cr>
+            noremap <silent><leader>bd :<c-u>BD!<cr>
+            noremap <silent><leader>ba :<c-u>bufdo BD<cr>
         ]]
     end}
 
@@ -310,7 +312,9 @@ require('packer').startup(function(use)
                     }
                     if server.name == "tsserver" then
                         server_opts.on_attach = function(client, bufnr)
-                            client.resolved_capabilities.document_formatting = false -- Prefer eslint
+                            -- prefer eslint
+                            client.resolved_capabilities.document_formatting = false
+                            client.resolved_capabilities.document_range_formatting = false
                             common_on_attach(client, bufnr)
                         end
                     elseif server.name == "eslint" then
@@ -386,9 +390,10 @@ require('packer').startup(function(use)
         local js_kind = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct", "Constant", "Variable", "Field" }
         local data_kind = { "Module", "Number", "Array", "Boolean", "String" }
         require("aerial").setup({
-          min_width = 40,
-          max_width = 40,
+          min_width = 30,
+          max_width = 30,
           show_guide = true,
+          open_automatic = true,
           icons = kind_icons,
           filter_kind = {
             ['_'] = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct" },
@@ -402,13 +407,13 @@ require('packer').startup(function(use)
           default_direction = "right",
         })
     end}
+
     use {'folke/trouble.nvim', config = function ()
         require("trouble").setup {
             auto_open = true,
-            auto_close = true,
             use_diagnostic_signs = true,
-            mode = "document_diagnostics",
-            height = 3
+            height = 3,
+            padding = false
         }
     end}
 
@@ -441,6 +446,7 @@ require('packer').startup(function(use)
           },
           sorting = {
             comparators = {
+              compare.exact,
               compare.score,
               compare.kind,
             }
@@ -590,12 +596,10 @@ require('packer').startup(function(use)
 
         -- https://github.com/RRethy/nvim-base16/blob/master/colors/base16-tomorrow-night.vim
         vim.cmd[[
-            colorscheme base16-tomorrow-night
             set termguicolors
+            colorscheme base16-tomorrow-night
         ]]
         vim.highlight.create("NonText", {guifg = base16.colors.base02, guibg="none"}, false)
-        vim.highlight.create("Search", {guibg = base16.colors.base09}, false)
-        vim.highlight.create("IncSearch", {guibg = base16.colors.base0A}, false)
         vim.highlight.create("Comment", {gui = "italic", guifg = base16.colors.base03, guibg = "none"}, false)
         vim.highlight.create("MatchParen", {gui = "bold,italic", guifg = "none", guibg = "none"}, false)
         vim.highlight.create("VertSplit", {guifg = base16.colors.base02, guibg = "none"}, false)
@@ -636,10 +640,7 @@ for type, icon in pairs(signs) do
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 vim.diagnostic.config({
-  virtual_text = {
-    prefix = '●',
-    severity_sort = true,
-  }
+  virtual_text = false
 })
 
 vim.cmd[[

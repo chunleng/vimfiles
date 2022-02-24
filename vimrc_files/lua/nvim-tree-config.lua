@@ -29,6 +29,8 @@ require'nvim-tree'.setup {
     }
   },
   view = {
+    width = 30,
+    hide_root_folder = true,
     auto_resize = true,
   },
   filters = {
@@ -36,7 +38,6 @@ require'nvim-tree'.setup {
   },
   actions = {
     open_file = {
-      quit_on_open = true,
       window_picker = {
         enable = true,
         chars = "aoeuhtns",
@@ -45,7 +46,8 @@ require'nvim-tree'.setup {
             "notify",
             "packer",
             "qf",
-            "Trouble"
+            "Trouble",
+            "aerial"
           }
         }
       }
