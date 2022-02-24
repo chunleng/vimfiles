@@ -33,5 +33,22 @@ require'nvim-tree'.setup {
   },
   filters = {
     custom = { "__pycache__" }
+  },
+  actions = {
+    open_file = {
+      quit_on_open = true,
+      window_picker = {
+        enable = true,
+        chars = "aoeuhtns",
+        exclude = {
+          filetype = {
+            "notify",
+            "packer",
+            "qf",
+            "Trouble"
+          }
+        }
+      }
+    }
   }
 }

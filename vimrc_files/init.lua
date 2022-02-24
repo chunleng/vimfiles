@@ -38,7 +38,7 @@ require('packer').startup(function(use)
     end}
     use {'kyazdani42/nvim-tree.lua', config = function ()
         require('nvim-tree-config')
-    end, requires = 'kyazdani42/nvim-web-devicons'}
+    end, requires = 'kyazdani42/nvim-web-devicons', after = "nvim-treesitter"}
 
     -- Beautify
     use {'glepnir/galaxyline.nvim', config = function ()
@@ -403,7 +403,13 @@ require('packer').startup(function(use)
         })
     end}
     use {'folke/trouble.nvim', config = function ()
-        require("trouble").setup {}
+        require("trouble").setup {
+            auto_open = true,
+            auto_close = true,
+            use_diagnostic_signs = true,
+            mode = "document_diagnostics",
+            height = 3
+        }
     end}
 
     use {'hrsh7th/nvim-cmp',
