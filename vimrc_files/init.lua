@@ -461,12 +461,12 @@ require('packer').startup(function(use)
             }
           },
           sources = {
-            { name = 'path' },
-            { name = 'ultisnips' },
-            { name = 'cmp_tabnine' },
-            { name = 'nvim_lsp_signature_help' },
-            { name = 'nvim_lsp', max_item_count = 100 },
-            { name = 'buffer',
+            { name = 'path', priority = 100 },
+            { name = 'ultisnips', priority = 100 },
+            { name = 'cmp_tabnine', priority = 50 },
+            { name = 'nvim_lsp_signature_help', priority = 50 },
+            { name = 'nvim_lsp', max_item_count = 100, priority = 30 },
+            { name = 'buffer', priority = 1,
               option = {
                 -- https://github.com/hrsh7th/cmp-buffer#visible-buffers
                 get_bufnrs = function()
