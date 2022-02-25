@@ -394,6 +394,8 @@ require('packer').startup(function(use)
         'folke/lua-dev.nvim',
         'b0o/schemastore.nvim'
     }}
+
+    -- https://github.com/stevearc/aerial.nvim
     use {'stevearc/aerial.nvim', config = function ()
         local kind_icons = require("kind-icons")
         local js_kind = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct", "Constant", "Variable", "Field" }
@@ -403,6 +405,7 @@ require('packer').startup(function(use)
           max_width = 30,
           show_guide = true,
           open_automatic = true,
+          close_behavior = "global",
           icons = kind_icons,
           filter_kind = {
             ['_'] = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct" },
