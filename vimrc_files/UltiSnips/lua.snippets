@@ -1,3 +1,13 @@
 snippet vimcmd "Allow Wrapping of vim.cmd" b
 vim.cmd[[${0:${VISUAL}}]]
 endsnippet
+
+snippet temp_autocommand_new "Autocommand" b
+vim.cmd[[
+	augroup ${1:group_name}
+		autocmd!
+		autocmd FileType ${2:filetype} setlocal noet
+		autocmd BufWinEnter *.${3:ext} set local noet$0
+	augroup END
+]]
+endsnippet

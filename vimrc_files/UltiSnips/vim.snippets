@@ -21,14 +21,14 @@ endsnippet
 snippet temp_autocommand_new "Template for commonly used autocommand" b
 augroup ${1:group_name}
 	autocmd!
-	autocmd FileType ${2:filetype} ${3:setlocal noet}
-	autocmd BufWinEnter *.${4:ext} ${3:setlocal noet}
+	autocmd FileType ${2:filetype} setlocal noet
+	autocmd BufWinEnter *.${3:ext} set local noet$0
 augroup END
 endsnippet
 
 snippet temp_lsp_autoformat_on_save "Template for LSP autoformat on save" b
 augroup LspFormatting
-    autocmd! * <buffer>
-    autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+	autocmd! * <buffer>
+	autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
 augroup END
 endsnippet
