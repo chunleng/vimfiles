@@ -243,8 +243,7 @@ require('packer').startup(function(use)
         vim.g.fzf_preview_window = {'right:50%', 'ctrl-/'}
         function GetWord()
           vim.ui.input({ prompt = "Search", default = vim.fn.expand("<cword>")}, function(response)
-            if response == "" then
-              print("Search ended as there is no input")
+            if response == nil then
               return
             end
             vim.fn.call("fzf#vim#grep",
