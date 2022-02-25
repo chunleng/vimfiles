@@ -128,7 +128,7 @@ require('packer').startup(function(use)
         vim.highlight.create("GitSignsDelete", { guifg = base16.colors.base0F, guibg = base16.colors.base01 }, false)
         vim.highlight.create("GitSignsDeleteLn", { guibg = "bg" }, false)
 
-        vim.highlight.create("GitSignsCurrentLineBlame", { gui = "italic", guifg = base16.colors.base03 , guibg = "bg" }, false)
+        vim.highlight.create("GitSignsCurrentLineBlame", { gui = "italic", guifg = base16.colors.base03 , guibg = "none" }, false)
     end, after = {"nvim-base16"}}
 
     use {'quangnguyen30192/cmp-nvim-ultisnips', run="./install.sh", config = function ()
@@ -215,11 +215,8 @@ require('packer').startup(function(use)
     -- For Commenting
     use 'tpope/vim-commentary'
 
-    -- Underline all other instance of word under cursor
-    use {'itchyny/vim-cursorword', config = function ()
-      vim.highlight.create("CursorWord0", { gui = "bold,underline", guifg = "none", guibg = "none" }, false)
-      vim.highlight.create("CursorWord1", { gui = "bold,underline", guifg = "none", guibg = "none" }, false)
-    end}
+    use "xiyaowong/nvim-cursorword"
+
     use {'whatyouhide/vim-lengthmatters', config = function ()
         local base16 = require("base16-colorscheme")
         vim.highlight.create("OverLengthCustom", { guibg = base16.colors.base0D_20, guifg = "none" }, false)
