@@ -20,6 +20,8 @@ endif
 runtime src/before-plugin.vim
 ]]
 
+vim.api.nvim_set_option("termguicolors", true)
+
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
@@ -94,7 +96,7 @@ require('packer').startup(function(use)
             nnoremap <silent><leader>gf :GBrowse<cr>
             nnoremap <silent><leader>gb :Git blame<cr>
         ]]
-    end, after = "nvim-base16"}
+    end}
 
     use 'tpope/vim-rhubarb'
     use {'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }, config = function ()
@@ -617,11 +619,14 @@ require('packer').startup(function(use)
     use {'RRethy/nvim-base16', config = function ()
         local base16 = require("base16-colorscheme")
 
-        -- https://github.com/RRethy/nvim-base16/blob/master/colors/base16-tomorrow-night.vim
-        vim.cmd[[
-            set termguicolors
-            colorscheme base16-tomorrow-night
-        ]]
+        -- ref: https://github.com/RRethy/nvim-base16/blob/master/colors/base16-tomorrow-night.vim
+        base16.setup({
+            base00 = '#1d1f21', base01 = '#282a2e', base02 = '#373b41', base03 = '#969896',
+            base04 = '#b4b7b4', base05 = '#c5c8c6', base06 = '#e0e0e0', base07 = '#ffffff',
+            base08 = '#cc6666', base09 = '#de935f', base0A = '#f0c674', base0B = '#b5bd68',
+            base0C = '#8abeb7', base0D = '#81a2be', base0E = '#b294bb', base0F = '#a3685a'
+        })
+
 
         -- extended colors
         -- base color with the lightness percentage adjusted
@@ -636,6 +641,8 @@ require('packer').startup(function(use)
         vim.highlight.create("DiffDelete", {guifg = base16.colorschemes["schemer-dark"].base00, guibg = base16.colorschemes["schemer-dark"].base00}, false)
         vim.highlight.create("DiffText", { guifg = "none", guibg = base16.colorschemes["schemer-medium"].base01}, false)
         vim.highlight.create("DiffChange", { guifg="none", guibg = "bg" }, false)
+        vim.highlight.create("Search", { guifg= base16.colors.base00, guibg = base16.colors.baseOA }, false)
+        vim.highlight.create("IncSearch", { guifg= base16.colors.base00, guibg = base16.colors.baseO9 }, false)
 
         -- LSP Diagnostics
         vim.highlight.create("DiagnosticError", {guifg = base16.colors.base08}, false)
