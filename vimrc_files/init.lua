@@ -81,7 +81,7 @@ require('packer').startup(function(use)
     use {'lukas-reineke/indent-blankline.nvim', config = function ()
         require("indent_blankline").setup {
             char = "│",
-            filetype_exclude = { 'WhichKey', 'markdown', 'aerial' },
+            filetype_exclude = { 'WhichKey', 'markdown', 'aerial', 'dashboard' },
             use_treesitter = true
         }
     end}
@@ -206,7 +206,7 @@ require('packer').startup(function(use)
     -- Show highlight when there is trailing whitespace
     use {'bronson/vim-trailing-whitespace', config = function ()
         vim.cmd[[
-            let g:extra_whitespace_ignored_filetypes = ['Mundo','MundoDiff','aerial']
+            let g:extra_whitespace_ignored_filetypes = ['Mundo','MundoDiff','aerial', 'dashboard']
         ]]
     end}
 
@@ -221,7 +221,7 @@ require('packer').startup(function(use)
     use {'whatyouhide/vim-lengthmatters', config = function ()
         vim.cmd[[
             nnoremap <leader>to :LengthmattersToggle<cr>
-            let g:lengthmatters_excluded = ['Mundo', 'MundoDiff', 'NvimTree', 'help', 'qf', 'WhichKey', 'min', 'markdown']
+            let g:lengthmatters_excluded = ['Mundo', 'MundoDiff', 'NvimTree', 'help', 'qf', 'WhichKey', 'min', 'markdown', 'dashboard']
             call lengthmatters#highlight('gui=undercurl')
         ]]
     end}
@@ -236,24 +236,30 @@ require('packer').startup(function(use)
 
     -- Fuzzy finder for files, grep and more
     use {'junegunn/fzf.vim', config = function ()
+        vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
+        vim.g.fzf_preview_window = {'right:50%', 'ctrl-/'}
+        vim.g.default_layout = { options = { '--layout=reverse', '--preview-window=' } }
+        vim.g.default_layout_with_preview = { options = { '--layout=reverse' } }
         vim.cmd[[
-            let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-            let g:fzf_preview_window = ['right:50%', 'ctrl-/']
-            let g:default_layout = {'options': ['--layout=reverse', '--preview-window=']}
-            let g:default_layout_with_preview = {'options': ['--layout=reverse']}
-
             " Find files
-            nnoremap <silent><leader>sf :call fzf#vim#files('', fzf#vim#with_preview(g:default_layout_with_preview))<cr>
+            command! FzfFiles call fzf#vim#files('', fzf#vim#with_preview(g:default_layout_with_preview))
+            nnoremap <silent><c-space> :FzfFiles<cr>
 
-            " Ag
-            nnoremap <silent><leader>sa :exec "call fzf#vim#grep('rg --line-number --no-heading --color=always -- '.shellescape('".input("grep > ")."'), 0, fzf#vim#with_preview(g:default_layout_with_preview),0)"<cr>
+            " Ripgrep
+            " c-u -> ctrl-/
+            function! GetWord()
+              let ans = input("grep > ")
+              if ans == ""
+                redraw
+                echo "Search ended as there is no input"
+                return
+              endif
+              call fzf#vim#grep('rg --line-number --no-heading --color=always -- '.shellescape(ans), 0, fzf#vim#with_preview(g:default_layout_with_preview),0)
+            endfunction
+            command! FzfRg call GetWord()
+            nnoremap <silent><c-_> :FzfRg<cr>
+            " TODO change to visual selection instead, mapping to vnoremap <leader>/
             nnoremap <silent><leader>su :call fzf#vim#grep('rg --fixed-strings --line-number --no-heading --color=always -- '.shellescape(expand('<cword>')), 0, fzf#vim#with_preview(g:default_layout_with_preview))<cr>
-
-            " Buffer
-            nnoremap <silent><leader>bb :call fzf#vim#buffers('', fzf#vim#with_preview(g:default_layout_with_preview))<cr>
-
-            " Show all commands
-            nnoremap <silent><leader>? :call fzf#vim#commands(g:default_layout)<cr>
         ]]
     end, requires = { 'junegunn/fzf', run = 'fzf#install()'}}
 
@@ -630,6 +636,24 @@ require('packer').startup(function(use)
         vim.highlight.create("FoldColumn", {guibg = "none"}, false)
 
       end }
+      use {"glepnir/dashboard-nvim", config = function()
+        vim.g.dashboard_default_executive = "fzf"
+        vim.g.dashboard_custom_section = {
+          a_find_file = {
+            description = { " Find File"},
+            command = "FzfFiles" -- link to fzf.vim config
+          },
+          b_find_word = {
+            description = { " Find Word" },
+            command = "FzfRg" -- link to fzf.vim config
+          },
+          c_bookmark = {
+            description = { " Bookmarks"},
+            command = "DashboardJumpMarks"
+          }
+        }
+
+      end, requires = "junegunn/fzf.vim"}
 end)
 
 
