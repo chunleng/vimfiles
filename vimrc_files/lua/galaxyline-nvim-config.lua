@@ -3,7 +3,7 @@ local condition = require('galaxyline.condition')
 local gps = require("nvim-gps")
 local gls = gl.section
 local base16 = require("base16-colorscheme")
-gl.short_line_list = {'NvimTree', 'Trouble', 'aerial'}
+gl.short_line_list = {'NvimTree', 'Trouble', 'aerial', 'dashboard'}
 
 local bgcolor = base16.colorschemes["schemer-medium"].base00
 local fgcolor = base16.colorschemes["schemer-medium"].base05
@@ -99,16 +99,7 @@ gls.right[6] = {
   }
 }
 
-gls.short_line_left[1] = {
-  BufferType = {
-    provider = 'FileTypeName',
-    separator = ' ',
-    separator_highlight = {'NONE',bgcolor},
-    highlight = {base16.colors.base0D,bgcolor,'bold'}
-  }
-}
-
-gls.short_line_left[2] = {
+gls.short_line_left[0] = {
   SFileName = {
     provider =  'SFileName',
     condition = condition.buffer_not_empty,
@@ -116,7 +107,7 @@ gls.short_line_left[2] = {
   }
 }
 
-gls.short_line_right[1] = {
+gls.short_line_right[0] = {
   BufferIcon = {
     provider= 'BufferIcon',
     highlight = {fgcolor,bgcolor}
