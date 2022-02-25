@@ -94,7 +94,7 @@ require('packer').startup(function(use)
             nnoremap <silent><leader>gf :GBrowse<cr>
             nnoremap <silent><leader>gb :Git blame<cr>
         ]]
-    end}
+    end, after = "nvim-base16"}
 
     use 'tpope/vim-rhubarb'
     use {'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }, config = function ()
@@ -238,11 +238,10 @@ require('packer').startup(function(use)
     end}
 
     -- Fuzzy finder for files, grep and more
+    -- TODO https://github.com/ibhagwan/fzf-lua seems alot easier to use
     use {'junegunn/fzf.vim', config = function ()
         vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
         vim.g.fzf_preview_window = {'right:50%', 'ctrl-/'}
-        vim.g.default_layout = { options = { '--layout=reverse', '--preview-window=' } }
-        vim.g.default_layout_with_preview = { options = { '--layout=reverse' } }
         function GetWord()
           vim.ui.input({ prompt = "Search", default = vim.fn.expand("<cword>")}, function(response)
             if response == "" then
@@ -253,14 +252,14 @@ require('packer').startup(function(use)
               {
                 'rg --line-number --smart-case --no-heading --color=always -- ' .. vim.fn.shellescape(response),
                 0,
-                vim.fn["fzf#vim#with_preview"](vim.g.default_layout_with_preview),
+                vim.fn["fzf#vim#with_preview"](),
                 0
               })
           end)
         end
         vim.cmd[[
             " Find files
-            command! FzfFiles call fzf#vim#files('', fzf#vim#with_preview(g:default_layout_with_preview))
+            command! FzfFiles call fzf#vim#files('', fzf#vim#with_preview())
             nnoremap <silent><c-space> :FzfFiles<cr>
 
             " Ripgrep
@@ -268,7 +267,7 @@ require('packer').startup(function(use)
             command! FzfRg lua GetWord()
             nnoremap <silent><c-_> :FzfRg<cr>
             " TODO change to visual selection instead, mapping to vnoremap <leader>/
-            nnoremap <silent><leader>su :call fzf#vim#grep('rg --fixed-strings --line-number --no-heading --color=always -- '.shellescape(expand('<cword>')), 0, fzf#vim#with_preview(g:default_layout_with_preview))<cr>
+            nnoremap <silent><leader>su :call fzf#vim#grep('rg --fixed-strings --line-number --no-heading --color=always -- '.shellescape(expand('<cword>')), 0, fzf#vim#with_preview())<cr>
         ]]
     end, requires = { 'junegunn/fzf', run = 'fzf#install()'}}
 
@@ -399,7 +398,7 @@ require('packer').startup(function(use)
         'neovim/nvim-lspconfig',
         'folke/lua-dev.nvim',
         'b0o/schemastore.nvim'
-    }, after = "dressing.nvim"}
+    }}
 
     -- https://github.com/stevearc/aerial.nvim
     use {'stevearc/aerial.nvim', config = function ()
@@ -678,9 +677,17 @@ require('packer').startup(function(use)
         }
 
       end, requires = "junegunn/fzf.vim"}
+
+      use { 'gfanto/fzf-lsp.nvim',
+        requires = { 'junegunn/fzf', 'junegunn/fzf.vim'},  -- to enable preview (optional)
+        config = function ()
+            require'fzf_lsp'.setup()
+        end
+      }
+
       use {'stevearc/dressing.nvim', config = function ()
         require('dressing').setup({})
-      end}
+      end, after = "nvim-base16"}
 end)
 
 
