@@ -219,12 +219,15 @@ require('packer').startup(function(use)
       vim.highlight.create("CursorWord1", { gui = "bold,underline", guifg = "none", guibg = "none" }, false)
     end}
     use {'whatyouhide/vim-lengthmatters', config = function ()
+        local base16 = require("base16-colorscheme")
+        vim.highlight.create("OverLengthCustom", { guibg = base16.colors.base0D_20, guifg = "none" }, false)
         vim.cmd[[
             nnoremap <leader>to :LengthmattersToggle<cr>
             let g:lengthmatters_excluded = ['Mundo', 'MundoDiff', 'NvimTree', 'help', 'qf', 'WhichKey', 'min', 'markdown', 'dashboard']
-            call lengthmatters#highlight('gui=undercurl')
+            call lengthmatters#highlight_link_to('OverLengthCustom')
         ]]
-    end}
+    end, after = "nvim-base16" }
+
     use 'tpope/vim-surround'
     use {'qpkorr/vim-bufkill', config = function ()
         vim.cmd[[
@@ -596,6 +599,12 @@ require('packer').startup(function(use)
     -- Additional Syntax Support
     use 'aklt/plantuml-syntax'
 
+    use {'norcalli/nvim-colorizer.lua', config = function()
+      -- nil -> all filetypes
+      vim.api.nvim_set_keymap("n", "<leader>tc", ":ColorizerToggle<cr>", {silent=true})
+      require'colorizer'.setup()
+    end}
+
     -- Colorscheme
     use {'RRethy/nvim-base16', config = function ()
         local base16 = require("base16-colorscheme")
@@ -605,6 +614,12 @@ require('packer').startup(function(use)
             set termguicolors
             colorscheme base16-tomorrow-night
         ]]
+
+        -- extended colors
+        -- base color with the lightness percentage adjusted
+        -- tool: https://www.w3schools.com/colors/colors_picker.asp
+        base16.colors.base0D_20 = "#233443"
+
         vim.highlight.create("NonText", {guifg = base16.colors.base02, guibg="none"}, false)
         vim.highlight.create("Comment", {gui = "italic", guifg = base16.colors.base03, guibg = "none"}, false)
         vim.highlight.create("MatchParen", {gui = "bold,italic", guifg = "none", guibg = "none"}, false)
