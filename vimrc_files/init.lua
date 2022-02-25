@@ -243,6 +243,21 @@ require('packer').startup(function(use)
         vim.g.fzf_preview_window = {'right:50%', 'ctrl-/'}
         vim.g.default_layout = { options = { '--layout=reverse', '--preview-window=' } }
         vim.g.default_layout_with_preview = { options = { '--layout=reverse' } }
+        function GetWord()
+          vim.ui.input({ prompt = "Search", default = vim.fn.expand("<cword>")}, function(response)
+            if response == "" then
+              print("Search ended as there is no input")
+              return
+            end
+            vim.fn.call("fzf#vim#grep",
+              {
+                'rg --line-number --smart-case --no-heading --color=always -- ' .. vim.fn.shellescape(response),
+                0,
+                vim.fn["fzf#vim#with_preview"](vim.g.default_layout_with_preview),
+                0
+              })
+          end)
+        end
         vim.cmd[[
             " Find files
             command! FzfFiles call fzf#vim#files('', fzf#vim#with_preview(g:default_layout_with_preview))
@@ -250,16 +265,7 @@ require('packer').startup(function(use)
 
             " Ripgrep
             " c-u -> ctrl-/
-            function! GetWord()
-              let ans = input("grep > ")
-              if ans == ""
-                redraw
-                echo "Search ended as there is no input"
-                return
-              endif
-              call fzf#vim#grep('rg --line-number --no-heading --color=always -- '.shellescape(ans), 0, fzf#vim#with_preview(g:default_layout_with_preview),0)
-            endfunction
-            command! FzfRg call GetWord()
+            command! FzfRg lua GetWord()
             nnoremap <silent><c-_> :FzfRg<cr>
             " TODO change to visual selection instead, mapping to vnoremap <leader>/
             nnoremap <silent><leader>su :call fzf#vim#grep('rg --fixed-strings --line-number --no-heading --color=always -- '.shellescape(expand('<cword>')), 0, fzf#vim#with_preview(g:default_layout_with_preview))<cr>
@@ -393,7 +399,7 @@ require('packer').startup(function(use)
         'neovim/nvim-lspconfig',
         'folke/lua-dev.nvim',
         'b0o/schemastore.nvim'
-    }}
+    }, after = "dressing.nvim"}
 
     -- https://github.com/stevearc/aerial.nvim
     use {'stevearc/aerial.nvim', config = function ()
@@ -672,6 +678,9 @@ require('packer').startup(function(use)
         }
 
       end, requires = "junegunn/fzf.vim"}
+      use {'stevearc/dressing.nvim', config = function ()
+        require('dressing').setup({})
+      end}
 end)
 
 
