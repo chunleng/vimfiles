@@ -83,7 +83,7 @@ require('packer').startup(function(use)
     use {'lukas-reineke/indent-blankline.nvim', config = function ()
         require("indent_blankline").setup {
             char = "│",
-            filetype_exclude = { 'WhichKey', 'markdown', 'aerial', 'dashboard' },
+            filetype_exclude = { 'WhichKey', 'markdown', 'aerial', 'dashboard', 'help' },
             use_treesitter = true
         }
     end}
