@@ -28,6 +28,11 @@ require('packer').startup(function(use)
     use {'folke/which-key.nvim', config = function ()
         vim.cmd[[set timeoutlen=1000]]
         local wk = require("which-key")
+        wk.setup({
+          window = {
+            winblend = 15
+          }
+        })
         wk.register({
             b = { name = "buffer" },
             c = {
@@ -83,7 +88,7 @@ require('packer').startup(function(use)
     use {'lukas-reineke/indent-blankline.nvim', config = function ()
         require("indent_blankline").setup {
             char = "│",
-            filetype_exclude = { 'WhichKey', 'markdown', 'aerial', 'dashboard', 'help' },
+            filetype_exclude = { 'WhichKey', 'markdown', 'aerial', 'dashboard', 'help', 'Trouble' },
             use_treesitter = true
         }
     end}
@@ -215,7 +220,11 @@ require('packer').startup(function(use)
     -- For Commenting
     use 'tpope/vim-commentary'
 
-    use "xiyaowong/nvim-cursorword"
+    use {"xiyaowong/nvim-cursorword", config = function ()
+      local base16 = require("base16-colorscheme")
+      vim.highlight.create("CursorWord", {guibg = base16.colors.base01, gui="none"}, false)
+      vim.g.cursorword_disable_filetypes = { "Dashboard", "NvimTree", "Aerial"}
+    end, after="nvim-base16"}
 
     use {'whatyouhide/vim-lengthmatters', config = function ()
         local base16 = require("base16-colorscheme")
@@ -421,12 +430,15 @@ require('packer').startup(function(use)
           },
           default_direction = "right",
         })
-    end}
+        local base16 = require("base16-colorscheme")
+        vim.highlight.create("AerialLine", { guifg="none", guibg = base16.colors.base0A_20, blend = 0 }, false)
+    end, after = "nvim-base16" }
 
     use {'folke/trouble.nvim', config = function ()
         require("trouble").setup {
             auto_open = true,
             use_diagnostic_signs = true,
+            indent_lines = false,
             height = 3,
             padding = false
         }
@@ -547,11 +559,13 @@ require('packer').startup(function(use)
     -- Scrollbar
     use {'dstein64/nvim-scrollview', config = function ()
         vim.cmd[[
-            let g:scrollview_winblend = 30
+            let g:scrollview_winblend = 15
             let g:scrollview_column = 1
             let g:scrollview_excluded_filetypes = ['NvimTree','WhichKey']
         ]]
-    end}
+        local base16 = require("base16-colorscheme")
+        vim.highlight.create("ScrollView", { guibg = base16.colors.base0D_40 }, false)
+    end, after = "nvim-base16"}
 
     -- Multi cursor edit
     use {'mg979/vim-visual-multi', config= function ()
@@ -630,7 +644,12 @@ require('packer').startup(function(use)
         -- base color with the lightness percentage adjusted
         -- tool: https://www.w3schools.com/colors/colors_picker.asp
         base16.colors.base0D_20 = "#233443"
+        base16.colors.base0D_40 = "#456887"
+        base16.colors.base0A_20 = "#5c410a"
+        base16.colors.base0A_40 = "#b98213"
+        base16.colors.base09_40 = "#a95b23"
 
+        vim.highlight.create("Cursor", {gui="inverse", guifg = "none", guibg="none"}, false)
         vim.highlight.create("NonText", {guifg = base16.colors.base02, guibg="none"}, false)
         vim.highlight.create("Comment", {gui = "italic", guifg = base16.colors.base03, guibg = "none"}, false)
         vim.highlight.create("MatchParen", {gui = "bold,italic", guifg = "none", guibg = "none"}, false)
@@ -639,8 +658,21 @@ require('packer').startup(function(use)
         vim.highlight.create("DiffDelete", {guifg = base16.colorschemes["schemer-dark"].base00, guibg = base16.colorschemes["schemer-dark"].base00}, false)
         vim.highlight.create("DiffText", { guifg = "none", guibg = base16.colorschemes["schemer-medium"].base01}, false)
         vim.highlight.create("DiffChange", { guifg="none", guibg = "bg" }, false)
-        vim.highlight.create("Search", { guifg= base16.colors.base00, guibg = base16.colors.baseOA }, false)
-        vim.highlight.create("IncSearch", { guifg= base16.colors.base00, guibg = base16.colors.baseO9 }, false)
+        vim.highlight.create("Search", { guifg= base16.colors.base00, guibg = base16.colors.base0A_40 }, false)
+        vim.highlight.create("IncSearch", { guifg= base16.colors.base05, guibg = base16.colors.base09_40 }, false)
+
+        -- Completion
+        vim.api.nvim_set_option("pumblend", 1)
+        vim.highlight.create("Pmenu", { guifg= base16.colors.base03, guibg = base16.colors.base01, blend = 15 }, false)
+        vim.highlight.create("PmenuSel", { guifg="none", guibg = base16.colors.base0A_20, blend = 0 }, false)
+        vim.highlight.create("PmenuSbar", { guibg = base16.colors.base0D_20 }, false)
+        vim.highlight.create("PmenuThumb", { guibg = base16.colors.base0D_40 }, false)
+
+        -- Float
+        vim.api.nvim_set_option("winblend", 1)
+        vim.highlight.create("NormalFloat", { guifg= base16.colors.base05, guibg = base16.colors.base01, blend = 15 }, false)
+        vim.highlight.create("FloatBorder", { guifg= base16.colors.base0D_40, guibg = base16.colors.base01, blend = 15 }, false)
+        vim.highlight.create("FloatTitle", { gui="bold", guifg= base16.colors.base04, guibg = base16.colors.base01, blend = 15 }, false)
 
         -- LSP Diagnostics
         vim.highlight.create("DiagnosticError", {guifg = base16.colors.base08}, false)
@@ -668,32 +700,43 @@ require('packer').startup(function(use)
         vim.g.dashboard_default_executive = "fzf"
         vim.g.dashboard_custom_section = {
           a_file_new = {
-            description = { " New File"},
+            description = { " New File                     "},
             command = "bd" -- Deleting the dashboard buffer brings to the new file
           },
           b_bookmark = {
-            description = { " Bookmarks"},
+            description = { " Bookmarks                    "},
             command = "DashboardJumpMarks"
           },
           c_find_file = {
-            description = { " Find File"},
+            description = { " Find File          CTRL SPACE"},
             command = "FzfFiles" -- link to fzf.vim config
           },
           d_find_word = {
-            description = { " Find Word" },
+            description = { " Find Word          CTRL /    "},
             command = "FzfRg" -- link to fzf.vim config
           }
         }
+        vim.g.dashboard_custom_footer = {}
+        local base16 = require("base16-colorscheme")
+        vim.highlight.create("DashboardHeader", {guifg = base16.colors.base0D_40}, false)
+        vim.highlight.create("DashboardCenter", {guifg = base16.colors.base0D}, false)
 
-      end, requires = "junegunn/fzf.vim"}
+      end, requires = "junegunn/fzf.vim", after = "nvim-base16"}
 
       use {'stevearc/dressing.nvim', config = function ()
-        require('dressing').setup({
+        require('dressing').setup(
+        {
+          input = {
+            winblend = 15,
+          },
           select = {
             backend = {"builtin"},
             builtin = {
               row = 1,
-              min_height = 1
+              min_height = 1,
+              max_height = 10,
+              min_width = 0,
+              max_width = 0.9
             }
           }
         })
