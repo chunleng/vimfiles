@@ -718,4 +718,8 @@ runtime src/after-plugin.vim
 vnoremap y ygv"*y
 vnoremap d ygv"*d
 vnoremap x ygv"*x
+" Make ZQ and ZZ more useful for multiple buffer situation
+" TODO anyway to integrate with dressing?
+nnoremap ZQ :confirm qa<cr>
+nnoremap ZZ :confirm wqa<cr>
 ]]
