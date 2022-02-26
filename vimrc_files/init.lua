@@ -246,37 +246,43 @@ require('packer').startup(function(use)
     end}
 
     -- Fuzzy finder for files, grep and more
-    -- TODO https://github.com/ibhagwan/fzf-lua seems alot easier to use
-    use {'junegunn/fzf.vim', config = function ()
-        vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
-        vim.g.fzf_preview_window = {'right:50%', 'ctrl-/'}
-        function GetWord()
-          vim.ui.input({ prompt = "Search", default = vim.fn.expand("<cword>")}, function(response)
+    use { 'ibhagwan/fzf-lua',
+      config = function ()
+        local actions = require('fzf-lua.actions')
+        require('fzf-lua').setup({
+          keymap = {
+            builtin = {
+              -- c-u -> ctrl-/
+              ["<c-_>"]       = "toggle-preview",
+              ["<s-down>"]    = "preview-page-down",
+              ["<s-up>"]      = "preview-page-up",
+              ["<tab>"]       = "toggle+down",
+              ["<s-tab>"]     = "toggle+up",
+            }
+          },
+          actions = {
+            files = {
+              ["default"]     = actions.file_edit,
+            },
+          },
+          fzf_args = "--select-1", -- auto-select when there is only one result
+        })
+        function FzfLuaSearch()
+          vim.ui.input({ prompt = "Search" }, function(response)
             if response == nil then
               return
             end
-            vim.fn.call("fzf#vim#grep",
-              {
-                'rg --line-number --smart-case --no-heading --color=always -- ' .. vim.fn.shellescape(response),
-                0,
-                vim.fn["fzf#vim#with_preview"](),
-                0
-              })
+            require("fzf-lua.providers.grep").grep({ search = response })
           end)
         end
-        vim.cmd[[
-            " Find files
-            command! FzfFiles call fzf#vim#files('', fzf#vim#with_preview())
-            nnoremap <silent><c-space> :FzfFiles<cr>
-
-            " Ripgrep
-            " c-u -> ctrl-/
-            command! FzfRg lua GetWord()
-            nnoremap <silent><c-_> :FzfRg<cr>
-            " TODO change to visual selection instead, mapping to vnoremap <leader>/
-            nnoremap <silent><leader>su :call fzf#vim#grep('rg --fixed-strings --line-number --no-heading --color=always -- '.shellescape(expand('<cword>')), 0, fzf#vim#with_preview())<cr>
-        ]]
-    end, requires = { 'junegunn/fzf', run = 'fzf#install()'}}
+        vim.cmd[[command! FzfLuaSearch lua FzfLuaSearch()]]
+        vim.api.nvim_set_keymap("n", "<c-space>", ":FzfLua files<cr>", { silent = true})
+        vim.api.nvim_set_keymap("n", "<c-_>", ":FzfLuaSearch<cr>", { silent = true})
+        vim.api.nvim_set_keymap("v", "<c-_>", ":<c-u>FzfLua grep_visual<cr>", { silent = true})
+      end,
+      -- optional for icon support
+      requires = { 'kyazdani42/nvim-web-devicons' }
+    }
 
     -- Code Intellisense
     use {'williamboman/nvim-lsp-installer',
@@ -308,13 +314,13 @@ require('packer').startup(function(use)
                 server:on_ready(function()
                     local keymap_opts = { noremap = true, silent = true }
                     local common_on_attach = function(client, bufnr)
-                        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', keymap_opts)
+                        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua require"fzf-lua".lsp_definitions({force_uri = false})<cr>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cf', '<cmd>lua vim.lsp.buf.code_action()<CR>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>c=', '<cmd>lua vim.lsp.buf.formatting()<CR>', keymap_opts)
-                        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cu', '<cmd>lua vim.lsp.buf.references()<CR>', keymap_opts)
+                        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cu', '<cmd>lua require"fzf-lua".lsp_references({force_uri = false})<cr>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'i', '<c-space>', '<cmd>lua vim.lsp.buf.completion()<CR>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'v', '=', ':\'<,\'>lua vim.lsp.buf.range_formatting()<CR>', keymap_opts)
                         vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>Trouble document_diagnostics<CR>', keymap_opts)
@@ -404,7 +410,8 @@ require('packer').startup(function(use)
     requires = {
         'neovim/nvim-lspconfig',
         'folke/lua-dev.nvim',
-        'b0o/schemastore.nvim'
+        'b0o/schemastore.nvim',
+        'ibhagwan/fzf-lua'
     }}
 
     -- https://github.com/stevearc/aerial.nvim
@@ -705,15 +712,15 @@ require('packer').startup(function(use)
           },
           b_bookmark = {
             description = { " Bookmarks                    "},
-            command = "DashboardJumpMarks"
+            command = "FzfLua marks"
           },
           c_find_file = {
             description = { " Find File          CTRL SPACE"},
-            command = "FzfFiles" -- link to fzf.vim config
+            command = "FzfLua files" -- link to fzf.vim config
           },
           d_find_word = {
             description = { " Find Word          CTRL /    "},
-            command = "FzfRg" -- link to fzf.vim config
+            command = "FzfLuaSearch" -- link to fzf.vim config
           }
         }
         vim.g.dashboard_custom_footer = {}
@@ -721,7 +728,7 @@ require('packer').startup(function(use)
         vim.highlight.create("DashboardHeader", {guifg = base16.colors.base0D_40}, false)
         vim.highlight.create("DashboardCenter", {guifg = base16.colors.base0D}, false)
 
-      end, requires = "junegunn/fzf.vim", after = "nvim-base16"}
+      end, requires = "ibhagwan/fzf-lua", after = "nvim-base16"}
 
       use {'stevearc/dressing.nvim', config = function ()
         require('dressing').setup(
@@ -738,13 +745,6 @@ require('packer').startup(function(use)
               min_width = 0,
               max_width = 0.9
             },
-            get_config = function(opts)
-              if opts.kind == 'location' then
-                return {
-                  backend = 'fzf',
-                }
-              end
-            end
           }
         })
         vim.cmd[[
@@ -756,44 +756,6 @@ require('packer').startup(function(use)
         ]]
       end, after = "nvim-base16"}
 end)
-
-vim.lsp.handlers['textDocument/references'] = function(err, result, ctx, config)
-    if result == nil or next(result) == nil then
-      print("No results returned")
-      return
-    end
-    -- TODO when 2 call happens vim.ui.select overlaps, find a way to ensure they don't conflict
-    vim.ui.select(result,
-      {
-        format_item = function (item)
-          return item.uri..item.range.start.line..item.range.start.character
-        end,
-        kind = "location"
-      },
-      function (item)
-        if item == nil then return end
-        vim.api.nvim_exec(string.format("e +%d %s", item.range.start.line, item.uri), false)
-      end)
-end
-
-vim.lsp.handlers['textDocument/definition'] = function(err, result, ctx, config)
-    if result == nil or next(result) == nil then
-      print("No results returned")
-      return
-    end
-    -- TODO when 2 call happens vim.ui.select overlaps, find a way to ensure they don't conflict
-    vim.ui.select(result,
-      {
-        format_item = function (item)
-          return item.targetUri..item.targetRange.start.line..item.targetRange.start.character
-        end,
-        kind = "location"
-      },
-      function (item)
-        if item == nil then return end
-        vim.api.nvim_exec(string.format("e +%d %s", item.targetRange.start.line, item.targetUri), false)
-      end)
-end
 
 
 
