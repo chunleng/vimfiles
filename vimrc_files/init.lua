@@ -297,6 +297,7 @@ require('packer').startup(function(use)
         vim.api.nvim_set_keymap("n", "<c-space>", ":FzfLua files<cr>", { silent = true})
         vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua resume<cr>", { silent = true})
         vim.api.nvim_set_keymap("n", "<c-_>", ":FzfLuaSearch<cr>", { silent = true})
+        vim.api.nvim_set_keymap("n", "<f1>", ":FzfLua help_tags<cr>", { silent = true})
         vim.api.nvim_set_keymap("v", "<c-_>", ":<c-u>FzfLua grep_visual<cr>", { silent = true})
 
         local base16 = require("base16-colorscheme")
