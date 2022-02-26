@@ -667,15 +667,19 @@ require('packer').startup(function(use)
       use {"glepnir/dashboard-nvim", config = function()
         vim.g.dashboard_default_executive = "fzf"
         vim.g.dashboard_custom_section = {
-          a_bookmark = {
+          a_file_new = {
+            description = { " New File"},
+            command = "bd" -- Deleting the dashboard buffer brings to the new file
+          },
+          b_bookmark = {
             description = { " Bookmarks"},
             command = "DashboardJumpMarks"
           },
-          b_find_file = {
+          c_find_file = {
             description = { " Find File"},
             command = "FzfFiles" -- link to fzf.vim config
           },
-          c_find_word = {
+          d_find_word = {
             description = { " Find Word" },
             command = "FzfRg" -- link to fzf.vim config
           }
