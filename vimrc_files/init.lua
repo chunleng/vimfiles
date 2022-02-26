@@ -737,7 +737,14 @@ require('packer').startup(function(use)
               max_height = 10,
               min_width = 0,
               max_width = 0.9
-            }
+            },
+            get_config = function(opts)
+              if opts.kind == 'location' then
+                return {
+                  backend = 'fzf',
+                }
+              end
+            end
           }
         })
         vim.cmd[[
@@ -749,6 +756,44 @@ require('packer').startup(function(use)
         ]]
       end, after = "nvim-base16"}
 end)
+
+vim.lsp.handlers['textDocument/references'] = function(err, result, ctx, config)
+    if result == nil or next(result) == nil then
+      print("No results returned")
+      return
+    end
+    -- TODO when 2 call happens vim.ui.select overlaps, find a way to ensure they don't conflict
+    vim.ui.select(result,
+      {
+        format_item = function (item)
+          return item.uri..item.range.start.line..item.range.start.character
+        end,
+        kind = "location"
+      },
+      function (item)
+        if item == nil then return end
+        vim.api.nvim_exec(string.format("e +%d %s", item.range.start.line, item.uri), false)
+      end)
+end
+
+vim.lsp.handlers['textDocument/definition'] = function(err, result, ctx, config)
+    if result == nil or next(result) == nil then
+      print("No results returned")
+      return
+    end
+    -- TODO when 2 call happens vim.ui.select overlaps, find a way to ensure they don't conflict
+    vim.ui.select(result,
+      {
+        format_item = function (item)
+          return item.targetUri..item.targetRange.start.line..item.targetRange.start.character
+        end,
+        kind = "location"
+      },
+      function (item)
+        if item == nil then return end
+        vim.api.nvim_exec(string.format("e +%d %s", item.targetRange.start.line, item.targetUri), false)
+      end)
+end
 
 
 
