@@ -13,4 +13,13 @@ require'nvim-treesitter.configs'.setup {
   playground = { enable = true },
   context_commentstring = { enable = true },
   endwise = { enable = true, },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "vv",
+      node_incremental = "<enter>",
+      scope_incremental = "+",
+      node_decremental = "-",
+    },
+  },
 }
