@@ -838,6 +838,7 @@ vim.diagnostic.config({
 vim.cmd[[
 runtime src/after-plugin.vim
 " Make visual mode yank and delete go to clipboard as well
+nnoremap vv viw
 vnoremap y ygv"*y
 vnoremap d ygv"*d
 vnoremap x ygv"*x
