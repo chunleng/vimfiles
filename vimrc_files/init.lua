@@ -788,6 +788,12 @@ require('packer').startup(function(use)
         local base16 = require("base16-colorscheme")
         vim.highlight.create("DashboardHeader", {guifg = base16.colors.base0D_40}, false)
         vim.highlight.create("DashboardCenter", {guifg = base16.colors.base0D}, false)
+        vim.cmd[[
+          augroup Dashboard
+            autocmd!
+            autocmd FileType dashboard nnoremap <buffer><silent><leader><space> :NvimTreeOpen<cr>
+          augroup END
+        ]]
 
       end, requires = "ibhagwan/fzf-lua", after = "nvim-base16"}
 
