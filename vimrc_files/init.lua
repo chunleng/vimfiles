@@ -122,7 +122,27 @@ require('packer').startup(function(use)
                 ['n <leader>d'] = '<cmd>Gitsigns diffthis<CR>',
             },
             current_line_blame = true,
-            current_line_blame_formatter = ' <author>, <author_time:%Y-%m-%d> - <summary>',
+            current_line_blame_opts = {
+              virt_text = true
+            },
+            current_line_blame_formatter = function(name, blame_info)
+              if blame_info.author == "Not Committed Yet" then
+                return {
+                  { '      ', 'GitSignsCurrentLineBlameBoldNoBg' },
+                  { '│ '..blame_info.author..' ', 'GitSignsCurrentLineBlame' },
+                }
+              end
+
+              local author = blame_info.author == name and "Me" or blame_info.author
+              return {
+                { '      ', 'GitSignsCurrentLineBlameBoldNoBg' },
+                { '│ ', 'GitSignsCurrentLineBlame' },
+                { '  ', 'GitSignsCurrentLineBlameAccent'},
+                { string.format("%s on %s", author, os.date("%Y/%m/%d", blame_info.author_time)), "GitSignsCurrentLineBlame" },
+                { '  ', "GitSignsCurrentLineBlameAccent"},
+                { blame_info.summary..' ', "GitSignsCurrentLineBlame" },
+              }
+            end,
             numhl = true,
         }
 
@@ -134,7 +154,9 @@ require('packer').startup(function(use)
         vim.highlight.create("GitSignsDelete", { guifg = base16.colors.base0F, guibg = base16.colors.base01 }, false)
         vim.highlight.create("GitSignsDeleteLn", { guibg = "bg" }, false)
 
-        vim.highlight.create("GitSignsCurrentLineBlame", { gui = "italic", guifg = base16.colors.base03 , guibg = "none" }, false)
+        vim.highlight.create("GitSignsCurrentLineBlame", { gui = "none", guifg = base16.colors.base04 , guibg = base16.colors.base01 }, false)
+        vim.highlight.create("GitSignsCurrentLineBlameNoBg", { guibg = "none" }, false)
+        vim.highlight.create("GitSignsCurrentLineBlameAccent", { gui = "none", guifg = base16.colors.base09_40 , guibg = base16.colors.base01 }, false)
     end, after = {"nvim-base16"}}
 
     use {'quangnguyen30192/cmp-nvim-ultisnips', run="./install.sh", config = function ()
