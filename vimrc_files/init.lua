@@ -332,7 +332,6 @@ require('packer').startup(function(use)
             "jdtls",
             "vimls",
             "html",
-            "emmet_ls",
             "yamlls",
             "terraformls",
             "tflint",
@@ -414,8 +413,6 @@ require('packer').startup(function(use)
                         local capabilities = vim.lsp.protocol.make_client_capabilities()
                         capabilities.textDocument.completion.completionItem.snippetSupport = true
                         server_opts.capabilities = capabilities
-                    elseif server.name == "emmet_ls" then
-                        server_opts.filetypes = { "html", "css", "typescriptreact", "javascriptreact" }
                     elseif server.name == "yamlls" then
                         server_opts.settings = {
                         yaml = {
