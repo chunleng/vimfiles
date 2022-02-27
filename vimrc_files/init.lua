@@ -403,7 +403,7 @@ require('packer').startup(function(use)
                         end
                     elseif server.name == "efm" then
                         server_opts.init_options = { documentFormatting = true }
-                        server_opts.filetypes = { "python" }
+                        server_opts.filetypes = { "python", "markdown" }
                         -- https://github.com/mattn/efm-langserver#example-for-configyaml
                         -- TODO markdown-lint
                         server_opts.settings = {
@@ -418,6 +418,17 @@ require('packer').startup(function(use)
                                 formatCommand = "isort --quiet -",
                                 formatStdin = true,
                                 rootMarkers = { ".python-version" }
+                              }
+                            },
+                            markdown = {
+                              {
+                                lintCommand = "markdownlint -s",
+                                lintStdin = true,
+                                lintFormats = {
+                                  '%f:%l %m',
+                                  '%f:%l:%c %m',
+                                  '%f: %l: %m',
+                                }
                               }
                             }
                           }
