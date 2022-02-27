@@ -15,7 +15,7 @@ nnoremap <silent><s-down> :rightbelow split<cr>
 
 nnoremap <silent>!% :source ~/.config/nvim/init.lua<cr>
 nnoremap <silent>!rs :e ~/.slate<cr>
-nnoremap <silent>!rv :e ~/.config/nvim/init.vim<cr>
+nnoremap <silent>!rv :e ~/.config/nvim/init.lua<cr>
 nnoremap <silent>!rk :e ~/.config/kitty/kitty.conf<cr>
 nnoremap <silent>!rz :e ~/.zshrc<cr>
 
