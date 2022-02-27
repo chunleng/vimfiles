@@ -5,17 +5,13 @@ def get_file_name(default: str='untitled') -> str:
 	return snip.basename or default
 endglobal
 
-snippet temp_link "Create link"
-[${1:${VISUAL:Link}}](${2:url})
-endsnippet
-
-snippet temp_link_ref "Create reference"
-[${1:id}]: ${2:${VISUAL:url}} ${3:"Title"}
+snippet [] "Create link"
+[${1:${VISUAL:text}}](${2:url})
 endsnippet
 
 # HTML is used here to make it easy to adjust width
-snippet temp_image "Create image"
-<img src="$1" alt="$2" style="width:$3px" />
+snippet ![] "Create image"
+![${1:alt}](url)
 endsnippet
 
 snippet temp_table "Create table" b
