@@ -29,6 +29,7 @@ set fillchars=vert:│,stlnc:\ ,diff:·,eob:\ ,fold:\ ,foldopen:,foldclose:�
 " '/' Search related
 set incsearch
 set hlsearch
+set smartcase
 
 " Show statusline always
 set laststatus=2
