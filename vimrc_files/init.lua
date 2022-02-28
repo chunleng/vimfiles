@@ -300,6 +300,9 @@ require('packer').startup(function(use)
               ["<s-up>"]      = "preview-page-up",
               ["<tab>"]       = "toggle+down",
               ["<s-tab>"]     = "toggle+up",
+            },
+            fzf = {
+              ["enter"]        = "select+accept",
             }
           },
           actions = {
