@@ -643,6 +643,9 @@ require('packer').startup(function(use)
                 vim.fn["UltiSnips#Anon"](args.body)
             end,
           },
+          completion = {
+            autocomplete = { cmp.TriggerEvent.InsertEnter, cmp.TriggerEvent.TextChanged }
+          }
         })
 
         local base16 = require("base16-colorscheme")
