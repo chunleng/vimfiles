@@ -259,7 +259,7 @@ require('packer').startup(function(use)
     use {"xiyaowong/nvim-cursorword", config = function ()
       local base16 = require("base16-colorscheme")
       vim.highlight.create("CursorWord", {guibg = base16.colors.base01, gui="none"}, false)
-      vim.g.cursorword_disable_filetypes = { "Dashboard", "NvimTree", "Aerial"}
+      vim.g.cursorword_disable_filetypes = { "Dashboard", "NvimTree", "aerial"}
     end, after="nvim-base16"}
 
     use {'whatyouhide/vim-lengthmatters', config = function ()
