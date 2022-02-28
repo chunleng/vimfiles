@@ -80,6 +80,12 @@ require('packer').startup(function(use)
                 separator = { guifg = bgcolor, guibg = bgcolor }
             }
         }
+        vim.api.nvim_set_keymap("n", "H", "<cmd>BufferLineMovePrev<cr>", { silent=true, noremap=true})
+        vim.api.nvim_set_keymap("n", "L", "<cmd>BufferLineMoveNext<cr>", { silent=true, noremap=true})
+        vim.api.nvim_set_keymap("n", "<c-p>", "<cmd>BufferLineCyclePrev<cr>", { silent=true, noremap=true})
+        vim.api.nvim_set_keymap("n", "<c-n>", "<cmd>BufferLineCycleNext<cr>", { silent=true, noremap=true})
+        vim.api.nvim_set_keymap("n", "<leader>bh", "<cmd>BufferLineCloseLeft<cr>", { silent=true, noremap=true})
+        vim.api.nvim_set_keymap("n", "<leader>bl", "<cmd>BufferLineCloseRight<cr>", { silent=true, noremap=true})
     end, requires = 'kyazdani42/nvim-web-devicons', after = "nvim-base16" }
     use {'SmiteshP/nvim-gps', config = function ()
         require("nvim-gps").setup()

@@ -1,8 +1,5 @@
 nnoremap <silent><esc> :nohl<cr>
 
-nnoremap <silent><c-n> :bn<cr>
-nnoremap <silent><c-p> :bp<cr>
-
 nnoremap <silent><leader>tl :set list!<cr>
 nnoremap <silent><leader>tp :set paste!<cr>
 nnoremap <silent><leader>tw :set wrap!<cr>
