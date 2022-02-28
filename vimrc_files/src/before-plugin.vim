@@ -48,6 +48,7 @@ autocmd BufReadPre *.min.* set ft=min " Allow no highlighting for min files
 " direnv settings
 autocmd BufRead,BufNewFile .env* :set ft=sh
 set sidescrolloff=20
+set scrolloff=5
 set nowrap
 scriptencoding utf-8
 
