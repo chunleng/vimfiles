@@ -592,7 +592,6 @@ require('packer').startup(function(use)
                     vim_item.menu = ({
                     path = "│",
                     ultisnips = "│",
-                    cmp_tabnine = "│ Tabnine",
                     nvim_lsp = "│ LSP",
                     buffer = "│ Buffer",
                     })[entry.source.name]
@@ -612,7 +611,6 @@ require('packer').startup(function(use)
           sources = {
             { name = 'path', priority = 100 },
             { name = 'ultisnips', priority = 100 },
-            { name = 'cmp_tabnine', priority = 50 },
             { name = 'nvim_lsp_signature_help', priority = 50 },
             { name = 'nvim_lsp', max_item_count = 100, priority = 30 },
             { name = 'buffer', priority = 1,
@@ -680,12 +678,6 @@ require('packer').startup(function(use)
     use {'hrsh7th/cmp-nvim-lsp-signature-help', after = "nvim-cmp"}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
     use {'hrsh7th/cmp-path', after = "nvim-cmp"}
-    use {"tzachar/cmp-tabnine", run = './install.sh', config= function ()
-      local tabnine = require('cmp_tabnine.config')
-      tabnine:setup({
-        max_num_results = 2;
-      })
-    end, after = "nvim-cmp"}
 
     -- Scrollbar
     use {'dstein64/nvim-scrollview', config = function ()
