@@ -484,8 +484,7 @@ require('packer').startup(function(use)
           min_width = 30,
           max_width = 30,
           show_guide = true,
-          open_automatic = true,
-          close_behavior = "global",
+          placement_editor_edge = true,
           icons = kind_icons,
           filter_kind = {
             ['_'] = { "Class", "Constructor", "Enum", "Function", "Interface", "Module", "Method", "Struct" },
@@ -500,6 +499,51 @@ require('packer').startup(function(use)
         })
         local base16 = require("base16-colorscheme")
         vim.highlight.create("AerialLine", { guifg="none", guibg = base16.colors.base0A_20, blend = 0 }, false)
+
+        function HandleAerialOpen()
+          local window_ids = vim.api.nvim_tabpage_list_wins(0)
+          local editing_win_count = 0
+          -- TODO refactor
+          local ignore_ft = { NvimTree=true, Trouble=true, aerial=true, }
+          for _, wid in ipairs(window_ids) do
+            local bufnr = vim.api.nvim_win_get_buf(wid)
+            local ft = vim.api.nvim_buf_get_option(bufnr, "ft")
+            local win_opt = vim.api.nvim_win_get_config(wid)
+
+            -- Not floating window or functional filetype
+            if win_opt.zindex == nil and win_opt.focusable and not ignore_ft[ft] then
+              editing_win_count = editing_win_count + 1
+            end
+          end
+          if editing_win_count > 1 then
+            for _, wid in ipairs(window_ids) do
+              local bufnr = vim.api.nvim_win_get_buf(wid)
+              local ft = vim.api.nvim_buf_get_option(bufnr, "ft")
+              if ft == "aerial" then
+                vim.api.nvim_win_close(wid, false)
+              end
+            end
+            return
+          end
+          for _, wid in ipairs(window_ids) do
+            local bufnr = vim.api.nvim_win_get_buf(wid)
+            local ft = vim.api.nvim_buf_get_option(bufnr, "ft")
+            if ft == "aerial" then
+              return
+            end
+          end
+          local win_opt = vim.api.nvim_win_get_config(0)
+          if win_opt.zindex == nil and win_opt.focusable and not ignore_ft[vim.api.nvim_buf_get_option(0, "ft")] then
+            vim.cmd[[silent! AerialOpen!]]
+          end
+        end
+
+        vim.cmd[[
+          augroup Aerial
+            autocmd!
+            autocmd VimEnter,BufEnter,WinEnter * lua HandleAerialOpen()
+          augroup END
+        ]]
     end, after = "nvim-base16" }
 
     use {'folke/trouble.nvim', config = function ()
