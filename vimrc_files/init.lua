@@ -19,6 +19,16 @@ if filereadable('/usr/local/bin/neovim-ruby-host')
 endif
 runtime src/before-plugin.vim
 ]]
+-- Better foldtext
+function FoldText()
+  local leveltext = "   "
+  for _=1,vim.v.foldlevel do
+    leveltext = leveltext..""
+  end
+  return leveltext.." "..vim.api.nvim_buf_get_lines(0, vim.v.foldstart-1, vim.v.foldstart, false)[1],vim.v.foldlevel
+end
+vim.cmd[[set foldtext=v:lua.FoldText()]]
+
 
 vim.api.nvim_set_option("termguicolors", true)
 
@@ -90,9 +100,12 @@ require('packer').startup(function(use)
           char = "│",
           filetype_exclude = { 'WhichKey', 'markdown', 'aerial', 'dashboard', 'help', 'Trouble' },
       }
+      vim.api.nvim_set_keymap("n", "za", "za:IndentBlanklineRefresh<cr>:ScrollViewRefresh<cr>", { silent=true, noremap=true })
+      vim.api.nvim_set_keymap("v", "za", "za:IndentBlanklineRefresh<cr>:ScrollViewRefresh<cr>", { silent=true, noremap=true })
       local base16 = require("base16-colorscheme")
       vim.highlight.create("IndentBlanklineChar", { guifg = base16.colors.base02}, false)
-    end, after ="nvim-base16"}
+    end, requires="dstein64/nvim-scrollview", after = {"nvim-base16", "nvim-scrollview"}}
+
     use {'AndrewRadev/linediff.vim', config= function ()
         vim.cmd[[vnoremap <silent><leader>d :Linediff<cr>]]
     end}
@@ -805,7 +818,8 @@ require('packer').startup(function(use)
         vim.highlight.create("LineNr", {guibg = "none"}, false)
         vim.highlight.create("CursorLineNr", {guibg = "none"}, false)
         vim.highlight.create("SignColumn", {guibg = "none"}, false)
-        vim.highlight.create("FoldColumn", {guibg = "none"}, false)
+        vim.highlight.create("FoldColumn", {guifg = base16.colors.base02,guibg = "none"}, false)
+        vim.highlight.create("Folded", {gui="bold", guifg = base16.colors.base0A_40,guibg =base16.colors.base01}, false)
 
       end }
       use {"glepnir/dashboard-nvim", config = function()

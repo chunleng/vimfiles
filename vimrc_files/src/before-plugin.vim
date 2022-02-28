@@ -24,7 +24,7 @@ set complete=.,w
 set completeopt-=preview
 set list
 set listchars=tab:»\ ,trail:·,extends:,precedes:,nbsp:+,eol:¶
-set fillchars=vert:│,stlnc:\ ,diff:·,eob:\ ,
+set fillchars=vert:│,stlnc:\ ,diff:·,eob:\ ,fold:\ ,foldopen:,foldclose:,foldsep:│
 
 " '/' Search related
 set incsearch
