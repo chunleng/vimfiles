@@ -8,8 +8,7 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
   highlight = { enable = true },
   matchup = { enable = true },
-  -- Disabled because plugin is still unstable
-  -- indent = { enable = true },
+  indent = { enable = true },
   playground = { enable = true },
   context_commentstring = { enable = true },
   endwise = { enable = true, },

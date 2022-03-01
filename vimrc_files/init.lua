@@ -241,11 +241,16 @@ require('packer').startup(function(use)
         vim.cmd[[let g:matchup_matchparen_offscreen = {'method': ''}]]
     end}
     use {'windwp/nvim-autopairs', config= function ()
-        local cmp = require 'cmp'
-        local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-        require('nvim-autopairs').setup {}
-        cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
-    end, after = "nvim-cmp" }
+        local autopairs = require('nvim-autopairs')
+        autopairs.setup {
+          disable_in_macro = true,
+          disable_in_visualblock = true,
+          enable_afterquote = false,
+          map_c_w = true,
+          map_cr = true,
+          check_ts = true,
+        }
+    end, after = {"nvim-treesitter"} }
     use {"RRethy/nvim-treesitter-endwise", after = "nvim-treesitter"}
 
     use {'windwp/nvim-ts-autotag', after = "nvim-treesitter", config = function ()
