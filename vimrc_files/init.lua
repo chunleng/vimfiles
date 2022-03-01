@@ -824,7 +824,6 @@ require('packer').startup(function(use)
         vim.highlight.create("SignColumn", {guibg = "none"}, false)
         vim.highlight.create("FoldColumn", {guifg = base16.colors.base02,guibg = "none"}, false)
         vim.highlight.create("Folded", {gui="bold", guifg = base16.colors.base0A_40,guibg =base16.colors.base01}, false)
-
       end }
       use {"glepnir/dashboard-nvim", config = function()
         vim.g.dashboard_default_executive = "fzf"
@@ -884,6 +883,10 @@ require('packer').startup(function(use)
             augroup END
         ]]
       end, after = "nvim-base16"}
+
+      use {"dkarter/bullets.vim", config = function()
+        vim.g.bullets_enabled_file_types = { 'markdown', 'text', 'gitcommit', 'scratch' }
+      end}
 end)
 
 
