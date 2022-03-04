@@ -393,13 +393,13 @@ require('packer').startup(function(use)
                 server:on_ready(function()
                     local keymap_opts = { noremap = true, silent = true }
                     local common_on_attach = function(client, bufnr)
-                        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua require"fzf-lua".lsp_definitions({force_uri = false})<cr>', keymap_opts)
+                        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua require"fzf-lua".lsp_definitions()<cr>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cf', '<cmd>lua vim.lsp.buf.code_action()<CR>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<CR>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>c=', '<cmd>lua vim.lsp.buf.formatting()<CR>', keymap_opts)
-                        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cu', '<cmd>lua require"fzf-lua".lsp_references({force_uri = false})<cr>', keymap_opts)
+                        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cu', '<cmd>lua require"fzf-lua".lsp_references()<cr>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'i', '<c-space>', '<cmd>lua vim.lsp.buf.completion()<CR>', keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'v', '=', ':\'<,\'>lua vim.lsp.buf.range_formatting()<CR>', keymap_opts)
                         vim.api.nvim_set_keymap('n', '<leader>cd', '<cmd>Trouble document_diagnostics<CR>', keymap_opts)
@@ -500,7 +500,7 @@ require('packer').startup(function(use)
         'folke/lua-dev.nvim',
         'b0o/schemastore.nvim',
         'ibhagwan/fzf-lua'
-    }}
+    }, after = "fzf-lua"}
 
     -- https://github.com/stevearc/aerial.nvim
     use {'stevearc/aerial.nvim', config = function ()
@@ -891,6 +891,7 @@ require('packer').startup(function(use)
 
       use {"dkarter/bullets.vim", config = function()
         vim.g.bullets_enabled_file_types = { 'markdown', 'text', 'gitcommit', 'scratch' }
+        -- TODO plugin overwrites mapping
       end}
 end)
 
