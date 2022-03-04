@@ -872,7 +872,6 @@ require('packer').startup(function(use)
           select = {
             backend = {"builtin"},
             builtin = {
-              row = 1,
               min_height = 1,
               max_height = 10,
               min_width = 0,
