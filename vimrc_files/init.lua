@@ -691,8 +691,11 @@ require('packer').startup(function(use)
                         elseif server.name == "sumneko_lua" then
                             local luadev = require("lua-dev").setup()
                             luadev.settings.Lua.diagnostics = {
-                                globals = {"vim"}
+                                -- vim and hammerspoon globals
+                                globals = {"vim", "hs"}
                             }
+                            luadev.settings.Lua.workspace.library['/Applications/Hammerspoon.app/Contents/Resources/extensions/hs/'] =
+                                true
                             server_opts.settings = luadev.settings
                         end
                         server:setup(server_opts)
