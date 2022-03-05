@@ -48,6 +48,7 @@ autocmd BufReadPre *.md setlocal textwidth=80
 autocmd BufReadPre *.min.* set ft=min " Allow no highlighting for min files
 " direnv settings
 autocmd BufRead,BufNewFile .env* :set ft=sh
+autocmd FileType zsh :set ft=bash " Because treesitter don't support zsh
 set sidescrolloff=20
 set scrolloff=5
 set nowrap
