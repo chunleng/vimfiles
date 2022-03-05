@@ -888,9 +888,11 @@ require('packer').startup(function(use)
         ]]
       end, after = "nvim-base16"}
 
-      use {"dkarter/bullets.vim", config = function()
+      -- https://github.com/dkarter/bullets.vim/issues/57
+      -- https://github.com/dkarter/bullets.vim/pull/93
+      -- Seems like creator is not dedicated to fixing this issue, PR has been requested over 1 year and not closed
+      use {"chunleng/bullets.vim", config = function()
         vim.g.bullets_enabled_file_types = { 'markdown', 'text', 'gitcommit', 'scratch' }
-        -- TODO plugin overwrites mapping
       end}
 end)
 
