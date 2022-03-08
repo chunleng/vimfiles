@@ -63,3 +63,11 @@ class ${1:Item}(BaseModel):
 	tax: Optional[float] = None
 	tags: list = []
 endsnippet
+
+snippet match "Match-case" b
+match ${1:var}:
+	case ${2:"1"}:
+		pass
+	${3:case _:
+		pass # default}
+endsnippet
