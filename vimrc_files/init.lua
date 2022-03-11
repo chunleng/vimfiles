@@ -899,7 +899,6 @@ require('packer').startup(function(use)
                 },
                 sources = {
                     {name = 'path', priority = 100},
-                    {name = 'nvim_lsp_signature_help', priority = 50},
                     {name = 'ultisnips', priority = 35},
                     {name = 'nvim_lsp', max_item_count = 100, priority = 30},
                     {name = 'cmp_tabnine', max_item_count = 2, priority = 30}, {
@@ -1006,7 +1005,6 @@ require('packer').startup(function(use)
         after = {'nvim-base16', "cmp-tabnine"}
     }
     use {'hrsh7th/cmp-nvim-lsp', after = "nvim-cmp"}
-    use {'hrsh7th/cmp-nvim-lsp-signature-help', after = "nvim-cmp"}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
     use {'hrsh7th/cmp-path', after = "nvim-cmp"}
     use {
@@ -1367,6 +1365,13 @@ require('packer').startup(function(use)
             vim.g.bullets_enabled_file_types = {
                 'markdown', 'text', 'gitcommit', 'scratch'
             }
+        end
+    }
+
+    use {
+        "ray-x/lsp_signature.nvim",
+        config = function()
+            require"lsp_signature".setup({hint_enable = false})
         end
     }
 end)
