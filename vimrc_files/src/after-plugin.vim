@@ -60,3 +60,9 @@ augroup snippets
     autocmd FileType snippets setlocal foldlevel=0
 augroup END
 
+augroup ecmascript
+  autocmd!
+  " Add missing information for jsx and tsx
+  autocmd FileType typescriptreact set indentexpr=GetTypescriptIndent()
+  autocmd FileType javascriptreact set indentexpr=GetJavascriptIndent()
+augroup END
