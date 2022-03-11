@@ -838,7 +838,8 @@ require('packer').startup(function(use)
                                 path = "│",
                                 ultisnips = "│",
                                 nvim_lsp = "│ LSP",
-                                buffer = "│ Buffer"
+                                buffer = "│ Buffer",
+                                cmp_tabnine = "│ Tabnine"
                             })[entry.source.name]
                             return vim_item
                         else
@@ -847,14 +848,63 @@ require('packer').startup(function(use)
                     end
                 },
                 sorting = {
-                    comparators = {compare.exact, compare.score, compare.kind}
+                    comparators = {
+                        function(entry1, entry2)
+                            -- Exact that is not buffer and is snippet
+                            local worthy_exact1 = entry1.exact and
+                                                      entry1.source.name ~=
+                                                      "buffer" and
+                                                      entry1.completion_item
+                                                          .insertTextFormat == 2
+                            local worthy_exact2 = entry2.exact and
+                                                      entry2.source.name ~=
+                                                      "buffer" and
+                                                      entry2.completion_item
+                                                          .insertTextFormat == 2
+                            if worthy_exact1 ~= worthy_exact2 then
+                                return worthy_exact1
+                            end
+                        end, compare.recently_used, function(entry1, entry2)
+                            -- Custom sorting that prioritize via a combination of the following criteria
+                            -- * Less fuzziness (higher score)
+                            -- * Longer length tabnine first
+                            -- * Snippet first
+                            -- The score for tabnine is reduced as it always give suggestions with no fuzziness,
+                            -- therefore the reduction allows the sorting to balance with score feature
+                            local tn_length_weight = 0.1
+                            local score1 = entry1.score +
+                                               (entry1.source.name ==
+                                                   'cmp_tabnine' and
+                                                   #entry1.completion_item.label *
+                                                   tn_length_weight or 1) +
+                                               (entry1.completion_item
+                                                   .insertTextFormat == 2 and 1 or
+                                                   0)
+                            local score2 = entry2.score +
+                                               (entry2.source.name ==
+                                                   'cmp_tabnine' and
+                                                   #entry2.completion_item.label *
+                                                   tn_length_weight or 1) +
+                                               (entry2.completion_item
+                                                   .insertTextFormat == 2 and 1 or
+                                                   0)
+                            local diff = score2 - score1
+                            if diff < 0 then
+                                return true
+                            elseif diff > 0 then
+                                return false
+                            end
+                        end, compare.sort_text
+                    }
                 },
                 sources = {
                     {name = 'path', priority = 100},
-                    {name = 'ultisnips', priority = 100},
                     {name = 'nvim_lsp_signature_help', priority = 50},
-                    {name = 'nvim_lsp', max_item_count = 100, priority = 30}, {
+                    {name = 'ultisnips', priority = 35},
+                    {name = 'nvim_lsp', max_item_count = 100, priority = 30},
+                    {name = 'cmp_tabnine', max_item_count = 2, priority = 30}, {
                         name = 'buffer',
+                        max_item_count = 10,
                         priority = 1,
                         option = {
                             -- https://github.com/hrsh7th/cmp-buffer#visible-buffers
@@ -953,12 +1003,28 @@ require('packer').startup(function(use)
             vim.highlight.create("CmpItemKind", {guifg = base16.colors.base03},
                                  false)
         end,
-        after = 'nvim-base16'
+        after = {'nvim-base16', "cmp-tabnine"}
     }
     use {'hrsh7th/cmp-nvim-lsp', after = "nvim-cmp"}
     use {'hrsh7th/cmp-nvim-lsp-signature-help', after = "nvim-cmp"}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
     use {'hrsh7th/cmp-path', after = "nvim-cmp"}
+    use {
+        'tzachar/cmp-tabnine',
+        config = function()
+            local tabnine = require('cmp_tabnine.config')
+            tabnine:setup({
+                max_lines = 200,
+                max_num_results = 10,
+                sort = true,
+                run_on_every_keystroke = true,
+                snippet_placeholder = '...',
+                ignored_file_types = {}
+            })
+        end,
+        run = './install.sh',
+        requires = 'hrsh7th/nvim-cmp'
+    }
 
     -- Scrollbar
     use {
