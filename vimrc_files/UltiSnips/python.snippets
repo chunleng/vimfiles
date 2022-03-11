@@ -16,12 +16,12 @@ class ${1:`!p snip.rv = get_file_name()`}:
 		$0
 endsnippet
 
-snippet temp_function_main "Main function declaration" b
+snippet _function_main "Main function declaration" b
 if __name__ == '__main__':
 	$0
 endsnippet
 
-snippet temp_fastapi_new_app "FastAPI new app template" b
+snippet _fastapi_new_app "FastAPI new app template" b
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -31,7 +31,7 @@ app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 app.add_middleware(CORSMiddleware, allow_origins=['*'])
 endsnippet
 
-snippet temp_fastapi_get "FastAPI get object method" b
+snippet _fastapi_get "FastAPI get object method" b
 @app.get(
 	'/`!p snip.rv = snake_to_upper_camel_case(t[1])`',
 	operation_id='`!p snip.rv = snake_to_upper_camel_case(t[1])`',
@@ -43,7 +43,7 @@ async def ${1:get_foo}(${2:arg:int}):
 	$0
 endsnippet
 
-snippet temp_fastapi_create "FastAPI create object method" b
+snippet _fastapi_create "FastAPI create object method" b
 @app.post(
 	'/`!p snip.rv = snake_to_upper_camel_case(t[1])`',
 	operation_id='`!p snip.rv = snake_to_upper_camel_case(t[1])`',
@@ -55,7 +55,7 @@ async def ${1:create_foo}(${2:arg:int}):
 	$0
 endsnippet
 
-snippet temp_fastapi_model "FastAPI model" b
+snippet _fastapi_model "FastAPI model" b
 class ${1:Item}(BaseModel):
 	name: str
 	description: Optional[str] = None

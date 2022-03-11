@@ -14,7 +14,7 @@ snippet ![] "Create image"
 ![${1:alt}](url)
 endsnippet
 
-snippet temp_table "Create table" b
+snippet _table "Create table" b
 <!-- Table of size ${1:2}x${2:2} (Excluding title) -->
 `!p
 import math
@@ -30,7 +30,7 @@ snip.rv = make_header(t[1]) + '\n' + make_body(t[1], t[2])
 $0
 endsnippet
 
-snippet temp_notes_writing_idea "Template for writing" b
+snippet _notes_writing_idea "Template for writing" b
 # ${1:Title for Writing}
 
 [TOC]
@@ -52,7 +52,7 @@ By writing this article
 ## Other Notes
 endsnippet
 
-snippet temp_notes_problems_solved "Template for things that I solved worth recording" b
+snippet _notes_problems_solved "Template for things that I solved worth recording" b
 ## ${1:Title}
 
 ref: <${2:https://referred.link}>
@@ -66,7 +66,7 @@ $0
 
 endsnippet
 
-snippet temp_notes_cooking_recipe "Template for cooking recipe" b
+snippet _notes_cooking_recipe "Template for cooking recipe" b
 # ${1:Name of Recipe}
 
 [Image goes here]
@@ -98,7 +98,7 @@ ${3:X} minutes before serving
 -
 endsnippet
 
-snippet temp_notes_journal "Template for daily journal" b
+snippet _notes_journal "Template for daily journal" b
 # `!p snip.rv = '/'.join(path.split('/')[-3:]).split('.')[0]`
 
 ## Summary of Feeling
@@ -124,7 +124,7 @@ $0
 - 
 endsnippet
 
-snippet temp_notes_relation "Template for relation management" b
+snippet _notes_relation "Template for relation management" b
 # `!p snip.rv = get_file_name().capitalize()`
 
 ## Like

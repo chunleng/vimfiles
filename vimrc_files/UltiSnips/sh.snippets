@@ -26,11 +26,11 @@ while [ ${1:expr} ]; do
 done
 endsnippet
 
-snippet temp_default_variable "Declare variable if not already set" b
+snippet _default_variable "Declare variable if not already set" b
 : ${${1:VAR_NAME}="${2:value}"}
 endsnippet
 
-snippet temp_getopts "Template for options reading" b
+snippet _getopts "Template for options reading" b
 show_usage(){
 	cat << EOF
 ${3:Name of Application}, v${4:1.0}
@@ -122,11 +122,11 @@ shift \$((OPTIND-1))
 test "\$1" = "--" && shift
 endsnippet
 
-snippet temp_app_path "Command to retrieve directory of script no matter where it is called from" b
+snippet _app_path "Command to retrieve directory of script no matter where it is called from" b
 APP_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
 endsnippet
 
-snippet temp_direnv_virtualenv_setting "Command to auto virtualenv when entering a folder" b
+snippet _direnv_virtualenv_setting "Command to auto virtualenv when entering a folder" b
 export VIRTUAL_ENV=\`pwd\`/.venv
 export PATH=$VIRTUAL_ENV/bin:$PATH
 endsnippet
