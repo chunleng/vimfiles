@@ -562,7 +562,7 @@ require('packer').startup(function(use)
                                                             keymap_opts)
                                 vim.api.nvim_buf_set_keymap(bufnr, 'n',
                                                             '<leader>cf',
-                                                            '<cmd>lua vim.lsp.buf.code_action()<CR>',
+                                                            ':lua require("lsp-fixcurrent")()<CR>',
                                                             keymap_opts)
                                 vim.api.nvim_buf_set_keymap(bufnr, 'n',
                                                             '<leader>cr',
@@ -1390,3 +1390,4 @@ vnoremap x ygv"*x
 nnoremap ZQ :confirm qa<cr>
 nnoremap ZZ :confirm wqa<cr>
 ]]
+
