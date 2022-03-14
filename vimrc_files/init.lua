@@ -1394,5 +1394,11 @@ vnoremap x ygv"*x
 " TODO anyway to integrate with dressing?
 nnoremap ZQ :confirm qa<cr>
 nnoremap ZZ :confirm wqa<cr>
+" Add command like mapping
+inoremap <c-a> <home>
+inoremap <c-e> <end>
+cnoremap <c-a> <home>
+" command ctrl-e already mapped to <end>
+" cnoremap <c-e> <end>
 ]]
 
