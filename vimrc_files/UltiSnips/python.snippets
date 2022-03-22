@@ -11,9 +11,19 @@ endglobal
 # Snippets
 
 snippet class "Class declaration" b
+class ${1:Cklass}:
+	$0
+endsnippet
+
+snippet class_init "Class with declaration" b
 class ${1:`!p snip.rv = get_file_name()`}:
 	def __init__(self${2:, args:int}):
 		$0
+endsnippet
+
+snippet class_enum "Enum declaration" b
+class ${1:Name}(Enum):
+	${2:EName} = 1
 endsnippet
 
 snippet _function_main "Main function declaration" b
@@ -43,7 +53,7 @@ async def ${1:get_foo}(${2:arg:int}):
 	$0
 endsnippet
 
-snippet _fastapi_create "FastAPI create object method" b
+snippet _fastapi_post "FastAPI post object method" b
 @app.post(
 	'/`!p snip.rv = snake_to_upper_camel_case(t[1])`',
 	operation_id='`!p snip.rv = snake_to_upper_camel_case(t[1])`',
@@ -70,4 +80,11 @@ match ${1:var}:
 		pass
 	${3:case _:
 		pass # default}
+endsnippet
+
+snippet try "Try except" b
+try:
+	${1:${VISUAL:pass}}
+except Exception as e:
+	${2:pass}
 endsnippet
