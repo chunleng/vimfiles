@@ -1,6 +1,6 @@
 # Snippets
 
-snippet _docker_compose_new "Docker-compose template" b
+snippet __docker_compose_new "Docker-compose template" b
 services:
 	${1}:
 		image: ${2:imagename:version}
@@ -11,7 +11,7 @@ services:
 	$0
 endsnippet
 
-snippet _rubocop_new "Rubocop lint config template" b
+snippet __rubocop_new "Rubocop lint config template" b
 AllCops:
 	TargetRubyVersion: 2.7.1
 	NewCops: enable
@@ -39,7 +39,7 @@ Style/PercentLiteralDelimiters:
 	Enabled: false
 endsnippet
 
-snippet _serverless_aws_new "Serverless framework AWS template" b
+snippet __serverless_aws_new "Serverless framework AWS template" b
 service: ${1:service_name}
 frameworkVersion: '3'
 

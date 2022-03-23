@@ -8,7 +8,7 @@ def upper_camel(s):
 	return s.capitalize()
 endglobal
 
-snippet _react_new_material_component "New component created with material UI" b
+snippet __react_new_material_component "New component created with material UI" b
 import {makeStyles} from '@material-ui/core'
 
 type $1Props = {
@@ -29,7 +29,7 @@ const ${1:Foo} = (props: $1Props) => {
 export default $1
 endsnippet
 
-snippet _react_new_component "New React Component" b
+snippet __react_new_component "New React Component" b
 import { ReactElement } from "react";
 
 type $1Props = {
@@ -45,7 +45,7 @@ export default function ${1:Name}({  }: $1Props): ReactElement {
 }
 endsnippet
 
-snippet _react_function "React function" b
+snippet __react_function "React function" b
 type $1Props = {
 
 }
@@ -57,11 +57,11 @@ function ${1:Foo}(props: $1Props): ReactElement {
 }
 endsnippet
 
-snippet _react_use_state "Making react useState" b
+snippet __react_use_state "Making react useState" b
 const [${1:foo}, set`!p snip.rv = upper_camel(t[1])`] = useState<${2:string}>()
 endsnippet
 
-snippet _react_use_state_with_effect "Making react useState with useEffect" b
+snippet __react_use_state_with_effect "Making react useState with useEffect" b
 const [${1:foo}, set`!p snip.rv = upper_camel(t[1])`] = useState<${2:string}>()
 
 useEffect(() => {
@@ -69,11 +69,11 @@ useEffect(() => {
 }, [$1])
 endsnippet
 
-snippet _react_graphql_usequery "Creating a useQuery statement" b
+snippet __react_graphql_usequery "Creating a useQuery statement" b
 const {data, loading, error} = use${1}Query(${2:{variables: {${3:id}}}})
 endsnippet
 
-snippet _react_graphql_usemutation "Creating a useMutation statement" b
+snippet __react_graphql_usemutation "Creating a useMutation statement" b
 const [${1:add/edit/delete}, {loading}] = use$2Mutation()
 $1({variables: {input: {${3:id}}}})
 endsnippet
