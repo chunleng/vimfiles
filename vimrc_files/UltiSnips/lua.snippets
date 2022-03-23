@@ -11,3 +11,7 @@ vim.cmd[[
 	augroup END
 ]]
 endsnippet
+
+snippet print_inspect "Print vim.inspect" b
+print(vim.inspect(${1:${VISUAL}}))
+endsnippet
