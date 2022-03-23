@@ -858,16 +858,23 @@ require('packer').startup(function(use)
                     comparators = {
                         function(entry1, entry2)
                             -- Exact that is not buffer and is snippet
+                            -- local file = io.open("log.txt", "a")
+                            -- file:write(vim.inspect(entry1.completion_item))
+                            -- file:close()
                             local worthy_exact1 = entry1.exact and
                                                       entry1.source.name ~=
                                                       "buffer" and
-                                                      entry1.completion_item
-                                                          .insertTextFormat == 2
+                                                      (entry1.completion_item
+                                                          .insertTextFormat == 2 or
+                                                          entry1.completion_item
+                                                              .textEdit ~= nil)
                             local worthy_exact2 = entry2.exact and
                                                       entry2.source.name ~=
                                                       "buffer" and
-                                                      entry2.completion_item
-                                                          .insertTextFormat == 2
+                                                      (entry2.completion_item
+                                                          .insertTextFormat == 2 or
+                                                          entry2.completion_item
+                                                              .textEdit ~= nil)
                             if worthy_exact1 ~= worthy_exact2 then
                                 return worthy_exact1
                             end
@@ -884,17 +891,21 @@ require('packer').startup(function(use)
                                                    'cmp_tabnine' and
                                                    #entry1.completion_item.label *
                                                    tn_length_weight or 1) +
-                                               (entry1.completion_item
-                                                   .insertTextFormat == 2 and 1 or
-                                                   0)
+                                               ((entry1.completion_item
+                                                   .insertTextFormat or
+                                                   entry1.completion_item
+                                                       .textEdit ~= nil) == 2 and
+                                                   1 or 0)
                             local score2 = entry2.score +
                                                (entry2.source.name ==
                                                    'cmp_tabnine' and
                                                    #entry2.completion_item.label *
                                                    tn_length_weight or 1) +
-                                               (entry2.completion_item
-                                                   .insertTextFormat == 2 and 1 or
-                                                   0)
+                                               ((entry2.completion_item
+                                                   .insertTextFormat or
+                                                   entry2.completion_item
+                                                       .textEdit ~= nil) == 2 and
+                                                   1 or 0)
                             local diff = score2 - score1
                             if diff < 0 then
                                 return true
