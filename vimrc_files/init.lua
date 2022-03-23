@@ -941,6 +941,8 @@ require('packer').startup(function(use)
                         behavior = cmp.ConfirmBehavior.Replace,
                         select = true
                     },
+                    ['<c-e>'] = cmp.mapping.close {},
+                    ['<c-a>'] = cmp.mapping.close {},
                     ['<s-down>'] = cmp.mapping(cmp.mapping.scroll_docs(4),
                                                {'i', 'c'}),
                     ['<s-up>'] = cmp.mapping(cmp.mapping.scroll_docs(-4),
