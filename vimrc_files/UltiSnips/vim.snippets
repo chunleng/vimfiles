@@ -29,6 +29,6 @@ endsnippet
 snippet _lsp_autoformat_on_save "Template for LSP autoformat on save" b
 augroup LspFormatting
 	autocmd! * <buffer>
-	autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+	autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync({},5000)
 augroup END
 endsnippet

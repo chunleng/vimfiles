@@ -45,7 +45,7 @@ export default function ${1:Name}({  }: $1Props): ReactElement {
 }
 endsnippet
 
-snippet _react_function "React function" b
+snippet function_react "React function" b
 type $1Props = {
 
 }
@@ -58,7 +58,7 @@ function ${1:Foo}(props: $1Props): ReactElement {
 endsnippet
 
 snippet _react_use_state "Making react useState" b
-const [${1:foo}, set`!p snip.rv = upper_camel(t[1])`] = useState<${2:string}>()
+const [${1:foo}, set`!p snip.rv = upper_camel(t[1])`] = useState<${2:string}>($3);
 endsnippet
 
 snippet _react_use_state_with_effect "Making react useState with useEffect" b
