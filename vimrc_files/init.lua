@@ -813,7 +813,7 @@ require('packer').startup(function(use)
         'folke/trouble.nvim',
         config = function()
             require("trouble").setup {
-                auto_open = true,
+                auto_open = false,
                 use_diagnostic_signs = true,
                 indent_lines = false,
                 height = 3,
