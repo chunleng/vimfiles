@@ -857,22 +857,15 @@ require('packer').startup(function(use)
                 sorting = {
                     comparators = {
                         function(entry1, entry2)
-                            -- Exact that is not buffer and is snippet
-                            -- local file = io.open("log.txt", "a")
-                            -- file:write(vim.inspect(entry1.completion_item))
-                            -- file:close()
+                            -- Exact that is snippet
                             local worthy_exact1 = entry1.exact and
-                                                      entry1.source.name ~=
-                                                      "buffer" and
                                                       (entry1.completion_item
-                                                          .insertTextFormat == 2 or
+                                                          .insertText ~= nil or
                                                           entry1.completion_item
                                                               .textEdit ~= nil)
                             local worthy_exact2 = entry2.exact and
-                                                      entry2.source.name ~=
-                                                      "buffer" and
                                                       (entry2.completion_item
-                                                          .insertTextFormat == 2 or
+                                                          .insertText ~= nil or
                                                           entry2.completion_item
                                                               .textEdit ~= nil)
                             if worthy_exact1 ~= worthy_exact2 then
@@ -880,32 +873,19 @@ require('packer').startup(function(use)
                             end
                         end, compare.recently_used, function(entry1, entry2)
                             -- Custom sorting that prioritize via a combination of the following criteria
+                            -- * Not exact (leave it to exact sorting)
                             -- * Less fuzziness (higher score)
-                            -- * Longer length tabnine first
                             -- * Snippet first
-                            -- The score for tabnine is reduced as it always give suggestions with no fuzziness,
-                            -- therefore the reduction allows the sorting to balance with score feature
-                            local tn_length_weight = 0.1
-                            local score1 = entry1.score +
-                                               (entry1.source.name ==
-                                                   'cmp_tabnine' and
-                                                   #entry1.completion_item.label *
-                                                   tn_length_weight or 1) +
-                                               ((entry1.completion_item
-                                                   .insertTextFormat or
-                                                   entry1.completion_item
-                                                       .textEdit ~= nil) == 2 and
-                                                   1 or 0)
-                            local score2 = entry2.score +
-                                               (entry2.source.name ==
-                                                   'cmp_tabnine' and
-                                                   #entry2.completion_item.label *
-                                                   tn_length_weight or 1) +
-                                               ((entry2.completion_item
-                                                   .insertTextFormat or
-                                                   entry2.completion_item
-                                                       .textEdit ~= nil) == 2 and
-                                                   1 or 0)
+                            local score1 =
+                                entry1.exact and 0 or (entry1.score +
+                                    ((entry1.completion_item.insertText ~= nil or
+                                        entry1.completion_item.textEdit ~= nil) and
+                                        1 or 0))
+                            local score2 =
+                                entry2.exact and 0 or (entry2.score +
+                                    ((entry2.completion_item.insertText ~= nil or
+                                        entry2.completion_item.textEdit ~= nil) and
+                                        1 or 0))
                             local diff = score2 - score1
                             if diff < 0 then
                                 return true
