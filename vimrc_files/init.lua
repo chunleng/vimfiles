@@ -576,11 +576,6 @@ require('packer').startup(function(use)
                                                             '<leader>cu',
                                                             '<cmd>lua require"fzf-lua".lsp_references()<cr>',
                                                             keymap_opts)
-                                vim.api
-                                    .nvim_buf_set_keymap(bufnr, 'i',
-                                                         '<c-space>',
-                                                         '<cmd>lua vim.lsp.buf.completion()<CR>',
-                                                         keymap_opts)
                                 vim.api.nvim_buf_set_keymap(bufnr, 'v', '=',
                                                             ':\'<,\'>lua vim.lsp.buf.range_formatting()<CR>',
                                                             keymap_opts)
@@ -845,8 +840,8 @@ require('packer').startup(function(use)
                                 path = "│",
                                 ultisnips = "│",
                                 nvim_lsp = "│ LSP",
-                                buffer = "│ Buffer",
-                                cmp_tabnine = "│ Tabnine"
+                                buffer = "│ Buffer"
+                                -- cmp_tabnine = "│ Tabnine"
                             })[entry.source.name]
                             return vim_item
                         else
@@ -898,8 +893,7 @@ require('packer').startup(function(use)
                 sources = {
                     {name = 'path', priority = 100},
                     {name = 'ultisnips', priority = 35},
-                    {name = 'nvim_lsp', max_item_count = 100, priority = 30},
-                    {name = 'cmp_tabnine', max_item_count = 2, priority = 30}, {
+                    {name = 'nvim_lsp', max_item_count = 100, priority = 30}, {
                         name = 'buffer',
                         max_item_count = 10,
                         priority = 1,
@@ -1017,27 +1011,30 @@ EOF
             vim.highlight.create("CmpItemKind", {guifg = base16.colors.base03},
                                  false)
         end,
-        after = {'nvim-base16', "cmp-tabnine"}
+        after = {
+            'nvim-base16'
+            -- "cmp-tabnine"
+        }
     }
     use {'hrsh7th/cmp-nvim-lsp', after = "nvim-cmp"}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
     use {'hrsh7th/cmp-path', after = "nvim-cmp"}
-    use {
-        'tzachar/cmp-tabnine',
-        config = function()
-            local tabnine = require('cmp_tabnine.config')
-            tabnine:setup({
-                max_lines = 200,
-                max_num_results = 10,
-                sort = true,
-                run_on_every_keystroke = true,
-                snippet_placeholder = '...',
-                ignored_file_types = {}
-            })
-        end,
-        run = './install.sh',
-        requires = 'hrsh7th/nvim-cmp'
-    }
+    -- use {
+    --     'tzachar/cmp-tabnine',
+    --     config = function()
+    --         local tabnine = require('cmp_tabnine.config')
+    --         tabnine:setup({
+    --             max_lines = 200,
+    --             max_num_results = 10,
+    --             sort = true,
+    --             run_on_every_keystroke = true,
+    --             snippet_placeholder = '...',
+    --             ignored_file_types = {}
+    --         })
+    --     end,
+    --     run = './install.sh',
+    --     requires = 'hrsh7th/nvim-cmp'
+    -- }
 
     -- Scrollbar
     use {
@@ -1387,6 +1384,16 @@ EOF
         "ray-x/lsp_signature.nvim",
         config = function()
             require"lsp_signature".setup({hint_enable = false})
+        end
+    }
+
+    use {
+        "github/copilot.vim",
+        config = function()
+            vim.g.copilot_no_tab_map = 1
+            vim.api.nvim_set_keymap("i", "<c-space>",
+                                    "copilot#Accept(\"\\<CR>\")",
+                                    {silent = true, script = true, expr = true})
         end
     }
 end)
