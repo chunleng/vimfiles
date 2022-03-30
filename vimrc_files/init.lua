@@ -953,11 +953,28 @@ require('packer').startup(function(use)
                 },
                 completion = {
                     autocomplete = {
-                        cmp.TriggerEvent.InsertEnter,
-                        cmp.TriggerEvent.TextChanged
+                        -- cmp.TriggerEvent.TextChanged,
+                        cmp.TriggerEvent.InsertEnter
                     }
                 }
             })
+
+            -- Feature Request: autocomplete debounce setting https://github.com/hrsh7th/nvim-cmp/issues/598
+            vim.cmd [[
+            let s:timer_id = 0
+            let s:timeout = 250
+            function! s:on_text_changed() abort
+                function! s:invoke() abort closure
+                lua << EOF
+                    local cmp = require('cmp')
+                    cmp.complete({ reason = cmp.ContextReason.Auto })
+EOF
+                endfunction
+                call timer_stop(s:timer_id)
+                let s:timer_id = timer_start(s:timeout, { -> s:invoke() })
+            endfunction
+            autocmd TextChangedI * call s:on_text_changed()
+            ]]
 
             local base16 = require("base16-colorscheme")
             vim.highlight.create("CmpItemMenuDefault", {
