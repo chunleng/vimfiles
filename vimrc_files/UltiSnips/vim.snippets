@@ -6,19 +6,19 @@ if ${1:expr}
 endif
 endsnippet
 
-snippet _fold "Fold for vim" b
+snippet __fold "Fold for vim" b
 " ${1} `!p snip.rv = "-" * (70 - len(t[1]))` {{{
 ${0:${VISUAL}}
 " }}}
 endsnippet
 
-snippet _vim_test "Setup for vimtest" b
+snippet __vim_test "Setup for vimtest" b
 " https://github.com/vim-test/vim-test#features
 let test#${1:<language>}#runner = '${2:<runner>}'
 ${3:let test#$1#$2#executable = '${4:path/to/executable}'}
 endsnippet
 
-snippet _autocommand_new "Template for commonly used autocommand" b
+snippet __autocommand_new "Template for commonly used autocommand" b
 augroup ${1:group_name}
 	autocmd!
 	autocmd FileType ${2:filetype} setlocal noet
@@ -26,7 +26,7 @@ augroup ${1:group_name}
 augroup END
 endsnippet
 
-snippet _lsp_autoformat_on_save "Template for LSP autoformat on save" b
+snippet __lsp_autoformat_on_save "Template for LSP autoformat on save" b
 augroup LspFormatting
 	autocmd! * <buffer>
 	autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync({},5000)

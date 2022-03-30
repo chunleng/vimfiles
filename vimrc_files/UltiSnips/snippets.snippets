@@ -1,3 +1,9 @@
+global !p
+def expand(snip, jump_pos=1):
+    if snip.tabstop != jump_pos: return
+    vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
+endglobal
+
 snippet snippet "Snippet definition" b
 `!p snip.rv = "snippet"` ${2:Tab_trigger} "${3:Description}" ${4:b}
 ${0:${VISUAL}}
@@ -17,4 +23,25 @@ endsnippet
 
 snippet $ "Parameterize text"
 \${${1:1}${2::${VISUAL:}}}
+endsnippet
+
+snippet __snippet_alias "Snippet aliasing" b
+post_jump "expand(snip)"
+snippet ${1:alias} "Alias for ${2:snippet_name}" b
+$2\$1
+`!p snip.rv = "endsnippet"`
+endsnippet
+post_jump "expand(snip)"
+snippet snippet_alias "Alias for __snippet_alias" b
+__snippet_alias$1
+endsnippet
+
+snippet __expand_function "Snippet aliasing python function" b
+def expand(snip, jump_pos=1):
+    if snip.tabstop != jump_pos: return
+    vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
+endsnippet
+post_jump "expand(snip)"
+snippet def_expand "Alias for __expand_function" b
+__expand_function$1
 endsnippet

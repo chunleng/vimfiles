@@ -1,14 +1,22 @@
 # To lower priority due to generality
 priority -10
 
-snippet _date "Insert date"
+snippet __date "Insert date"
 `!p
 from datetime import datetime
 snip.rv = datetime.now().strftime("%Y-%m-%d %a %X")`
 endsnippet
 
-snippet _time "Insert time"
+snippet ___time "Insert time"
 `!p
 from datetime import datetime
 snip.rv = datetime.now().strftime("%X")`
+endsnippet
+
+snippet __folder_tree "Insert snippet for a folder tree" b
+.
+├─ folder
+│  ├─ a.sh
+│  └─ b.py
+└─ README.md
 endsnippet
