@@ -601,7 +601,7 @@ require('packer').startup(function(use)
                             on_attach = common_on_attach,
                             flags = {
                                 -- This will be the default in neovim 0.7+
-                                debounce_text_changes = 150
+                                debounce_text_changes = 250
                             }
                         }
                         if server.name == "tsserver" then
@@ -928,28 +928,11 @@ require('packer').startup(function(use)
                 },
                 completion = {
                     autocomplete = {
-                        -- cmp.TriggerEvent.TextChanged,
+                        cmp.TriggerEvent.TextChanged,
                         cmp.TriggerEvent.InsertEnter
                     }
                 }
             })
-
-            -- Feature Request: autocomplete debounce setting https://github.com/hrsh7th/nvim-cmp/issues/598
-            vim.cmd [[
-            let s:timer_id = 0
-            let s:timeout = 250
-            function! s:on_text_changed() abort
-                function! s:invoke() abort closure
-                lua << EOF
-                    local cmp = require('cmp')
-                    cmp.complete({ reason = cmp.ContextReason.Auto })
-EOF
-                endfunction
-                call timer_stop(s:timer_id)
-                let s:timer_id = timer_start(s:timeout, { -> s:invoke() })
-            endfunction
-            autocmd TextChangedI * call s:on_text_changed()
-            ]]
 
             local base16 = require("base16-colorscheme")
             vim.highlight.create("CmpItemMenuDefault", {
