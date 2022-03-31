@@ -74,3 +74,8 @@ augroup gitcommit
     autocmd FileType gitcommit set comments=:;
     autocmd FileType gitcommit set commentstring=;\ %s
 augroup END
+
+augroup dressing
+  autocmd!
+  autocmd FileType DressingInput setlocal sidescrolloff=0
+augroup END
