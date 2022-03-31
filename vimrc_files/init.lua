@@ -576,11 +576,6 @@ require('packer').startup(function(use)
                                                             '<leader>cu',
                                                             '<cmd>lua require"fzf-lua".lsp_references()<cr>',
                                                             keymap_opts)
-                                vim.api
-                                    .nvim_buf_set_keymap(bufnr, 'i',
-                                                         '<c-space>',
-                                                         '<cmd>lua vim.lsp.buf.completion()<CR>',
-                                                         keymap_opts)
                                 vim.api.nvim_buf_set_keymap(bufnr, 'v', '=',
                                                             ':\'<,\'>lua vim.lsp.buf.range_formatting()<CR>',
                                                             keymap_opts)
@@ -606,7 +601,7 @@ require('packer').startup(function(use)
                             on_attach = common_on_attach,
                             flags = {
                                 -- This will be the default in neovim 0.7+
-                                debounce_text_changes = 150
+                                debounce_text_changes = 250
                             }
                         }
                         if server.name == "tsserver" then
@@ -639,11 +634,11 @@ require('packer').startup(function(use)
                                 languages = {
                                     python = {
                                         {
-                                            formatCommand = "black --quiet -",
+                                            formatCommand = "isort --quiet -",
                                             formatStdin = true,
                                             rootMarkers = {".python-version"}
                                         }, {
-                                            formatCommand = "isort --quiet -",
+                                            formatCommand = "black --quiet -",
                                             formatStdin = true,
                                             rootMarkers = {".python-version"}
                                         }
@@ -731,6 +726,7 @@ require('packer').startup(function(use)
             }
             local data_kind = {"Module", "Number", "Array", "Boolean", "String"}
             require("aerial").setup({
+                backends = {"lsp", "treesitter", "markdown"}, -- LSP is still more stable, prioritize LSP first
                 min_width = 30,
                 max_width = 30,
                 show_guide = true,
@@ -813,7 +809,7 @@ require('packer').startup(function(use)
         'folke/trouble.nvim',
         config = function()
             require("trouble").setup {
-                auto_open = true,
+                auto_open = false,
                 use_diagnostic_signs = true,
                 indent_lines = false,
                 height = 3,
@@ -845,8 +841,8 @@ require('packer').startup(function(use)
                                 path = "│",
                                 ultisnips = "│",
                                 nvim_lsp = "│ LSP",
-                                buffer = "│ Buffer",
-                                cmp_tabnine = "│ Tabnine"
+                                buffer = "│ Buffer"
+                                -- cmp_tabnine = "│ Tabnine"
                             })[entry.source.name]
                             return vim_item
                         else
@@ -857,22 +853,15 @@ require('packer').startup(function(use)
                 sorting = {
                     comparators = {
                         function(entry1, entry2)
-                            -- Exact that is not buffer and is snippet
-                            -- local file = io.open("log.txt", "a")
-                            -- file:write(vim.inspect(entry1.completion_item))
-                            -- file:close()
+                            -- Exact that is snippet
                             local worthy_exact1 = entry1.exact and
-                                                      entry1.source.name ~=
-                                                      "buffer" and
                                                       (entry1.completion_item
-                                                          .insertTextFormat == 2 or
+                                                          .insertText ~= nil or
                                                           entry1.completion_item
                                                               .textEdit ~= nil)
                             local worthy_exact2 = entry2.exact and
-                                                      entry2.source.name ~=
-                                                      "buffer" and
                                                       (entry2.completion_item
-                                                          .insertTextFormat == 2 or
+                                                          .insertText ~= nil or
                                                           entry2.completion_item
                                                               .textEdit ~= nil)
                             if worthy_exact1 ~= worthy_exact2 then
@@ -880,32 +869,19 @@ require('packer').startup(function(use)
                             end
                         end, compare.recently_used, function(entry1, entry2)
                             -- Custom sorting that prioritize via a combination of the following criteria
+                            -- * Not exact (leave it to exact sorting)
                             -- * Less fuzziness (higher score)
-                            -- * Longer length tabnine first
                             -- * Snippet first
-                            -- The score for tabnine is reduced as it always give suggestions with no fuzziness,
-                            -- therefore the reduction allows the sorting to balance with score feature
-                            local tn_length_weight = 0.1
-                            local score1 = entry1.score +
-                                               (entry1.source.name ==
-                                                   'cmp_tabnine' and
-                                                   #entry1.completion_item.label *
-                                                   tn_length_weight or 1) +
-                                               ((entry1.completion_item
-                                                   .insertTextFormat or
-                                                   entry1.completion_item
-                                                       .textEdit ~= nil) == 2 and
-                                                   1 or 0)
-                            local score2 = entry2.score +
-                                               (entry2.source.name ==
-                                                   'cmp_tabnine' and
-                                                   #entry2.completion_item.label *
-                                                   tn_length_weight or 1) +
-                                               ((entry2.completion_item
-                                                   .insertTextFormat or
-                                                   entry2.completion_item
-                                                       .textEdit ~= nil) == 2 and
-                                                   1 or 0)
+                            local score1 =
+                                entry1.exact and 0 or (entry1.score +
+                                    ((entry1.completion_item.insertText ~= nil or
+                                        entry1.completion_item.textEdit ~= nil) and
+                                        1 or 0))
+                            local score2 =
+                                entry2.exact and 0 or (entry2.score +
+                                    ((entry2.completion_item.insertText ~= nil or
+                                        entry2.completion_item.textEdit ~= nil) and
+                                        1 or 0))
                             local diff = score2 - score1
                             if diff < 0 then
                                 return true
@@ -918,8 +894,7 @@ require('packer').startup(function(use)
                 sources = {
                     {name = 'path', priority = 100},
                     {name = 'ultisnips', priority = 35},
-                    {name = 'nvim_lsp', max_item_count = 100, priority = 30},
-                    {name = 'cmp_tabnine', max_item_count = 2, priority = 30}, {
+                    {name = 'nvim_lsp', max_item_count = 100, priority = 30}, {
                         name = 'buffer',
                         max_item_count = 10,
                         priority = 1,
@@ -955,8 +930,8 @@ require('packer').startup(function(use)
                 },
                 completion = {
                     autocomplete = {
-                        cmp.TriggerEvent.InsertEnter,
-                        cmp.TriggerEvent.TextChanged
+                        cmp.TriggerEvent.TextChanged,
+                        cmp.TriggerEvent.InsertEnter
                     }
                 }
             })
@@ -1022,27 +997,30 @@ require('packer').startup(function(use)
             vim.highlight.create("CmpItemKind", {guifg = base16.colors.base03},
                                  false)
         end,
-        after = {'nvim-base16', "cmp-tabnine"}
+        after = {
+            'nvim-base16'
+            -- "cmp-tabnine"
+        }
     }
     use {'hrsh7th/cmp-nvim-lsp', after = "nvim-cmp"}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
     use {'hrsh7th/cmp-path', after = "nvim-cmp"}
-    use {
-        'tzachar/cmp-tabnine',
-        config = function()
-            local tabnine = require('cmp_tabnine.config')
-            tabnine:setup({
-                max_lines = 200,
-                max_num_results = 10,
-                sort = true,
-                run_on_every_keystroke = true,
-                snippet_placeholder = '...',
-                ignored_file_types = {}
-            })
-        end,
-        run = './install.sh',
-        requires = 'hrsh7th/nvim-cmp'
-    }
+    -- use {
+    --     'tzachar/cmp-tabnine',
+    --     config = function()
+    --         local tabnine = require('cmp_tabnine.config')
+    --         tabnine:setup({
+    --             max_lines = 200,
+    --             max_num_results = 10,
+    --             sort = true,
+    --             run_on_every_keystroke = true,
+    --             snippet_placeholder = '...',
+    --             ignored_file_types = {}
+    --         })
+    --     end,
+    --     run = './install.sh',
+    --     requires = 'hrsh7th/nvim-cmp'
+    -- }
 
     -- Scrollbar
     use {
@@ -1392,6 +1370,17 @@ require('packer').startup(function(use)
         "ray-x/lsp_signature.nvim",
         config = function()
             require"lsp_signature".setup({hint_enable = false})
+        end
+    }
+
+    use {
+        "github/copilot.vim",
+        config = function()
+            vim.g.copilot_no_tab_map = 1
+            vim.g.copilot_filetypes = {DressingInput = false}
+            vim.api.nvim_set_keymap("i", "<c-space>",
+                                    "copilot#Accept(\"\\<CR>\")",
+                                    {silent = true, script = true, expr = true})
         end
     }
 end)

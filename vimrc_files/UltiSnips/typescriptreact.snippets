@@ -6,6 +6,10 @@ def upper_camel(s):
 	if len(s) > 1:
 		return s[0].capitalize() + s[1:]
 	return s.capitalize()
+
+def expand(snip, jump_pos=1):
+    if snip.tabstop != jump_pos: return
+    vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
 endglobal
 
 snippet __react_new_material_component "New component created with material UI" b
@@ -45,28 +49,31 @@ export default function ${1:Name}({  }: $1Props): ReactElement {
 }
 endsnippet
 
+
 snippet __react_function "React function" b
-type $1Props = {
-
-}
-
-function ${1:Foo}(props: $1Props): ReactElement {
+function ${1:Foo}(): ReactElement {
 	return (
 		${2:<>$0</>}
 	)
 }
 endsnippet
-
-snippet __react_use_state "Making react useState" b
-const [${1:foo}, set`!p snip.rv = upper_camel(t[1])`] = useState<${2:string}>()
+post_jump "expand(snip)"
+snippet function_react_compenent "Alias for __react_function" b
+__react_function$1
 endsnippet
 
-snippet __react_use_state_with_effect "Making react useState with useEffect" b
-const [${1:foo}, set`!p snip.rv = upper_camel(t[1])`] = useState<${2:string}>()
+snippet __react_useState "Making react useState" b
+const [${1:foo}, set`!p snip.rv = upper_camel(t[1])`] = useState<${2:string}>($3)
+endsnippet
+post_jump "expand(snip)"
+snippet const_useState "Alias for __react_useState" b
+__react_useState$1
+endsnippet
 
+snippet useEffect "Making react useState with useEffect" b
 useEffect(() => {
-	${3:${VISUAL:console.log("test")}}
-}, [$1])
+	${1:${VISUAL}}
+}, [$2])
 endsnippet
 
 snippet __react_graphql_usequery "Creating a useQuery statement" b
