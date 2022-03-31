@@ -538,7 +538,7 @@ require('packer').startup(function(use)
             local servers = {
                 "tsserver", "tailwindcss", "eslint", "pyright", "efm", "jsonls",
                 "sumneko_lua", "jdtls", "vimls", "html", "yamlls",
-                "terraformls", "tflint", "cssls"
+                "terraformls", "tflint", "cssls", "cssmodules_ls", "dockerls"
             }
             -- Loop through the servers listed above and set them up. If a server is
             -- not already installed, install it.
