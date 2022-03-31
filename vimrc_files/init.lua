@@ -634,11 +634,11 @@ require('packer').startup(function(use)
                                 languages = {
                                     python = {
                                         {
-                                            formatCommand = "black --quiet -",
+                                            formatCommand = "isort --quiet -",
                                             formatStdin = true,
                                             rootMarkers = {".python-version"}
                                         }, {
-                                            formatCommand = "isort --quiet -",
+                                            formatCommand = "black --quiet -",
                                             formatStdin = true,
                                             rootMarkers = {".python-version"}
                                         }
