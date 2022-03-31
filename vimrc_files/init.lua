@@ -726,6 +726,7 @@ require('packer').startup(function(use)
             }
             local data_kind = {"Module", "Number", "Array", "Boolean", "String"}
             require("aerial").setup({
+                backends = {"lsp", "treesitter", "markdown"}, -- LSP is still more stable, prioritize LSP first
                 min_width = 30,
                 max_width = 30,
                 show_guide = true,
