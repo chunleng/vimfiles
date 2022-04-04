@@ -410,15 +410,9 @@ require('packer').startup(function(use)
     use 'tpope/vim-commentary'
 
     use {
-        "xiyaowong/nvim-cursorword",
+        "RRethy/vim-illuminate",
         config = function()
-            local base16 = require("base16-colorscheme")
-            vim.highlight.create("CursorWord",
-                                 {guibg = base16.colors.base01, gui = "none"},
-                                 false)
-            vim.g.cursorword_disable_filetypes = {
-                "Dashboard", "NvimTree", "aerial"
-            }
+            vim.g.Illuminate_ftblacklist = {"Dashboard", "NvimTree", "aerial"}
         end,
         after = "nvim-base16"
     }
