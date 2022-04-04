@@ -128,7 +128,6 @@ require('packer').startup(function(use)
             nnoremap <leader>u :MundoToggle<cr>
 
             let g:mundo_width = 30
-            let g:mundo_right = 1
             let g:mundo_header = 0
         ]]
         end
@@ -754,6 +753,8 @@ require('packer').startup(function(use)
                     aerial = true,
                     dashboard = true,
                     gitcommit = true,
+                    Mundo = true,
+                    MundoDiff = true,
                     [""] = true -- no filetype
                 }
                 for _, wid in ipairs(window_ids) do
