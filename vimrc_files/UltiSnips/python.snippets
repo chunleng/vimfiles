@@ -6,6 +6,10 @@ def get_file_name(default: str='untitled') -> str:
 
 def	snake_to_upper_camel_case(s: str) -> str:
 	return ''.join([ x.title() for x in s.split('_')])
+
+def expand(snip, jump_pos=1):
+    if snip.tabstop != jump_pos: return
+    vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
 endglobal
 #
 # Snippets
@@ -80,6 +84,15 @@ match ${1:var}:
 		pass
 	${3:case _:
 		pass # default}
+endsnippet
+
+post_jump "expand(snip)"
+snippet switch "Alias for match" b
+match$1
+endsnippet
+post_jump "expand(snip)"
+snippet select "Alias for match" b
+match$1
 endsnippet
 
 snippet try "Try except" b
