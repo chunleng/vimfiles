@@ -750,11 +750,13 @@ require('packer').startup(function(use)
             function HandleAerialOpen()
                 local window_ids = vim.api.nvim_tabpage_list_wins(0)
                 local editing_win_count = 0
-                -- TODO refactor
                 local ignore_ft = {
                     NvimTree = true,
                     Trouble = true,
-                    aerial = true
+                    aerial = true,
+                    dashboard = true,
+                    gitcommit = true,
+                    [""] = true -- no filetype
                 }
                 for _, wid in ipairs(window_ids) do
                     local bufnr = vim.api.nvim_win_get_buf(wid)
@@ -767,34 +769,33 @@ require('packer').startup(function(use)
                         editing_win_count = editing_win_count + 1
                     end
                 end
-                if editing_win_count > 1 then
-                    for _, wid in ipairs(window_ids) do
-                        local bufnr = vim.api.nvim_win_get_buf(wid)
-                        local ft = vim.api.nvim_buf_get_option(bufnr, "ft")
-                        if ft == "aerial" then
-                            vim.api.nvim_win_close(wid, false)
-                        end
-                    end
-                    return
-                end
+
+                local is_open = false
                 for _, wid in ipairs(window_ids) do
                     local bufnr = vim.api.nvim_win_get_buf(wid)
                     local ft = vim.api.nvim_buf_get_option(bufnr, "ft")
-                    if ft == "aerial" then return end
+
+                    if ft == "aerial" then
+                        is_open = true
+                        break
+                    end
                 end
-                local win_opt = vim.api.nvim_win_get_config(0)
-                if win_opt.zindex == nil and win_opt.focusable and
-                    not ignore_ft[vim.api.nvim_buf_get_option(0, "ft")] then
-                    vim.cmd [[silent! AerialOpen!]]
+
+                if editing_win_count == 1 then
+                    if not is_open then
+                        require("aerial").open()
+                    end
+                elseif is_open then
+                    require("aerial").close()
                 end
             end
 
             vim.cmd [[
-          augroup Aerial
-            autocmd!
-            autocmd VimEnter,BufEnter,WinEnter,VimResized * lua HandleAerialOpen()
-          augroup END
-        ]]
+              augroup Aerial
+                autocmd!
+                autocmd BufEnter,WinEnter * lua HandleAerialOpen()
+              augroup END
+            ]]
         end,
         after = "nvim-base16"
     }
