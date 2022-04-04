@@ -1,13 +1,14 @@
 # Snippets
 
 snippet __docker_compose_new "Docker-compose template" b
+version: "3.9"
 services:
-	${1}:
-		image: ${2:imagename:version}
+	web:
+		image: ${1:imagename:version}
 		ports:
-			- "${3:host:docker}"
+			- "${2:host:docker}"
 		volumes:
-			- ${4:local_path:docker_path}
+			- ${3:local_path:docker_path}
 	$0
 endsnippet
 
