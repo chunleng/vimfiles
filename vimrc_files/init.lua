@@ -139,8 +139,7 @@ require('packer').startup(function(use)
             require("indent_blankline").setup {
                 char = "│",
                 filetype_exclude = {
-                    'WhichKey', 'markdown', 'aerial', 'dashboard', 'help',
-                    'Trouble'
+                    'WhichKey', 'markdown', 'aerial', 'dashboard', 'help'
                 }
             }
             vim.api.nvim_set_keymap("n", "za",
@@ -574,10 +573,10 @@ require('packer').startup(function(use)
                                                             ':\'<,\'>lua vim.lsp.buf.range_formatting()<CR>',
                                                             keymap_opts)
                                 vim.api.nvim_set_keymap('n', '<leader>cd',
-                                                        '<cmd>Trouble document_diagnostics<CR>',
+                                                        '<cmd>FzfLua lsp_document_diagnostics<CR>',
                                                         keymap_opts)
                                 vim.api.nvim_set_keymap('n', '<leader>c?',
-                                                        '<cmd>Trouble workspace_diagnostics<CR>',
+                                                        '<cmd>FzfLua lsp_workspace_diagnostics<CR>',
                                                         keymap_opts)
                                 vim.api.nvim_set_keymap('n', '<leader>cp',
                                                         '<cmd>lua vim.diagnostic.goto_prev()<CR>',
@@ -752,7 +751,6 @@ require('packer').startup(function(use)
                 local editing_win_count = 0
                 local ignore_ft = {
                     NvimTree = true,
-                    Trouble = true,
                     aerial = true,
                     dashboard = true,
                     gitcommit = true,
@@ -798,20 +796,6 @@ require('packer').startup(function(use)
             ]]
         end,
         after = "nvim-base16"
-    }
-
-    use {
-        'folke/trouble.nvim',
-        config = function()
-            require("trouble").setup {
-                auto_open = false,
-                use_diagnostic_signs = true,
-                indent_lines = false,
-                height = 3,
-                padding = false,
-                auto_preview = false
-            }
-        end
     }
 
     use {

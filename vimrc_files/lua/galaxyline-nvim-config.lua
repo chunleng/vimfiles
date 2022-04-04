@@ -29,6 +29,18 @@ gls.left = {
             separator = ' ',
             separator_highlight = {'NONE', bgcolor}
         }
+    }, {
+        diagnostic = {
+            provider = function()
+                local count = #vim.diagnostic.get(nil, {
+                    severity = vim.diagnostic.severity.ERROR
+                })
+
+                return count > 0 and tostring(count) .. " " or nil
+            end,
+            icon = '  ',
+            highlight = {base16.colors.base07, base16.colors.base08}
+        }
     }
 }
 
