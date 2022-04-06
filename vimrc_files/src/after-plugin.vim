@@ -50,9 +50,6 @@ augroup markdown
 
     " Shorten textwidth to markdown standard
     autocmd FileType markdown setlocal textwidth=80
-
-    " Allow spelling on markdown
-    autocmd FileType markdown setlocal spell
 augroup END
 
 augroup snippets
