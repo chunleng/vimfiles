@@ -793,7 +793,7 @@ require('packer').startup(function(use)
             vim.cmd [[
               augroup Aerial
                 autocmd!
-                autocmd BufEnter,WinEnter * lua HandleAerialOpen()
+                autocmd BufEnter,WinEnter * silent! lua HandleAerialOpen()
               augroup END
             ]]
         end,
