@@ -986,22 +986,6 @@ require('packer').startup(function(use)
     use {'hrsh7th/cmp-nvim-lsp', after = "nvim-cmp"}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
     use {'hrsh7th/cmp-path', after = "nvim-cmp"}
-    -- use {
-    --     'tzachar/cmp-tabnine',
-    --     config = function()
-    --         local tabnine = require('cmp_tabnine.config')
-    --         tabnine:setup({
-    --             max_lines = 200,
-    --             max_num_results = 10,
-    --             sort = true,
-    --             run_on_every_keystroke = true,
-    --             snippet_placeholder = '...',
-    --             ignored_file_types = {}
-    --         })
-    --     end,
-    --     run = './install.sh',
-    --     requires = 'hrsh7th/nvim-cmp'
-    -- }
 
     -- Scrollbar
     use {
