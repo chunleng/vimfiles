@@ -530,7 +530,8 @@ require('packer').startup(function(use)
             local servers = {
                 "tsserver", "tailwindcss", "eslint", "pyright", "efm", "jsonls",
                 "sumneko_lua", "jdtls", "vimls", "html", "yamlls",
-                "terraformls", "tflint", "cssls", "cssmodules_ls", "dockerls"
+                "terraformls", "tflint", "cssls", "cssmodules_ls", "dockerls",
+                "grammarly", "solargraph"
             }
             -- Loop through the servers listed above and set them up. If a server is
             -- not already installed, install it.
@@ -792,7 +793,7 @@ require('packer').startup(function(use)
             vim.cmd [[
               augroup Aerial
                 autocmd!
-                autocmd BufEnter,WinEnter * lua HandleAerialOpen()
+                autocmd BufEnter,WinEnter * silent! lua HandleAerialOpen()
               augroup END
             ]]
         end,
@@ -985,22 +986,6 @@ require('packer').startup(function(use)
     use {'hrsh7th/cmp-nvim-lsp', after = "nvim-cmp"}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
     use {'hrsh7th/cmp-path', after = "nvim-cmp"}
-    -- use {
-    --     'tzachar/cmp-tabnine',
-    --     config = function()
-    --         local tabnine = require('cmp_tabnine.config')
-    --         tabnine:setup({
-    --             max_lines = 200,
-    --             max_num_results = 10,
-    --             sort = true,
-    --             run_on_every_keystroke = true,
-    --             snippet_placeholder = '...',
-    --             ignored_file_types = {}
-    --         })
-    --     end,
-    --     run = './install.sh',
-    --     requires = 'hrsh7th/nvim-cmp'
-    -- }
 
     -- Scrollbar
     use {
