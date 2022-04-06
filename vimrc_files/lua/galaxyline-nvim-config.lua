@@ -30,7 +30,7 @@ gls.left = {
             separator_highlight = {'NONE', bgcolor}
         }
     }, {
-        diagnostic = {
+        LspError = {
             provider = function()
                 local count = #vim.diagnostic.get(nil, {
                     severity = vim.diagnostic.severity.ERROR
@@ -39,7 +39,23 @@ gls.left = {
                 return count > 0 and tostring(count) .. " " or nil
             end,
             icon = '  ',
+            separator = ' ',
+            separator_highlight = {'NONE', bgcolor},
             highlight = {base16.colors.base07, base16.colors.base08}
+        }
+    }, {
+        LspWarning = {
+            provider = function()
+                local count = #vim.diagnostic.get(nil, {
+                    severity = vim.diagnostic.severity.WARN
+                })
+
+                return count > 0 and tostring(count) .. " " or nil
+            end,
+            icon = '  ',
+            separator = ' ',
+            separator_highlight = {'NONE', bgcolor},
+            highlight = {base16.colors.base00, base16.colors.base0A}
         }
     }
 }
