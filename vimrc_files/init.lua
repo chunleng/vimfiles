@@ -17,7 +17,27 @@ if vim.fn.filereadable("/usr/local/bin/neovim-ruby-host") then
     vim.g.neovim_host_prog = "/usr/local/bin/neovim-ruby-host"
 end
 
-vim.cmd "runtime src/before-plugin.vim"
+vim.o.number = true
+vim.o.relativenumber = true
+
+vim.o.swapfile = false
+
+vim.o.list = true
+vim.o.listchars = "tab:» ,trail:·,extends:,precedes:,nbsp:+,eol:¶"
+vim.o.fillchars =
+    'vert:│,stlnc: ,diff:·,eob: ,fold: ,foldopen:,foldclose:,foldsep:│'
+
+-- Show statusline always
+vim.o.laststatus = 2
+
+vim.o.synmaxcol = 160
+vim.o.textwidth = 120
+
+vim.o.sidescrolloff = 20
+vim.o.scrolloff = 5
+vim.o.wrap = false
+
+vim.g.mapleader = " "
 
 -- Better foldtext
 function _G.fold_text()
