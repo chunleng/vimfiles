@@ -76,3 +76,19 @@ augroup dressing
   autocmd!
   autocmd FileType DressingInput setlocal sidescrolloff=0
 augroup END
+
+augroup custom_filetype
+    autocmd!
+    " direnv settings
+    autocmd BufRead,BufNewFile .env* :set ft=sh
+
+    " Allow no highlighting for min files
+    autocmd BufReadPre *.min.* set ft=
+
+    " Because treesitter don't support zsh
+    autocmd FileType zsh :set ft=bash
+
+    " Plist is a xml file
+    autocmd BufRead,BufNewFile *.plist setlocal ft=xml
+augroup END
+
