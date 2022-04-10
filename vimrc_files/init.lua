@@ -1,35 +1,34 @@
-vim.cmd [[
-" /usr/local:x86 /opt/homebrew:apple silicon
-if filereadable('/usr/local/bin/python3')
-    let g:python3_host_prog='/usr/local/bin/python3'
-endif
-if filereadable('/opt/homebrew/bin/python3')
-    let g:python3_host_prog='/opt/homebrew/bin/python3'
-endif
+-- /usr/local:x86 /opt/homebrew:apple silicon
+if vim.fn.filereadable('/usr/local/bin/python3') then
+    vim.g.python3_host_prog = '/usr/local/bin/python3'
+end
+if vim.fn.filereadable('/opt/homebrew/bin/python3') then
+    vim.g.python3_host_prog = '/opt/homebrew/bin/python3'
+end
 
-if filereadable('/usr/local/bin/neovim-node-host')
-    let g:node_host_prog='/usr/local/bin/neovim-node-host'
-endif
-if filereadable('/opt/homebrew/bin/neovim-node-host')
-    let g:node_host_prog='/opt/homebrew/bin/neovim-node-host'
-endif
+if vim.fn.filereadable("/usr/local/bin/neovim-node-host") then
+    vim.g.neovim_host_prog = "/usr/local/bin/neovim-node-host"
+end
+if vim.fn.filereadable("/opt/homebrew/bin/neovim-node-host") then
+    vim.g.neovim_host_prog = "/opt/homebrew/bin/neovim-node-host"
+end
 
-if filereadable('/usr/local/bin/neovim-ruby-host')
-    let g:ruby_host_prog='/usr/local/bin/neovim-ruby-host'
-endif
-runtime src/before-plugin.vim
-]]
+if vim.fn.filereadable("/usr/local/bin/neovim-ruby-host") then
+    vim.g.neovim_host_prog = "/usr/local/bin/neovim-ruby-host"
+end
+
+vim.cmd "runtime src/before-plugin.vim"
+
 -- Better foldtext
-function FoldText()
+function _G.fold_text()
     local leveltext = "   "
     for _ = 1, vim.v.foldlevel do leveltext = leveltext .. "" end
     local foldtext = vim.api.nvim_buf_get_lines(0, vim.v.foldstart - 1,
                                                 vim.v.foldstart, false)[1]
     return leveltext .. " " .. foldtext
 end
-vim.cmd [[set foldtext=v:lua.FoldText()]]
-
-vim.api.nvim_set_option("termguicolors", true)
+vim.o.foldtext = "v:lua.fold_text()"
+vim.o.termguicolors = true
 
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
@@ -37,7 +36,7 @@ require('packer').startup(function(use)
     use {
         'folke/which-key.nvim',
         config = function()
-            vim.cmd [[set timeoutlen=1000]]
+            vim.o.timeoutlen = 1000
             local wk = require("which-key")
             wk.setup({window = {winblend = 15}})
             wk.register({
@@ -127,12 +126,10 @@ require('packer').startup(function(use)
     use {
         'simnalamburt/vim-mundo',
         config = function()
-            vim.cmd [[
-            nnoremap <leader>u :MundoToggle<cr>
-
-            let g:mundo_width = 30
-            let g:mundo_header = 0
-        ]]
+            vim.api.nvim_set_keymap("n", "<leader>u", "<cmd>MundoToggle<cr>",
+                                    {noremap = true, silent = true})
+            vim.g.mundo_width = 30
+            vim.g.mundo_header = 0
         end
     }
     use {
@@ -161,17 +158,18 @@ require('packer').startup(function(use)
     use {
         'AndrewRadev/linediff.vim',
         config = function()
-            vim.cmd [[vnoremap <silent><leader>d :Linediff<cr>]]
+            vim.api.nvim_set_keymap("v", "<leader>d", "<cmd>Linediff<cr>",
+                                    {noremap = true, silent = true})
         end
     }
 
     use {
         'tpope/vim-fugitive',
         config = function()
-            vim.cmd [[
-            nnoremap <silent><leader>gf :GBrowse<cr>
-            nnoremap <silent><leader>gb :Git blame<cr>
-        ]]
+            vim.api.nvim_set_keymap("n", "<leader>gf", "<cmd>GBrowse<cr>",
+                                    {noremap = true, silent = true})
+            vim.api.nvim_set_keymap("n", "<leader>gb", "<cmd>Git blame<cr>",
+                                    {noremap = true, silent = true})
         end
     }
 
@@ -301,31 +299,27 @@ require('packer').startup(function(use)
     use {
         'SirVer/ultisnips',
         config = function()
-            vim.cmd [[
-            nnoremap !ru :UltiSnipsEdit!<cr>
-            let g:UltiSnipsJumpForwardTrigger="<c-j>"
-            let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-        ]]
+            vim.api.nvim_set_keymap("n", "!ru", "<cmd>UltiSnipsEdit!<cr>",
+                                    {noremap = true, silent = true})
+            vim.g.UltiSnipsJumpForwardTrigger = "<c-j>"
+            vim.g.UltiSnipsJumpBackwardTrigger = "<c-k>"
         end
     }
     use {
         'embear/vim-localvimrc',
         config = function()
-            vim.cmd [[
-            " Vim localvimrc
-            nnoremap !rV :e .vim/local.vim<cr>
-            let g:localvimrc_name = [".vim/local.vim"]
+            vim.api.nvim_set_keymap("n", "!rV", "<cmd>e .vim/local.vim<cr>",
+                                    {noremap = true, silent = true})
+            vim.g.localvimrc_name = {".vim/local.vim"}
+            vim.g.localvimrc_file_directory_only = 0
 
-            let g:localvimrc_file_directory_only = 0
+            -- Disable sandbox to enable running of autocmd
+            -- NOTE: do not remove ask, only accept if you know the content of vimrc
+            vim.g.localvimrc_sandbox = 0
+            vim.g.localvimrc_ask = 1
 
-            " Disable sandbox to enable running of autocmd
-            " NOTE: do not remove ask, only accept if you know the content of vimrc
-            let g:localvimrc_sandbox = 0
-            let g:localvimrc_ask = 1
-
-            " Store decision to source local vimrc
-            let g:localvimrc_persistent = 2
-        ]]
+            --  Store decision to source local vimrc
+            vim.g.localvimrc_persistent = 2
         end
     }
 
@@ -333,14 +327,15 @@ require('packer').startup(function(use)
     use {
         'vim-test/vim-test',
         config = function()
-            vim.cmd [[
-            let g:test#strategy = 'kitty'
-            let g:test#preserve_screen = 1
+            vim.g["test#strategy"] = "kitty"
+            vim.g["test#preserve_screen"] = 1
 
-            nnoremap <silent><leader>ctf :TestFile<cr>
-            nnoremap <silent><leader>ctn :TestNearest<cr>
-            nnoremap <silent><leader>ctt :TestSuite<cr>
-        ]]
+            vim.api.nvim_set_keymap("n", "<leader>ctf", "<cmd>TestFile<cr>",
+                                    {noremap = true, silent = true})
+            vim.api.nvim_set_keymap("n", "<leader>ctn", "<cmd>TestNearest<cr>",
+                                    {noremap = true, silent = true})
+            vim.api.nvim_set_keymap("n", "<leader>ctt", "<cmd>TestSuite<cr>",
+                                    {noremap = true, silent = true})
         end
     }
 
@@ -349,10 +344,8 @@ require('packer').startup(function(use)
         'iamcco/markdown-preview.nvim',
         run = 'cd app && yarn install',
         config = function()
-            vim.cmd [[
-            autocmd FileType markdown nnoremap <silent><buffer><leader>tm :MarkdownPreviewToggle<cr>
-            let g:mkdp_auto_close = 0
-        ]]
+            vim.cmd "autocmd FileType markdown nnoremap <silent><buffer><leader>tm :MarkdownPreviewToggle<cr>"
+            vim.g.mkdp_auto_close = 0
         end
     }
     use {
@@ -371,7 +364,7 @@ require('packer').startup(function(use)
     use {
         'andymass/vim-matchup',
         config = function()
-            vim.cmd [[let g:matchup_matchparen_offscreen = {'method': ''}]]
+            vim.g.matchup_matchparen_offscreen = {method = ""}
         end
     }
     use {
@@ -401,9 +394,9 @@ require('packer').startup(function(use)
     use {
         'bronson/vim-trailing-whitespace',
         config = function()
-            vim.cmd [[
-            let g:extra_whitespace_ignored_filetypes = ['Mundo','MundoDiff','aerial', 'dashboard']
-        ]]
+            vim.g.extra_whitespace_ignored_filetypes = {
+                "Mundo", "MundoDiff", "aerial", "dashboard"
+            }
         end
     }
 
@@ -426,11 +419,14 @@ require('packer').startup(function(use)
                 guibg = base16.colors.base0D_20,
                 guifg = "none"
             }, false)
-            vim.cmd [[
-            nnoremap <leader>to :LengthmattersToggle<cr>
-            let g:lengthmatters_excluded = ['Mundo', 'MundoDiff', 'NvimTree', 'help', 'qf', 'WhichKey', 'min', 'markdown', 'dashboard']
-            call lengthmatters#highlight_link_to('OverLengthCustom')
-        ]]
+            vim.api.nvim_set_keymap("n", "<leader>to",
+                                    "<cmd>LengthmattersToggle<cr>",
+                                    {noremap = true, silent = true})
+            vim.g.lengthmatters_excluded = {
+                "Mundo", "MundoDiff", "NvimTree", "help", "qf", "WhichKey",
+                "min", "markdown", "dashboard"
+            }
+            vim.fn.call("lengthmatters#highlight_link_to", {'OverLengthCustom'})
         end,
         after = "nvim-base16"
     }
@@ -482,13 +478,13 @@ require('packer').startup(function(use)
                 fzf_args = "--select-1", -- auto-select when there is only one result
                 file_icon_padding = " "
             })
-            function FzfLuaSearch()
+            function _G.fzf_lua_search()
                 vim.ui.input({prompt = "Search"}, function(response)
                     if response == nil then return end
                     require("fzf-lua.providers.grep").grep({search = response})
                 end)
             end
-            vim.cmd [[command! FzfLuaSearch lua FzfLuaSearch()]]
+            vim.cmd [[command! FzfLuaSearch call v:lua.fzf_lua_search()]]
             vim.api.nvim_set_keymap("n", "<c-space>", ":FzfLua files<cr>",
                                     {silent = true})
             vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua resume<cr>",
@@ -992,11 +988,10 @@ require('packer').startup(function(use)
     use {
         'dstein64/nvim-scrollview',
         config = function()
-            vim.cmd [[
-            let g:scrollview_winblend = 15
-            let g:scrollview_column = 1
-            let g:scrollview_excluded_filetypes = ['NvimTree','WhichKey']
-        ]]
+            vim.g.scrollview_winblend = 15
+            vim.g.scrollview_column = 1
+            vim.g.scrollview_excluded_filetypes = {"NvimTree", "WhichKey"}
+
             local base16 = require("base16-colorscheme")
             vim.highlight.create("ScrollView",
                                  {guibg = base16.colors.base0D_40}, false)
@@ -1008,14 +1003,13 @@ require('packer').startup(function(use)
     use {
         'mg979/vim-visual-multi',
         config = function()
-            vim.cmd [[
-            let g:VM_default_mappings = 0
-            let g:VM_mouse_mappings = 1
-            let g:VM_maps = {}
-            let g:VM_maps["Find Under"] = '\'
-            let g:VM_maps['Find Subword Under'] = '\'
-            let g:VM_maps['Select All'] = 'g\'
-        ]]
+            vim.g.VM_default_mappings = 0
+            vim.g.VM_mouse_mappings = 0
+            vim.g.VM_maps = {
+                ["Find Under"] = "\\",
+                ["Find Subword Under"] = "\\",
+                ["Select All"] = "g\\"
+            }
         end
     }
 
@@ -1165,7 +1159,7 @@ require('packer').startup(function(use)
             }, false)
 
             -- Completion
-            vim.api.nvim_set_option("pumblend", 1)
+            vim.o.pumblend = 1
             vim.highlight.create("Pmenu", {
                 guifg = base16.colors.base03,
                 guibg = base16.colors.base01,
@@ -1182,7 +1176,7 @@ require('packer').startup(function(use)
                                  {guibg = base16.colors.base0D_40}, false)
 
             -- Float
-            vim.api.nvim_set_option("winblend", 1)
+            vim.o.winblend = 1
             vim.highlight.create("NormalFloat", {
                 guifg = base16.colors.base05,
                 guibg = base16.colors.base01,

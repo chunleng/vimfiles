@@ -1,19 +1,18 @@
-vim.cmd [[
-nnoremap <silent><leader><space> :NvimTreeFindFile<cr>
-let g:nvim_tree_group_empty = 1
-let g:nvim_tree_git_hl = 1
-let g:nvim_tree_icons = {
-    \ 'git': {
-    \   'unstaged': "",
-    \   'staged': "",
-    \   'unmerged': "",
-    \   'renamed': "→",
-    \   'untracked': "?",
-    \   'deleted': "",
-    \   'ignored': "◌"
-    \   }
-    \ }
-]]
+vim.api.nvim_set_keymap("n", "<leader><space>", "<cmd>NvimTreeFindFile<cr>",
+                        {noremap = true, silent = true})
+vim.g.nvim_tree_group_empty = 1
+vim.g.nvim_tree_git_hl = 1
+vim.g.nvim_tree_icons = {
+    git = {
+        unstaged = "",
+        staged = "",
+        unmerged = "",
+        renamed = "→",
+        untracked = "?",
+        deleted = "",
+        ignored = "◌"
+    }
+}
 
 require'nvim-tree'.setup {
     disable_netrw = false,
