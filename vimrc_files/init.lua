@@ -110,6 +110,9 @@ require('packer').startup(function(use)
             vim.api.nvim_set_keymap("n", "<leader>bl",
                                     "<cmd>BufferLineCloseRight<cr>",
                                     {silent = true, noremap = true})
+            vim.api.nvim_set_keymap("n", "<leader>bo",
+                                    "<cmd>BufferLineCloseRight<cr><cmd>BufferLineCloseLeft<cr>",
+                                    {silent = true, noremap = true})
         end,
         requires = 'kyazdani42/nvim-web-devicons',
         after = "nvim-base16"
@@ -436,11 +439,9 @@ require('packer').startup(function(use)
     use {
         'qpkorr/vim-bufkill',
         config = function()
-            vim.cmd [[
-            let g:BufKillCreateMappings = 0
-            noremap <silent><leader>bd :<c-u>BD!<cr>
-            noremap <silent><leader>ba :<c-u>bufdo BD<cr>
-        ]]
+            vim.g.BufKillCreateMappings = 0
+            vim.api.nvim_set_keymap("", "<c-x>", "<cmd>BD!<cr>",
+                                    {noremap = true, silent = true})
         end
     }
 
