@@ -15,3 +15,12 @@ endsnippet
 snippet print_inspect "Print vim.inspect" b
 print(vim.inspect(${1:${VISUAL}}))
 endsnippet
+
+snippet __lua_module "Template for Lua Module" b
+local M = {}
+
+function M.setup()
+end
+
+return M
+endsnippet
