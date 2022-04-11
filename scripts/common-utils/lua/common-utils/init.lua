@@ -80,8 +80,8 @@ local function configure_preferred_mappings()
     -- command ctrl-e already mapped to <end>
     -- cnoremap <c-e> <end>
     noremap("i", "<c-a>", "<home>")
-    noremap("i", "<c-e>", "<h<end>")
-    noremap("c", "<c-a>", "<h<home>")
+    noremap("i", "<c-e>", "<end>")
+    noremap("c", "<c-a>", "<home>")
 
 end
 
@@ -136,10 +136,10 @@ local function configure_autogroup()
         augroup custom_filetype
             autocmd!
             " direnv settings
-            autocmd BufRead,BufNewFile .env* :set ft=sh
+            autocmd BufRead,BufNewFile .env* set ft=bash
 
             " Allow no highlighting for min files
-            autocmd BufReadPre *.min.* set ft=
+            autocmd BufWinEnter *.min.* set ft=
 
             " Because treesitter don't support zsh
             autocmd FileType zsh :set ft=bash
