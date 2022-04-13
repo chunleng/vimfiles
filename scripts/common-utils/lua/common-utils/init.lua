@@ -26,7 +26,7 @@ local function configure_preferred_settings()
     vim.o.listchars = "tab:» ,trail:·,extends:,precedes:,nbsp:+,eol:¶"
     vim.o.fillchars =
         'vert:│,stlnc: ,diff:·,eob: ,fold: ,foldopen:,foldclose:,foldsep:│'
-    vim.o.laststatus = 2 -- Show statusline always
+    vim.o.laststatus = 3 -- global status bar
     vim.o.synmaxcol = 160
     vim.o.textwidth = 120
     vim.o.sidescrolloff = 20
@@ -164,7 +164,6 @@ local function configure_vim_diagnostics()
 
     vim.diagnostic.config({
         virtual_text = false,
-        header = "",
         float = {source = true}
     })
 end
