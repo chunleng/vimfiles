@@ -145,6 +145,13 @@ function M.setup()
                     }
                     luadev.settings.Lua.workspace.library['/Applications/Hammerspoon.app/Contents/Resources/extensions/hs/'] =
                         true
+                    server_opts.on_attach = -- Ignore sumneko formatter and use lua formatter because it's not working on apple silicon
+                    function(client, bufnr)
+                        client.resolved_capabilities.document_formatting = false
+                        client.resolved_capabilities.document_range_formatting =
+                            false
+                        common_on_attach(client, bufnr)
+                    end
                     server_opts.settings = luadev.settings
                 elseif server.name == "cssls" then
                     local capabilities = vim.lsp.protocol
