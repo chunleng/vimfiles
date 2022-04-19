@@ -3,6 +3,10 @@
 global !p
 def getFileName(default='untitled'):
 	return snip.basename or default
+
+def expand(snip, jump_pos=1):
+    if snip.tabstop != jump_pos: return
+    vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
 endglobal
 
 # Snippets
@@ -27,3 +31,7 @@ class ${1:`!p snip.rv = getFileName()`} {
 }
 endsnippet
 
+post_jump "expand(snip)"
+snippet class_main "Alias for __class_main" b
+__class_main$1
+endsnippet
