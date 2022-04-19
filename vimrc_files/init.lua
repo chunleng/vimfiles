@@ -65,16 +65,6 @@ require('packer').startup(function(use)
     }
 
     use {
-        'quangnguyen30192/cmp-nvim-ultisnips',
-        run = "./install.sh",
-        config = function() require("config.cmp-nvim-ultisnips").setup() end,
-        after = {"ultisnips", "nvim-cmp"}
-    }
-    use {
-        'SirVer/ultisnips',
-        config = function() require("config.ultisnips").setup() end
-    }
-    use {
         'embear/vim-localvimrc',
         config = function() require("config.localvimrc").setup() end
     }
@@ -154,7 +144,7 @@ require('packer').startup(function(use)
             'neovim/nvim-lspconfig', 'folke/lua-dev.nvim',
             'b0o/schemastore.nvim', 'ibhagwan/fzf-lua'
         },
-        after = "fzf-lua"
+        after = {"fzf-lua", "aerial.nvim"}
     }
 
     -- https://github.com/stevearc/aerial.nvim
@@ -169,9 +159,19 @@ require('packer').startup(function(use)
         config = function() require("config.nvim-cmp").setup() end,
         after = {'nvim-base16', 'common-utils'}
     }
-    use {'hrsh7th/cmp-nvim-lsp', after = "nvim-cmp"}
+    use {'hrsh7th/cmp-nvim-lsp', after = {"nvim-cmp", "nvim-lsp-installer"}}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
     use {'hrsh7th/cmp-path', after = "nvim-cmp"}
+    use {
+        'quangnguyen30192/cmp-nvim-ultisnips',
+        run = "./install.sh",
+        config = function() require("config.cmp-nvim-ultisnips").setup() end,
+        after = {"ultisnips", "nvim-cmp"}
+    }
+    use {
+        'SirVer/ultisnips',
+        config = function() require("config.ultisnips").setup() end
+    }
 
     -- Scrollbar
     use {
