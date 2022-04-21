@@ -3,13 +3,18 @@ vim.cmd[[${0:${VISUAL}}]]
 endsnippet
 
 snippet __autocommand_new "Autocommand" b
-vim.cmd[[
-	augroup ${1:group_name}
-		autocmd!
-		autocmd FileType ${2:filetype} setlocal noet
-		autocmd BufWinEnter *.${3:ext} set local noet$0
-	augroup END
-]]
+local group_name = "${1:group_name}"
+vim.api.nvim_create_augroup(group_name, {})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "${2:filetype}",
+        callback = function() vim.bo.expandtab = false end,
+	group = group_name
+})
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	pattern = "*.${2:ext}",
+        callback = function() vim.bo.expandtab = false end,
+	group = group_name
+})
 endsnippet
 
 snippet print_inspect "Print vim.inspect" b
