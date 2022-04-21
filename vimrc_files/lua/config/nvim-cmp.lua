@@ -19,8 +19,8 @@ function M.setup()
                         path = "│",
                         ultisnips = "│",
                         nvim_lsp = "│ LSP",
-                        buffer = "│ Buffer"
-                        -- cmp_tabnine = "│ Tabnine"
+                        buffer = "│ Buffer",
+                        ["vim-dadbod-completion"] = "│ DB"
                     })[entry.source.name]
                     return vim_item
                 else
@@ -72,7 +72,8 @@ function M.setup()
         sources = {
             {name = 'path', priority = 100},
             {name = 'ultisnips', priority = 35},
-            {name = 'nvim_lsp', max_item_count = 100, priority = 30}, {
+            {name = 'nvim_lsp', max_item_count = 100, priority = 30},
+            {name = "vim-dadbod-completion", priority = 30}, {
                 name = 'buffer',
                 max_item_count = 10,
                 priority = 1,
@@ -97,7 +98,7 @@ function M.setup()
             ['<c-e>'] = cmp.mapping.close {},
             ['<c-a>'] = cmp.mapping.close {},
             ['<s-down>'] = cmp.mapping.scroll_docs(4),
-            ['<s-up>'] = cmp.mapping.scroll_docs(-4),
+            ['<s-up>'] = cmp.mapping.scroll_docs(-4)
         }),
         snippet = {
             expand = function(args)

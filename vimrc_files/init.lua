@@ -154,6 +154,13 @@ require('packer').startup(function(use)
         after = {"nvim-base16", "common-utils"}
     }
 
+    use {"tpope/vim-dadbod"}
+    use {
+        "kristijanhusak/vim-dadbod-ui",
+        setup = function() require("config.dadbod-ui").beforeSetup() end,
+        config = function() require("config.dadbod-ui").setup() end,
+        after = "vim-dadbod"
+    }
     use {
         'hrsh7th/nvim-cmp',
         config = function() require("config.nvim-cmp").setup() end,
@@ -162,6 +169,10 @@ require('packer').startup(function(use)
     use {'hrsh7th/cmp-nvim-lsp', after = {"nvim-cmp", "nvim-lsp-installer"}}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
     use {'hrsh7th/cmp-path', after = "nvim-cmp"}
+    use {
+        "kristijanhusak/vim-dadbod-completion",
+        after = {"nvim-cmp", "vim-dadbod"}
+    }
     use {
         'quangnguyen30192/cmp-nvim-ultisnips',
         run = "./install.sh",

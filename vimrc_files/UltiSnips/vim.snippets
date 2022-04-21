@@ -32,3 +32,10 @@ augroup LspFormatting
 	autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync({},5000)
 augroup END
 endsnippet
+
+snippet __db_ui "Connection settings for vim-dadbod-ui" b
+" :h dadbod
+let g:dbs = [
+\ { "name": "dev", "url": "postgres://postgres:password@localhost:5432/db"}
+\ ]
+endsnippet

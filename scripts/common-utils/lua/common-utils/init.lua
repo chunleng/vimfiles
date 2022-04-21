@@ -32,8 +32,10 @@ local function configure_preferred_settings()
     vim.o.sidescrolloff = 20
     vim.o.scrolloff = 5
     vim.o.wrap = false
-    vim.g.mapleader = " "
     vim.o.termguicolors = true
+    vim.o.shiftwidth = 2
+
+    vim.g.mapleader = " "
 end
 
 local function configure_preferred_mappings()
@@ -162,10 +164,7 @@ local function configure_vim_diagnostics()
         vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
     end
 
-    vim.diagnostic.config({
-        virtual_text = false,
-        float = {source = true}
-    })
+    vim.diagnostic.config({virtual_text = false, float = {source = true}})
 end
 
 function M.setup()
