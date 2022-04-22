@@ -159,6 +159,11 @@ function M.setup()
                     capabilities.textDocument.completion.completionItem
                         .snippetSupport = true
                     server_opts.capabilities = capabilities
+                elseif server.name == "solargraph" then
+                    server_opts.cmd = {
+                        os.getenv("HOME") .. "/.rbenv/shims/bundle", "exec",
+                        "solargraph", "stdio"
+                    }
                 end
                 server:setup(server_opts)
             end)

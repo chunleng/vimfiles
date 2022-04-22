@@ -13,8 +13,9 @@ local function configure_provider()
         vim.g.neovim_host_prog = "/opt/homebrew/bin/neovim-node-host"
     end
 
-    if vim.fn.filereadable("/usr/local/bin/neovim-ruby-host") == 1 then
-        vim.g.neovim_host_prog = "/usr/local/bin/neovim-ruby-host"
+    local homedir = os.getenv("HOME")
+    if vim.fn.filereadable(homedir .. "/.gem/bin/neovim-ruby-host") == 1 then
+        vim.g.neovim_host_prog = homedir .. "/.gem/bin/neovim-ruby-host"
     end
 end
 
