@@ -49,3 +49,38 @@ provider:
 	runtime: nodejs14.x
 	region: ap-northeast-1
 endsnippet
+
+snippet __solargraph_yaml "Starting template for .solargraph.yml" b
+---
+include:
+- "**/*.rb"
+exclude:
+- spec/**/*
+- test/**/*
+- vendor/**/*
+- ".bundle/**/*"
+require:
+	- actioncontroller
+	- actioncable
+	- actionmailer
+	- actionpack
+	- actionview
+	- activejob
+	- activemodel
+	- activerecord
+	- activestorage
+	- activesupport
+domains: []
+reporters:
+- rubocop
+- require_not_found
+formatter:
+	rubocop:
+		cops: safe
+		except: []
+		only: []
+		extra_args: []
+require_paths: []
+plugins: []
+max_files: 5000
+endsnippet
