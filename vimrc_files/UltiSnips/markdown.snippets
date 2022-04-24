@@ -1,8 +1,18 @@
 # Snippets
 
 global !p
+from datetime import datetime
+
 def get_file_name(default: str='untitled') -> str:
 	return snip.basename or default
+
+def zet_header(title=get_file_name().replace("_", " ").title(), tags=[]):
+	return (f"# {title}\n\n" +
+		f"- created on: {datetime.now().strftime('%Y-%m-%d %X')}\n"
+		f"- tags: #{', #'.join(tags)}\n\n" +
+		"----\n\n## Main")
+def zet_footer():
+	return "----\n\n## References"
 endglobal
 
 snippet [] "Create link"
@@ -20,38 +30,38 @@ snippet __table "Create table" b
 import math
 def make_header(col):
 	col = int(col) if col.isnumeric() else 2
-	return f"|{' |' * col}\n|{'-|' * col}"
+	return f"|{'   |' * col}\n|{'---|' * col}"
 def make_body(col, row):
 	col = int(col) if col.isnumeric() else 2
 	row = int(row) if row.isnumeric() else 2
-	return f"|{' |' * col}" + f"\n|{' |' * col}" * (row - 1)
+	return f"|{'   |' * col}" + f"\n|{'   |' * col}" * (row - 1)
 snip.rv = make_header(t[1]) + '\n' + make_body(t[1], t[2])
 `
 $0
 endsnippet
 
 snippet __notes_writing_idea "Template for writing" b
-# ${1:Title for Writing}
+`!p snip.rv = zet_header()`
 
-[TOC]
-
-## Motivation for this writing
+### Motivation for this writing
 
 I wanted to write this article because $0
 
 By writing this article
 
-## Research
+### Research
 
-## Candidate for Title
+### Candidate for Title
 
-## Outline
+### Outline
 
 - [Topic 1]
 
-## Other Notes
+### Other Notes
 
-## Draft
+### Draft
+
+`!p snip.rv = zet_footer()`
 endsnippet
 
 snippet __notes_problems_solved "Template for things that I solved worth recording" b
@@ -69,35 +79,33 @@ $0
 endsnippet
 
 snippet __notes_cooking_recipe "Template for cooking recipe" b
-# ${1:Name of Recipe}
+`!p snip.rv = zet_header(tags = ["cooking-recipe"])`
 
 [Image goes here]
 
-## Serving Size
+### Serving Size
 
 ${2:3} pax
 
-## Preparation Time
+### Preparation Time
 
 ${3:X} minutes before serving
 
-## Ingredients
+### Ingredients
 
 - ${3:Chicken, 1 whole}
 
-## Steps
+### Steps
 
-### Subsection 1 (e.g. fish)
-
-1.
-
-### Putting it together
+#### Subsection 1 (e.g. fish)
 
 1.
 
-## References
+#### Putting it together
 
--
+1.
+
+`!p snip.rv = zet_footer()`
 endsnippet
 
 snippet __notes_journal "Template for daily journal" b
@@ -127,17 +135,27 @@ $0
 endsnippet
 
 snippet __notes_relation "Template for relation management" b
-# `!p snip.rv = get_file_name().capitalize()`
+`!p snip.rv = zet_header(tags=["relation"])`
 
-## Like
+### Like
 
 - ${0:...}
 
-## Dislike
+### Dislike
 
 - ...
 
-## Others
+### Others
 
 - ...
+
+`!p snip.rv = zet_footer()`
+endsnippet
+
+snippet __notes_others "Template for new note" b
+`!p snip.rv = zet_header()`
+
+$0
+
+`!p snip.rv = zet_footer()`
 endsnippet
