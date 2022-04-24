@@ -1,6 +1,6 @@
 local M = {}
 
-function _G.handle_aerial_open()
+function _G.only_one_editable_window()
     local window_ids = vim.api.nvim_tabpage_list_wins(0)
     local editing_win_count = 0
     local ignore_ft = {
@@ -12,7 +12,11 @@ function _G.handle_aerial_open()
         MundoDiff = true,
         [""] = true -- no filetype
     }
+
     for _, wid in ipairs(window_ids) do
+        -- For WinClosed event, we want to exclude the closing window in the count
+        if tostring(wid) == vim.fn.expand("<afile>") then goto continue end
+
         local bufnr = vim.api.nvim_win_get_buf(wid)
         local ft = vim.api.nvim_buf_get_option(bufnr, "ft")
         local win_opt = vim.api.nvim_win_get_config(wid)
@@ -21,22 +25,25 @@ function _G.handle_aerial_open()
         if win_opt.zindex == nil and win_opt.focusable and not ignore_ft[ft] then
             editing_win_count = editing_win_count + 1
         end
+
+        ::continue::
     end
 
-    local is_open = false
-    for _, wid in ipairs(window_ids) do
-        local bufnr = vim.api.nvim_win_get_buf(wid)
-        local ft = vim.api.nvim_buf_get_option(bufnr, "ft")
+    if editing_win_count == 1 then return true end
+    return false
+end
 
-        if ft == "aerial" then
-            is_open = true
-            break
+function _G.handle_aerial()
+    if only_one_editable_window() then
+        local window_ids = vim.api.nvim_tabpage_list_wins(0)
+        for _, wid in ipairs(window_ids) do
+            local bufnr = vim.api.nvim_win_get_buf(wid)
+            local ft = vim.api.nvim_buf_get_option(bufnr, "ft")
+
+            if ft == "aerial" then return end
         end
-    end
-
-    if editing_win_count == 1 then
-        if not is_open then require("aerial").open() end
-    elseif is_open then
+        require("aerial").open()
+    else
         require("aerial").close()
     end
 end
@@ -67,6 +74,7 @@ function M.setup()
             json = data_kind,
             yaml = data_kind
         },
+        open_automatic = only_one_editable_window,
         default_direction = "right"
     })
     local base16 = require("base16-colorscheme")
@@ -79,7 +87,7 @@ function M.setup()
     vim.cmd [[
         augroup Aerial
             autocmd!
-            autocmd BufEnter,WinEnter * silent! call v:lua.handle_aerial_open()
+            autocmd WinNew,WinClosed * silent call v:lua.handle_aerial()
         augroup END
     ]]
 end
