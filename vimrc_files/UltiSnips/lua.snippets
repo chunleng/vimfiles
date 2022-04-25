@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	pattern = "*.${2:ext}",
-        callback = function() vim.bo.expandtab = false end,
+	callback = function() vim.bo.expandtab = false end,
 	group = group_name
 })
 endsnippet
