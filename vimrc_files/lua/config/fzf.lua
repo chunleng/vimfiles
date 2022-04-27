@@ -5,8 +5,7 @@ function M.setup()
     require('fzf-lua').setup({
         keymap = {
             builtin = {
-                -- c-u -> ctrl-/
-                ["<c-_>"] = "toggle-preview",
+                ["<c-/>"] = "toggle-preview",
                 ["<s-down>"] = "preview-page-down",
                 ["<s-up>"] = "preview-page-up",
                 ["<tab>"] = "toggle+down",
@@ -45,10 +44,10 @@ function M.setup()
                             {silent = true})
     vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua resume<cr>",
                             {silent = true})
-    vim.api.nvim_set_keymap("n", "<c-_>", ":FzfLuaSearch<cr>", {silent = true})
+    vim.api.nvim_set_keymap("n", "<c-/>", ":FzfLuaSearch<cr>", {silent = true})
     vim.api.nvim_set_keymap("n", "<f1>", ":FzfLua help_tags<cr>",
                             {silent = true})
-    vim.api.nvim_set_keymap("v", "<c-_>", ":<c-u>FzfLua grep_visual<cr>",
+    vim.api.nvim_set_keymap("v", "<c-/>", ":<c-u>FzfLua grep_visual<cr>",
                             {silent = true})
 
     local base16 = require("base16-colorscheme")
