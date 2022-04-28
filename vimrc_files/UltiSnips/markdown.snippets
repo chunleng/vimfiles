@@ -109,29 +109,31 @@ ${3:X} minutes before serving
 endsnippet
 
 snippet __notes_journal "Template for daily journal" b
-# `!p snip.rv = '/'.join(path.split('/')[-3:]).split('.')[0]`
+`!p snip.rv = zet_header(tags = ["journal"])`
 
-## Summary of Feeling
+### Summary of Feeling
 
 $0
 
-## Things That I am Grateful for
+### Things That I am Grateful for
 
-- 
+-
 
-## 3 Main Event of the Day
+### 3 Main Event of the Day
 
 1.
 2.
 3.
 
-## What Worked
+### What Worked
 
-- 
+-
 
-## What Didn't Work
+### What Didn't Work
 
-- 
+-
+
+`!p snip.rv = zet_footer()`
 endsnippet
 
 snippet __notes_relation "Template for relation management" b
