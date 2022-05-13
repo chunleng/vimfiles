@@ -70,16 +70,16 @@ function M.setup()
                     server_opts.on_attach =
                         function(client, bufnr)
                             -- prefer eslint
-                            client.resolved_capabilities.document_formatting =
+                            client.server_capabilities.document_formatting =
                                 false
-                            client.resolved_capabilities
-                                .document_range_formatting = false
+                            client.server_capabilities.document_range_formatting =
+                                false
                             common_on_attach(client, bufnr)
                         end
                 elseif server.name == "eslint" then
                     server_opts.on_attach =
                         function(client, bufnr)
-                            client.resolved_capabilities.document_formatting =
+                            client.server_capabilities.document_formatting =
                                 true
                             common_on_attach(client, bufnr)
                         end
@@ -145,8 +145,8 @@ function M.setup()
                         true
                     server_opts.on_attach = -- Ignore sumneko formatter and use lua formatter because it's not working on apple silicon
                     function(client, bufnr)
-                        client.resolved_capabilities.document_formatting = false
-                        client.resolved_capabilities.document_range_formatting =
+                        client.server_capabilities.document_formatting = false
+                        client.server_capabilities.document_range_formatting =
                             false
                         common_on_attach(client, bufnr)
                     end
