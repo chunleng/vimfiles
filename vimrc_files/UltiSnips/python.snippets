@@ -14,11 +14,6 @@ endglobal
 #
 # Snippets
 
-snippet class "Class declaration" b
-class ${1:Cklass}:
-	$0
-endsnippet
-
 snippet class_init "Class with declaration" b
 class ${1:`!p snip.rv = get_file_name()`}:
 	def __init__(self${2:, args:int}):
@@ -33,6 +28,10 @@ endsnippet
 snippet __function_main "Main function declaration" b
 if __name__ == '__main__':
 	$0
+endsnippet
+post_jump "expand(snip)"
+snippet if_main "Alias for __function_main" b
+__function_main$1
 endsnippet
 
 snippet __fastapi_new_app "FastAPI new app template" b
