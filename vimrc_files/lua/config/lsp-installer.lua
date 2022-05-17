@@ -35,7 +35,7 @@ function M.setup()
                                                     '<cmd>lua vim.lsp.buf.rename()<CR>',
                                                     keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>c=',
-                                                    '<cmd>lua vim.lsp.buf.formatting()<CR>',
+                                                    '<cmd>lua vim.lsp.buf.format({async=true})<CR>',
                                                     keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cu',
                                                     '<cmd>lua require"fzf-lua".lsp_references()<cr>',
