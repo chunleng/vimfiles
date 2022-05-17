@@ -70,17 +70,17 @@ function M.setup()
                     server_opts.on_attach =
                         function(client, bufnr)
                             -- prefer eslint
-                            client.server_capabilities.document_formatting =
-                                false
-                            client.server_capabilities.document_range_formatting =
-                                false
+                            client.server_capabilities
+                                .documentFormattingProvider = false
+                            client.server_capabilities
+                                .documentRangeFormattingProvider = false
                             common_on_attach(client, bufnr)
                         end
                 elseif server.name == "eslint" then
                     server_opts.on_attach =
                         function(client, bufnr)
-                            client.server_capabilities.document_formatting =
-                                true
+                            client.server_capabilities
+                                .documentFormattingProvider = true
                             common_on_attach(client, bufnr)
                         end
                 elseif server.name == "efm" then
@@ -145,9 +145,10 @@ function M.setup()
                         true
                     server_opts.on_attach = -- Ignore sumneko formatter and use lua formatter because it's not working on apple silicon
                     function(client, bufnr)
-                        client.server_capabilities.document_formatting = false
-                        client.server_capabilities.document_range_formatting =
+                        client.server_capabilities.documentFormattingProvider =
                             false
+                        client.server_capabilities
+                            .documentRangeFormattingProvider = false
                         common_on_attach(client, bufnr)
                     end
                     server_opts.settings = luadev.settings
