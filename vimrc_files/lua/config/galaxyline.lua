@@ -6,7 +6,7 @@ function M.setup()
     local gps = require("nvim-gps")
     local gls = gl.section
     local base16 = require("base16-colorscheme")
-    gl.short_line_list = {'NvimTree', 'Trouble', 'aerial', 'dashboard'}
+    gl.short_line_list = {'NvimTree', 'Trouble', 'Outline', 'dashboard'}
 
     local bgcolor = base16.colorschemes["schemer-medium"].base00
     local fgcolor = base16.colorschemes["schemer-medium"].base05
