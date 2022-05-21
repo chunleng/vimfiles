@@ -112,3 +112,17 @@ print <<__EOF__
 ${0:${VISUAL:Hello World}}
 __EOF__
 endsnippet
+
+snippet __ruby_net_http_ssl_with_auth_header "Make headered HTTPS request with Net::HTTP" b
+uri = URI($1)
+req = Net::HTTP::Get.new(uri)
+req['authorization'] = "Bearer $2"
+
+http = Net::HTTP.new(uri.host, uri.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+res = http.request(req)
+json_body = JSON.parse(res.body)
+code = res.code
+endsnippet
