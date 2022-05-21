@@ -157,7 +157,7 @@ function M.setup()
                     server_opts.capabilities = capabilities
                 elseif server.name == "solargraph" then
                     server_opts.cmd = {
-                        os.getenv("HOME") .. "/.rbenv/shims/bundle", "exec",
+                        os.getenv("HOME") .. "/.asdf/shims/bundle", "exec",
                         "solargraph", "stdio"
                     }
                 end
