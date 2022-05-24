@@ -160,6 +160,10 @@ function M.setup()
                         os.getenv("HOME") .. "/.asdf/shims/bundle", "exec",
                         "solargraph", "stdio"
                     }
+                elseif server.name == "jdtls" then
+                    server_opts.root_dir = function()
+                        return vim.fn.getcwd()
+                    end
                 end
                 server:setup(server_opts)
             end)
