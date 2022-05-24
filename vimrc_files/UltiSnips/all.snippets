@@ -20,3 +20,9 @@ snippet __folder_tree "Insert snippet for a folder tree" b
 │  └─ b.py
 └─ README.md
 endsnippet
+
+snippet __pwd "Insert current directory"
+`!p
+from os import getcwd
+snip.rv = getcwd()`
+endsnippet
