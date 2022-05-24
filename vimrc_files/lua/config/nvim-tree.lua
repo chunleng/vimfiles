@@ -34,7 +34,7 @@ function M.setup()
                     chars = "aoeuhtns",
                     exclude = {
                         filetype = {
-                            "notify", "packer", "qf", "Trouble", "Outline"
+                            "notify", "packer", "qf", "Trouble", "aerial"
                         }
                     }
                 }

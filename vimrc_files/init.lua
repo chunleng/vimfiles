@@ -144,12 +144,13 @@ require('packer').startup(function(use)
             'neovim/nvim-lspconfig', 'folke/lua-dev.nvim',
             'b0o/schemastore.nvim', 'ibhagwan/fzf-lua'
         },
-        after = {"fzf-lua"}
+        after = {"fzf-lua", "aerial.nvim"}
     }
 
     use {
-        'simrat39/symbols-outline.nvim',
-        config = function() require("config.symbols-outline").setup() end
+        'stevearc/aerial.nvim',
+        config = function() require("config.aerial-nvim").setup() end,
+        after = {"nvim-base16", "common-utils"}
     }
 
     use {"tpope/vim-dadbod"}

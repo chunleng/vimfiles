@@ -55,6 +55,7 @@ function M.setup()
                         vim.api.nvim_set_keymap('n', '<leader>cn',
                                                 '<cmd>lua vim.diagnostic.goto_next()<CR>',
                                                 keymap_opts)
+                        require("aerial").on_attach(client, bufnr)
                     end
                 local server_opts = {
                     on_attach = common_on_attach,

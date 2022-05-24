@@ -4,7 +4,7 @@ function M.setup()
     require("indent_blankline").setup {
         char = "│",
         filetype_exclude = {
-            'WhichKey', 'markdown', 'Outline', 'dashboard', 'help'
+            'WhichKey', 'markdown', 'aerial', 'dashboard', 'help'
         }
     }
     vim.api.nvim_set_keymap("n", "za",
