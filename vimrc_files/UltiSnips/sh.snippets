@@ -130,3 +130,7 @@ snippet __direnv_virtualenv_setting "Command to auto virtualenv when entering a 
 export VIRTUAL_ENV=\`pwd\`/.venv
 export PATH=$VIRTUAL_ENV/bin:$PATH
 endsnippet
+
+snippet __direnv_dockerhost_setting "For program where docker host is read instead of docker context" b
+export DOCKER_HOST=$(docker context inspect $1 -f '{{ .Endpoints.docker.Host }}')$0
+endsnippet
