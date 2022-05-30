@@ -152,6 +152,13 @@ local function configure_autogroup()
         augroup END
     ]]
 
+    local awsconfig = "aws_config"
+    vim.api.nvim_create_augroup(awsconfig, {})
+    vim.api.nvim_create_autocmd("BufRead", {
+        pattern = "*/.aws/config",
+        callback = function() vim.opt.filetype = 'toml' end,
+        group = awsconfig
+    })
 end
 
 local function configure_vim_diagnostics()
