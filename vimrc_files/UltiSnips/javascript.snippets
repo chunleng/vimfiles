@@ -1,5 +1,11 @@
 # Snippets
 
+global !p
+def expand(snip, jump_pos=1):
+    if snip.tabstop != jump_pos: return
+    vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
+endglobal
+
 snippet import{} "Curly import" b
 import { $2 } from "$1"
 $0
@@ -13,6 +19,20 @@ endsnippet
 snippet () "Arrow Function" i
 ($2) => { ${1:${VISUAL}}$0 }
 endsnippet
+
+snippet switch "Description" b
+switch(${1:variable_name}) {
+	case ${2:x}:
+		$0
+		break;
+	default:
+}
+endsnippet
+post_jump "expand(snip)"
+snippet select "Alias for switch" b
+switch$1
+endsnippet
+
 
 snippet __array_to_dictionary "Convert array to dictionary" b
 Object.assign({}, ...${1:target}.map(item => ({ [item.${2:key}]: item.${3:value} })))
