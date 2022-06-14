@@ -144,6 +144,9 @@ local function configure_autogroup()
             " Allow no highlighting for min files
             autocmd BufWinEnter *.min.* set ft=
 
+            " Php
+            autocmd BufRead,BufNewFile *.twig set ft=php
+
             " Because treesitter don't support zsh
             autocmd FileType zsh :set ft=bash
 
