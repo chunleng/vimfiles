@@ -33,6 +33,12 @@ snippet select "Alias for switch" b
 switch$1
 endsnippet
 
+snippet if "If statement" b
+if (${1:condition}) {
+	$0
+}
+endsnippet
+
 
 snippet __array_to_dictionary "Convert array to dictionary" b
 Object.assign({}, ...${1:target}.map(item => ({ [item.${2:key}]: item.${3:value} })))
