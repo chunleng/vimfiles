@@ -163,9 +163,18 @@ function M.setup()
                         "solargraph", "stdio"
                     }
                 elseif server.name == "jdtls" then
+                    -- Currently, jdtls latest version is not allowing Java 11 to be used
+                    -- To allow Java 11 to be used, we need to use the jdtls version the version that is supported
+                    -- To do so:
+                    --   :LspInstall jdtls@1.9.0-202203031534
+                    -- ref: https://github.com/williamboman/nvim-lsp-installer/issues/763
+                    server_opts.use_lombok_agent = true
                     server_opts.root_dir = function()
                         return vim.fn.getcwd()
                     end
+                    local workspace = os.getenv("HOME") .. "/.java-workspace"
+                    server_opts.workspace = workspace
+                    server_opts.vmargs = {"-data", workspace}
                 end
                 server:setup(server_opts)
             end)
