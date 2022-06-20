@@ -185,8 +185,8 @@ require('packer').startup(function(use)
 
     -- Scrollbar
     use {
-        'dstein64/nvim-scrollview',
-        config = function() require("config.scrollview").setup() end,
+        'petertriho/nvim-scrollbar',
+        config = function() require("config.nvim-scrollbar").setup() end,
         after = "nvim-base16"
     }
 
