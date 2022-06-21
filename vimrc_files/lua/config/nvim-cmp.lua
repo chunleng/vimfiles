@@ -95,8 +95,16 @@ function M.setup()
                 behavior = cmp.ConfirmBehavior.Replace,
                 select = true
             },
-            ['<c-e>'] = cmp.mapping.close {},
-            ['<c-a>'] = cmp.mapping.close {},
+            ['<c-e>'] = function()
+                local key = vim.api.nvim_replace_termcodes('<end>', true, false,
+                                                           true)
+                vim.api.nvim_feedkeys(key, 'i', false)
+            end,
+            ['<c-a>'] = function()
+                local key = vim.api.nvim_replace_termcodes('<home>', true,
+                                                           false, true)
+                vim.api.nvim_feedkeys(key, 'i', false)
+            end,
             ['<s-down>'] = cmp.mapping.scroll_docs(4),
             ['<s-up>'] = cmp.mapping.scroll_docs(-4)
         }),
