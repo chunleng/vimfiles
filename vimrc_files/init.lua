@@ -41,8 +41,9 @@ require('packer').startup(function(use)
         config = function() require("config.mundo").setup() end
     }
     use {
-        'lukas-reineke/indent-blankline.nvim',
-        config = function() require("config.indent-blankline").setup() end,
+        -- TODO fix pretty-mode
+        'chunleng/indent-guides.nvim',
+        config = function() require("config.indent-guides").setup() end,
         after = "nvim-base16"
     }
 

@@ -26,6 +26,7 @@ function M.setup()
     -- extended colors
     -- base color with the lightness percentage adjusted
     -- tool: https://www.w3schools.com/colors/colors_picker.asp
+    base16.colors.base00_15 = "#242629" -- for barely visible shade
     base16.colors.base0D_20 = "#233443"
     base16.colors.base0D_40 = "#456887"
     base16.colors.base0A_20 = "#5c410a"
