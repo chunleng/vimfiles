@@ -35,6 +35,8 @@ local function configure_preferred_settings()
     vim.o.wrap = false
     vim.o.termguicolors = true
     vim.o.shiftwidth = 2
+    vim.o.tabstop = 2
+    vim.o.expandtab = true
 
     vim.g.mapleader = " "
 end
