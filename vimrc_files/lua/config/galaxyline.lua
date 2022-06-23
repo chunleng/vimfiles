@@ -15,21 +15,10 @@ function M.setup()
 
     gls.left = {
         {
-            FileIcon = {
-                provider = 'FileIcon',
-                condition = condition.buffer_not_empty,
-                highlight = {
-                    require('galaxyline.provider_fileinfo').get_file_icon_color,
-                    bgcolor
-                }
-            }
-        }, {
-            FileName = {
-                provider = 'FileName',
-                condition = condition.buffer_not_empty,
-                highlight = {fgcolor, bgcolor, 'bold'},
-                separator = ' ',
-                separator_highlight = {'NONE', bgcolor}
+            nvimGPS = {
+                provider = function() return gps.get_location() end,
+                condition = function() return gps.is_available() end,
+                highlight = {fgcolor, bgcolor}
             }
         }, {
             LspError = {
@@ -62,31 +51,8 @@ function M.setup()
         }
     }
 
-    gls.mid = {
-        {
-            nvimGPS = {
-                provider = function() return gps.get_location() end,
-                condition = function() return gps.is_available() end,
-                highlight = {fgcolor, bgcolor}
-            }
-        }
-    }
-
     gls.right = {
         {
-            LineInfo = {
-                provider = function()
-                    local line = vim.fn.line('.')
-                    local total_line = vim.fn.line('$')
-                    local column = vim.fn.col('.')
-                    return string.format("%3d of %3d | %2d ", line, total_line,
-                                         column)
-                end,
-                separator = ' ',
-                separator_highlight = {'NONE', bgcolor},
-                highlight = {fgcolor, bgcolor}
-            }
-        }, {
             FileEncode = {
                 provider = 'FileEncode',
                 condition = condition.hide_in_width,
@@ -118,20 +84,6 @@ function M.setup()
                 highlight = {base16.colors.base0E, bgcolor, 'bold'}
             }
         }
-    }
-
-    gls.short_line_left = {
-        {
-            SFileName = {
-                provider = 'SFileName',
-                condition = condition.buffer_not_empty,
-                highlight = {fgcolor, bgcolor, 'bold'}
-            }
-        }
-    }
-
-    gls.short_line_right = {
-        {BufferIcon = {provider = 'BufferIcon', highlight = {fgcolor, bgcolor}}}
     }
 end
 
