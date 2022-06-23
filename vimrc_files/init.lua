@@ -275,4 +275,10 @@ require('packer').startup(function(use)
         config = function() require("config.copilot").setup() end
     }
 
+    use {
+        "b0o/incline.nvim",
+        config = function() require("config.incline").setup() end,
+        after = {"nvim-base16"}
+    }
+
 end)
