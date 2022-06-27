@@ -14,21 +14,10 @@ function M.setup()
             fzf = {["enter"] = "select+accept"}
         },
         actions = {files = {["default"] = actions.file_edit}},
-        winopts = {
-            hl = {
-                normal = "FzfLuaFloat",
-                border = "FzfLuaFloatBorder",
-                cursorline = "FzfLuaFloatPreviewCursorLine"
-            }
-        },
+        winopts = {hl = {normal = "FzfLuaFloat", border = "FzfLuaFloatBorder"}},
         fzf_colors = {
             ["bg"] = {"bg", "FzfLuaFloat"},
-            ["bg+"] = {"bg", "FzfLuaFloatCursorLine"},
-            ["info"] = {"fg", "FzfLuaFloatInfo"},
-            ["gutter"] = {"bg", "FzfLuaFloat"},
-            ["prompt"] = {"fg", "FzfLuaFloatPrompt"},
-            ["pointer"] = {"fg", "FzfLuaFloatPointer"},
-            ["marker"] = {"fg", "FzfLuaFloatMarker"}
+            ["gutter"] = {"bg", "FzfLuaFloat"}
         },
         fzf_args = "--select-1", -- auto-select when there is only one result
         file_icon_padding = " "
@@ -50,19 +39,8 @@ function M.setup()
     vim.api.nvim_set_keymap("v", "<c-/>", ":<c-u>FzfLua grep_visual<cr>",
                             {silent = true})
 
-    local base16 = require("base16-colorscheme")
     vim.highlight.link("FzfLuaFloat", "NormalFloat", false)
     vim.highlight.link("FzfLuaFloatBorder", "FloatBorder", false)
-    vim.highlight.link("FzfLuaFloatCursorLine", "PmenuSel", false)
-    vim.highlight.create("FzfLuaFloatPreviewCursorLine", {gui = "none"}, false)
-    vim.highlight.create("FzfLuaFloatInfo", {guifg = base16.colors.base0D_40},
-                         false)
-    vim.highlight.create("FzfLuaFloatPrompt", {guifg = base16.colors.base03},
-                         false)
-    vim.highlight.create("FzfLuaFloatPointer", {guifg = base16.colors.base03},
-                         false)
-    vim.highlight.create("FzfLuaFloatMarker", {guifg = base16.colors.base06},
-                         false)
 end
 
 return M

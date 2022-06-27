@@ -133,8 +133,7 @@ require('packer').startup(function(use)
     use {
         'ibhagwan/fzf-lua',
         config = function() require("config.fzf").setup() end,
-        requires = 'kyazdani42/nvim-web-devicons',
-        after = "nvim-base16"
+        requires = 'kyazdani42/nvim-web-devicons'
     }
 
     -- Code Intellisense
