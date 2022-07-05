@@ -30,6 +30,8 @@ function M.setup()
                             {silent = true, noremap = true})
     vim.api.nvim_set_keymap("n", "<c-n>", "<cmd>BufferLineCycleNext<cr>",
                             {silent = true, noremap = true})
+    vim.api.nvim_set_keymap("n", "<tab>", "<cmd>b #<cr>",
+                            {silent = true, noremap = true})
     vim.api.nvim_set_keymap("n", "<leader>bh", "<cmd>BufferLineCloseLeft<cr>",
                             {silent = true, noremap = true})
     vim.api.nvim_set_keymap("n", "<leader>bl", "<cmd>BufferLineCloseRight<cr>",
