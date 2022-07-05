@@ -11,7 +11,7 @@ function M.setup()
             enable = true,
             icons = {hint = "", info = "", warning = "", error = ""}
         },
-        view = {width = 30, hide_root_folder = true, auto_resize = true},
+        view = {width = 30, hide_root_folder = true},
         filters = {custom = {"__pycache__"}},
         actions = {
             open_file = {
@@ -24,7 +24,8 @@ function M.setup()
                             "notify", "packer", "qf", "Trouble", "aerial"
                         }
                     }
-                }
+                },
+                resize_window = true
             }
         },
         renderer = {
