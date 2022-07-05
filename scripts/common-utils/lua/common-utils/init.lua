@@ -152,6 +152,9 @@ local function configure_autogroup()
             " Because treesitter don't support zsh
             autocmd FileType zsh :set ft=bash
 
+            " SQL file comment
+            autocmd FileType sql set commentstring=--\ %s
+
             " Plist is a xml file
             autocmd BufRead,BufNewFile *.plist setlocal ft=xml
         augroup END
