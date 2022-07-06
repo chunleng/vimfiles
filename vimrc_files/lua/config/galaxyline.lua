@@ -15,12 +15,6 @@ function M.setup()
 
     gls.left = {
         {
-            nvimGPS = {
-                provider = function() return gps.get_location() end,
-                condition = function() return gps.is_available() end,
-                highlight = {fgcolor, bgcolor}
-            }
-        }, {
             LspError = {
                 provider = function()
                     local count = #vim.diagnostic.get(nil, {
@@ -47,6 +41,12 @@ function M.setup()
                 separator = ' ',
                 separator_highlight = {'NONE', bgcolor},
                 highlight = {base16.colors.base00, base16.colors.base0A}
+            }
+        }, {
+            nvimGPS = {
+                provider = function() return gps.get_location() end,
+                condition = function() return gps.is_available() end,
+                highlight = {fgcolor, bgcolor}
             }
         }
     }
