@@ -148,6 +148,9 @@ local function configure_autogroup()
 
             " Php
             autocmd BufRead,BufNewFile *.twig set ft=php
+            " autoindent in indentexpr only works if syntax is on for PHP
+            " https://github.com/nvim-treesitter/nvim-treesitter/issues/462#issuecomment-700278736
+            autocmd BufRead,BufNewFile *.php syntax on
 
             " Because treesitter don't support zsh
             autocmd FileType zsh :set ft=bash
