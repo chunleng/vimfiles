@@ -8,7 +8,7 @@ function M.setup()
         "tsserver", "tailwindcss", "eslint", "pyright", "efm", "jsonls",
         "sumneko_lua", "jdtls", "vimls", "html", "yamlls", "terraformls",
         "tflint", "cssls", "cssmodules_ls", "dockerls", "solargraph",
-        "intelephense"
+        "intelephense", "denols"
     }
     -- Loop through the servers listed above and set them up. If a server is
     -- not already installed, install it.
@@ -75,6 +75,14 @@ function M.setup()
                                 .documentRangeFormattingProvider = false
                             common_on_attach(client, bufnr)
                         end
+                    server_opts.root_dir =
+                        require("lspconfig").util.root_pattern("package.json",
+                                                               "tsconfig.json",
+                                                               "jsconfig.json")
+                elseif server.name == "denols" then
+                    server_opts.root_dir =
+                        require("lspconfig").util.root_pattern("deno.json",
+                                                               "deno.jsonc")
                 elseif server.name == "eslint" then
                     server_opts.on_attach =
                         function(client, bufnr)
