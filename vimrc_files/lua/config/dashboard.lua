@@ -21,10 +21,8 @@ function M.setup()
     }
     vim.g.dashboard_custom_footer = {}
     local base16 = require("base16-colorscheme")
-    vim.highlight.create("DashboardHeader", {guifg = base16.colors.base0D_40},
-                         false)
-    vim.highlight.create("DashboardCenter", {guifg = base16.colors.base0D},
-                         false)
+    vim.api.nvim_set_hl(0, "DashboardHeader", {fg = base16.colors.base0D_40})
+    vim.api.nvim_set_hl(0, "DashboardCenter", {fg = base16.colors.base0D})
     vim.cmd [[
         augroup Dashboard
             autocmd!

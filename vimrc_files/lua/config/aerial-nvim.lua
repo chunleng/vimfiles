@@ -37,11 +37,8 @@ function M.setup()
         end
     })
     local base16 = require("base16-colorscheme")
-    vim.highlight.create("AerialLine", {
-        guifg = "none",
-        guibg = base16.colors.base0A_20,
-        blend = 0
-    }, false)
+    vim.api.nvim_set_hl(0, "AerialLine",
+                        {bg = base16.colors.base0A_20, blend = 0})
 end
 
 return M

@@ -71,38 +71,25 @@ function M.setup()
     }
 
     local base16 = require("base16-colorscheme")
-    vim.highlight.create("GitSignsAdd", {
-        guifg = base16.colors.base0B,
-        guibg = base16.colors.base01
-    }, false)
-    vim.highlight.create("GitSignsAddLn", {
-        guibg = base16.colorschemes["schemer-medium"].base00
-    }, false)
-    vim.highlight.create("GitSignsChange", {
-        guifg = base16.colors.base0D,
-        guibg = base16.colors.base01
-    }, false)
-    vim.highlight.create("GitSignsChangeLn", {
-        guibg = base16.colorschemes["schemer-medium"].base00
-    }, false)
-    vim.highlight.create("GitSignsDelete", {
-        guifg = base16.colors.base0F,
-        guibg = base16.colors.base01
-    }, false)
-    vim.highlight.create("GitSignsDeleteLn", {guibg = "bg"}, false)
+    vim.api.nvim_set_hl(0, "GitSignsAdd",
+                        {fg = base16.colors.base0B, bg = base16.colors.base01})
+    vim.api.nvim_set_hl(0, "GitSignsAddLn",
+                        {bg = base16.colorschemes["schemer-medium"].base00})
+    vim.api.nvim_set_hl(0, "GitSignsChange",
+                        {fg = base16.colors.base0D, bg = base16.colors.base01})
+    vim.api.nvim_set_hl(0, "GitSignsChangeLn",
+                        {bg = base16.colorschemes["schemer-medium"].base00})
+    vim.api.nvim_set_hl(0, "GitSignsDelete",
+                        {fg = base16.colors.base0F, bg = base16.colors.base01})
+    vim.api.nvim_set_hl(0, "GitSignsDeleteLn", {bg = "bg"})
 
-    vim.highlight.create("GitSignsCurrentLineBlame", {
-        gui = "none",
-        guifg = base16.colors.base04,
-        guibg = base16.colors.base01
-    }, false)
-    vim.highlight
-        .create("GitSignsCurrentLineBlameNoBg", {guibg = "none"}, false)
-    vim.highlight.create("GitSignsCurrentLineBlameAccent", {
-        gui = "none",
-        guifg = base16.colors.base09_40,
-        guibg = base16.colors.base01
-    }, false)
+    vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame",
+                        {fg = base16.colors.base04, bg = base16.colors.base01})
+    vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlameNoBg", {bg = "none"})
+    vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlameAccent", {
+        fg = base16.colors.base09_40,
+        bg = base16.colors.base01
+    })
 end
 
 return M

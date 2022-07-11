@@ -3,18 +3,16 @@ local M = {}
 function M.setup()
     local base16 = require("base16-colorscheme")
 
-    vim.highlight.create("InclineNormal", {
-        gui = "none",
-        guifg = base16.colors.base06,
-        guibg = base16.colors.base0D_40,
+    vim.api.nvim_set_hl(0, "InclineNormal", {
+        fg = base16.colors.base06,
+        bg = base16.colors.base0D_40,
         blend = 0
-    }, false)
-    vim.highlight.create("InclineNormalNC", {
-        gui = "none",
-        guifg = base16.colors.base03,
-        guibg = base16.colors.base01,
+    })
+    vim.api.nvim_set_hl(0, "InclineNormalNC", {
+        fg = base16.colors.base03,
+        bg = base16.colors.base01,
         blend = 0
-    }, false)
+    })
 
     require("incline").setup({
         render = function(props)

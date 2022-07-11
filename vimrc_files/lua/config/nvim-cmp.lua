@@ -121,60 +121,38 @@ function M.setup()
     })
 
     local base16 = require("base16-colorscheme")
-    vim.highlight.create("CmpItemMenuDefault",
-                         {gui = "italic", guifg = base16.colors.base03}, false)
-    vim.highlight.create("CmpItemMenuDefault",
-                         {gui = "italic", guifg = base16.colors.base03}, false)
+    vim.api.nvim_set_hl(0, "CmpItemMenu",
+                        {italic = true, fg = base16.colors.base03})
     -- blue
-    vim.highlight.create("CmpItemAbbrMatch", {guifg = base16.colors.base0D},
-                         false)
-    vim.highlight.create("CmpItemAbbrMatchFuzzy",
-                         {guifg = base16.colors.base0D}, false)
+    vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", {fg = base16.colors.base0D})
+    vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", {fg = base16.colors.base0D})
     -- orange
-    vim.highlight.create("CmpItemKindFunction", {guifg = base16.colors.base09},
-                         false)
-    vim.highlight.create("CmpItemKindMethod", {guifg = base16.colors.base09},
-                         false)
-    vim.highlight.create("CmpItemKindConstructor",
-                         {guifg = base16.colors.base09}, false)
-    vim.highlight.create("CmpItemKindClass", {guifg = base16.colors.base09},
-                         false)
-    vim.highlight.create("CmpItemKindInterface", {guifg = base16.colors.base09},
-                         false)
-    vim.highlight.create("CmpItemKindModule", {guifg = base16.colors.base09},
-                         false)
-    vim.highlight.create("CmpItemKindEnum", {guifg = base16.colors.base09},
-                         false)
-    vim.highlight.create("CmpItemKindStruct", {guifg = base16.colors.base09},
-                         false)
+    vim.api.nvim_set_hl(0, "CmpItemKindFunction", {fg = base16.colors.base09})
+    vim.api.nvim_set_hl(0, "CmpItemKindMethod", {fg = base16.colors.base09})
+    vim.api
+        .nvim_set_hl(0, "CmpItemKindConstructor", {fg = base16.colors.base09})
+    vim.api.nvim_set_hl(0, "CmpItemKindClass", {fg = base16.colors.base09})
+    vim.api.nvim_set_hl(0, "CmpItemKindInterface", {fg = base16.colors.base09})
+    vim.api.nvim_set_hl(0, "CmpItemKindModule", {fg = base16.colors.base09})
+    vim.api.nvim_set_hl(0, "CmpItemKindEnum", {fg = base16.colors.base09})
+    vim.api.nvim_set_hl(0, "CmpItemKindStruct", {fg = base16.colors.base09})
     -- turquoise
-    vim.highlight.create("CmpItemKindVariable", {guifg = base16.colors.base0C},
-                         false)
-    vim.highlight.create("CmpItemKindText", {guifg = base16.colors.base0C},
-                         false)
-    vim.highlight.create("CmpItemKindField", {guifg = base16.colors.base0C},
-                         false)
-    vim.highlight.create("CmpItemKindProperty", {guifg = base16.colors.base0C},
-                         false)
-    vim.highlight.create("CmpItemKindValue", {guifg = base16.colors.base0C},
-                         false)
-    vim.highlight.create("CmpItemKindEnumMember",
-                         {guifg = base16.colors.base0C}, false)
-    vim.highlight.create("CmpItemKindTypeParameter",
-                         {guifg = base16.colors.base0C}, false)
-    vim.highlight.create("CmpItemKindConstant", {guifg = base16.colors.base0C},
-                         false)
+    vim.api.nvim_set_hl(0, "CmpItemKindVariable", {fg = base16.colors.base0C})
+    vim.api.nvim_set_hl(0, "CmpItemKindText", {fg = base16.colors.base0C})
+    vim.api.nvim_set_hl(0, "CmpItemKindField", {fg = base16.colors.base0C})
+    vim.api.nvim_set_hl(0, "CmpItemKindProperty", {fg = base16.colors.base0C})
+    vim.api.nvim_set_hl(0, "CmpItemKindValue", {fg = base16.colors.base0C})
+    vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", {fg = base16.colors.base0C})
+    vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter",
+                        {fg = base16.colors.base0C})
+    vim.api.nvim_set_hl(0, "CmpItemKindConstant", {fg = base16.colors.base0C})
     -- yellow
-    vim.highlight.create("CmpItemKindUnit", {guifg = base16.colors.base0A},
-                         false)
-    vim.highlight.create("CmpItemKindKeyword", {guifg = base16.colors.base0A},
-                         false)
-    vim.highlight.create("CmpItemKindOperator", {guifg = base16.colors.base0A},
-                         false)
-    vim.highlight.create("CmpItemKindColor", {guifg = base16.colors.base0A},
-                         false)
+    vim.api.nvim_set_hl(0, "CmpItemKindUnit", {fg = base16.colors.base0A})
+    vim.api.nvim_set_hl(0, "CmpItemKindKeyword", {fg = base16.colors.base0A})
+    vim.api.nvim_set_hl(0, "CmpItemKindOperator", {fg = base16.colors.base0A})
+    vim.api.nvim_set_hl(0, "CmpItemKindColor", {fg = base16.colors.base0A})
     -- default
-    vim.highlight.create("CmpItemKind", {guifg = base16.colors.base03}, false)
+    vim.api.nvim_set_hl(0, "CmpItemKind", {fg = base16.colors.base03})
 end
 
 return M

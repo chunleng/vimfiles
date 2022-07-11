@@ -10,8 +10,8 @@ function M.setup()
     local bgcolor = base16.colorschemes["schemer-medium"].base00
     local fgcolor = base16.colorschemes["schemer-medium"].base05
 
-    vim.highlight.create("StatusLine", {gui = "none", guibg = bgcolor}, false)
-    vim.highlight.create("StatusLineNC", {gui = "none", guibg = bgcolor}, false)
+    vim.api.nvim_set_hl(0, "StatusLine", {default = true, bg = bgcolor})
+    vim.api.nvim_set_hl(0, "StatusLineNC", {default = true, bg = bgcolor})
 
     gls.left = {
         {

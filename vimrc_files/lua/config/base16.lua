@@ -33,120 +33,103 @@ function M.setup()
     base16.colors.base0A_40 = "#b98213"
     base16.colors.base09_40 = "#a95b23"
 
-    vim.highlight.create("Cursor",
-                         {gui = "inverse", guifg = "none", guibg = "none"},
-                         false)
-    vim.highlight.create("NonText",
-                         {guifg = base16.colors.base02, guibg = "none"}, false)
-    vim.highlight.create("Comment", {
-        gui = "italic",
-        guifg = base16.colors.base03,
-        guibg = "none"
-    }, false)
-    vim.highlight.create("MatchParen",
-                         {gui = "bold,italic", guifg = "none", guibg = "none"},
-                         false)
-    vim.highlight.create("VertSplit",
-                         {guifg = base16.colors.base02, guibg = "none"}, false)
-    vim.highlight.create("DiffAdd", {guifg = "none", guibg = "none"}, false)
-    vim.highlight.create("DiffDelete", {
-        guifg = base16.colorschemes["schemer-dark"].base00,
-        guibg = base16.colorschemes["schemer-dark"].base00
-    }, false)
-    vim.highlight.create("DiffText", {
-        guifg = "none",
-        guibg = base16.colorschemes["schemer-medium"].base01
-    }, false)
-    vim.highlight.create("DiffChange", {guifg = "none", guibg = "bg"}, false)
-    vim.highlight.create("Search", {
-        guifg = base16.colors.base00,
-        guibg = base16.colors.base0A_40
-    }, false)
-    vim.highlight.create("IncSearch", {
-        guifg = base16.colors.base05,
-        guibg = base16.colors.base09_40
-    }, false)
+    vim.api.nvim_set_hl(0, "Cursor", {reverse = true, fg = "none", bg = "none"})
+    vim.api.nvim_set_hl(0, "NonText", {fg = base16.colors.base02, bg = "none"})
+    vim.api.nvim_set_hl(0, "Comment",
+                        {italic = true, fg = base16.colors.base03, bg = "none"})
+    vim.api.nvim_set_hl(0, "MatchParen",
+                        {bold = true, italic = true, fg = "none", bg = "none"})
+    vim.api
+        .nvim_set_hl(0, "VertSplit", {fg = base16.colors.base02, bg = "none"})
+    vim.api.nvim_set_hl(0, "DiffAdd", {fg = "none", bg = "none"})
+    vim.api.nvim_set_hl(0, "DiffDelete", {
+        fg = base16.colorschemes["schemer-dark"].base00,
+        bg = base16.colorschemes["schemer-dark"].base00
+    })
+    vim.api.nvim_set_hl(0, "DiffText", {
+        fg = "none",
+        bg = base16.colorschemes["schemer-medium"].base01
+    })
+    vim.api.nvim_set_hl(0, "DiffChange", {fg = "none", bg = "bg"})
+    vim.api.nvim_set_hl(0, "Search", {
+        fg = base16.colors.base00,
+        bg = base16.colors.base0A_40
+    })
+    vim.api.nvim_set_hl(0, "IncSearch", {
+        fg = base16.colors.base05,
+        bg = base16.colors.base09_40
+    })
 
     -- Completion
     vim.o.pumblend = 1
-    vim.highlight.create("Pmenu", {
-        guifg = base16.colors.base03,
-        guibg = base16.colors.base01,
+    vim.api.nvim_set_hl(0, "Pmenu", {
+        fg = base16.colors.base03,
+        bg = base16.colors.base01,
         blend = 15
-    }, false)
-    vim.highlight.create("PmenuSel", {
-        guifg = "none",
-        guibg = base16.colors.base0A_20,
-        blend = 0
-    }, false)
-    vim.highlight.create("PmenuSbar", {guibg = base16.colors.base0D_20}, false)
-    vim.highlight.create("PmenuThumb", {guibg = base16.colors.base0D_40}, false)
+    })
+    vim.api.nvim_set_hl(0, "PmenuSel",
+                        {fg = "none", bg = base16.colors.base0A_20, blend = 0})
+    vim.api.nvim_set_hl(0, "PmenuSbar", {bg = base16.colors.base0D_20})
+    vim.api.nvim_set_hl(0, "PmenuThumb", {bg = base16.colors.base0D_40})
 
     -- Float
     vim.o.winblend = 1
-    vim.highlight.create("NormalFloat", {
-        guifg = base16.colors.base05,
-        guibg = base16.colors.base01,
+    vim.api.nvim_set_hl(0, "NormalFloat", {
+        fg = base16.colors.base05,
+        bg = base16.colors.base01,
         blend = 15
-    }, false)
-    vim.highlight.create("FloatBorder", {
-        guifg = base16.colors.base0D_40,
-        guibg = base16.colors.base01,
+    })
+    vim.api.nvim_set_hl(0, "FloatBorder", {
+        fg = base16.colors.base0D_40,
+        bg = base16.colors.base01,
         blend = 15
-    }, false)
-    vim.highlight.create("FloatTitle", {
-        gui = "bold",
-        guifg = base16.colors.base04,
-        guibg = base16.colors.base01,
+    })
+    vim.api.nvim_set_hl(0, "FloatTitle", {
+        bold = true,
+        fg = base16.colors.base04,
+        bg = base16.colors.base01,
         blend = 15
-    }, false)
+    })
 
     -- LSP Diagnostics
-    vim.highlight.create("DiagnosticError", {guifg = base16.colors.base08},
-                         false)
-    vim.highlight.create("DiagnosticUnderlineError",
-                         {gui = "undercurl", guisp = base16.colors.base08},
-                         false)
-    vim.highlight
-        .create("DiagnosticWarn", {guifg = base16.colors.base0A}, false)
-    vim.highlight.create("DiagnosticUnderlineWarn",
-                         {gui = "undercurl", guisp = base16.colors.base0A},
-                         false)
-    vim.highlight
-        .create("DiagnosticInfo", {guifg = base16.colors.base0B}, false)
-    vim.highlight.create("DiagnosticUnderlineInfo",
-                         {gui = "undercurl", guisp = base16.colors.base0B},
-                         false)
-    vim.highlight
-        .create("DiagnosticHint", {guifg = base16.colors.base0D}, false)
-    vim.highlight.create("DiagnosticUnderlineHint",
-                         {gui = "undercurl", guisp = base16.colors.base0D},
-                         false)
-    vim.highlight.create("DiagnosticVirtualText", {
-        gui = "undercurl,bold",
-        guifg = base16.colors.base02,
-        guibg = "none"
-    }, false)
-    vim.highlight.link("DiagnosticVirtualTextError", "DiagnosticVirtualText",
-                       false)
-    vim.highlight.link("DiagnosticVirtualTextWarn", "DiagnosticVirtualText",
-                       false)
-    vim.highlight.link("DiagnosticVirtualTextInfo", "DiagnosticVirtualText",
-                       false)
-    vim.highlight.link("DiagnosticVirtualTextHint", "DiagnosticVirtualText",
-                       false)
+    vim.api.nvim_set_hl(0, "DiagnosticError", {fg = base16.colors.base08})
+    vim.api.nvim_set_hl(0, "DiagnosticUnderlineError",
+                        {undercurl = true, sp = base16.colors.base08})
+    vim.api.nvim_set_hl(0, "DiagnosticWarn", {fg = base16.colors.base0A})
+    vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarn",
+                        {undercurl = true, sp = base16.colors.base0A})
+    vim.api.nvim_set_hl(0, "DiagnosticInfo", {fg = base16.colors.base0B})
+    vim.api.nvim_set_hl(0, "DiagnosticUnderlineInfo",
+                        {undercurl = true, sp = base16.colors.base0B})
+    vim.api.nvim_set_hl(0, "DiagnosticHint", {fg = base16.colors.base0D})
+    vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint",
+                        {undercurl = true, sp = base16.colors.base0D})
+    vim.api.nvim_set_hl(0, "DiagnosticVirtualText", {
+        undercurl = true,
+        bold = true,
+        fg = base16.colors.base02,
+        bg = "none"
+    })
+    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError",
+                        {link = "DiagnosticVirtualText"})
+    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn",
+                        {link = "DiagnosticVirtualText"})
+    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo",
+                        {link = "DiagnosticVirtualText"})
+    vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint",
+                        {link = "DiagnosticVirtualText"})
 
     -- Gutter
-    vim.highlight.create("LineNr", {guibg = "none"}, false)
-    vim.highlight.create("CursorLineNr", {guibg = "none"}, false)
-    vim.highlight.create("SignColumn", {guibg = "none"}, false)
-    vim.highlight.create("FoldColumn",
-                         {guifg = base16.colors.base02, guibg = "none"}, false)
-    vim.highlight.create("Folded", {
-        gui = "bold",
-        guifg = base16.colors.base0A_40,
-        guibg = base16.colors.base01
-    }, false)
+    vim.api.nvim_set_hl(0, "LineNr", {bg = "none"})
+    vim.api.nvim_set_hl(0, "CursorLineNr", {bg = "none"})
+    vim.api.nvim_set_hl(0, "SignColumn", {bg = "none"})
+    vim.api.nvim_set_hl(0, "FoldColumn",
+                        {fg = base16.colors.base02, bg = "none"})
+    vim.api.nvim_set_hl(0, "Folded", {
+        bold = true,
+        fg = base16.colors.base0A_40,
+        bg = base16.colors.base01
+    })
 end
 
 return M

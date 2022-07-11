@@ -39,8 +39,8 @@ function M.setup()
     vim.api.nvim_set_keymap("v", "<c-/>", ":<c-u>FzfLua grep_visual<cr>",
                             {silent = true})
 
-    vim.highlight.link("FzfLuaFloat", "NormalFloat", false)
-    vim.highlight.link("FzfLuaFloatBorder", "FloatBorder", false)
+    vim.api.nvim_set_hl(0, "FzfLuaFloat", {link = "NormalFloat"})
+    vim.api.nvim_set_hl(0, "FzfLuaFloatBorder", {link = "FloatBorder"})
 end
 
 return M
