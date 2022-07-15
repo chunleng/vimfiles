@@ -32,6 +32,15 @@ function M.setup()
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cf',
                                                     ':lua require("lsp-fixcurrent")()<CR>',
                                                     keymap_opts)
+                        -- TODO In typescript-language-server, no matter the kind, it always include disable rules as a result.
+                        --      Thus, the code_action does not work as expected. We can probably fix this by allowing
+                        --      apply_strategy to be "first" or "only"
+                        -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cf',
+                        --                             '<cmd>lua vim.lsp.buf.code_action({context={only={"quickfix"}}, apply=true})<CR>',
+                        --                             keymap_opts)
+                        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca',
+                                                    '<cmd>lua vim.lsp.buf.code_action({context={only={"refactor"}}, apply=true})<CR>',
+                                                    keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cr',
                                                     '<cmd>lua vim.lsp.buf.rename()<CR>',
                                                     keymap_opts)
