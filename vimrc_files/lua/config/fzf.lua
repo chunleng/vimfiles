@@ -14,6 +14,7 @@ function M.setup()
             fzf = {["enter"] = "select+accept"}
         },
         actions = {files = {["default"] = actions.file_edit}},
+        grep = {actions = {["default"] = actions.file_edit_or_qf}},
         winopts = {hl = {normal = "FzfLuaFloat", border = "FzfLuaFloatBorder"}},
         fzf_colors = {
             ["bg"] = {"bg", "FzfLuaFloat"},
