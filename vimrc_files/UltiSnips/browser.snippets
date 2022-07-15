@@ -1,0 +1,20 @@
+global !p
+def expand(snip, jump_pos=1):
+    if snip.tabstop != jump_pos: return
+    vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
+endglobal
+
+snippet __github_foldable "Template for <details> tag" b
+<details>
+<summary>$1</summary>
+
+\`\`\`$2
+$0
+\`\`\`
+
+</details>
+endsnippet
+post_jump "expand(snip)"
+snippet <details> "Alias for __github_foldable" b
+__github_foldable$1
+endsnippet
