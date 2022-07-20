@@ -21,7 +21,7 @@ require('packer').startup(function(use)
     use {
         'glepnir/galaxyline.nvim',
         config = function() require("config.galaxyline").setup() end,
-        after = "nvim-base16"
+        after = {"nvim-base16", "nvim-gps"}
     }
     use {
         'akinsho/bufferline.nvim',
