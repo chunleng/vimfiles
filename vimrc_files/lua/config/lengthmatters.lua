@@ -8,7 +8,7 @@ function M.setup()
                             {noremap = true, silent = true})
     vim.g.lengthmatters_excluded = {
         "Mundo", "MundoDiff", "NvimTree", "help", "qf", "WhichKey", "min",
-        "markdown", "dashboard", "dbout"
+        "markdown", "dashboard", "dbout", "lsp-installer"
     }
     vim.fn.call("lengthmatters#highlight_link_to", {'OverLengthCustom'})
 end

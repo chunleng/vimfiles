@@ -7,7 +7,7 @@ function M.setup()
         indent_tab_guides = true,
         exclude_filetypes = {
             'WhichKey', 'markdown', 'aerial', 'dashboard', 'help', 'fzf',
-            "NvimTree"
+            'NvimTree', 'lsp-installer'
         },
         odd_colors = {fg = base16.colors.base03, bg = base16.colors.base00_15},
         even_colors = {fg = base16.colors.base03, bg = base16.colors.base00}
