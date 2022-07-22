@@ -88,3 +88,11 @@ snippet __react_graphql_usemutation "Creating a useMutation statement" b
 const [${1:add/edit/delete}, {loading}] = use$2Mutation()
 $1({variables: {input: {${3:id}}}})
 endsnippet
+
+snippet __react_tw_class "Twind class" w
+class={tw\`$0\`}
+endsnippet
+post_jump "expand(snip)"
+snippet class_tw "Alias for __react_tw_class" w
+__react_tw_class$1
+endsnippet
