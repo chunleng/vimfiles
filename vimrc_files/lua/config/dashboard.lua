@@ -1,25 +1,27 @@
 local M = {}
 
 function M.setup()
-    vim.g.dashboard_custom_section = {
-        a_file_new = {
-            description = {" New File                     "},
-            command = "bd" -- Deleting the dashboard buffer brings to the new file
-        },
-        b_bookmark = {
-            description = {" Bookmarks                    "},
-            command = "FzfLua marks"
-        },
-        c_find_file = {
-            description = {" Find File          CTRL SPACE"},
-            command = "FzfLua files" -- link to fzf.vim config
-        },
-        d_find_word = {
-            description = {" Find Word          CTRL /    "},
-            command = "FzfLuaSearch" -- link to fzf.vim config
+    local db = require('dashboard')
+    db.custom_center = {
+        {
+            icon = " ",
+            desc = "New File                     ",
+            action = "bd" -- Deleting the dashboard buffer brings to the new file
+        }, {
+            icon = " ",
+            desc = "Bookmarks                    ",
+            action = "FzfLua marks"
+        }, {
+            icon = " ",
+            desc = "Find File          CTRL SPACE",
+            action = "FzfLua files" -- link to fzf.vim config
+        }, {
+            icon = " ",
+            desc = "Find Word          CTRL /    ",
+            action = "FzfLuaSearch" -- link to fzf.vim config
         }
     }
-    vim.g.dashboard_custom_footer = {}
+    db.custom_footer = nil
     local base16 = require("base16-colorscheme")
     vim.api.nvim_set_hl(0, "DashboardHeader", {fg = base16.colors.base0D_40})
     vim.api.nvim_set_hl(0, "DashboardCenter", {fg = base16.colors.base0D})

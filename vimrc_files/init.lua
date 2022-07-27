@@ -245,7 +245,7 @@ require('packer').startup(function(use)
         "glepnir/dashboard-nvim",
         config = function() require("config.dashboard").setup() end,
         requires = "ibhagwan/fzf-lua",
-        after = "nvim-base16"
+        after = {"nvim-base16", "nvim-tree.lua"}
     }
 
     use {

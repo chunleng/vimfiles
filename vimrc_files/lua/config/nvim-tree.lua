@@ -5,7 +5,7 @@ function M.setup()
                             {noremap = true, silent = true})
     require'nvim-tree'.setup {
         disable_netrw = false,
-        open_on_setup = true,
+        open_on_setup = false,
         hijack_cursor = true,
         diagnostics = {
             enable = true,
