@@ -22,9 +22,9 @@ function M.setup()
             separator = {guifg = bgcolor, guibg = bgcolor}
         }
     }
-    vim.api.nvim_set_keymap("n", "H", "<cmd>BufferLineMovePrev<cr>",
+    vim.api.nvim_set_keymap("n", "<c-,>", "<cmd>BufferLineMovePrev<cr>",
                             {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "L", "<cmd>BufferLineMoveNext<cr>",
+    vim.api.nvim_set_keymap("n", "<c-.>", "<cmd>BufferLineMoveNext<cr>",
                             {silent = true, noremap = true})
     vim.api.nvim_set_keymap("n", "<c-p>", "<cmd>BufferLineCyclePrev<cr>",
                             {silent = true, noremap = true})
