@@ -43,8 +43,10 @@ local function configure_preferred_settings()
 end
 
 local function configure_preferred_mappings()
-    local function noremap(mode, lhs, rhs)
-        vim.api.nvim_set_keymap(mode, lhs, rhs, {silent = true, noremap = true})
+    local function noremap(mode, lhs, rhs, is_silent)
+        if is_silent == nil then is_silent = true end
+        vim.api.nvim_set_keymap(mode, lhs, rhs,
+                                {silent = is_silent, noremap = true})
     end
 
     noremap("n", "<esc>", "<cmd>nohl<cr>")
@@ -85,9 +87,13 @@ local function configure_preferred_mappings()
     -- Add command like mapping
     -- command ctrl-e already mapped to <end>
     -- cnoremap <c-e> <end>
+    -- cnoremap silent for <home> key causes cursor to freeze
     noremap("i", "<c-a>", "<home>")
     noremap("i", "<c-e>", "<end>")
-    noremap("c", "<c-a>", "<home>")
+    noremap("i", "<c-k>", "<c-o>D")
+    noremap("c", "<c-a>", "<home>", false)
+    noremap("c", "<c-k>",
+            "<c-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>", false)
 
 end
 
