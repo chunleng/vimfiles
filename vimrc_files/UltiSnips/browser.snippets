@@ -4,17 +4,17 @@ def expand(snip, jump_pos=1):
     vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
 endglobal
 
-snippet __github_foldable "Template for <details> tag" b
+snippet <details> "Template for <details> tag" b
 <details>
 <summary>$1</summary>
 
 \`\`\`$2
-$0
+${VISUAL}
 \`\`\`
 
 </details>
 endsnippet
 post_jump "expand(snip)"
-snippet <details> "Alias for __github_foldable" b
-__github_foldable$1
+snippet __github_foldable "Alias for <details>" b
+<details>$1
 endsnippet
