@@ -26,7 +26,7 @@ function M.setup()
     vim.api.nvim_set_hl(0, "DashboardHeader", {fg = base16.colors.base0D_40})
     vim.api.nvim_set_hl(0, "DashboardCenter", {fg = base16.colors.base0D})
     vim.cmd [[
-        augroup Dashboard
+        augroup DashboardNvim
             autocmd!
             autocmd FileType dashboard nnoremap <buffer><silent><leader><space> :NvimTreeOpen<cr>
         augroup END
