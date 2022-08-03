@@ -26,6 +26,12 @@ while [ ${1:expr} ]; do
 done
 endsnippet
 
+snippet function "Function" b
+function ${1:foo}() {
+	${2:${VISUAL}}$0
+}
+endsnippet
+
 snippet __default_variable "Declare variable if not already set" b
 : ${${1:VAR_NAME}="${2:value}"}
 endsnippet
@@ -123,7 +129,16 @@ test "\$1" = "--" && shift
 endsnippet
 
 snippet __app_path "Command to retrieve directory of script no matter where it is called from" b
-APP_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
+APP_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd  )"
+endsnippet
+
+snippet __quickread_yes_no "Simple yes/no input" b
+read -r -p "${Question}? [y/N]" -n 1 response
+echo
+case $response in
+  [yY]) ${1:yes_func};;
+  *) ${2:no_func};;
+esac
 endsnippet
 
 snippet __direnv_virtualenv_setting "Command to auto virtualenv when entering a folder" b
