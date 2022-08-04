@@ -8,7 +8,7 @@ function M.setup()
         "tsserver", "tailwindcss", "eslint", "pyright", "efm", "jsonls",
         "sumneko_lua", "jdtls", "vimls", "html", "yamlls", "terraformls",
         "tflint", "cssls", "cssmodules_ls", "dockerls", "solargraph",
-        "intelephense", "denols"
+        "intelephense", "denols", "purescriptls", "rust_analyzer"
     }
     -- Loop through the servers listed above and set them up. If a server is
     -- not already installed, install it.
@@ -192,6 +192,17 @@ function M.setup()
                     local workspace = os.getenv("HOME") .. "/.java-workspace"
                     server_opts.workspace = workspace
                     server_opts.vmargs = {"-data", workspace}
+                elseif server_name == "rust_analyzer" then
+                    -- autoimport allows classes to be imported upon completion
+                    --   Requires additionalTextEdits in neovim to work properly
+                    --     source: https://rust-analyzer.github.io/manual.html#completion-with-autoimport
+                    --   TODO: I can use the workaround in this issue
+                    --     https://github.com/neovim/neovim/issues/12310
+                    server_opts.settings = {
+                        ["rust-analyzer"] = {
+                            completion = {autoimport = {enable = true}}
+                        }
+                    }
                 end
                 server:setup(server_opts)
             end)
