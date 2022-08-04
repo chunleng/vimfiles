@@ -94,6 +94,7 @@ local function configure_preferred_mappings()
     noremap("c", "<c-a>", "<home>", false)
     noremap("c", "<c-k>",
             "<c-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>", false)
+    noremap("i", "<s-enter>", "<enter><c-o>k<c-o>Aa<c-o>==<c-o>A<bs>") -- `a<c-o>==<c-o>A<bs>` is to make auto indent work
 
 end
 
