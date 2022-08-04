@@ -26,9 +26,6 @@ function M.setup()
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K',
                                                     '<cmd>lua vim.lsp.buf.hover()<CR>',
                                                     keymap_opts)
-                        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca',
-                                                    '<cmd>lua vim.lsp.buf.code_action()<CR>',
-                                                    keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cf',
                                                     ':lua require("lsp-fixcurrent")()<CR>',
                                                     keymap_opts)
@@ -39,7 +36,7 @@ function M.setup()
                         --                             '<cmd>lua vim.lsp.buf.code_action({context={only={"quickfix"}}, apply=true})<CR>',
                         --                             keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca',
-                                                    '<cmd>lua vim.lsp.buf.code_action({context={only={"refactor"}}, apply=true})<CR>',
+                                                    '<cmd>lua vim.lsp.buf.code_action({apply=true})<CR>',
                                                     keymap_opts)
                         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cr',
                                                     '<cmd>lua vim.lsp.buf.rename()<CR>',
