@@ -25,6 +25,10 @@ snippet $ "Parameterize text"
 \${${1:1}${2::${VISUAL:}}}
 endsnippet
 
+snippet $VISUAL "Parameterize with VISUAL" b
+\${${1:0}:\${VISUAL}}
+endsnippet
+
 snippet __snippet_alias "Snippet aliasing" b
 post_jump "expand(snip)"
 snippet ${1:alias} "Alias for ${2:snippet_name}" b

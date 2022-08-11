@@ -1,0 +1,32 @@
+global !p
+def expand(snip, jump_pos=1):
+	if snip.tabstop != jump_pos: return
+	vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
+endglobal
+
+snippet match "Switch case"
+match ${1:var_name} {
+	${2:Enum} => ${3:println!("match!")},
+	_ => (),
+}
+endsnippet
+post_jump "expand(snip)"
+snippet switch "Alias for match"
+match$1
+endsnippet
+post_jump "expand(snip)"
+snippet case "Alias for match"
+match$1
+endsnippet
+
+snippet loop "Loop statement" b
+loop {
+	${1:${VISUAL}}
+}$0
+endsnippet
+
+snippet if_let_some "If let statement for Some" b
+if let Some(x) = ${1:var_name} {
+	${0}
+}
+endsnippet
