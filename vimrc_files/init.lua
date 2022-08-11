@@ -231,7 +231,7 @@ require('packer').startup(function(use)
     use 'aklt/plantuml-syntax'
 
     use {
-        'norcalli/nvim-colorizer.lua',
+        'NvChad/nvim-colorizer.lua',
         config = function() require("config.colorizer").setup() end,
         after = "common-utils" -- after setting termguicolors
     }
