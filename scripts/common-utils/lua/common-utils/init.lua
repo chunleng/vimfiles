@@ -96,6 +96,10 @@ local function configure_preferred_mappings()
             "<c-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>", false)
     noremap("i", "<s-enter>", "<enter><c-o>k<c-o>Aa<c-o>==<c-o>A<bs>") -- `a<c-o>==<c-o>A<bs>` is to make auto indent work
 
+    -- Add macos text edit mapping
+    noremap("i", "<c-b>", "<left>")
+    noremap("i", "<c-f>", "<right>")
+
 end
 
 local function configure_autogroup()
