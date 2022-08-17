@@ -1,7 +1,8 @@
 local M = {}
 
 function M.setup()
-    vim.api.nvim_set_keymap("n", "!rV", "<cmd>e .vim/local.vim<cr>",
+    vim.api.nvim_set_keymap("n", "!rV",
+                            "<cmd>silent !mkdir -p .vim<cr><cmd>e .vim/local.vim<cr>",
                             {noremap = true, silent = true})
     vim.g.localvimrc_name = {".vim/local.vim"}
     vim.g.localvimrc_file_directory_only = 0
