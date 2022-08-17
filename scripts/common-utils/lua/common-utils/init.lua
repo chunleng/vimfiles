@@ -104,7 +104,7 @@ end
 
 local function configure_autogroup()
     vim.cmd [[
-        augroup allfile
+        augroup lAllFile
             autocmd!
             " BufWinEnter here is to override plugin that force the option
             " r,o: Continue comment
@@ -116,12 +116,12 @@ local function configure_autogroup()
             autocmd BufWinEnter * setlocal formatoptions=roMBjqcl
         augroup END
 
-        augroup vim
+        augroup lVim
             autocmd!
             autocmd FileType vim setlocal foldmethod=marker
         augroup END
 
-        augroup markdown
+        augroup lMarkdown
             autocmd!
             " Set textwidth-related formatoptions
             " t: Autowrap text/code
@@ -135,14 +135,14 @@ local function configure_autogroup()
             autocmd FileType markdown setlocal textwidth=80
         augroup END
 
-        augroup ecmascript
+        augroup lEcmascript
           autocmd!
           " Add missing information for jsx and tsx
           autocmd FileType typescriptreact set indentexpr=GetTypescriptIndent()
           autocmd FileType javascriptreact set indentexpr=GetJavascriptIndent()
         augroup END
 
-        augroup gitcommit
+        augroup lGitCommit
             autocmd!
             " Syntax highlight should be fixed by this PR? (Awaiting release)
             " https://github.com/neovim/neovim/pull/17007
@@ -150,7 +150,7 @@ local function configure_autogroup()
             autocmd FileType gitcommit set commentstring=;\ %s
         augroup END
 
-        augroup custom_filetype
+        augroup lFiletype
             autocmd!
             " direnv settings
             autocmd BufRead,BufNewFile .env* set ft=bash
@@ -175,7 +175,7 @@ local function configure_autogroup()
         augroup END
     ]]
 
-    local awsconfig = "aws_config"
+    local awsconfig = "lAwsConfig"
     vim.api.nvim_create_augroup(awsconfig, {})
     vim.api.nvim_create_autocmd("BufRead", {
         pattern = "*/.aws/config",
