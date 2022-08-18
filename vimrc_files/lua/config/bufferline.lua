@@ -10,16 +10,16 @@ function M.setup()
             separator_style = "slant"
         },
         highlights = {
-            fill = {guifg = "none", guibg = bgcolor},
+            fill = {fg = "none", bg = bgcolor},
             buffer_visible = {
-                guifg = base16.colors.base03,
-                guibg = base16.colors.base00
+                fg = base16.colors.base03,
+                bg = base16.colors.base00
             },
-            buffer_selected = {guifg = base16.colors.base05, gui = "bold"},
-            background = {guifg = base16.colors.base03, guibg = bgcolor},
-            separator_selected = {guifg = bgcolor, guibg = base16.colors.base00},
-            separator_visible = {guifg = bgcolor, guibg = base16.colors.base00},
-            separator = {guifg = bgcolor, guibg = bgcolor}
+            buffer_selected = {fg = base16.colors.base05, bold = true},
+            background = {fg = base16.colors.base03, bg = bgcolor},
+            separator_selected = {fg = bgcolor, bg = base16.colors.base00},
+            separator_visible = {fg = bgcolor, bg = base16.colors.base00},
+            separator = {fg = bgcolor, bg = bgcolor}
         }
     }
     vim.api.nvim_set_keymap("n", "<c-,>", "<cmd>BufferLineMovePrev<cr>",
