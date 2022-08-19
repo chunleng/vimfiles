@@ -138,11 +138,11 @@ require('packer').startup(function(use)
 
     -- Code Intellisense
     use {
-        'williamboman/nvim-lsp-installer',
-        config = function() require("config.lsp-installer").setup() end,
+        'williamboman/mason.nvim',
+        config = function() require("config.mason").setup() end,
         requires = {
-            'neovim/nvim-lspconfig', 'folke/lua-dev.nvim',
-            'b0o/schemastore.nvim', 'ibhagwan/fzf-lua'
+            'williamboman/mason-lspconfig', 'neovim/nvim-lspconfig',
+            'folke/lua-dev.nvim', 'b0o/schemastore.nvim', 'ibhagwan/fzf-lua'
         },
         after = {"fzf-lua", "aerial.nvim"}
     }
@@ -165,7 +165,7 @@ require('packer').startup(function(use)
         config = function() require("config.nvim-cmp").setup() end,
         after = {'nvim-base16', 'common-utils'}
     }
-    use {'hrsh7th/cmp-nvim-lsp', after = {"nvim-cmp", "nvim-lsp-installer"}}
+    use {'hrsh7th/cmp-nvim-lsp', after = {"nvim-cmp", "mason.nvim"}}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
     use {'hrsh7th/cmp-path', after = "nvim-cmp"}
     use {
