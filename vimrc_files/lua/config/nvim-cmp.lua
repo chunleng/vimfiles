@@ -6,6 +6,8 @@ function M.setup()
     local kind_icons = require("common-utils").kind_icons
 
     cmp.setup({
+        -- Since I my sorting prioritize exact elements first, preselect is not required
+        preselect = require("cmp.types").cmp.PreselectMode.None,
         formatting = {
             format = function(entry, vim_item)
                 local prsnt, lspkind = pcall(require, "lspkind")
@@ -13,7 +15,7 @@ function M.setup()
                     -- Kind icons
                     vim_item.kind = string.format('%s %s',
                                                   kind_icons[vim_item.kind],
-                                                  vim_item.kind) -- This concatonates the icons with the name of the item kind
+                                                  vim_item.kind) -- This concatenates the icons with the name of the item kind
                     -- Source
                     vim_item.menu = ({
                         path = "│",
