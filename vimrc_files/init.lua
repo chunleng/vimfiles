@@ -113,8 +113,7 @@ require('packer').startup(function(use)
 
     use {
         "RRethy/vim-illuminate",
-        config = function() require("config.illuminate").setup() end,
-        after = "nvim-base16"
+        config = function() require("config.illuminate").setup() end
     }
 
     use {
