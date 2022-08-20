@@ -71,9 +71,9 @@ function M.setup()
         }
     }
 
-    require("nvim-tree.events").on_tree_open(function()
-        vim.opt_local.cursorline = true
-    end)
+    local events = require("nvim-tree.api").events
+    events.subscribe(events.Event.TreeOpen,
+                     function() vim.opt_local.cursorline = true end)
 
 end
 
