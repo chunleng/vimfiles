@@ -280,4 +280,9 @@ require('packer').startup(function(use)
         after = {"nvim-base16"}
     }
 
+    use {
+        "mattn/emmet-vim",
+        config = function() require("config.emmet").setup() end
+    }
+
 end)
