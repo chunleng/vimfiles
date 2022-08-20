@@ -67,8 +67,11 @@ function M.setup()
         bg = base16.colors.base01,
         blend = 15
     })
-    vim.api.nvim_set_hl(0, "PmenuSel",
-                        {fg = "none", bg = base16.colors.base0A_20, blend = 0})
+    vim.api.nvim_set_hl(0, "PmenuSel", {
+        fg = base16.colors.base05,
+        bg = base16.colors.base0A_20,
+        blend = 15
+    })
     vim.api.nvim_set_hl(0, "PmenuSbar", {bg = base16.colors.base0D_20})
     vim.api.nvim_set_hl(0, "PmenuThumb", {bg = base16.colors.base0D_40})
 
