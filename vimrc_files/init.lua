@@ -263,13 +263,6 @@ require('packer').startup(function(use)
     }
 
     use {
-        "ray-x/lsp_signature.nvim",
-        config = function()
-            require"lsp_signature".setup({hint_enable = false})
-        end
-    }
-
-    use {
         "github/copilot.vim",
         config = function() require("config.copilot").setup() end
     }
