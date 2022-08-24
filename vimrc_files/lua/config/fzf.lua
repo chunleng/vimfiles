@@ -39,7 +39,7 @@ function M.setup()
                             {silent = true})
     vim.api.nvim_set_keymap("n", "<leader>g/", ":<c-u>FzfLua git_status<cr>",
                             {silent = true})
-    vim.api.nvim_set_keymap("v", "<c-/>", ":<c-u>FzfLua grep_visual<cr>",
+    vim.api.nvim_set_keymap("x", "<c-/>", ":<c-u>FzfLua grep_visual<cr>",
                             {silent = true})
 
     vim.api.nvim_set_hl(0, "FzfLuaFloat", {link = "NormalFloat"})

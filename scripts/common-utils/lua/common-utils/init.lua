@@ -75,9 +75,9 @@ local function configure_preferred_mappings()
 
     -- Make visual mode yank and delete go to clipboard as well
     noremap("n", "vv", "viw")
-    noremap("v", "y", "ygv\"*y")
-    noremap("v", "d", "ygv\"*d")
-    noremap("v", "x", "ygv\"*x")
+    noremap("x", "y", "ygv\"*y")
+    noremap("x", "d", "ygv\"*d")
+    noremap("x", "x", "ygv\"*x")
 
     -- Make ZQ and ZZ more useful for multiple buffer situation
     -- TODO any way to integrate with dressing?
