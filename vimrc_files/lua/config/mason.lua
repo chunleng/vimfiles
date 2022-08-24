@@ -48,7 +48,7 @@ function M.setup()
     require("mason-lspconfig").setup({
         ensure_installed = {
             "cssls", "cssmodules_ls", "denols", "dockerls", "efm", "eslint",
-            "html", "intelephense", "jdtls", "jsonls", "pyright",
+            "grammarly", "html", "intelephense", "jdtls", "jsonls", "pyright",
             "purescriptls", "rust_analyzer", "solargraph", "sumneko_lua",
             "tailwindcss", "terraformls", "tflint", "tsserver", "vimls",
             "yamlls"
@@ -122,6 +122,13 @@ function M.setup()
                     client.server_capabilities.documentFormattingProvider = true
                     common_on_attach(client, bufnr)
                 end
+            })
+        end,
+        grammarly = function()
+            vim.lsp.set_log_level("debug")
+            lspconfig.grammarly.setup({
+                -- https://github.com/znck/grammarly/blob/23ace62e1568a49349807bae500157246a85aff3/extension/src/GrammarlyClient.ts#L71
+                init_options = {clientId = "client_BaDkMgx4X19X9UxxYRCXZo"}
             })
         end,
         html = function()
