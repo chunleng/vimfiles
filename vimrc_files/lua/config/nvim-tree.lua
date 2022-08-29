@@ -17,6 +17,7 @@ function M.setup()
             mappings = {
                 custom_only = true,
                 list = {
+                    -- :h nvim-tree-default-mappings
                     {key = 'a', action = "create"},
                     {key = {'l', '<CR>'}, action = "edit"},
                     {key = 'h', action = "close_node"},
@@ -31,7 +32,8 @@ function M.setup()
                     {
                         key = {'<C-h>', '<backspace>'},
                         action = "toggle_git_ignored"
-                    }, {key = '<C-k>', action = ''}
+                    }, {key = '<C-k>', action = ''},
+                    {key = 'gp', action = 'parent_node'}
                 }
             }
         },
