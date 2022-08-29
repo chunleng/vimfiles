@@ -88,7 +88,7 @@ local function configure_preferred_mappings()
     -- command ctrl-e already mapped to <end>
     -- cnoremap <c-e> <end>
     -- cnoremap silent for <home> key causes cursor to freeze
-    noremap("i", "<c-a>", "<home>")
+    noremap("i", "<c-a>", "<c-o>I")
     noremap("i", "<c-e>", "<end>")
     noremap("i", "<c-k>", "<c-o>D")
     noremap("c", "<c-a>", "<home>", false)
