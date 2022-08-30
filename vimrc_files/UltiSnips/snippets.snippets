@@ -25,7 +25,7 @@ snippet $ "Parameterize text"
 \${${1:1}${2::${VISUAL:}}}
 endsnippet
 
-snippet $VISUAL "Parameterize with VISUAL" b
+snippet $VISUAL "Parameterize with VISUAL"
 \${${1:0}:\${VISUAL}}
 endsnippet
 
@@ -48,4 +48,9 @@ endsnippet
 post_jump "expand(snip)"
 snippet def_expand "Alias for __expand_function" b
 __expand_function$1
+endsnippet
+
+snippet extends "Import script" b
+# For jumping ./$1.snippets
+extends $1
 endsnippet
