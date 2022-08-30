@@ -190,6 +190,24 @@ function M.setup()
                 settings = luadev.settings
             })
         end,
+        tailwindcss = function()
+            lspconfig.tailwindcss.setup({
+                on_attach = common_on_attach,
+                filetypes = {
+                    "aspnetcorerazor", "astro", "astro-markdown", "blade",
+                    "css", "django-html", "edge", "eelixir", "ejs", "erb",
+                    "eruby", "gohtml", "haml", "handlebars", "hbs", "heex",
+                    "html", "html-eex", "htmldjango", "jade", "javascript",
+                    "javascriptreact", "leaf", "less", "liquid", "markdown",
+                    "mdx", "mustache", "njk", "nunjucks", "php", "postcss",
+                    "razor", "reason", "rescript", "rust", "sass", "scss",
+                    "slim", "stylus", "sugarss", "svelte", "twig", "typescript",
+                    "typescriptreact", "vue"
+                },
+                settings = {tailwindCSS = {emmetCompletions = true}},
+                init_options = {userLanguages = {rust = "html"}}
+            })
+        end,
         tsserver = function()
             lspconfig.tsserver.setup({
                 on_attach = function(client, bufnr)
