@@ -125,7 +125,6 @@ function M.setup()
             })
         end,
         grammarly = function()
-            vim.lsp.set_log_level("debug")
             lspconfig.grammarly.setup({
                 -- https://github.com/znck/grammarly/blob/23ace62e1568a49349807bae500157246a85aff3/extension/src/GrammarlyClient.ts#L71
                 init_options = {clientId = "client_BaDkMgx4X19X9UxxYRCXZo"}
