@@ -20,8 +20,8 @@ snippet [] "Create link"
 endsnippet
 
 # HTML is used here to make it easy to adjust width
-snippet ![] "Create image"
-![${1:alt}](url)
+snippet ! "Create image"
+![${1:${VISUAL:alt}}](${2:url})
 endsnippet
 
 snippet __table "Create table" b
