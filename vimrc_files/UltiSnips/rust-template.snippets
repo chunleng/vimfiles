@@ -1,0 +1,49 @@
+global !p
+def expand(snip, jump_pos=1):
+	if snip.tabstop != jump_pos: return
+	vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
+endglobal
+
+snippet mod_test "Test module"
+#[cfg(test)]
+mod ${1:tests} {
+	use super::*;
+	$0
+}
+endsnippet
+post_jump "expand(snip)"
+snippet __cfg_test "Alias for mod_test" b
+mod_test$1
+endsnippet
+
+snippet fn_test "Test function" b
+#[test]
+fn ${1:test_name}() {
+	$0
+}
+endsnippet
+post_jump "expand(snip)"
+snippet __test "Alias for fn_test" b
+fn_test$1
+endsnippet
+
+snippet fn_test_with_panic "Test function that results in panic" b
+#[test]
+#[should_panic]
+fn ${1:test_name}() {
+	$0
+}
+endsnippet
+
+snippet __main_cli "Main function for a CLI tool" b
+fn main() {
+	let args: Vec<String> = std::env::args().collect();
+
+	if args.len() != 2 {
+		println!("Usage: {} <param>", args[0]);
+		return;
+	}
+
+	let param = &args[1];
+}
+endsnippet
