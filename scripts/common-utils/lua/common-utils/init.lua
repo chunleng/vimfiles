@@ -206,6 +206,11 @@ function M.setup()
     configure_vim_diagnostics()
 
     vim.o.foldtext = "v:lua.fold_text()"
+
+    local homedir = os.getenv("HOME")
+    if vim.fn.filereadable(homedir .. "/.vimrc_local") == 1 then
+        vim.cmd [[source ~/.vimrc_local]]
+    end
 end
 
 M.kind_icons = {
