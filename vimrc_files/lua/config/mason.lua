@@ -85,6 +85,7 @@ function M.setup()
                 filetypes = {"python", "markdown", "lua"},
                 -- https://github.com/mattn/efm-langserver#example-for-configyaml
                 settings = {
+                    lintDebounce = "500ms",
                     languages = {
                         python = {
                             {
@@ -95,10 +96,30 @@ function M.setup()
                                 formatCommand = "black --quiet -",
                                 formatStdin = true,
                                 rootMarkers = {".python-version"}
+                            }, {
+                                formatCommand = "yapf --quiet",
+                                formatStdin = true,
+                                rootMarkers = {".python-version"}
+                            }, {
+                                prefix = "Pylint",
+                                lintCommand = "pylint --from-stdin --output-format text --score no --msg-template {path}:{line}:{column}:{C}:{msg} ${INPUT}",
+                                lintStdin = true,
+                                lintFormats = {'%f:%l:%c:%t:%m'},
+                                lintOffsetColumns = 1,
+                                lintCategoryMap = {
+                                    I = "H",
+                                    R = "I",
+                                    C = "I",
+                                    W = "W",
+                                    E = "E",
+                                    F = "E"
+                                },
+                                rootMarkers = {".python-version"}
                             }
                         },
                         markdown = {
                             {
+                                prefix = "Markdownlint",
                                 lintCommand = "markdownlint -s",
                                 lintStdin = true,
                                 lintFormats = {
