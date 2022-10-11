@@ -262,11 +262,6 @@ require('packer').startup(function(use)
     }
 
     use {
-        "github/copilot.vim",
-        config = function() require("config.copilot").setup() end
-    }
-
-    use {
         "b0o/incline.nvim",
         config = function() require("config.incline").setup() end,
         after = {"nvim-base16"}
