@@ -186,7 +186,27 @@ function M.setup()
                 },
                 capabilities = capabilities
             })
+        end,
+        pyright = function()
+            local setup_dict = {on_attach = common_on_attach}
+            local exit_code = os.execute(
+                                  'which -a pyright|grep -v ${HOME}/.local/share/nvim/mason/bin/pyright')
+            if exit_code ~= 0 then -- turn off diagnostic because no pyright found
+                setup_dict["settings"] = {
+                    python = {
+                        analysis = {
+                            typeCheckingMode = "off",
+                            diagnosticSeverityOverrides = {
+                                reportMissingModuleSource = "none",
+                                reportMissingImports = "none",
+                                reportUndefinedVariable = "none"
+                            }
+                        }
+                    }
+                }
+            end
 
+            lspconfig.pyright.setup(setup_dict)
         end,
         solargraph = function()
             lspconfig.solargraph.setup({
