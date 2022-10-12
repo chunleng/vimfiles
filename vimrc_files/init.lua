@@ -1,10 +1,6 @@
+require("common-utils").setup()
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
-
-    use {
-        "~/.local/share/nvim-scripts/common-utils/",
-        config = function() require("common-utils").setup() end
-    }
 
     use {
         'folke/which-key.nvim',
@@ -149,7 +145,7 @@ require('packer').startup(function(use)
     use {
         'stevearc/aerial.nvim',
         config = function() require("config.aerial-nvim").setup() end,
-        after = {"nvim-base16", "common-utils"}
+        after = {"nvim-base16"}
     }
 
     use {"tpope/vim-dadbod"}
@@ -162,7 +158,7 @@ require('packer').startup(function(use)
     use {
         'hrsh7th/nvim-cmp',
         config = function() require("config.nvim-cmp").setup() end,
-        after = {'nvim-base16', 'common-utils'}
+        after = {'nvim-base16'}
     }
     use {'hrsh7th/cmp-nvim-lsp', after = {"nvim-cmp", "mason.nvim"}}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
@@ -231,8 +227,7 @@ require('packer').startup(function(use)
 
     use {
         'NvChad/nvim-colorizer.lua',
-        config = function() require("config.colorizer").setup() end,
-        after = "common-utils" -- after setting termguicolors
+        config = function() require("config.colorizer").setup() end
     }
 
     -- Colorscheme
