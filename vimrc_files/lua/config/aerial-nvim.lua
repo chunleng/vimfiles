@@ -9,7 +9,7 @@ function M.setup()
     local data_kind = {"Module", "Number", "Array", "Boolean", "String"}
 
     require("aerial").setup({
-        close_behavior = "global",
+        attach_mode = "global",
         backends = {"lsp", "treesitter", "markdown"}, -- LSP is still more stable, prioritize LSP first
         min_width = 30,
         max_width = 30,
