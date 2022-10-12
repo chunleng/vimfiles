@@ -51,7 +51,8 @@ function M.setup()
                     }
                 },
                 resize_window = true
-            }
+            },
+            remove_file = {close_window = false}
         },
         renderer = {
             group_empty = true,
