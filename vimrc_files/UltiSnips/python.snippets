@@ -4,7 +4,7 @@ global !p
 def get_file_name(default: str='untitled') -> str:
 	return snip.basename or default
 
-def	snake_to_upper_camel_case(s: str) -> str:
+def snake_to_upper_camel_case(s: str) -> str:
 	return ''.join([ x.title() for x in s.split('_')])
 
 def expand(snip, jump_pos=1):
@@ -15,7 +15,7 @@ endglobal
 # Snippets
 
 snippet class_init "Class with declaration" b
-class ${1:`!p snip.rv = get_file_name()`}:
+class ${1:`!p snip.rv = snake_to_upper_camel_case(get_file_name())`}:
 	def __init__(self${2:, args:int}):
 		$0
 endsnippet
@@ -99,4 +99,56 @@ try:
 	${1:${VISUAL:pass}}
 except Exception as e:
 	${2:pass}
+endsnippet
+
+snippet __docstring_module_googlestyle "Template for google style module docstring" b
+"""${1:A one line summary of the module or program, terminated by a period.}
+
+${2:Leave one blank line.  The rest of this docstring should contain an
+overall description of the module or program.  Optionally, it may also
+contain a brief description of exported classes and functions and/or usage
+examples.}
+
+	Typical usage example:
+
+	${3:foo = ClassFoo()
+	bar = foo.FunctionBar()}
+"""
+endsnippet
+
+snippet __docstring_class_googlestyle "Template for google style class docstring" b
+"""${1:Summary of class here.}
+
+${2:Longer class information...}
+
+Attributes:
+	${3:likes_spam: A boolean indicating if we like SPAM or not.
+	eggs: An integer count of the eggs we have laid.}
+"""
+endsnippet
+
+snippet __docstring_function_googlestyle "Template for google style function docstring" b
+"""${1:Fetches rows from a Smalltable.}
+
+${2:Retrieves rows pertaining to the given keys from the Table instance
+represented by table_handle.  String keys will be UTF-8 encoded.}
+
+Args:
+	keys: A sequence of strings representing the key of each table
+		row to fetch.  String keys will be UTF-8 encoded.
+
+Returns:
+	string
+
+	A dict mapping keys to the corresponding table row data
+	fetched. Each row is represented as a tuple of strings. For
+	example:
+
+	{b'Serak': ('Rigel VII', 'Preparer'),
+	 b'Zim': ('Irk', 'Invader'),
+	 b'Lrrr': ('Omicron Persei 8', 'Emperor')}
+
+Raises:
+	IOError: An error occurred accessing the smalltable.
+"""
 endsnippet

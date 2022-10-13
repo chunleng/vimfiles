@@ -124,3 +124,37 @@ stop -do-> [*]
 ' -ri-> With direction: up/do/le/ri
 @enduml
 endsnippet
+
+# Flowchart
+
+snippet __flowchart_new "A new template for " b
+@startuml
+' https://plantuml.com/activity-diagram-beta
+title Title
+
+' for vertical ifs
+!pragma useVerticalIf on
+
+start
+:Task 1;
+if (Condition) then (true)
+	:Task 2;
+else (no)
+	:Task 3;
+endif
+
+while (Condition)
+    :Task 4;
+endwhile
+
+fork
+    :Task 5;
+fork again
+    :Task 6;
+    note right: Comment
+endfork
+' Use below to merge the fork
+' end merge
+stop
+@enduml
+endsnippet
