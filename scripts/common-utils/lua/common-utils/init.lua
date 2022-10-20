@@ -75,6 +75,7 @@ local function configure_preferred_mappings()
 
     -- Make visual mode yank and delete go to clipboard as well
     noremap("n", "vv", "viw")
+    noremap("n", "vV", "viW")
     noremap("x", "y", "ygv\"*y")
     noremap("x", "d", "ygv\"*d")
     noremap("x", "x", "ygv\"*x")
