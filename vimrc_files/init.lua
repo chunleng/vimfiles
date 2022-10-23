@@ -137,7 +137,7 @@ require('packer').startup(function(use)
         config = function() require("config.mason").setup() end,
         requires = {
             'williamboman/mason-lspconfig', 'neovim/nvim-lspconfig',
-            'folke/lua-dev.nvim', 'b0o/schemastore.nvim', 'ibhagwan/fzf-lua'
+            'folke/neodev.nvim', 'b0o/schemastore.nvim', 'ibhagwan/fzf-lua'
         },
         after = {"fzf-lua", "aerial.nvim"}
     }

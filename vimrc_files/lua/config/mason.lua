@@ -217,8 +217,7 @@ function M.setup()
             })
         end,
         sumneko_lua = function()
-            local luadev = require("lua-dev").setup()
-            if luadev == nil then luadev = {} end
+            require("neodev").setup()
             lspconfig.sumneko_lua.setup({
                 on_attach = function(client, bufnr)
                     -- Use efm lua-format instead
@@ -228,7 +227,7 @@ function M.setup()
                         false
                     common_on_attach(client, bufnr)
                 end,
-                settings = luadev.settings
+                settings = {Lua = {completion = {callSnippet = "Replace"}}}
             })
         end,
         tailwindcss = function()
