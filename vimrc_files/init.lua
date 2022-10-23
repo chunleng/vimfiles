@@ -145,6 +145,7 @@ require('packer').startup(function(use)
     use {
         'stevearc/aerial.nvim',
         config = function() require("config.aerial-nvim").setup() end,
+        commit = "e0215f9dcf55e917f547ad2c688be6fe67a5926d", -- Lock because this plugin tends to break easily
         after = {"nvim-base16"}
     }
 

@@ -12,10 +12,8 @@ function M.setup()
         attach_mode = "global",
         close_automatic_events = {"unsupported", "switch_buffer"},
         backends = {"lsp", "treesitter", "markdown"}, -- LSP is still more stable, prioritize LSP first
-        min_width = 30,
-        max_width = 30,
         show_guide = true,
-        placement_editor_edge = true,
+        layout = {placement = "edge", min_width = 30, max_width = 30},
         icons = kind_icons,
         filter_kind = {
             ['_'] = {
