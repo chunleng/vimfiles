@@ -25,12 +25,18 @@ function M.setup()
     local base16 = require("base16-colorscheme")
     vim.api.nvim_set_hl(0, "DashboardHeader", {fg = base16.colors.base0D_40})
     vim.api.nvim_set_hl(0, "DashboardCenter", {fg = base16.colors.base0D})
-    vim.cmd [[
-        augroup DashboardNvim
-            autocmd!
-            autocmd FileType dashboard nnoremap <buffer><silent><leader><space> :NvimTreeOpen<cr>
-        augroup END
-    ]]
+
+    local group_name = "Dashboard"
+    vim.api.nvim_create_augroup(group_name, {clear = true})
+    vim.api.nvim_create_autocmd("User", {
+        pattern = "DashboardReady",
+        callback = function()
+            vim.api.nvim_buf_set_keymap(0, "n", "<backspace>",
+                                        "<cmd>NvimTreeOpen<cr>",
+                                        {silent = true, noremap = true})
+        end,
+        group = group_name
+    })
 end
 
 return M
