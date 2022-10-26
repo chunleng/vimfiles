@@ -30,8 +30,8 @@ function M.setup()
         end)
     end
     vim.cmd [[command! FzfLuaSearch call v:lua.fzf_lua_search()]]
-    vim.api.nvim_set_keymap("n", "<c-space>", ":FzfLua files<cr>",
-                            {silent = true})
+    vim.api
+        .nvim_set_keymap("n", "<enter>", ":FzfLua files<cr>", {silent = true})
     vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua resume<cr>",
                             {silent = true})
     vim.api.nvim_set_keymap("n", "<c-/>", ":FzfLuaSearch<cr>", {silent = true})

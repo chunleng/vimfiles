@@ -25,15 +25,21 @@ function M.setup()
     local base16 = require("base16-colorscheme")
     vim.api.nvim_set_hl(0, "DashboardHeader", {fg = base16.colors.base0D_40})
     vim.api.nvim_set_hl(0, "DashboardCenter", {fg = base16.colors.base0D})
-
+    vim.api.nvim_buf_set_keymap(0, "n", "<c-space>", "<cmd>NvimTreeOpen<cr>",
+                                {silent = true, noremap = true})
     local group_name = "Dashboard"
     vim.api.nvim_create_augroup(group_name, {clear = true})
     vim.api.nvim_create_autocmd("User", {
         pattern = "DashboardReady",
         callback = function()
-            vim.api.nvim_buf_set_keymap(0, "n", "<backspace>",
-                                        "<cmd>NvimTreeOpen<cr>",
+            -- Restore overwritten fzf filesearch
+            vim.api.nvim_buf_set_keymap(0, "n", "<enter>",
+                                        "<cmd>FzfLua files<cr>",
                                         {silent = true, noremap = true})
+            vim.api.nvim_buf_set_keymap(0, "n", "l",
+                                        "<cmd>lua require(\"dashboard\").call_line_action()<cr>",
+                                        {silent = true, noremap = true})
+
         end,
         group = group_name
     })

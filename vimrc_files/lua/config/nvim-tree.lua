@@ -1,7 +1,7 @@
 local M = {}
 
 function M.setup()
-    vim.api.nvim_set_keymap("n", "<backspace>", "<cmd>NvimTreeFindFile<cr>",
+    vim.api.nvim_set_keymap("n", "<c-space>", "<cmd>NvimTreeFindFile<cr>",
                             {noremap = true, silent = true})
     require'nvim-tree'.setup {
         disable_netrw = false,
@@ -28,7 +28,7 @@ function M.setup()
                     {key = 'x', action = "remove"},
                     {key = 'r', action = "rename"},
                     {key = 'R', action = "refresh"},
-                    {key = {'q', "<backspace>"}, action = "close"},
+                    {key = {'q', "<c-space>"}, action = "close"},
                     {key = {'<C-h>'}, action = "toggle_git_ignored"},
                     {key = '<C-k>', action = ''},
                     {key = 'gp', action = 'parent_node'}
