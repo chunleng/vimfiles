@@ -103,6 +103,8 @@ local function configure_preferred_mappings()
     noremap("i", "<c-b>", "<left>")
     noremap("i", "<c-f>", "<right>")
 
+    -- Add on to existing feature
+    noremap("n", "gF", "<cmd>e %:h/<cfile><cr>")
 end
 
 local function configure_autogroup()
