@@ -175,6 +175,9 @@ local function configure_autogroup()
 
             " Plist is a xml file
             autocmd BufRead,BufNewFile *.plist setlocal ft=xml
+
+            " Force .tf to be terraform instead of sometimes tf
+            autocmd BufRead,BufNewFile *.tf setlocal ft=terraform
         augroup END
     ]]
 
