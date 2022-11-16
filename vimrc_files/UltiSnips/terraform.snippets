@@ -4,7 +4,7 @@ resource "$1" "$2" {
 }
 endsnippet
 
-snippet variable "Create new variable" b
+snippet variable "Create input variable" b
 variable "$1" {
 	type    = ${2:string}
 	${3:default = ${4:"default"}}
@@ -14,4 +14,10 @@ endsnippet
 
 snippet data "Create new data" b
 data "$1" "$2" { $0}
+endsnippet
+
+snippet output "Create output variable" b
+output "$1" {
+	value = $2
+}
 endsnippet
