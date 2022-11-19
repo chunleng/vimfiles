@@ -22,9 +22,9 @@ function M.setup()
         }
     }
     db.custom_footer = nil
-    local base16 = require("base16-colorscheme")
-    vim.api.nvim_set_hl(0, "DashboardHeader", {fg = base16.colors.base0D_40})
-    vim.api.nvim_set_hl(0, "DashboardCenter", {fg = base16.colors.base0D})
+    local theme = require('common-theme')
+    theme.set_hl("DashboardHeader", {fg = 4})
+    theme.set_hl("DashboardCenter", {fg = 4})
     vim.api.nvim_buf_set_keymap(0, "n", "<c-space>", "<cmd>NvimTreeOpen<cr>",
                                 {silent = true, noremap = true})
     local group_name = "Dashboard"

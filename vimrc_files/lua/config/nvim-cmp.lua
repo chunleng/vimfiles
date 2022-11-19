@@ -122,39 +122,11 @@ function M.setup()
         }
     })
 
-    local base16 = require("base16-colorscheme")
-    vim.api.nvim_set_hl(0, "CmpItemMenu",
-                        {italic = true, fg = base16.colors.base03})
-    -- blue
-    vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", {fg = base16.colors.base0D})
-    vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", {fg = base16.colors.base0D})
-    -- orange
-    vim.api.nvim_set_hl(0, "CmpItemKindFunction", {fg = base16.colors.base09})
-    vim.api.nvim_set_hl(0, "CmpItemKindMethod", {fg = base16.colors.base09})
-    vim.api
-        .nvim_set_hl(0, "CmpItemKindConstructor", {fg = base16.colors.base09})
-    vim.api.nvim_set_hl(0, "CmpItemKindClass", {fg = base16.colors.base09})
-    vim.api.nvim_set_hl(0, "CmpItemKindInterface", {fg = base16.colors.base09})
-    vim.api.nvim_set_hl(0, "CmpItemKindModule", {fg = base16.colors.base09})
-    vim.api.nvim_set_hl(0, "CmpItemKindEnum", {fg = base16.colors.base09})
-    vim.api.nvim_set_hl(0, "CmpItemKindStruct", {fg = base16.colors.base09})
-    -- turquoise
-    vim.api.nvim_set_hl(0, "CmpItemKindVariable", {fg = base16.colors.base0C})
-    vim.api.nvim_set_hl(0, "CmpItemKindText", {fg = base16.colors.base0C})
-    vim.api.nvim_set_hl(0, "CmpItemKindField", {fg = base16.colors.base0C})
-    vim.api.nvim_set_hl(0, "CmpItemKindProperty", {fg = base16.colors.base0C})
-    vim.api.nvim_set_hl(0, "CmpItemKindValue", {fg = base16.colors.base0C})
-    vim.api.nvim_set_hl(0, "CmpItemKindEnumMember", {fg = base16.colors.base0C})
-    vim.api.nvim_set_hl(0, "CmpItemKindTypeParameter",
-                        {fg = base16.colors.base0C})
-    vim.api.nvim_set_hl(0, "CmpItemKindConstant", {fg = base16.colors.base0C})
-    -- yellow
-    vim.api.nvim_set_hl(0, "CmpItemKindUnit", {fg = base16.colors.base0A})
-    vim.api.nvim_set_hl(0, "CmpItemKindKeyword", {fg = base16.colors.base0A})
-    vim.api.nvim_set_hl(0, "CmpItemKindOperator", {fg = base16.colors.base0A})
-    vim.api.nvim_set_hl(0, "CmpItemKindColor", {fg = base16.colors.base0A})
-    -- default
-    vim.api.nvim_set_hl(0, "CmpItemKind", {fg = base16.colors.base03})
+    local theme = require('common-theme')
+    theme.set_hl("CmpItemAbbrMatch", {fg = 12})
+    theme.set_hl('CmpItemAbbrMatchFuzzy', {fg = 12})
+    theme.set_hl('CmpItemMenu', {italic = true, fg = theme.blender.fg_lighter_2})
+    theme.set_hl('CmpItemKind', {fg = 12})
 end
 
 return M

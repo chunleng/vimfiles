@@ -42,8 +42,10 @@ function M.setup()
     vim.api.nvim_set_keymap("x", "<c-/>", ":<c-u>FzfLua grep_visual<cr>",
                             {silent = true})
 
-    vim.api.nvim_set_hl(0, "FzfLuaFloat", {link = "NormalFloat"})
-    vim.api.nvim_set_hl(0, "FzfLuaFloatBorder", {link = "FloatBorder"})
+    local theme = require("common-theme")
+    theme.set_hl("FzfLuaFloat", {link = "NormalFloat"})
+    theme.set_hl("FzfLuaFloatBorder", {link = "FloatBorder"})
+    theme.set_hl("FzfLuaCursorLine", {bg = theme.blender.bg_lighter_2})
 end
 
 return M

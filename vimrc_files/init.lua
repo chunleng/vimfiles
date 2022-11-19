@@ -1,4 +1,5 @@
 require("common-utils").setup()
+require("common-theme").setup()
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
@@ -17,13 +18,12 @@ require('packer').startup(function(use)
     use {
         'glepnir/galaxyline.nvim',
         config = function() require("config.galaxyline").setup() end,
-        after = {"nvim-base16", "nvim-gps"}
+        after = {"nvim-gps"}
     }
     use {
-        'akinsho/bufferline.nvim',
-        config = function() require("config.bufferline").setup() end,
-        requires = 'kyazdani42/nvim-web-devicons',
-        after = "nvim-base16"
+        'romgrk/barbar.nvim',
+        config = function() require('config.barbar').setup() end,
+        requires = 'kyazdani42/nvim-web-devicons'
     }
     use {
         'SmiteshP/nvim-gps',
@@ -39,8 +39,7 @@ require('packer').startup(function(use)
     use {
         -- TODO fix pretty-mode
         'chunleng/indent-guides.nvim',
-        config = function() require("config.indent-guides").setup() end,
-        after = "nvim-base16"
+        config = function() require("config.indent-guides").setup() end
     }
 
     use {
@@ -57,8 +56,7 @@ require('packer').startup(function(use)
     use {
         'lewis6991/gitsigns.nvim',
         config = function() require("config.gitsigns").setup() end,
-        requires = 'nvim-lua/plenary.nvim',
-        after = "nvim-base16"
+        requires = 'nvim-lua/plenary.nvim'
     }
 
     use {
@@ -114,16 +112,10 @@ require('packer').startup(function(use)
 
     use {
         'whatyouhide/vim-lengthmatters',
-        config = function() require("config.lengthmatters").setup() end,
-        after = "nvim-base16"
+        config = function() require("config.lengthmatters").setup() end
     }
 
     use 'tpope/vim-surround'
-    use {
-        'qpkorr/vim-bufkill',
-        config = function() require("config.bufkill").setup() end
-    }
-
     -- Fuzzy finder for files, grep and more
     use {
         'ibhagwan/fzf-lua',
@@ -145,8 +137,7 @@ require('packer').startup(function(use)
     use {
         'stevearc/aerial.nvim',
         config = function() require("config.aerial-nvim").setup() end,
-        commit = "e0215f9dcf55e917f547ad2c688be6fe67a5926d", -- Lock because this plugin tends to break easily
-        after = {"nvim-base16"}
+        commit = "e0215f9dcf55e917f547ad2c688be6fe67a5926d" -- Lock because this plugin tends to break easily
     }
 
     use {"tpope/vim-dadbod"}
@@ -158,8 +149,7 @@ require('packer').startup(function(use)
     }
     use {
         'hrsh7th/nvim-cmp',
-        config = function() require("config.nvim-cmp").setup() end,
-        after = {'nvim-base16'}
+        config = function() require("config.nvim-cmp").setup() end
     }
     use {'hrsh7th/cmp-nvim-lsp', after = {"nvim-cmp", "mason.nvim"}}
     use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
@@ -182,8 +172,7 @@ require('packer').startup(function(use)
     -- Scrollbar
     use {
         'petertriho/nvim-scrollbar',
-        config = function() require("config.nvim-scrollbar").setup() end,
-        after = "nvim-base16"
+        config = function() require("config.nvim-scrollbar").setup() end
     }
 
     -- Multi cursor edit
@@ -233,20 +222,15 @@ require('packer').startup(function(use)
 
     -- Colorscheme
     use {
-        'RRethy/nvim-base16',
-        config = function() require("config.base16").setup() end
-    }
-    use {
         "glepnir/dashboard-nvim",
         config = function() require("config.dashboard").setup() end,
         requires = "ibhagwan/fzf-lua",
-        after = {"nvim-base16", "nvim-tree.lua"}
+        after = {"nvim-tree.lua"}
     }
 
     use {
         'stevearc/dressing.nvim',
-        config = function() require("config.dressing").setup() end,
-        after = "nvim-base16"
+        config = function() require("config.dressing").setup() end
     }
 
     -- https://github.com/dkarter/bullets.vim/issues/57
@@ -259,8 +243,7 @@ require('packer').startup(function(use)
 
     use {
         "b0o/incline.nvim",
-        config = function() require("config.incline").setup() end,
-        after = {"nvim-base16"}
+        config = function() require("config.incline").setup() end
     }
 
     use {

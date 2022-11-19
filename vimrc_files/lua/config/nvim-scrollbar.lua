@@ -1,19 +1,34 @@
 local M = {}
 
 function M.setup()
-    local base16 = require("base16-colorscheme")
 
     require("scrollbar").setup({
-        handle = {color = base16.colors.base02},
-        excluded_filetypes = {"WhichKey"},
+        set_highlights = false,
+        excluded_filetypes = {'WhichKey'},
         marks = {
-            Search = {color = base16.colors.base0A_40},
-            Error = {text = {"🬇", "▐"}, color = base16.colors.base08},
-            Warn = {text = {"🬇", "▐"}, color = base16.colors.base0A},
-            Info = {text = {"🬇", "▐"}, color = base16.colors.base0B},
-            Hint = {text = {"🬇", "▐"}, color = base16.colors.base0D}
-        }
+            Error = {text = {"🬇", "▐"}},
+            Warn = {text = {"🬇", "▐"}},
+            Info = {text = {"🬇", "▐"}},
+            Hint = {text = {"🬇", "▐"}}
+        },
+        handlers = {cursor = false}
     })
+
+    local theme = require('common-theme')
+    theme.set_hl('ScrollbarHandle', {bg = theme.blender.scrollbar})
+    theme.set_hl('ScrollbarError', {fg = theme.blender.error})
+    theme.set_hl('ScrollbarErrorHandle',
+                 {fg = theme.blender.error, bg = theme.blender.scrollbar})
+    theme.set_hl('ScrollbarWarn', {fg = theme.blender.warn})
+    theme.set_hl('ScrollbarWarnHandle',
+                 {fg = theme.blender.warn, bg = theme.blender.scrollbar})
+    theme.set_hl('ScrollbarInfo', {fg = theme.blender.info})
+    theme.set_hl('ScrollbarInfoHandle',
+                 {fg = theme.blender.info, bg = theme.blender.scrollbar})
+    theme.set_hl('ScrollbarHint', {fg = theme.blender.hint})
+    theme.set_hl('ScrollbarHintHandle',
+                 {fg = theme.blender.hint, bg = theme.blender.scrollbar})
+    theme.set_hl('ScrollbarWarnHandle', {bg = theme.blender.scrollbar})
 end
 
 return M

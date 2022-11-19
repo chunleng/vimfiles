@@ -5,13 +5,10 @@ function M.setup()
     local condition = require('galaxyline.condition')
     local gps = require("nvim-gps")
     local gls = gl.section
-    local base16 = require("base16-colorscheme")
+    local theme = require('common-theme')
 
-    local bgcolor = base16.colorschemes["schemer-medium"].base00
-    local fgcolor = base16.colorschemes["schemer-medium"].base05
-
-    vim.api.nvim_set_hl(0, "StatusLine", {default = true, bg = bgcolor})
-    vim.api.nvim_set_hl(0, "StatusLineNC", {default = true, bg = bgcolor})
+    local bgcolor = theme.colormap[theme.blender.bg_lighter_1]
+    local fgcolor = theme.colormap[theme.blender.fg_darker_1]
 
     gls.left = {
         {
@@ -25,8 +22,10 @@ function M.setup()
                 end,
                 icon = '  ',
                 separator = ' ',
-                separator_highlight = {'NONE', bgcolor},
-                highlight = {base16.colors.base07, base16.colors.base08}
+                separator_highlight = {'none', bgcolor},
+                highlight = {
+                    theme.colormap[0], theme.colormap[theme.blender.error]
+                }
             }
         }, {
             LspWarning = {
@@ -39,8 +38,10 @@ function M.setup()
                 end,
                 icon = '  ',
                 separator = ' ',
-                separator_highlight = {'NONE', bgcolor},
-                highlight = {base16.colors.base00, base16.colors.base0A}
+                separator_highlight = {'none', bgcolor},
+                highlight = {
+                    theme.colormap[0], theme.colormap[theme.blender.warn]
+                }
             }
         }, {
             nvimGPS = {
@@ -57,16 +58,16 @@ function M.setup()
                 provider = 'FileEncode',
                 condition = condition.hide_in_width,
                 separator = ' ',
-                separator_highlight = {'NONE', bgcolor},
-                highlight = {base16.colors.base0B, bgcolor, 'bold'}
+                separator_highlight = {'none', bgcolor},
+                highlight = {theme.colormap[3], bgcolor, 'bold'}
             }
         }, {
             FileFormat = {
                 provider = 'FileFormat',
                 condition = condition.hide_in_width,
                 separator = ' ',
-                separator_highlight = {'NONE', bgcolor},
-                highlight = {base16.colors.base0B, bgcolor, 'bold'}
+                separator_highlight = {'none', bgcolor},
+                highlight = {theme.colormap[3], bgcolor, 'bold'}
             }
 
         }, {
@@ -74,14 +75,14 @@ function M.setup()
                 provider = function() return '  ' end,
                 condition = condition.check_git_workspace,
                 separator = ' ',
-                separator_highlight = {'NONE', bgcolor},
-                highlight = {base16.colors.base0E, bgcolor, 'bold'}
+                separator_highlight = {'none', bgcolor},
+                highlight = {theme.colormap[5], bgcolor, 'bold'}
             }
         }, {
             GitBranch = {
                 provider = 'GitBranch',
                 condition = condition.check_git_workspace,
-                highlight = {base16.colors.base0E, bgcolor, 'bold'}
+                highlight = {theme.colormap[5], bgcolor, 'bold'}
             }
         }
     }

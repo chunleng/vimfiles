@@ -25,19 +25,20 @@ local function configure_preferred_settings()
     vim.o.swapfile = false
     vim.o.list = true
     vim.o.listchars = "tab:» ,trail:·,extends:,precedes:,nbsp:+,eol:¶"
-    vim.o.fillchars =
-        'vert:│,stlnc: ,diff:·,eob: ,fold: ,foldopen:,foldclose:,foldsep:│'
+    vim.o.fillchars = 'stlnc: ,diff:·,eob: ,fold: ,foldopen:,foldclose:'
     vim.o.laststatus = 3 -- global status bar
     vim.o.synmaxcol = 160
     vim.o.textwidth = 120
     vim.o.sidescrolloff = 20
     vim.o.scrolloff = 5
     vim.o.wrap = false
-    vim.o.termguicolors = true
     vim.o.shiftwidth = 4
     vim.o.tabstop = 4
     vim.o.expandtab = true
     vim.o.mouse = ""
+    vim.o.foldcolumn = 'auto:3'
+    vim.o.foldnestmax = 3
+    vim.o.foldminlines = 10
 
     vim.g.mapleader = " "
 end

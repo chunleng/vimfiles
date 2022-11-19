@@ -3,36 +3,11 @@ local M = {}
 function M.setup()
     require('gitsigns').setup {
         signs = {
-            add = {
-                hl = 'GitSignsAdd',
-                text = '│',
-                numhl = 'GitSignsAddNr',
-                linehl = 'GitSignsAddLn'
-            },
-            change = {
-                hl = 'GitSignsChange',
-                text = '│',
-                numhl = 'GitSignsChangeNr',
-                linehl = 'GitSignsChangeLn'
-            },
-            delete = {
-                hl = 'GitSignsDelete',
-                text = '│',
-                numhl = 'GitSignsDeleteNr',
-                linehl = 'GitSignsDeleteLn'
-            },
-            topdelete = {
-                hl = 'GitSignsDelete',
-                text = '│',
-                numhl = 'GitSignsDeleteNr',
-                linehl = 'GitSignsDeleteLn'
-            },
-            changedelete = {
-                hl = 'GitSignsChange',
-                text = '│',
-                numhl = 'GitSignsChangeNr',
-                linehl = 'GitSignsChangeLn'
-            }
+            add = {hl = 'GitSignsAdd', text = '│'},
+            change = {hl = 'GitSignsChange', text = '│'},
+            delete = {hl = 'GitSignsDelete', text = '│'},
+            topdelete = {hl = 'GitSignsDelete', text = '│'},
+            changedelete = {hl = 'GitSignsChange', text = '│'}
         },
         keymaps = {
             buffer = false,
@@ -70,26 +45,21 @@ function M.setup()
         numhl = true
     }
 
-    local base16 = require("base16-colorscheme")
-    vim.api.nvim_set_hl(0, "GitSignsAdd",
-                        {fg = base16.colors.base0B, bg = base16.colors.base01})
-    vim.api.nvim_set_hl(0, "GitSignsAddLn",
-                        {bg = base16.colorschemes["schemer-medium"].base00})
-    vim.api.nvim_set_hl(0, "GitSignsChange",
-                        {fg = base16.colors.base0D, bg = base16.colors.base01})
-    vim.api.nvim_set_hl(0, "GitSignsChangeLn",
-                        {bg = base16.colorschemes["schemer-medium"].base00})
-    vim.api.nvim_set_hl(0, "GitSignsDelete",
-                        {fg = base16.colors.base0F, bg = base16.colors.base01})
-    vim.api.nvim_set_hl(0, "GitSignsDeleteLn", {bg = "bg"})
+    local theme = require('common-theme')
+    theme.set_hl("GitSignsAdd",
+                 {fg = theme.blender.add, bg = theme.blender.bg_lighter_1})
+    theme.set_hl("GitSignsChange",
+                 {fg = theme.blender.change, bg = theme.blender.bg_lighter_1})
+    theme.set_hl("GitSignsDelete",
+                 {fg = theme.blender.delete, bg = theme.blender.bg_lighter_1})
 
-    vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame",
-                        {fg = base16.colors.base04, bg = base16.colors.base01})
-    vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlameNoBg", {bg = "none"})
-    vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlameAccent", {
-        fg = base16.colors.base09_40,
-        bg = base16.colors.base01
+    theme.set_hl('GitSignsCurrentLineBlame', {
+        fg = theme.blender.fg_darker_3,
+        bg = theme.blender.bg_lighter_2
     })
+    theme.set_hl('GitSignsCurrentLineBlameNoBg', {nocombine = true})
+    theme.set_hl('GitSignsCurrentLineBlameAccent',
+                 {fg = 2, bg = theme.blender.bg_lighter_2})
 end
 
 return M

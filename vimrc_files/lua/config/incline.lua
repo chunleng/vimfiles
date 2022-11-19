@@ -1,17 +1,12 @@
 local M = {}
 
 function M.setup()
-    local base16 = require("base16-colorscheme")
+    local theme = require('common-theme')
 
-    vim.api.nvim_set_hl(0, "InclineNormal", {
-        fg = base16.colors.base06,
-        bg = base16.colors.base0D_40,
-        blend = 0
-    })
-    vim.api.nvim_set_hl(0, "InclineNormalNC", {
-        fg = base16.colors.base03,
-        bg = base16.colors.base01,
-        blend = 0
+    theme.set_hl('InclineNormal', {fg = 15, bg = 4})
+    theme.set_hl('InclineNormalNc', {
+        fg = theme.blender.fg_darker_3,
+        bg = theme.blender.bg_lighter_2
     })
 
     require("incline").setup({
@@ -25,13 +20,7 @@ function M.setup()
             return icon .. " " .. f_name
         end,
         window = {margin = {vertical = 0}},
-        hide = {only_win = true},
-        highlight = {
-            groups = {
-                InclineNormal = "InclineNormal",
-                InclineNormalNC = "InclineNormalNC"
-            }
-        }
+        hide = {only_win = true}
     })
 end
 
