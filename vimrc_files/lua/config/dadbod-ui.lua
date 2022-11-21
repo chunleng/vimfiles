@@ -19,6 +19,20 @@ function M.setup()
             Count = "SELECT COUNT(*) FROM {optional_schema}{table}"
         }
     }
+
+    local theme = require('common-theme')
+    theme.set_hl('NotificationError', {
+        fg = theme.blender.error,
+        bg = theme.blender.bg_lighter_1,
+        blend = 10
+    })
+    theme.set_hl('NotificationWarning', {
+        fg = theme.blender.warn,
+        bg = theme.blender.bg_lighter_1,
+        blend = 10
+    })
+    theme.set_hl('NotificationInfo',
+                 {fg = 15, bg = theme.blender.bg_lighter_1, blend = 10})
 end
 
 return M

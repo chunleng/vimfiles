@@ -3,11 +3,11 @@ local M = {}
 function M.setup()
     require('gitsigns').setup {
         signs = {
-            add = {hl = 'GitSignsAdd', text = '│'},
-            change = {hl = 'GitSignsChange', text = '│'},
-            delete = {hl = 'GitSignsDelete', text = '│'},
-            topdelete = {hl = 'GitSignsDelete', text = '│'},
-            changedelete = {hl = 'GitSignsChange', text = '│'}
+            add = {hl = 'GitSignsAdd', text = ''},
+            change = {hl = 'GitSignsChange', text = ''},
+            delete = {hl = 'GitSignsDelete', text = ''},
+            topdelete = {hl = 'GitSignsDelete', text = ''},
+            changedelete = {hl = 'GitSignsChange', text = ''}
         },
         keymaps = {
             buffer = false,
@@ -19,47 +19,29 @@ function M.setup()
         current_line_blame = true,
         current_line_blame_opts = {virt_text = true},
         current_line_blame_formatter = function(name, blame_info)
-            if blame_info.author == "Not Committed Yet" then
-                return {
-                    {'      ', 'GitSignsCurrentLineBlameBoldNoBg'},
-                    {
-                        '│ ' .. blame_info.author .. ' ',
-                        'GitSignsCurrentLineBlame'
-                    }
-                }
-            end
-
             local author = blame_info.author == name and "Me" or
                                blame_info.author
             return {
-                {'      ', 'GitSignsCurrentLineBlameBoldNoBg'},
-                {'│ ', 'GitSignsCurrentLineBlame'},
-                {'  ', 'GitSignsCurrentLineBlameAccent'}, {
+                {'	  ', 'Normal'}, {'  ', 'GitSignsCurrentLineBlameAccent'},
+                {
                     string.format("%s on %s", author,
-                                  os.date("%Y/%m/%d", blame_info.author_time)),
+                                  os.date("%Y-%m-%d", blame_info.author_time)),
                     "GitSignsCurrentLineBlame"
                 }, {'  ', "GitSignsCurrentLineBlameAccent"},
                 {blame_info.summary .. ' ', "GitSignsCurrentLineBlame"}
             }
         end,
+        current_line_blame_formatter_nc = '',
         numhl = true
     }
 
     local theme = require('common-theme')
-    theme.set_hl("GitSignsAdd",
-                 {fg = theme.blender.add, bg = theme.blender.bg_lighter_1})
-    theme.set_hl("GitSignsChange",
-                 {fg = theme.blender.change, bg = theme.blender.bg_lighter_1})
-    theme.set_hl("GitSignsDelete",
-                 {fg = theme.blender.delete, bg = theme.blender.bg_lighter_1})
+    theme.set_hl("GitSignsAdd", {fg = theme.blender.add, bold = true})
+    theme.set_hl("GitSignsChange", {fg = theme.blender.change, bold = true})
+    theme.set_hl("GitSignsDelete", {fg = theme.blender.delete, bold = true})
 
-    theme.set_hl('GitSignsCurrentLineBlame', {
-        fg = theme.blender.fg_darker_3,
-        bg = theme.blender.bg_lighter_2
-    })
-    theme.set_hl('GitSignsCurrentLineBlameNoBg', {nocombine = true})
-    theme.set_hl('GitSignsCurrentLineBlameAccent',
-                 {fg = 2, bg = theme.blender.bg_lighter_2})
+    theme.set_hl('GitSignsCurrentLineBlame', {link = 'Comment'})
+    theme.set_hl('GitSignsCurrentLineBlameAccent', {fg = 4, italic = true})
 end
 
 return M

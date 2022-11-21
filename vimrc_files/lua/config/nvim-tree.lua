@@ -54,23 +54,36 @@ function M.setup()
         },
         renderer = {
             group_empty = true,
-            highlight_git = true,
+            highlight_git = false,
             icons = {
                 glyphs = {
                     git = {
                         unstaged = "",
-                        staged = "",
-                        unmerged = "",
-                        renamed = "→",
-                        untracked = "?",
-                        deleted = "",
-                        ignored = "◌"
+                        deleted = "✖ ",
+                        staged = " ",
+                        unmerged = " ",
+                        renamed = " ",
+                        untracked = " ",
+                        ignored = "◌ "
                     }
 
                 }
             }
         }
     }
+
+    local theme = require('common-theme')
+    theme.set_hl('NvimTreeGitDeleted', {fg = theme.blender.delete})
+    theme.set_hl('NvimTreeGitDirty', {fg = theme.blender.change})
+    theme.set_hl('NvimTreeGitIgnored', {fg = theme.blender.bg_lighter_3})
+    theme.set_hl('NvimTreeGitMerge', {fg = 6})
+    theme.set_hl('NvimTreeGitNew', {fg = theme.blender.add})
+    theme.set_hl('NvimTreeGitRenamed', {fg = theme.blender.change})
+    theme.set_hl('NvimTreeGitStaged', {fg = 6})
+    theme.set_hl('NvimTreeFolderIcon', {link = 'Directory'})
+    theme.set_hl('NvimTreeExecFile', {fg = 2, bold = true})
+    theme.set_hl('NvimTreeSymlink', {fg = 6, bold = true})
+    theme.set_hl('NvimTreeEndOfBuffer', {bg = 0})
 
     local events = require("nvim-tree.api").events
     events.subscribe(events.Event.TreeOpen,

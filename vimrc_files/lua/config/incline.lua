@@ -3,7 +3,7 @@ local M = {}
 function M.setup()
     local theme = require('common-theme')
 
-    theme.set_hl('InclineNormal', {fg = 15, bg = 4})
+    theme.set_hl('InclineNormal', {fg = 0, bg = 6})
     theme.set_hl('InclineNormalNc', {
         fg = theme.blender.fg_darker_3,
         bg = theme.blender.bg_lighter_2

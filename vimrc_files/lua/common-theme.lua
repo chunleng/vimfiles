@@ -274,37 +274,47 @@ function M.setup()
 
     update_color({
         '#202020', '#dd241d', '#98a71a', '#c76921', '#456588', '#d16286',
-        '#58ad8a', '#989898', '#737373', '#ff4934', '#b8db36', '#ea7d2f',
-        '#8385a8', '#f3869b', '#7ec09c', '#ebebeb'
+        '#288d7a', '#989898', '#737373', '#ff4934', '#b8db36', '#ea7d2f',
+        '#8385a8', '#f3869b', '#7ec09c', '#d0d0d0'
     })
     update_blender({
-        bg_lighter_1 = 236,
-        bg_lighter_2 = 238,
-        bg_lighter_3 = 240,
+        bg_lighter_1 = 235,
+        bg_lighter_2 = 237,
+        bg_lighter_3 = 239,
         bg_darker_1 = 234,
         bg_darker_2 = 233,
         bg_darker_3 = 232,
-        fg_darker_1 = 253,
-        fg_darker_2 = 249,
-        fg_darker_3 = 245,
+        fg_darker_1 = 249,
+        fg_darker_2 = 246,
+        fg_darker_3 = 243,
         add = 2,
         change = 4,
         delete = 1,
         error = 9,
         warn = 11,
         info = 12,
-        hint = 10,
-        scrollbar = 4
+        hint = 2,
+        scrollbar = 4,
+        void = 234
     })
 
     M.set_hl('Normal', {fg = 15})
-    M.set_hl('NonText', {fg = M.blender.bg_lighter_2})
-    M.set_hl('Comment', {fg = M.blender.bg_lighter_3})
-    M.set_hl('MatchParen', {bold = true, italic = true})
-    M.set_hl('VertSplit', {fg = M.blender.bg_lighter_3})
-    M.set_hl('ColorColumn', {undercurl = true, sp = 9})
+    M.set_hl('NonText', {fg = 10})
+    M.set_hl('Whitespace', {fg = M.blender.bg_lighter_2})
+    M.set_hl('VertSplit', {fg = M.blender.bg_lighter_2})
+    M.set_hl('ColorColumn', {bg = M.blender.void})
     M.set_hl('CursorLine', {bg = M.blender.bg_lighter_1})
-    M.set_hl('Folded', {bold = true, fg = 4, bg = M.blender.bg_lighter_1})
+    M.set_hl('Folded', {
+        bold = true,
+        fg = 2,
+        bg = M.blender.bg_lighter_2,
+        sp = M.blender.fg_darker_3
+    })
+    M.set_hl('FoldColumn', {fg = M.blender.bg_lighter_2})
+    M.set_hl('EndOfBuffer', {bg = M.blender.bg_darker_1})
+
+    -- similar to lf file manager
+    M.set_hl('Directory', {fg = 4, bold = true})
 
     M.set_hl('DiffAdd', {})
     M.set_hl('DiffDelete',
@@ -315,16 +325,17 @@ function M.setup()
     M.set_hl('ErrorMsg', {fg = 9})
     M.set_hl('IncSearch', {fg = 15, bg = 2})
     M.set_hl('Search', {bg = 4})
+    M.set_hl('MsgArea', {fg = M.blender.fg_darker_2})
     M.set_hl('MoreMsg', {fg = M.blender.fg_darker_2})
 
     -- Completion
     M.set_hl('Pmenu', {
         fg = M.blender.fg_darker_2,
-        bg = M.blender.bg_lighter_1,
+        bg = M.blender.bg_lighter_2,
         blend = 10
     })
     M.set_hl('PmenuSel', {fg = 0, bg = 2, blend = 10})
-    M.set_hl('PmenuSbar', {bg = M.blender.bg_lighter_2})
+    M.set_hl('PmenuSbar', {bg = M.blender.bg_lighter_3})
     M.set_hl('PmenuThumb', {bg = M.blender.scrollbar})
 
     -- Float
@@ -352,42 +363,42 @@ function M.setup()
     M.set_hl('DiagnosticVirtualTextHint', {link = 'DiagnosticVirtualText'})
 
     -- Gutter
-    M.set_hl('LineNr', {fg = M.blender.bg_lighter_3})
+    M.set_hl('LineNr', {fg = M.blender.fg_darker_3})
     M.set_hl('CursorLineNr', {})
     M.set_hl('SignColumn', {})
-    M.set_hl('FoldColumn', {fg = 4})
 
     M.set_hl('StatusLine', {})
-    M.set_hl('Visual', {bg = M.blender.bg_lighter_1})
-    M.set_hl('MsgArea', {fg = M.blender.fg_darker_2})
+    M.set_hl('Visual', {bg = M.blender.bg_lighter_2})
 
     -- :h treesitter-highlight-groups
     M.set_hl('NvimInternalError', {fg = M.blender.error})
     M.set_hl('Operator', {fg = 9})
-    M.set_hl('SpecialChar', {
-        italic = true,
-        bold = true,
-        fg = M.blender.fg_darker_2,
-        underdotted = true
-    })
-    M.set_hl('String', {italic = true, fg = M.blender.fg_darker_2})
+    M.set_hl('SpecialChar', {bold = true, fg = 6})
+    M.set_hl('Comment', {fg = M.blender.bg_lighter_3, italic = true})
+    M.set_hl('String', {fg = 6})
     M.set_hl('Number', {link = 'String'})
     M.set_hl('Float', {link = 'String'})
-    M.set_hl('Boolean', {link = 'String'})
+    M.set_hl('Boolean', {link = 'Keyword'})
     M.set_hl('Character', {link = 'String'})
     M.set_hl('Keyword', {fg = 4, bold = true})
     M.set_hl('Conditional', {fg = 12, bold = true})
     M.set_hl('Repeat', {link = 'Conditional'})
     M.set_hl('Function', {fg = 10})
+    M.set_hl('@function.builtin', {fg = 10, underdotted = true})
     M.set_hl('Identifier', {fg = M.blender.fg_darker_1})
     M.set_hl('Delimiter', {fg = 3})
     M.set_hl('Type', {fg = 11})
+    M.set_hl('@constructor', {link = 'type'})
     M.set_hl('TypeDef', {fg = 11, bold = true})
     M.set_hl('Constant', {fg = 13, bold = true})
-    M.set_hl('Include', {fg = 10, bold = true})
+    M.set_hl('@constant.builtin', {fg = 13, underdotted = true, bold = true})
+    M.set_hl('Include', {fg = 2, underdotted = true, bold = true})
     M.set_hl('Preproc', {fg = M.blender.bg_lighter_3})
     M.set_hl('Label', {fg = 6})
     M.set_hl('Tag', {fg = 6})
+    M.set_hl('Title', {fg = 12, bold = true})
+    M.set_hl('Exception', {fg = 1})
+    M.set_hl('@text.literal', {link = "String"})
 end
 
 return M

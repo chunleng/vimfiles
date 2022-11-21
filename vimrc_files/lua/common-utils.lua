@@ -21,10 +21,10 @@ end
 
 local function configure_preferred_settings()
     vim.o.number = true
-    vim.o.relativenumber = true
+    vim.o.relativenumber = false
     vim.o.swapfile = false
     vim.o.list = true
-    vim.o.listchars = "tab:» ,trail:·,extends:,precedes:,nbsp:+,eol:¶"
+    vim.o.listchars = "tab:⇥ ,trail:·,extends:,precedes:,nbsp:+,eol: "
     vim.o.fillchars = 'stlnc: ,diff:·,eob: ,fold: ,foldopen:,foldclose:'
     vim.o.laststatus = 3 -- global status bar
     vim.o.synmaxcol = 160
@@ -36,9 +36,10 @@ local function configure_preferred_settings()
     vim.o.tabstop = 4
     vim.o.expandtab = true
     vim.o.mouse = ""
-    vim.o.foldcolumn = 'auto:3'
-    vim.o.foldnestmax = 3
+    vim.o.foldcolumn = '1'
+    vim.o.foldnestmax = 9
     vim.o.foldminlines = 10
+    vim.o.colorcolumn = '+1,+' .. vim.fn.join(vim.fn.range(2, 100), ',+')
 
     vim.g.mapleader = " "
 end
@@ -197,14 +198,18 @@ local function configure_vim_diagnostics()
     for type, icon in pairs({
         Error = "",
         Warn = "",
-        Hint = "ﯦ",
+        Hint = "",
         Info = ""
     }) do
         local hl = "DiagnosticSign" .. type
         vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
     end
 
-    vim.diagnostic.config({virtual_text = false, float = {source = true}})
+    vim.diagnostic.config({
+        virtual_text = false,
+        float = {source = true},
+        signs = false
+    })
 end
 
 function M.setup()
@@ -256,7 +261,7 @@ M.kind_icons = {
 
 -- Better foldtext
 function _G.fold_text()
-    local leveltext = "   "
+    local leveltext = "   "
     for _ = 1, vim.v.foldlevel do leveltext = leveltext .. "" end
     local foldtext = vim.api.nvim_buf_get_lines(0, vim.v.foldstart - 1,
                                                 vim.v.foldstart, false)[1]
