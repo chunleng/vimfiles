@@ -10,10 +10,15 @@ function M.setup()
 
     require("aerial").setup({
         attach_mode = "global",
-        close_automatic_events = {"unsupported", "switch_buffer"},
+        close_automatic_events = {'unfocus', "unsupported", "switch_buffer"},
         backends = {"lsp", "treesitter", "markdown"}, -- LSP is still more stable, prioritize LSP first
         show_guide = true,
-        layout = {placement = "edge", min_width = 30, max_width = 30},
+        layout = {
+            placement = "edge",
+            min_width = 30,
+            max_width = 30,
+            default_direction = 'right'
+        },
         icons = kind_icons,
         filter_kind = {
             ['_'] = {
@@ -28,12 +33,18 @@ function M.setup()
             yaml = data_kind
         },
         open_automatic = os.getenv("NOAERIAL") == nil and true or false,
-        default_direction = "right",
         on_attach = function(bufnr)
             vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cc',
                                         '<cmd>AerialToggle!<cr>',
                                         {silent = true, noremap = true})
         end
+    })
+
+    local theme = require('common-theme')
+    theme.set_hl('AerialLine', {fg = 0, bg = 6})
+    theme.set_hl('AerialLineNC', {
+        fg = theme.blender.fg_darker_3,
+        bg = theme.blender.bg_lighter_2
     })
 end
 

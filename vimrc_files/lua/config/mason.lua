@@ -26,7 +26,7 @@ function M.setup()
     -- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 
     local lspconfig = require('lspconfig')
-    local common_on_attach = function(client, bufnr)
+    local common_on_attach = function(_, bufnr)
         local function noremap(b, mode, lhs, rhs, is_silent)
             if is_silent == nil then is_silent = true end
             vim.api.nvim_buf_set_keymap(b, mode, lhs, rhs,
@@ -39,8 +39,6 @@ function M.setup()
         noremap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
         noremap(bufnr, 'v', '=',
                 ':\'<,\'>lua vim.lsp.buf.range_formatting()<cr>')
-
-        require("aerial").on_attach(client, bufnr)
     end
 
     configure_lsp_mappings()
