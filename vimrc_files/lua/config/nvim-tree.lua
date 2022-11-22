@@ -1,7 +1,8 @@
 local M = {}
 
 function M.setup()
-    vim.api.nvim_set_keymap("n", "<c-space>", "<cmd>NvimTreeFindFile<cr>",
+    vim.api.nvim_set_keymap("n", "<c-space>",
+                            "<cmd>NvimTreeFindFile|NvimTreeOpen<cr>",
                             {noremap = true, silent = true})
     require'nvim-tree'.setup {
         disable_netrw = false,
