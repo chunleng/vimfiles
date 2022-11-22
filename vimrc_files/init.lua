@@ -36,10 +36,11 @@ require('packer').startup(function(use)
         'simnalamburt/vim-mundo',
         config = function() require("config.mundo").setup() end
     }
+
+    -- https://github.com/lukas-reineke/indent-blankline.nvim/
     use {
-        -- TODO fix pretty-mode
-        'chunleng/indent-guides.nvim',
-        config = function() require("config.indent-guides").setup() end
+        'lukas-reineke/indent-blankline.nvim',
+        config = function() require('config.indent-blankline') end
     }
 
     use {
