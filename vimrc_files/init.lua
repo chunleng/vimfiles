@@ -110,11 +110,6 @@ require('packer').startup(function(use)
         config = function() require("config.illuminate").setup() end
     }
 
-    use {
-        'whatyouhide/vim-lengthmatters',
-        config = function() require("config.lengthmatters").setup() end
-    }
-
     use 'tpope/vim-surround'
     -- Fuzzy finder for files, grep and more
     use {
@@ -218,14 +213,6 @@ require('packer').startup(function(use)
     use {
         'NvChad/nvim-colorizer.lua',
         config = function() require("config.colorizer").setup() end
-    }
-
-    -- Colorscheme
-    use {
-        "glepnir/dashboard-nvim",
-        config = function() require("config.dashboard").setup() end,
-        requires = "ibhagwan/fzf-lua",
-        after = {"nvim-tree.lua"}
     }
 
     use {
