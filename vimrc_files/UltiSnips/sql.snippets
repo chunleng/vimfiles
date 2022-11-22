@@ -1,7 +1,7 @@
 global !p
 def expand(snip, jump_pos=1):
-    if snip.tabstop != jump_pos: return
-    vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
+	if snip.tabstop != jump_pos: return
+	vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
 endglobal
 
 snippet __delete_by_id "SQL Template for deletion by id" b
@@ -18,4 +18,15 @@ endsnippet
 post_jump "expand(snip)"
 snippet update_by_id "Alias for __update_by_id" b
 __update_by_id$1
+endsnippet
+
+snippet __insert "Insert into table" b
+INSERT INTO ${1:table}${2:
+	(columns)}
+VALUES
+	($3)
+endsnippet
+post_jump "expand(snip)"
+snippet insert "Alias for __insert" bi
+__insert$1
 endsnippet
