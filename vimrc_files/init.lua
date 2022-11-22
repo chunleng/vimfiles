@@ -238,4 +238,9 @@ require('packer').startup(function(use)
         config = function() require("config.emmet").setup() end
     }
 
+    -- https://github.com/nvim-treesitter/nvim-treesitter-context
+    use {
+        "nvim-treesitter/nvim-treesitter-context",
+        config = function() require('config.treesitter-context').setup() end
+    }
 end)
