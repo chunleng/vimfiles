@@ -14,7 +14,7 @@ function M.setup()
             ['n <leader>gn'] = '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>',
             ['n <leader>gp'] = '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>',
             ['n <leader>gr'] = '<cmd>lua require\"gitsigns.actions\".reset_hunk()<CR>',
-            ['n <leader>d'] = '<cmd>Gitsigns diffthis<CR>'
+            ['n <leader>gd'] = '<cmd>Gitsigns diffthis<CR>'
         },
         current_line_blame = true,
         current_line_blame_opts = {virt_text = true},

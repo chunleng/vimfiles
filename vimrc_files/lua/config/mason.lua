@@ -22,9 +22,8 @@ local function configure_lsp_mappings()
     noremap('n', '<leader>cn', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 end
 
-function M.setup()
+local function setup_lsp()
     -- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
-
     local lspconfig = require('lspconfig')
     local common_on_attach = function(_, bufnr)
         local function noremap(b, mode, lhs, rhs, is_silent)
@@ -42,8 +41,8 @@ function M.setup()
     end
 
     configure_lsp_mappings()
-    require("mason").setup()
-    require("mason-lspconfig").setup({
+    local lsp_setup = require("mason-lspconfig")
+    lsp_setup.setup({
         ensure_installed = {
             "cssls", "cssmodules_ls", "denols", "dockerls", "efm", "eslint",
             "grammarly", "html", "intelephense", "jdtls", "jsonls", "pyright",
@@ -53,7 +52,7 @@ function M.setup()
 
         }
     })
-    require("mason-lspconfig").setup_handlers {
+    lsp_setup.setup_handlers {
         function(server_name)
             lspconfig[server_name].setup({on_attach = common_on_attach})
         end,
@@ -267,6 +266,51 @@ function M.setup()
             })
         end
     }
+end
+
+local function setup_dap()
+    local dap_setup = require('mason-nvim-dap')
+
+    local theme = require('common-theme')
+    theme.set_hl('DapBreakpointText', {fg = 14})
+    theme.set_hl('DapStoppedText', {fg = 10})
+    vim.fn.sign_define('DapBreakpoint',
+                       {text = '⏺', texthl = 'DapBreakpointText'})
+    vim.fn.sign_define('DapStopped', {
+        text = '',
+        texthl = 'DapStoppedText',
+        linehl = 'CursorLine'
+    })
+
+    vim.api.nvim_set_keymap('n', '<leader>db', '<cmd>DapToggleBreakpoint<cr>',
+                            {silent = true, noremap = true})
+    vim.api.nvim_set_keymap('n', '<leader>dc',
+                            '<cmd>DapContinue<cr><cmd>lua require("dap").repl.open({width=50}, "belowright vsplit")<cr>',
+                            {silent = true, noremap = true})
+    vim.api.nvim_set_keymap('n', '<leader>dn', '<cmd>DapNext<cr>',
+                            {silent = true, noremap = true})
+    vim.api.nvim_set_keymap('n', '<leader>dr',
+                            '<cmd>lua require("dap").repl.toggle({width=50}, "belowright vsplit")<cr>',
+                            {silent = true, noremap = true})
+    vim.api.nvim_set_keymap('n', '<leader>dt', '<cmd>DapTerminate<cr>',
+                            {silent = true, noremap = true})
+
+    -- List of install name
+    -- https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
+    dap_setup.setup({
+        ensure_installed = {'python'},
+        automatic_installation = true,
+        automatic_setup = true
+    })
+
+    dap_setup.setup_handlers()
+
+end
+
+function M.setup()
+    require("mason").setup()
+    setup_lsp()
+    setup_dap()
 end
 
 return M

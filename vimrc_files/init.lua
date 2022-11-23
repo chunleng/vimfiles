@@ -120,12 +120,14 @@ require('packer').startup(function(use)
     }
 
     -- Code Intellisense
+    -- https://github.com/mfussenegger/nvim-dap
     use {
         'williamboman/mason.nvim',
         config = function() require("config.mason").setup() end,
         requires = {
             'williamboman/mason-lspconfig', 'neovim/nvim-lspconfig',
-            'folke/neodev.nvim', 'b0o/schemastore.nvim', 'ibhagwan/fzf-lua'
+            'folke/neodev.nvim', 'b0o/schemastore.nvim', 'ibhagwan/fzf-lua',
+            'jayp0521/mason-nvim-dap.nvim', 'mfussenegger/nvim-dap'
         },
         after = {"fzf-lua", "aerial.nvim"}
     }
