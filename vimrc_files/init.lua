@@ -121,6 +121,7 @@ require('packer').startup(function(use)
 
     -- Code Intellisense
     -- https://github.com/mfussenegger/nvim-dap
+    -- https://github.com/jayp0521/mason-nvim-dap.nvim
     use {
         'williamboman/mason.nvim',
         config = function() require("config.mason").setup() end,

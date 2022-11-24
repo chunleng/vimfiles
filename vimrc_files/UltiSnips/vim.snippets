@@ -40,3 +40,18 @@ let g:dbs = [
 \ { "name": "dev-mysql", "url": "mysql://mysql:password@127.0.0.1:3306/db?default-character-set=utf8"}
 \ ]
 endsnippet
+
+snippet __dap_python "DAP project configuration" b
+LUA
+lua << LUA
+require('dap').configurations.python = {
+	{
+		type = 'python',
+		request = 'launch',
+		name = 'Launch current',
+		program = '${file}', -- current file
+		pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python'
+	}
+}
+LUA
+endsnippet

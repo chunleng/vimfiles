@@ -11,7 +11,7 @@ function M.setup()
         minimum_padding = 2,
         maximum_padding = 2,
         maximum_length = 40,
-        exclude_ft = {'qf'}
+        exclude_ft = {'qf', 'dap-repl'}
     })
 
     vim.api.nvim_set_keymap("n", "<c-,>", "<cmd>BufferMovePrevious<cr>",
