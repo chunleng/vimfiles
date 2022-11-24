@@ -24,17 +24,20 @@ function M.setup()
     vim.api.nvim_set_keymap("n", "gp", "<cmd>BufferPin<cr>",
                             {silent = true, noremap = true})
     vim.api.nvim_set_keymap("n", "<leader>bh",
-                            "<cmd>BufferCloseBuffersLeft<cr>",
+                            "<cmd>confirm BufferCloseBuffersLeft<cr>",
                             {silent = true, noremap = true})
     vim.api.nvim_set_keymap("n", "<leader>bl",
-                            "<cmd>BufferCloseBuffersRight<cr>",
+                            "<cmd>confirm BufferCloseBuffersRight<cr>",
+                            {silent = true, noremap = true})
+    vim.api.nvim_set_keymap("n", "<leader>ba",
+                            "<cmd>confirm BufferCloseAllButPinned<cr>",
                             {silent = true, noremap = true})
     vim.api.nvim_set_keymap("n", "<leader>bo",
-                            "<cmd>BufferCloseAllButPinned<cr>",
+                            "<cmd>confirm BufferCloseAllButCurrentOrPinned<cr>",
                             {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "<c-x>", "<cmd>BufferClose<cr>",
+    vim.api.nvim_set_keymap("n", "<c-x>", "<cmd>confirm BufferClose<cr>",
                             {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "<c-x>", "<cmd>BufferClose<cr>",
+    vim.api.nvim_set_keymap("n", "<c-x>", "<cmd>confirm BufferClose<cr>",
                             {noremap = true, silent = true})
     vim.api.nvim_set_keymap("n", "g0", "<cmd>BufferGoto 1<cr>",
                             {noremap = true, silent = true})
