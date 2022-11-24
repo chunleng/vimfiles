@@ -10,7 +10,8 @@ function M.setup()
         icon_close_tab_modified = '⊙',
         minimum_padding = 2,
         maximum_padding = 2,
-        maximum_length = 40
+        maximum_length = 40,
+        exclude_ft = {'qf'}
     })
 
     vim.api.nvim_set_keymap("n", "<c-,>", "<cmd>BufferMovePrevious<cr>",

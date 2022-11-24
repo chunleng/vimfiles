@@ -312,6 +312,7 @@ function M.setup()
     })
     M.set_hl('FoldColumn', {fg = M.blender.bg_lighter_2})
     M.set_hl('EndOfBuffer', {bg = M.blender.bg_darker_1})
+    M.set_hl('QuickFixLine', {bg = 2})
 
     -- similar to lf file manager
     M.set_hl('Directory', {fg = 4, bold = true})
