@@ -13,6 +13,7 @@ local function configure_lsp_mappings()
     -- noremap('n', '<leader>cf', '<cmd>lua vim.lsp.buf.code_action({context={only={"quickfix"}}, apply=true})<cr>')
     noremap('n', '<leader>ca',
             '<cmd>lua vim.lsp.buf.code_action({apply=true})<cr>')
+    noremap('n', '<leader>cR', '<cmd>LspRestart<cr>')
     noremap('n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<cr>')
     noremap('n', '<leader>c=', '<cmd>lua vim.lsp.buf.format({async=true})<cr>')
     noremap('n', '<leader>cu', '<cmd>lua require"fzf-lua".lsp_references()<cr>')
