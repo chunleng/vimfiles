@@ -7,7 +7,8 @@ function M.setup()
             change = {hl = 'GitSignsChange', text = ''},
             delete = {hl = 'GitSignsDelete', text = ''},
             topdelete = {hl = 'GitSignsDelete', text = ''},
-            changedelete = {hl = 'GitSignsChange', text = ''}
+            changedelete = {hl = 'GitSignsChange', text = ''},
+            untracked = {hl = 'GitSignsChange', text = ''}
         },
         keymaps = {
             buffer = false,
