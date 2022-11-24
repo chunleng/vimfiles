@@ -46,6 +46,21 @@ function M.setup()
         fg = theme.blender.fg_darker_3,
         bg = theme.blender.bg_lighter_2
     })
+
+    local group_name = "Aerial"
+    vim.api.nvim_create_augroup(group_name, {clear = true})
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = "aerial",
+        callback = function()
+            vim.keymap.del('n', '<c-j>', {buffer = true})
+            vim.keymap.del('n', '<c-k>', {buffer = true})
+            vim.keymap.set('n', 'J', '<cmd>AerialNext<cr>',
+                           {buffer = true, silent = true, noremap = true})
+            vim.keymap.set('n', 'K', '<cmd>AerialPrev<cr>',
+                           {buffer = true, silent = true, noremap = true})
+        end,
+        group = group_name
+    })
 end
 
 return M
