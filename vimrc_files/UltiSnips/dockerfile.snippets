@@ -1,0 +1,9 @@
+snippet __apt_install "Apt update and install" b
+RUN apt-get update && \
+	apt-get install -y ${1:curl} && \
+	rm -rf /var/lib/apt/lists/*
+endsnippet
+
+snippet __apk_install "Alpine apk install" b
+RUN apk --no-cache ${1:curl}
+endsnippet
