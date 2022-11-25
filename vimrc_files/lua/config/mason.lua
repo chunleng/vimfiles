@@ -276,7 +276,7 @@ local function setup_dap()
     theme.set_hl('DapBreakpointText', {fg = 14})
     theme.set_hl('DapStoppedText', {fg = 10})
     vim.fn.sign_define('DapBreakpoint',
-                       {text = '⏺', texthl = 'DapBreakpointText'})
+                       {text = '', texthl = 'DapBreakpointText'})
     vim.fn.sign_define('DapStopped', {
         text = '',
         texthl = 'DapStoppedText',
