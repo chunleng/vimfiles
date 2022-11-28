@@ -18,3 +18,15 @@ post_jump "expand(snip)"
 snippet __github_foldable "Alias for <details>" b
 <details>$1
 endsnippet
+
+snippet __user_story "Description" b
+# Description
+
+As a ${1:<role/profile>}
+I wan to ${2:<action/activity>}
+so that ${3:<benefit/reason>}
+
+# Acceptance Criteria
+
+- $0
+endsnippet
