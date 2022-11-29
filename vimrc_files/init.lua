@@ -135,8 +135,7 @@ require('packer').startup(function(use)
 
     use {
         'stevearc/aerial.nvim',
-        config = function() require("config.aerial-nvim").setup() end,
-        commit = "4b42ddbd453caec3b12541af80e498a02d47cf20" -- Lock because this plugin tends to break easily
+        config = function() require("config.aerial-nvim").setup() end
     }
 
     use {"tpope/vim-dadbod"}

@@ -10,8 +10,7 @@ function M.setup()
 
     require("aerial").setup({
         attach_mode = "global",
-        close_automatic_events = {'unfocus', "unsupported", "switch_buffer"},
-        backends = {"lsp", "treesitter", "markdown"}, -- LSP is still more stable, prioritize LSP first
+        backends = {'lsp', 'treesitter', 'markdown', 'man'}, -- LSP is still more stable, prioritize LSP first
         show_guide = true,
         layout = {
             placement = "edge",
@@ -32,8 +31,11 @@ function M.setup()
             json = data_kind,
             yaml = data_kind
         },
-        open_automatic = os.getenv("NOAERIAL") == nil and true or false,
         on_attach = function(bufnr)
+            if os.getenv("NOAERIAL") ~= '1' and M.opened ~= 1 then
+                require('aerial').open({focus = false})
+                M.opened = 1
+            end
             vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cc',
                                         '<cmd>AerialToggle!<cr>',
                                         {silent = true, noremap = true})
