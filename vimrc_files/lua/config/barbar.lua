@@ -59,8 +59,10 @@ function M.setup()
         fg = theme.blender.fg_darker_3,
         bg = theme.blender.bg_darker_2
     })
-    theme.set_hl('BufferInactiveMod',
-                 {bg = theme.blender.bg_darker_2, nocombine = true})
+    theme.set_hl('BufferInactiveMod', {
+        fg = theme.blender.fg_darker_3,
+        bg = theme.blender.bg_darker_2
+    })
     theme.set_hl('BufferInactiveSign', {link = 'BufferInactive'})
 
     theme.set_hl('BufferTabpages', {bg = 4})
