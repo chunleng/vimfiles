@@ -5,5 +5,5 @@ RUN apt-get update && \
 endsnippet
 
 snippet __apk_install "Alpine apk install" b
-RUN apk --no-cache ${1:curl}
+RUN apk add --no-cache ${1:curl}
 endsnippet
