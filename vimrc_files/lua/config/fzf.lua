@@ -35,7 +35,9 @@ function M.setup()
     vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua resume<cr>",
                             {silent = true})
     vim.api.nvim_set_keymap("n", "<c-/>", ":FzfLuaSearch<cr>", {silent = true})
-    vim.api.nvim_set_keymap("n", "<f1>", ":FzfLua help_tags<cr>",
+    vim.api.nvim_set_keymap("n", "<leader>?v", ":FzfLua help_tags<cr>",
+                            {silent = true})
+    vim.api.nvim_set_keymap("n", "<leader>?m", ":FzfLua man_pages<cr>",
                             {silent = true})
     vim.api.nvim_set_keymap("n", "<leader>g/", ":<c-u>FzfLua git_status<cr>",
                             {silent = true})
