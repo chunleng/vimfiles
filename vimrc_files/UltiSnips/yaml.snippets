@@ -45,7 +45,7 @@ service: ${1:service_name}
 frameworkVersion: '3'
 
 provider:
-  name: aws
+	name: aws
 	runtime: nodejs14.x
 	region: ap-northeast-1
 endsnippet
@@ -83,4 +83,11 @@ formatter:
 require_paths: []
 plugins: []
 max_files: 5000
+endsnippet
+
+snippet __gha_checkout "GitHub Action Checkout"
+name: Checkout repository
+	uses: actions/checkout@v3
+	with:
+		fetch-depth: 0
 endsnippet
