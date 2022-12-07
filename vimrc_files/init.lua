@@ -116,7 +116,8 @@ require('packer').startup(function(use)
     use {
         'ibhagwan/fzf-lua',
         config = function() require("config.fzf").setup() end,
-        requires = 'kyazdani42/nvim-web-devicons'
+        requires = 'kyazdani42/nvim-web-devicons',
+        after = {'nvim-dap-ui'}
     }
 
     -- Code Intellisense
@@ -131,7 +132,7 @@ require('packer').startup(function(use)
             'jayp0521/mason-nvim-dap.nvim', 'mfussenegger/nvim-dap',
             'rcarriga/nvim-dap-ui', 'ofirgall/goto-breakpoints.nvim'
         },
-        after = {"fzf-lua", "aerial.nvim"}
+        after = {"aerial.nvim"}
     }
 
     use {

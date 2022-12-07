@@ -14,6 +14,18 @@ function M.setup()
             fzf = {["enter"] = "select+accept"}
         },
         actions = {files = {["default"] = actions.file_edit}},
+        dap = {
+            variables = {
+                actions = {
+                    ["default"] = function(selected)
+                        -- TODO Add to watch after the following issue is resolved
+                        -- https://github.com/rcarriga/nvim-dap-ui/issues/160
+                        -- local expr = string.match(selected[0], '%] (.*) = ')
+                        print(selected)
+                    end
+                }
+            }
+        },
         grep = {actions = {["default"] = actions.file_edit_or_qf}},
         winopts = {hl = {normal = "FzfLuaFloat", border = "FzfLuaFloatBorder"}},
         fzf_colors = {
@@ -34,6 +46,10 @@ function M.setup()
     vim.api
         .nvim_set_keymap("n", "<enter>", ":FzfLua files<cr>", {silent = true})
     vim.api.nvim_set_keymap("n", "<leader>B", "<cmd>FzfLua buffers<cr>",
+                            {silent = true})
+    vim.api.nvim_set_keymap("n", "<leader>Db",
+                            "<cmd>FzfLua dap_breakpoints<cr>", {silent = true})
+    vim.api.nvim_set_keymap("n", "<leader>Dv", "<cmd>FzfLua dap_variables<cr>",
                             {silent = true})
     vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua resume<cr>",
                             {silent = true})

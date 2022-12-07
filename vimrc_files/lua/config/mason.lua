@@ -16,7 +16,7 @@ local function configure_lsp_mappings()
     noremap('n', '<leader>cR', '<cmd>LspRestart<cr>')
     noremap('n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<cr>')
     noremap('n', '<leader>c=', '<cmd>lua vim.lsp.buf.format({async=true})<cr>')
-    noremap('n', '<leader>cu', '<cmd>lua require"fzf-lua".lsp_references()<cr>')
+    noremap('n', '<leader>cu', '<cmd>FzfLua lsp_references<cr>')
     noremap('n', '<leader>cd', '<cmd>FzfLua lsp_document_diagnostics<cr>')
     noremap('n', '<leader>c?', '<cmd>FzfLua lsp_workspace_diagnostics<cr>')
     noremap('n', '<leader>cp', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
@@ -34,8 +34,7 @@ local function setup_lsp()
         end
 
         -- Insert keymap that might override default ones
-        noremap(bufnr, 'n', 'gd',
-                '<cmd>lua require"fzf-lua".lsp_definitions()<cr>')
+        noremap(bufnr, 'n', 'gd', '<cmd>FzfLua lsp_definitions<cr>')
         noremap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
         noremap(bufnr, 'v', '=',
                 ':\'<,\'>lua vim.lsp.buf.range_formatting()<cr>')
@@ -336,8 +335,7 @@ local function setup_dap()
         layouts = {
             {
                 elements = {
-                    {id = 'stacks', size = 0.3}, {id = 'watches', size = 0.3},
-                    {id = 'scopes', size = 0.4}
+                    {id = 'stacks', size = 0.4}, {id = 'watches', size = 0.6}
                 },
                 size = 30,
                 position = 'left'
