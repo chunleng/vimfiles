@@ -273,9 +273,9 @@ function M.setup()
     vim.o.winblend = 1
 
     update_color({
-        '#202020', '#dd241d', '#98a71a', '#c76921', '#456588', '#d16286',
-        '#288d7a', '#989898', '#737373', '#ff4934', '#b8db36', '#ea7d2f',
-        '#8385a8', '#f3869b', '#7ec09c', '#d0d0d0'
+        '#202020', '#ff141d', '#6d9c10', '#bfbf31', '#3a5aa3', '#d182d6',
+        '#28869c', '#737373', '#939393', '#ff7964', '#68c336', '#cccc7f',
+        '#6f95d8', '#f3b6fb', '#4ea9cc', '#d0d0d0'
     })
     update_blender({
         bg_lighter_1 = 235,
@@ -293,7 +293,7 @@ function M.setup()
         error = 9,
         warn = 11,
         info = 12,
-        hint = 2,
+        hint = 10,
         scrollbar = 4,
         void = 234
     })
@@ -374,27 +374,27 @@ function M.setup()
 
     -- :h treesitter-highlight-groups
     M.set_hl('NvimInternalError', {fg = M.blender.error})
-    M.set_hl('Operator', {fg = 9})
-    M.set_hl('SpecialChar', {bold = true, fg = 6})
+    M.set_hl('Operator', {fg = 15})
+    M.set_hl('SpecialChar', {bold = true, fg = 14})
     M.set_hl('Comment', {fg = M.blender.bg_lighter_3, italic = true})
-    M.set_hl('String', {fg = 6})
+    M.set_hl('String', {fg = M.blender.fg_darker_1})
     M.set_hl('Number', {link = 'String'})
     M.set_hl('Float', {link = 'String'})
     M.set_hl('Boolean', {link = 'Keyword'})
     M.set_hl('Character', {link = 'String'})
-    M.set_hl('Keyword', {fg = 4, bold = true})
-    M.set_hl('Conditional', {fg = 12, bold = true})
+    M.set_hl('Keyword', {fg = 12, bold = true})
+    M.set_hl('Conditional', {fg = 4, bold = true})
     M.set_hl('Repeat', {link = 'Conditional'})
-    M.set_hl('Function', {fg = 10})
-    M.set_hl('@function.builtin', {fg = 10, underdotted = true})
-    M.set_hl('Identifier', {fg = M.blender.fg_darker_1})
-    M.set_hl('Delimiter', {fg = 3})
+    M.set_hl('Function', {fg = 2})
+    M.set_hl('@function.builtin', {fg = 12, underdotted = true})
+    M.set_hl('Identifier', {fg = 6})
+    M.set_hl('Delimiter', {link = 'Operator'})
     M.set_hl('Type', {fg = 11})
     M.set_hl('@constructor', {link = 'type'})
     M.set_hl('TypeDef', {fg = 11, bold = true})
-    M.set_hl('Constant', {fg = 13, bold = true})
+    M.set_hl('Constant', {fg = 14, bold = true})
     M.set_hl('@constant.builtin', {fg = 13, underdotted = true, bold = true})
-    M.set_hl('Include', {fg = 2, underdotted = true, bold = true})
+    M.set_hl('Include', {fg = 10, underdotted = true, bold = true})
     M.set_hl('Preproc', {fg = M.blender.bg_lighter_3})
     M.set_hl('Label', {fg = 6})
     M.set_hl('Tag', {fg = 6})

@@ -18,6 +18,7 @@ function M.setup()
         winopts = {hl = {normal = "FzfLuaFloat", border = "FzfLuaFloatBorder"}},
         fzf_colors = {
             ["bg"] = {"bg", "FzfLuaFloat"},
+            ["bg+"] = {"bg", "FzfLuaCursor"},
             ["gutter"] = {"bg", "FzfLuaFloat"}
         },
         fzf_args = "--select-1", -- auto-select when there is only one result
@@ -47,7 +48,7 @@ function M.setup()
     local theme = require("common-theme")
     theme.set_hl("FzfLuaFloat", {link = "NormalFloat"})
     theme.set_hl("FzfLuaFloatBorder", {link = "FloatBorder"})
-    theme.set_hl("FzfLuaCursorLine", {bg = theme.blender.bg_lighter_2})
+    theme.set_hl("FzfLuaCursor", {link = "PmenuSel"})
 end
 
 return M
