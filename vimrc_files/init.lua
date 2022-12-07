@@ -128,7 +128,8 @@ require('packer').startup(function(use)
         requires = {
             'williamboman/mason-lspconfig', 'neovim/nvim-lspconfig',
             'folke/neodev.nvim', 'b0o/schemastore.nvim', 'ibhagwan/fzf-lua',
-            'jayp0521/mason-nvim-dap.nvim', 'mfussenegger/nvim-dap'
+            'jayp0521/mason-nvim-dap.nvim', 'mfussenegger/nvim-dap',
+            'rcarriga/nvim-dap-ui', 'ofirgall/goto-breakpoints.nvim'
         },
         after = {"fzf-lua", "aerial.nvim"}
     }

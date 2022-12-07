@@ -271,6 +271,8 @@ end
 
 local function setup_dap()
     local dap_setup = require('mason-nvim-dap')
+    local dap = require("dap")
+    local dapui = require("dapui")
 
     local theme = require('common-theme')
     theme.set_hl('DapBreakpointText', {fg = 14})
@@ -285,15 +287,24 @@ local function setup_dap()
 
     vim.api.nvim_set_keymap('n', '<leader>db', '<cmd>DapToggleBreakpoint<cr>',
                             {silent = true, noremap = true})
-    vim.api.nvim_set_keymap('n', '<leader>dc',
-                            '<cmd>DapContinue<cr><cmd>lua require("dap").repl.open({width=50}, "belowright vsplit")<cr>',
+    vim.api.nvim_set_keymap('n', '<leader>dc', '<cmd>DapContinue<cr>',
                             {silent = true, noremap = true})
-    vim.api.nvim_set_keymap('n', '<leader>dn', '<cmd>DapNext<cr>',
+    vim.api.nvim_set_keymap('n', '<leader>dC',
+                            '<cmd>lua require("dap").run_last()<cr>',
                             {silent = true, noremap = true})
-    vim.api.nvim_set_keymap('n', '<leader>dr',
-                            '<cmd>lua require("dap").repl.toggle({width=50}, "belowright vsplit")<cr>',
+    vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>DapStepOver<cr>',
+                            {silent = true, noremap = true})
+    vim.api.nvim_set_keymap('n', '<leader>di', '<cmd>DapStepInto<cr>',
+                            {silent = true, noremap = true})
+    vim.api.nvim_set_keymap('n', '<leader>do', '<cmd>DapStepOut<cr>',
                             {silent = true, noremap = true})
     vim.api.nvim_set_keymap('n', '<leader>dt', '<cmd>DapTerminate<cr>',
+                            {silent = true, noremap = true})
+    vim.api.nvim_set_keymap('n', '<leader>Dr',
+                            '<cmd>lua require("dap").repl.toggle()<cr>',
+                            {silent = true, noremap = true})
+    vim.api.nvim_set_keymap('n', '<leader>Du',
+                            '<cmd>lua require("dapui").toggle()<cr>',
                             {silent = true, noremap = true})
 
     -- List of install name
@@ -305,13 +316,66 @@ local function setup_dap()
 
     dap_setup.setup_handlers({
         python = function()
-            require('dap').adapters.python = {
+            dap.adapters.python = {
                 command = "debugpy-adapter",
                 type = "executable"
             }
         end
     })
 
+    dapui.setup({
+        icons = {expanded = "", collapsed = "", current_frame = ""},
+        mappings = {
+            expand = {'<cr>', 'l', 'h'},
+            open = 'o',
+            remove = 'd',
+            edit = 'e',
+            toggle = 't'
+        },
+        element_mappings = {stacks = {open = {'<cr>', 'l', 'h'}, expand = 'o'}},
+        layouts = {
+            {
+                elements = {
+                    {id = 'stacks', size = 0.3}, {id = 'watches', size = 0.3},
+                    {id = 'scopes', size = 0.4}
+                },
+                size = 30,
+                position = 'left'
+            }
+        },
+        controls = {enabled = false}
+    })
+    theme.set_hl('DapUIVariable', {fg = theme.blender.fg_darker_2})
+    theme.set_hl('DapUIScope', {bold = true, fg = 4})
+    theme.set_hl('DapUIType', {link = 'Type'})
+    theme.set_hl('DapUIValue', {fg = theme.blender.bg_lighter_3})
+    theme.set_hl('DapUIModifiedValue', {fg = 15, underdashed = true})
+    theme.set_hl('DapUIDecoration', {fg = theme.blender.bg_lighter_2})
+    theme.set_hl('DapUIType', {link = 'Type'})
+    theme.set_hl('DapUIStoppedThread', {bold = true, fg = 4})
+    theme.set_hl('DapUIThread', {fg = 4})
+    theme.set_hl('DapUISource', {fg = 12})
+    theme.set_hl('DapUILineNumber', {link = 'Normal'})
+    theme.set_hl('DapUIWatchesEmpty', {link = 'Comment'})
+    theme.set_hl('DapUIWatchesValue', {link = 'Normal'})
+    theme.set_hl('DapUIWatchesError', {link = 'Comment'})
+    theme.set_hl('DapUIBreakpointsCurrentLine', {fg = 2})
+
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+    end
+    dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+    end
+    dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+    end
+    vim.api.nvim_set_keymap('n', '<leader>dn',
+                            '<cmd>lua require("goto-breakpoints").next()<cr>',
+                            {noremap = true})
+    vim.api.nvim_set_keymap('n', '<leader>dp',
+                            '<cmd>lua require("goto-breakpoints").prev()<cr>',
+                            {noremap = true})
 end
 
 function M.setup()
