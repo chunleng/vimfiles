@@ -21,6 +21,8 @@ local function configure_lsp_mappings()
     noremap('n', '<leader>c?', '<cmd>FzfLua lsp_workspace_diagnostics<cr>')
     noremap('n', '<leader>cp', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
     noremap('n', '<leader>cn', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+    noremap('n', '(', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+    noremap('n', ')', '<cmd>lua vim.diagnostic.goto_next()<cr>')
 end
 
 local function setup_lsp()
@@ -293,9 +295,13 @@ local function setup_dap()
                             {silent = true, noremap = true})
     vim.api.nvim_set_keymap('n', '<leader>dd', '<cmd>DapStepOver<cr>',
                             {silent = true, noremap = true})
+    vim.api.nvim_set_keymap('n', '+', '<cmd>DapStepOver<cr>',
+                            {silent = true, noremap = true})
     vim.api.nvim_set_keymap('n', '<leader>di', '<cmd>DapStepInto<cr>',
                             {silent = true, noremap = true})
     vim.api.nvim_set_keymap('n', '<leader>do', '<cmd>DapStepOut<cr>',
+                            {silent = true, noremap = true})
+    vim.api.nvim_set_keymap('n', '-', '<cmd>DapStepOut<cr>',
                             {silent = true, noremap = true})
     vim.api.nvim_set_keymap('n', '<leader>dt', '<cmd>DapTerminate<cr>',
                             {silent = true, noremap = true})
@@ -305,6 +311,12 @@ local function setup_dap()
     vim.api.nvim_set_keymap('n', '<leader>Du',
                             '<cmd>lua require("dapui").toggle()<cr>',
                             {silent = true, noremap = true})
+    vim.api.nvim_set_keymap('n', '<leader>dn',
+                            '<cmd>lua require("goto-breakpoints").next()<cr>',
+                            {noremap = true})
+    vim.api.nvim_set_keymap('n', '<leader>dp',
+                            '<cmd>lua require("goto-breakpoints").prev()<cr>',
+                            {noremap = true})
 
     -- List of install name
     -- https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
@@ -368,12 +380,6 @@ local function setup_dap()
     dap.listeners.before.event_exited["dapui_config"] = function()
         dapui.close()
     end
-    vim.api.nvim_set_keymap('n', '<leader>dn',
-                            '<cmd>lua require("goto-breakpoints").next()<cr>',
-                            {noremap = true})
-    vim.api.nvim_set_keymap('n', '<leader>dp',
-                            '<cmd>lua require("goto-breakpoints").prev()<cr>',
-                            {noremap = true})
 end
 
 function M.setup()
