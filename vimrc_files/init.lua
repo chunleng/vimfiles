@@ -189,7 +189,7 @@ require('packer').startup(function(use)
     }
     use {
         'nvim-treesitter/playground',
-        opt = true, -- load by using `packeradd playground`
+        opt = true, -- load by using `packadd playground`
         requires = "nvim-treesitter/nvim-treesitter"
     }
     use {
