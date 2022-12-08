@@ -42,6 +42,24 @@ function M.setup()
                             {noremap = true, silent = true})
     vim.api.nvim_set_keymap("n", "g0", "<cmd>BufferGoto 1<cr>",
                             {noremap = true, silent = true})
+    vim.api.nvim_set_keymap("n", "g1", "<cmd>BufferGoto 2<cr>",
+                            {noremap = true, silent = true})
+    vim.api.nvim_set_keymap("n", "g2", "<cmd>BufferGoto 3<cr>",
+                            {noremap = true, silent = true})
+    vim.api.nvim_set_keymap("n", "g3", "<cmd>BufferGoto 4<cr>",
+                            {noremap = true, silent = true})
+    vim.api.nvim_set_keymap("n", "g4", "<cmd>BufferGoto 5<cr>",
+                            {noremap = true, silent = true})
+    vim.api.nvim_set_keymap("n", "g5", "<cmd>BufferGoto 6<cr>",
+                            {noremap = true, silent = true})
+    vim.api.nvim_set_keymap("n", "g6", "<cmd>BufferGoto 7<cr>",
+                            {noremap = true, silent = true})
+    vim.api.nvim_set_keymap("n", "g7", "<cmd>BufferGoto 8<cr>",
+                            {noremap = true, silent = true})
+    vim.api.nvim_set_keymap("n", "g8", "<cmd>BufferGoto 9<cr>",
+                            {noremap = true, silent = true})
+    vim.api.nvim_set_keymap("n", "g9", "<cmd>BufferGoto 10<cr>",
+                            {noremap = true, silent = true})
     vim.api.nvim_set_keymap("n", "g$", "<cmd>BufferLast<cr>",
                             {noremap = true, silent = true})
 
