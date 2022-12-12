@@ -107,6 +107,10 @@ local function configure_preferred_mappings()
 
     -- Add on to existing feature
     noremap("n", "gF", "<cmd>e %:h/<cfile><cr>")
+
+    -- Make cycling between easier
+    noremap('n', '<bs>', '<cmd>b #<cr>')
+    noremap('n', '<c-bs>', '<cmd>wincmd p<cr>')
 end
 
 local function configure_autogroup()

@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
     require('dressing').setup({
-        input = {winblend = 15, min_width = 40},
+        input = {win_options = {winblend = 15}, min_width = 40},
         select = {
             backend = {"builtin"},
             builtin = {
