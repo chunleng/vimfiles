@@ -1,3 +1,4 @@
+local personal_project = '~/workspace-bootstrap/git/chunleng/'
 require("common-utils").setup()
 require("common-theme").setup()
 require('packer').startup(function(use)
@@ -130,7 +131,8 @@ require('packer').startup(function(use)
             'williamboman/mason-lspconfig', 'neovim/nvim-lspconfig',
             'folke/neodev.nvim', 'b0o/schemastore.nvim', 'ibhagwan/fzf-lua',
             'jayp0521/mason-nvim-dap.nvim', 'mfussenegger/nvim-dap',
-            'rcarriga/nvim-dap-ui', 'ofirgall/goto-breakpoints.nvim'
+            'rcarriga/nvim-dap-ui', 'ofirgall/goto-breakpoints.nvim',
+            personal_project .. 'nvim-dap-kitty-launcher'
         },
         after = {"aerial.nvim"}
     }

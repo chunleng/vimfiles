@@ -384,6 +384,7 @@ end
 
 function M.setup()
     require("mason").setup()
+    require('kitty-launcher').setup()
     setup_lsp()
     setup_dap()
 end
