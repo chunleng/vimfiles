@@ -49,15 +49,17 @@ require('dap').configurations.python = {
 		request = 'launch',
 		name = 'Launch current',
 		program = '${file}', -- current file
+		console = 'externalTerminal',
 		pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python'
 	},
-    {
-        type = 'python',
-        request = 'launch',
-        name = 'Test current',
-        code = 'import pytest; pytest.main(["${file}"])',
-        pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python'
-    }
+	{
+		type = 'python',
+		request = 'launch',
+		name = 'Test current',
+		code = 'import pytest; pytest.main(["${file}"])',
+		console = 'externalTerminal',
+		pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python'
+	}
 }
 LUA
 endsnippet
