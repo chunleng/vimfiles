@@ -153,14 +153,6 @@ local function configure_autogroup()
           autocmd FileType javascriptreact set indentexpr=GetJavascriptIndent()
         augroup END
 
-        augroup lGitCommit
-            autocmd!
-            " Syntax highlight should be fixed by this PR? (Awaiting release)
-            " https://github.com/neovim/neovim/pull/17007
-            autocmd FileType gitcommit set comments=:;
-            autocmd FileType gitcommit set commentstring=;\ %s
-        augroup END
-
         augroup lQf
             autocmd!
             " Always open at the bottom edge
