@@ -30,7 +30,7 @@ function M.setup()
                     {key = 'r', action = "rename"},
                     {key = 'R', action = "refresh"},
                     {key = {'q', "<c-space>"}, action = "close"},
-                    {key = {'<C-h>'}, action = "toggle_git_ignored"},
+                    {key = {'zh'}, action = "toggle_git_ignored"},
                     {key = '<C-k>', action = ''},
                     {key = 'gp', action = 'parent_node'}
                 }
