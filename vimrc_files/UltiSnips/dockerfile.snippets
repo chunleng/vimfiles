@@ -7,3 +7,9 @@ endsnippet
 snippet __apk_install "Alpine apk install" b
 RUN apk add --no-cache ${1:curl}
 endsnippet
+
+snippet __poetry_install "Poetry install" b
+RUN pip install poetry && \
+    poetry install && \
+    rm -rf ~/.cache
+endsnippet
