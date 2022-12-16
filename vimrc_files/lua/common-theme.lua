@@ -321,7 +321,7 @@ function M.setup()
     M.set_hl('DiffAdd', {})
     M.set_hl('DiffDelete',
              {fg = M.blender.bg_darker_1, bg = M.blender.bg_darker_1})
-    M.set_hl('DiffText', {underdashed = true})
+    M.set_hl('DiffText', {underdashed = true, bg = M.blender.bg_lighter_1})
     M.set_hl('DiffChange', {})
 
     M.set_hl('ErrorMsg', {fg = 9})
