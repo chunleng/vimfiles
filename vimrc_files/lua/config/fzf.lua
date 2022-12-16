@@ -27,6 +27,7 @@ function M.setup()
             }
         },
         grep = {actions = {["default"] = actions.file_edit_or_qf}},
+        lsp = {actions = {["default"] = actions.file_edit_or_qf}},
         winopts = {hl = {normal = "FzfLuaFloat", border = "FzfLuaFloatBorder"}},
         fzf_colors = {
             ["bg"] = {"bg", "FzfLuaFloat"},
