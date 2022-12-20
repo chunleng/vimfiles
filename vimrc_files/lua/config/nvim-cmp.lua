@@ -125,6 +125,8 @@ function M.setup()
     local theme = require('common-theme')
     theme.set_hl("CmpItemAbbrMatch", {fg = 12})
     theme.set_hl('CmpItemAbbrMatchFuzzy', {fg = 12})
+    theme.set_hl('CmpItemAbbrDeprecatedDefault',
+                 {strikethrough = true, fg = theme.blender.fg_darker_3})
     theme.set_hl('CmpItemMenu', {italic = true, fg = theme.blender.fg_lighter_2})
     theme.set_hl('CmpItemKind', {fg = 12})
 end
