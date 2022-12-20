@@ -250,4 +250,8 @@ require('packer').startup(function(use)
         "nvim-treesitter/nvim-treesitter-context",
         config = function() require('config.treesitter-context').setup() end
     }
+
+    -- https://github.com/aduros/ai.vim
+    use {'aduros/ai.vim', config = function() require('config.ai').setup() end}
 end)
+
