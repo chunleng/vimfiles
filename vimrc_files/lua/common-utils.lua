@@ -7,13 +7,14 @@ local function configure_provider()
         vim.g.python3_host_prog = '/opt/homebrew/bin/python3'
     end
 
-    if vim.fn.filereadable("/usr/local/bin/neovim-node-host") == 1 then
-        vim.g.neovim_host_prog = "/usr/local/bin/neovim-node-host"
-    elseif vim.fn.filereadable("/opt/homebrew/bin/neovim-node-host") == 1 then
-        vim.g.neovim_host_prog = "/opt/homebrew/bin/neovim-node-host"
+    local homedir = os.getenv("HOME")
+    if vim.fn.filereadable(homedir ..
+                               "/.asdf/installs/nodejs/lts-gallium/bin/neovim-node-host") ==
+        1 then
+        vim.g.node_host_prog = homedir ..
+                                   "/.asdf/installs/nodejs/lts-gallium/bin/neovim-node-host"
     end
 
-    local homedir = os.getenv("HOME")
     if vim.fn.filereadable(homedir .. "/.gem/bin/neovim-ruby-host") == 1 then
         vim.g.neovim_host_prog = homedir .. "/.gem/bin/neovim-ruby-host"
     end
