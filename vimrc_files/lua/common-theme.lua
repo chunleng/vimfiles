@@ -326,7 +326,7 @@ function M.setup()
 
     M.set_hl('ErrorMsg', {fg = 9})
     M.set_hl('IncSearch', {fg = 15, bg = 2})
-    M.set_hl('Search', {bg = 4})
+    M.set_hl('Search', {bg = 4, fg = 15})
     M.set_hl('MsgArea', {fg = M.blender.fg_darker_2})
     M.set_hl('MoreMsg', {fg = M.blender.fg_darker_2})
 
