@@ -13,6 +13,13 @@ function M.setup()
             end
         end)
     end, {noremap = true, silent = true})
+
+    vim.cmd [[
+        augroup lFiletype
+            autocmd!
+            autocmd FileType fugitiveblame nnoremap <buffer> q <cmd>bd<cr>
+        augroup END
+    ]]
 end
 
 return M
