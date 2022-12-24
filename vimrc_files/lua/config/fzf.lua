@@ -46,23 +46,21 @@ function M.setup()
     vim.cmd [[command! FzfLuaSearch call v:lua.fzf_lua_search()]]
     vim.api
         .nvim_set_keymap("n", "<enter>", ":FzfLua files<cr>", {silent = true})
-    vim.api.nvim_set_keymap("n", "<leader>B", "<cmd>FzfLua buffers<cr>",
+    vim.api.nvim_set_keymap("n", "<c-w><c-b>", "<cmd>FzfLua buffers<cr>",
                             {silent = true})
-    vim.api.nvim_set_keymap("n", "<leader>Db",
-                            "<cmd>FzfLua dap_breakpoints<cr>", {silent = true})
-    vim.api.nvim_set_keymap("n", "<leader>Dv", "<cmd>FzfLua dap_variables<cr>",
-                            {silent = true})
-    vim.api.nvim_set_keymap("n", "<leader>/", ":FzfLua resume<cr>",
+    vim.keymap.set('n', '<c-w><c-d>', function()
+        vim.ui.select({'breakpoints', 'variables'}, {prompt = 'DAP Menu'},
+                      function(choice) vim.cmd('FzfLua dap_' .. choice) end)
+    end, {silent = true})
+    vim.api.nvim_set_keymap("n", "<c-w><c-/>", ":FzfLua resume<cr>",
                             {silent = true})
     vim.api.nvim_set_keymap("n", "<c-/>", ":FzfLuaSearch<cr>", {silent = true})
-    vim.api.nvim_set_keymap("n", "<leader>?v", ":FzfLua help_tags<cr>",
-                            {silent = true})
-    vim.api.nvim_set_keymap("n", "<leader>?m", ":FzfLua man_pages<cr>",
-                            {silent = true})
-    vim.api.nvim_set_keymap("n", "<leader>g/", ":<c-u>FzfLua git_status<cr>",
-                            {silent = true})
     vim.api.nvim_set_keymap("x", "<c-/>", ":<c-u>FzfLua grep_visual<cr>",
                             {silent = true})
+    vim.keymap.set('n', '<c-w><c-h>', function()
+        vim.ui.select({'help_tags', 'man_pages'}, {prompt = 'Help Menu'},
+                      function(choice) vim.cmd('FzfLua ' .. choice) end)
+    end, {silent = true})
 
     local theme = require("common-theme")
     theme.set_hl("FzfLuaFloat", {link = "NormalFloat"})

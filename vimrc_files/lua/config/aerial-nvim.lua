@@ -36,7 +36,7 @@ function M.setup()
                 require('aerial').open({focus = false})
                 M.opened = 1
             end
-            vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>cc',
+            vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-w><c-a>',
                                         '<cmd>AerialToggle!<cr>',
                                         {silent = true, noremap = true})
         end

@@ -57,7 +57,7 @@ local function configure_preferred_mappings()
     noremap("n", "<leader>tl", "<cmd>set list!<cr>")
     noremap("n", "<leader>tp", "<cmd>set paste!<cr>")
     noremap("n", "<leader>tw", "<cmd>set wrap!<cr>")
-    noremap("n", "<leader>x", "<cmd>close!<cr>")
+    noremap("n", "<c-w><c-q>", "<cmd>close!<cr>")
 
     -- rc files
     noremap("n", "!%", "<cmd>source ~/.config/nvim/init.lua<cr>")

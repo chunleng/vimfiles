@@ -36,9 +36,7 @@ function M.setup()
     vim.api.nvim_set_keymap("n", "<leader>bo",
                             "<cmd>confirm BufferCloseAllButCurrentOrPinned<cr>",
                             {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "<c-x>", "<cmd>confirm BufferClose<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "<c-x>", "<cmd>confirm BufferClose<cr>",
+    vim.api.nvim_set_keymap("n", "<c-q>", "<cmd>confirm BufferClose<cr>",
                             {noremap = true, silent = true})
     vim.api.nvim_set_keymap("n", "g0", "<cmd>BufferGoto 1<cr>",
                             {noremap = true, silent = true})
