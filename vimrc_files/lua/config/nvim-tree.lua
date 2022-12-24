@@ -20,7 +20,8 @@ function M.setup()
                 list = {
                     -- :h nvim-tree-default-mappings
                     {key = 'a', action = "create"},
-                    {key = {'l', '<CR>'}, action = "edit"},
+                    {key = '<CR>', action = "edit"},
+                    {key = 'l', action = 'preview'},
                     {key = 'h', action = "close_node"},
                     {key = 'J', action = "next_sibling"},
                     {key = 'K', action = "prev_sibling"},
