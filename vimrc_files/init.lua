@@ -177,12 +177,6 @@ require('packer').startup(function(use)
         config = function() require("config.nvim-scrollbar").setup() end
     }
 
-    -- Multi cursor edit
-    use {
-        'mg979/vim-visual-multi',
-        config = function() require("config.visual-multi").setup() end
-    }
-
     -- TreeSitter: Better highlight and autoindent information
     use {
         'nvim-treesitter/nvim-treesitter',
