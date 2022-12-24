@@ -1,9 +1,9 @@
 local M = {}
 
 function M.setup()
+    local utils = require('common-utils')
     -- :Linediff<cr> not <cmd> because we want to pick up the range
-    vim.api.nvim_set_keymap("x", "<leader>d", ":Linediff<cr>",
-                            {noremap = true, silent = true})
+    utils.noremap("x", "<leader>d", "<cmd>Linediff<cr>")
 end
 
 return M

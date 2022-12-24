@@ -8,8 +8,8 @@ function M.beforeSetup()
 end
 
 function M.setup()
-    vim.api.nvim_set_keymap('n', '<c-w><c-s>', '<cmd>DBUIToggle<cr>',
-                            {noremap = true, silent = true})
+    local utils = require('common-utils')
+    utils.noremap('n', '<c-w><c-s>', '<cmd>DBUIToggle<cr>')
     vim.g.db_ui_win_position = 'right'
     vim.g.db_ui_table_helpers = {
         postgresql = {

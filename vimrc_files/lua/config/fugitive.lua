@@ -1,9 +1,9 @@
 local M = {}
 
 function M.setup()
-    vim.api.nvim_set_keymap("n", "<leader>gf", "<cmd>GBrowse<cr>",
-                            {noremap = true, silent = true})
-    vim.keymap.set("n", "<c-w><c-g>", function()
+    local utils = require('common-utils')
+    utils.noremap("n", "<leader>gf", "<cmd>GBrowse<cr>")
+    utils.noremap("n", "<c-w><c-g>", function()
         vim.ui.select({'blame', 'browse file'}, {prompt = 'Git Menu'},
                       function(choice)
             if choice == 'blame' then
@@ -12,7 +12,7 @@ function M.setup()
                 vim.cmd("GBrowse")
             end
         end)
-    end, {noremap = true, silent = true})
+    end)
 
     vim.cmd [[
         augroup lFiletype

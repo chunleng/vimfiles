@@ -14,52 +14,29 @@ function M.setup()
         exclude_ft = {'qf', 'dap-repl'}
     })
 
-    vim.api.nvim_set_keymap("n", "<c-,>", "<cmd>BufferMovePrevious<cr>",
-                            {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "<c-.>", "<cmd>BufferMoveNext<cr>",
-                            {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "<c-p>", "<cmd>BufferPrevious<cr>",
-                            {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "<c-n>", "<cmd>BufferNext<cr>",
-                            {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "gp", "<cmd>BufferPin<cr>",
-                            {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "<leader>bh",
-                            "<cmd>confirm BufferCloseBuffersLeft<cr>",
-                            {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "<leader>bl",
-                            "<cmd>confirm BufferCloseBuffersRight<cr>",
-                            {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "<leader>ba",
-                            "<cmd>confirm BufferCloseAllButPinned<cr>",
-                            {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "<leader>bo",
-                            "<cmd>confirm BufferCloseAllButCurrentOrPinned<cr>",
-                            {silent = true, noremap = true})
-    vim.api.nvim_set_keymap("n", "<c-q>", "<cmd>confirm BufferClose<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "g0", "<cmd>BufferGoto 1<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "g1", "<cmd>BufferGoto 2<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "g2", "<cmd>BufferGoto 3<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "g3", "<cmd>BufferGoto 4<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "g4", "<cmd>BufferGoto 5<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "g5", "<cmd>BufferGoto 6<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "g6", "<cmd>BufferGoto 7<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "g7", "<cmd>BufferGoto 8<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "g8", "<cmd>BufferGoto 9<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "g9", "<cmd>BufferGoto 10<cr>",
-                            {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "g$", "<cmd>BufferLast<cr>",
-                            {noremap = true, silent = true})
+    local utils = require('common-utils')
+    utils.noremap("n", "<c-,>", "<cmd>BufferMovePrevious<cr>")
+    utils.noremap("n", "<c-.>", "<cmd>BufferMoveNext<cr>")
+    utils.noremap("n", "<c-p>", "<cmd>BufferPrevious<cr>")
+    utils.noremap("n", "<c-n>", "<cmd>BufferNext<cr>")
+    utils.noremap("n", "gp", "<cmd>BufferPin<cr>")
+    utils.noremap("n", "<leader>bh", "<cmd>confirm BufferCloseBuffersLeft<cr>")
+    utils.noremap("n", "<leader>bl", "<cmd>confirm BufferCloseBuffersRight<cr>")
+    utils.noremap("n", "<leader>ba", "<cmd>confirm BufferCloseAllButPinned<cr>")
+    utils.noremap("n", "<leader>bo",
+                  "<cmd>confirm BufferCloseAllButCurrentOrPinned<cr>")
+    utils.noremap("n", "<c-q>", "<cmd>confirm BufferClose<cr>")
+    utils.noremap("n", "g0", "<cmd>BufferGoto 1<cr>")
+    utils.noremap("n", "g1", "<cmd>BufferGoto 2<cr>")
+    utils.noremap("n", "g2", "<cmd>BufferGoto 3<cr>")
+    utils.noremap("n", "g3", "<cmd>BufferGoto 4<cr>")
+    utils.noremap("n", "g4", "<cmd>BufferGoto 5<cr>")
+    utils.noremap("n", "g5", "<cmd>BufferGoto 6<cr>")
+    utils.noremap("n", "g6", "<cmd>BufferGoto 7<cr>")
+    utils.noremap("n", "g7", "<cmd>BufferGoto 8<cr>")
+    utils.noremap("n", "g8", "<cmd>BufferGoto 9<cr>")
+    utils.noremap("n", "g9", "<cmd>BufferGoto 10<cr>")
+    utils.noremap("n", "g$", "<cmd>BufferLast<cr>")
 
     local theme = require('common-theme')
 

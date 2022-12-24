@@ -270,8 +270,21 @@ function _G.fold_text()
 end
 
 function M.noremap(mode, lhs, rhs, is_silent)
-    if is_silent == nil then is_silent = true end
-    vim.keymap.set(mode, lhs, rhs, {silent = is_silent, noremap = true})
+    lhs = type(lhs) == 'string' and {lhs} or lhs
+    is_silent = is_silent == nil and true or is_silent
+
+    for i = 1, #lhs do
+        vim.keymap.set(mode, lhs[i], rhs, {silent = is_silent, noremap = true})
+    end
 end
 
+function M.buf_noremap(b, mode, lhs, rhs, is_silent)
+    lhs = type(lhs) == 'string' and {lhs} or lhs
+    is_silent = is_silent == nil and true or is_silent
+
+    for i = 1, #lhs do
+        vim.api.nvim_buf_set_keymap(b, mode, lhs[i], rhs,
+                                    {silent = is_silent, noremap = true})
+    end
+end
 return M

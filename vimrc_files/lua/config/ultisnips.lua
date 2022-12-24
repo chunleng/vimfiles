@@ -1,8 +1,8 @@
 local M = {}
 
 function M.setup()
-    vim.api.nvim_set_keymap("n", "!ru", "<cmd>UltiSnipsEdit!<cr>",
-                            {noremap = true, silent = true})
+    local utils = require('common-utils')
+    utils.noremap("n", "!ru", "<cmd>UltiSnipsEdit!<cr>")
     vim.g.UltiSnipsJumpForwardTrigger = "<c-j>"
     vim.g.UltiSnipsJumpBackwardTrigger = "<c-k>"
 

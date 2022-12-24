@@ -1,8 +1,8 @@
 local M = {}
 
 function M.setup()
-    vim.api.nvim_set_keymap("n", "<leader>tc", ":ColorizerToggle<cr>",
-                            {silent = true})
+    local utils = require('common-utils')
+    utils.noremap("n", "<leader>tc", "<cmd>ColorizerToggle<cr>")
     require'colorizer'.setup({user_default_options = {names = false}})
 end
 
