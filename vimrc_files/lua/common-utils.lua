@@ -46,72 +46,64 @@ local function configure_preferred_settings()
 end
 
 local function configure_preferred_mappings()
-    local function noremap(mode, lhs, rhs, is_silent)
-        if is_silent == nil then is_silent = true end
-        vim.api.nvim_set_keymap(mode, lhs, rhs,
-                                {silent = is_silent, noremap = true})
-    end
 
-    noremap("n", "<esc>", "<cmd>nohl<cr>")
+    M.noremap("n", "<esc>", "<cmd>nohl<cr>")
 
-    noremap("n", "<leader>tl", "<cmd>set list!<cr>")
-    noremap("n", "<leader>tp", "<cmd>set paste!<cr>")
-    noremap("n", "<leader>tw", "<cmd>set wrap!<cr>")
-    noremap("n", "<c-w><c-q>", "<cmd>close!<cr>")
+    M.noremap("n", "<leader>tu", "<cmd>set termguicolors!<cr>")
+    M.noremap("n", "<leader>tl", "<cmd>set list!<cr>")
+    M.noremap("n", "<leader>tp", "<cmd>set paste!<cr>")
+    M.noremap("n", "<leader>tw", "<cmd>set wrap!<cr>")
+    M.noremap("n", "<c-w><c-q>", "<cmd>close!<cr>")
 
     -- rc files
-    noremap("n", "!%", "<cmd>source ~/.config/nvim/init.lua<cr>")
-    noremap("n", "!rh", "<cmd>e ~/.hammerspoon/init.lua<cr>")
-    noremap("n", "!rv", "<cmd>e ~/.config/nvim/init.lua<cr>")
-    noremap("n", "!rk", "<cmd>e ~/.config/kitty/kitty.conf<cr>")
-    noremap("n", "!rz", "<cmd>e ~/.zshrc<cr>")
+    M.noremap("n", "!%", "<cmd>source ~/.config/nvim/init.lua<cr>")
+    M.noremap("n", "!rh", "<cmd>e ~/.hammerspoon/init.lua<cr>")
+    M.noremap("n", "!rv", "<cmd>e ~/.config/nvim/init.lua<cr>")
+    M.noremap("n", "!rk", "<cmd>e ~/.config/kitty/kitty.conf<cr>")
+    M.noremap("n", "!rz", "<cmd>e ~/.zshrc<cr>")
 
     -- split control
-    noremap("n", "<s-left>", "<cmd>leftabove vsplit<cr>")
-    noremap("n", "<s-right>", "<cmd>rightbelow vsplit<cr>")
-    noremap("n", "<s-up>", "<cmd>leftabove split<cr>")
-    noremap("n", "<s-down>", "<cmd>rightbelow split<cr>")
-    noremap("n", "<c-l>", "<c-w>l")
-    noremap("n", "<c-h>", "<c-w>h")
-    noremap("n", "<c-j>", "<c-w>j")
-    noremap("n", "<c-k>", "<c-w>k")
+    M.noremap("n", "<c-l>", "<c-w>l")
+    M.noremap("n", "<c-h>", "<c-w>h")
+    M.noremap("n", "<c-j>", "<c-w>j")
+    M.noremap("n", "<c-k>", "<c-w>k")
 
     -- Make visual mode yank and delete go to clipboard as well
-    noremap("n", "vv", "viw")
-    noremap("n", "vV", "viW")
-    noremap("x", "y", "ygv\"*y")
-    noremap("x", "d", "ygv\"*d")
-    noremap("x", "x", "ygv\"*x")
+    M.noremap("n", "vv", "viw")
+    M.noremap("n", "vV", "viW")
+    M.noremap("x", "y", "ygv\"*y")
+    M.noremap("x", "d", "ygv\"*d")
+    M.noremap("x", "x", "ygv\"*x")
 
     -- Make ZQ and ZZ more useful for multiple buffer situation
     -- TODO any way to integrate with dressing?
-    noremap("n", "ZQ", ":confirm qa<cr>")
-    noremap("n", "ZZ", ":confirm wqa<cr>")
+    M.noremap("n", "ZQ", ":confirm qa<cr>")
+    M.noremap("n", "ZZ", ":confirm wqa<cr>")
 
     -- Add command like mapping
     -- command ctrl-e already mapped to <end>
-    -- cnoremap <c-e> <end>
-    -- cnoremap silent for <home> key causes cursor to freeze
-    noremap("i", "<c-a>", "<c-o>I")
-    noremap("i", "<c-e>", "<end>")
-    noremap("i", "<c-k>", "<c-o>D")
-    noremap("c", "<c-a>", "<home>", false)
-    noremap("c", "<c-k>",
-            "<c-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>", false)
-    noremap("c", "<c-b>", "<left>", false)
-    noremap("c", "<c-f>", "<right>", false)
-    noremap("i", "<s-enter>", "<enter><c-o>k<c-o>Aa<c-o>==<c-o>A<bs>") -- `a<c-o>==<c-o>A<bs>` is to make auto indent work
+    -- cM.noremap <c-e> <end>
+    -- cM.noremap silent for <home> key causes cursor to freeze
+    M.noremap("i", "<c-a>", "<c-o>I")
+    M.noremap("i", "<c-e>", "<end>")
+    M.noremap("i", "<c-k>", "<c-o>D")
+    M.noremap("c", "<c-a>", "<home>", false)
+    M.noremap("c", "<c-k>",
+              "<c-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>", false)
+    M.noremap("c", "<c-b>", "<left>", false)
+    M.noremap("c", "<c-f>", "<right>", false)
+    M.noremap("i", "<s-enter>", "<enter><c-o>k<c-o>Aa<c-o>==<c-o>A<bs>") -- `a<c-o>==<c-o>A<bs>` is to make auto indent work
 
     -- Add macos text edit mapping
-    noremap("i", "<c-b>", "<left>")
-    noremap("i", "<c-f>", "<right>")
+    M.noremap("i", "<c-b>", "<left>")
+    M.noremap("i", "<c-f>", "<right>")
 
     -- Add on to existing feature
-    noremap("n", "gF", "<cmd>e %:h/<cfile><cr>")
+    M.noremap("n", "gF", "<cmd>e %:h/<cfile><cr>")
 
     -- Make cycling between easier
-    noremap('n', '<bs>', '<cmd>b #<cr>')
-    noremap('n', '<c-bs>', '<cmd>wincmd p<cr>')
+    M.noremap('n', '<bs>', '<cmd>b #<cr>')
+    M.noremap('n', '<c-bs>', '<cmd>wincmd p<cr>')
 end
 
 local function configure_autogroup()
@@ -275,6 +267,11 @@ function _G.fold_text()
     local foldtext = vim.api.nvim_buf_get_lines(0, vim.v.foldstart - 1,
                                                 vim.v.foldstart, false)[1]
     return leveltext .. " " .. foldtext
+end
+
+function M.noremap(mode, lhs, rhs, is_silent)
+    if is_silent == nil then is_silent = true end
+    vim.keymap.set(mode, lhs, rhs, {silent = is_silent, noremap = true})
 end
 
 return M
