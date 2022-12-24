@@ -31,37 +31,32 @@ function M.setup()
             json = data_kind,
             yaml = data_kind
         },
+        keymaps = {
+            ['<c-j>'] = false,
+            ['<c-k>'] = false,
+            ['J'] = 'actions.next',
+            ['K'] = 'actions.prev',
+            ['l'] = function()
+                require('aerial').select()
+                vim.cmd [[wincmd p]]
+            end
+        },
         on_attach = function(bufnr)
             if os.getenv("NOAERIAL") ~= '1' and M.opened ~= 1 then
                 require('aerial').open({focus = false})
                 M.opened = 1
             end
-            vim.api.nvim_buf_set_keymap(bufnr, 'n', '<c-w><c-a>',
-                                        '<cmd>AerialToggle!<cr>',
-                                        {silent = true, noremap = true})
         end
     })
+
+    vim.api.nvim_set_keymap('n', '<c-w><c-a>', '<cmd>AerialToggle!<cr>',
+                            {silent = true, noremap = true})
 
     local theme = require('common-theme')
     theme.set_hl('AerialLine', {fg = 0, bg = 6})
     theme.set_hl('AerialLineNC', {
         fg = theme.blender.fg_darker_3,
         bg = theme.blender.bg_lighter_2
-    })
-
-    local group_name = "Aerial"
-    vim.api.nvim_create_augroup(group_name, {clear = true})
-    vim.api.nvim_create_autocmd("FileType", {
-        pattern = "aerial",
-        callback = function()
-            vim.keymap.del('n', '<c-j>', {buffer = true})
-            vim.keymap.del('n', '<c-k>', {buffer = true})
-            vim.keymap.set('n', 'J', '<cmd>AerialNext<cr>',
-                           {buffer = true, silent = true, noremap = true})
-            vim.keymap.set('n', 'K', '<cmd>AerialPrev<cr>',
-                           {buffer = true, silent = true, noremap = true})
-        end,
-        group = group_name
     })
 end
 
