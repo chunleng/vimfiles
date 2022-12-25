@@ -153,9 +153,11 @@ local function configure_autogroup()
             " Reduce height by 5 (qf defaults to 10)
             autocmd FileType qf wincmd 5-
             " Preview
+            autocmd FileType qf nnoremap <buffer> <silent> <cr> <cr>
             autocmd FileType qf nnoremap <buffer> <silent> l <cr><c-w>p
             autocmd FileType qf nnoremap <buffer> <silent> J j<cr><c-w>p
             autocmd FileType qf nnoremap <buffer> <silent> K k<cr><c-w>p
+            autocmd FileType qf nnoremap <buffer> <silent> q <cmd>close<cr>
         augroup END
 
         augroup lFiletype
