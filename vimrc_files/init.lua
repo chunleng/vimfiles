@@ -206,6 +206,38 @@ require('packer').startup(function(use)
         after = 'LuaSnip'
     }
 
+    use {
+        'chunleng/nvim-null',
+        as = 'resolve_rc_menu',
+        config = function()
+            local utils = require('common-utils')
+            utils.noremap('n', '<c-w><c-r>', function()
+                vim.ui.select({
+                    'Vim RC', 'Vim Local RC', 'LuaSnip', 'Zsh', 'Hammerspoon',
+                    'Kitty'
+                }, {}, function(choice)
+                    if choice == 'Vim RC' then
+                        vim.cmd('edit ~/.config/nvim/init.lua')
+                    elseif choice == 'Vim Local RC' then
+                        vim.cmd([[
+                            silent !mkdir -p .vim
+                            edit .vim/local.vim
+                        ]])
+                    elseif choice == 'LuaSnip' then
+                        require('luasnip.loaders').edit_snippet_files()
+                    elseif choice == 'Zsh' then
+                        vim.cmd('edit ~/.zshrc')
+                    elseif choice == 'Hammerspoon' then
+                        vim.cmd('edit ~/.hammerspoon/init.lua')
+                    elseif choice == 'Kitty' then
+                        vim.cmd('edit ~/.config/kitty/kitty.conf')
+                    end
+                end)
+            end)
+        end,
+        after = {'LuaSnip', 'vim-localvimrc'}
+    }
+
     -- Scrollbar
     use {
         'petertriho/nvim-scrollbar',

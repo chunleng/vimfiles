@@ -55,13 +55,6 @@ local function configure_preferred_mappings()
     M.noremap("n", "<leader>tw", "<cmd>set wrap!<cr>")
     M.noremap("n", "<c-w><c-q>", "<cmd>close!<cr>")
 
-    -- rc files
-    M.noremap("n", "!%", "<cmd>source ~/.config/nvim/init.lua<cr>")
-    M.noremap("n", "!rh", "<cmd>e ~/.hammerspoon/init.lua<cr>")
-    M.noremap("n", "!rv", "<cmd>e ~/.config/nvim/init.lua<cr>")
-    M.noremap("n", "!rk", "<cmd>e ~/.config/kitty/kitty.conf<cr>")
-    M.noremap("n", "!rz", "<cmd>e ~/.zshrc<cr>")
-
     -- split control
     M.noremap("n", "<c-l>", "<c-w>l")
     M.noremap("n", "<c-h>", "<c-w>h")

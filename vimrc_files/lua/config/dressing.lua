@@ -4,13 +4,8 @@ function M.setup()
     require('dressing').setup({
         input = {win_options = {winblend = 15}, min_width = 40},
         select = {
-            backend = {"builtin"},
-            builtin = {
-                min_height = 1,
-                max_height = 10,
-                min_width = 0,
-                max_width = 0.9
-            }
+            backend = {'fzf_lua'},
+            fzf_lua = {winopts = {width = 0.4, height = 0.3}}
         }
     })
     vim.cmd [[
