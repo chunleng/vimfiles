@@ -104,6 +104,9 @@ local function configure_preferred_mappings()
     -- Make cycling between easier
     M.noremap('n', '<bs>', '<cmd>b #<cr>')
     M.noremap('n', '<c-bs>', '<cmd>wincmd p<cr>')
+
+    -- Faster completion
+    M.noremap('i', '<c-l>', '<c-x><c-l>')
 end
 
 local function configure_autogroup()
