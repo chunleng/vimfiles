@@ -18,6 +18,8 @@ local function setup_mappings()
             vim.api.nvim_eval([[feedkeys("\<esc>", "n")]])
         end
     end)
+    utils.noremap({'i', 's'}, '<c-j>', function() ls.change_choice(1) end)
+    utils.noremap({'i', 's'}, '<c-k>', function() ls.change_choice(-1) end)
 end
 
 function M.setup()
