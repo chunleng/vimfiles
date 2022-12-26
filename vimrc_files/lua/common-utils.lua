@@ -92,7 +92,6 @@ local function configure_preferred_mappings()
               "<c-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>", false)
     M.noremap("c", "<c-b>", "<left>", false)
     M.noremap("c", "<c-f>", "<right>", false)
-    M.noremap("i", "<s-enter>", "<enter><c-o>k<c-o>Aa<c-o>==<c-o>A<bs>") -- `a<c-o>==<c-o>A<bs>` is to make auto indent work
 
     -- Add macos text edit mapping
     M.noremap("i", "<c-b>", "<left>")

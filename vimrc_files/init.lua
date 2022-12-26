@@ -160,15 +160,50 @@ require('packer').startup(function(use)
         "kristijanhusak/vim-dadbod-completion",
         after = {"nvim-cmp", "vim-dadbod"}
     }
+
     use {
-        'quangnguyen30192/cmp-nvim-ultisnips',
-        run = "./install.sh",
-        config = function() require("config.cmp-nvim-ultisnips").setup() end,
-        after = {"ultisnips", "nvim-cmp"}
+        'saadparwaiz1/cmp_luasnip', -- https://github.com/saadparwaiz1/cmp_luasnip
+        requires = 'L3MON4D3/LuaSnip', -- https://github.com/L3MON4D3/LuaSnip
+        config = function() require('config.luasnip').setup() end
     }
+
     use {
-        'SirVer/ultisnips',
-        config = function() require("config.ultisnips").setup() end
+        'chunleng/nvim-null',
+        as = 'resolve_cr',
+        config = function()
+            local utils = require('common-utils')
+            local ls = require('luasnip')
+
+            utils.noremap({'i', 's'}, '<cr>', function()
+                if ls.jumpable() then
+                    ls.jump(1)
+                else
+                    vim.fn.feedkeys(require('nvim-autopairs').autopairs_cr(),
+                                    'n')
+                end
+            end)
+        end,
+        after = {'nvim-autopairs', 'LuaSnip'}
+    }
+
+    use {
+        'chunleng/nvim-null',
+        as = 'resolve_s_cr',
+        config = function()
+            local utils = require('common-utils')
+            local ls = require('luasnip')
+
+            utils.noremap({'i', 's'}, '<s-cr>', function()
+                if ls.jumpable() then
+                    ls.jump(-1)
+                else
+                    -- Enter without cursor going to the next line
+                    vim.api.nvim_eval(
+                        [[feedkeys("\<enter>\<c-o>k\<c-o>Aa\<c-o>==\<c-o>A\<bs>", "n")]]) -- `a<c-o>==<c-o>A<bs>` is to make auto indent work
+                end
+            end)
+        end,
+        after = 'LuaSnip'
     }
 
     -- Scrollbar

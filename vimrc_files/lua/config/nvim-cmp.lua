@@ -16,7 +16,7 @@ function M.setup()
                 -- Source
                 vim_item.menu = ({
                     path = "│",
-                    ultisnips = "│",
+                    luasnip = "│",
                     nvim_lsp = "│ LSP",
                     buffer = "│ Buffer",
                     ["vim-dadbod-completion"] = "│ DB"
@@ -66,8 +66,7 @@ function M.setup()
             }
         },
         sources = {
-            {name = 'path', priority = 100},
-            {name = 'ultisnips', priority = 35},
+            {name = 'path', priority = 100}, {name = 'luasnip', priority = 35},
             {name = 'nvim_lsp', max_item_count = 99999, priority = 30},
             {name = "vim-dadbod-completion", priority = 30}, {
                 name = 'buffer',
@@ -87,10 +86,19 @@ function M.setup()
             }
         },
         mapping = cmp.mapping.preset.insert({
-            ['<tab>'] = cmp.mapping.confirm {
-                behavior = cmp.ConfirmBehavior.Replace,
-                select = true
-            },
+            ['<tab>'] = cmp.mapping(function(fallback)
+                local ls = require('luasnip')
+                if ls.expandable() then
+                    ls.expand_or_jump()
+                elseif cmp.visible() then
+                    cmp.confirm({
+                        behavior = cmp.ConfirmBehavior.Replace,
+                        select = true
+                    })
+                else
+                    fallback()
+                end
+            end, {'i', 's'}),
             ['<c-e>'] = function()
                 vim.fn.eval([[feedkeys("\<end>", "n")]])
             end,
@@ -102,7 +110,7 @@ function M.setup()
         }),
         snippet = {
             expand = function(args)
-                vim.fn["UltiSnips#Anon"](args.body)
+                require'luasnip'.lsp_expand(args.body)
             end
         },
         completion = {

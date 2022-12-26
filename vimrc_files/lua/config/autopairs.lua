@@ -7,7 +7,7 @@ function M.setup()
         disable_in_visualblock = true,
         enable_afterquote = false,
         map_c_w = true,
-        map_cr = true,
+        map_cr = false,
         check_ts = true
     }
 end
