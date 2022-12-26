@@ -98,14 +98,10 @@ function M.setup()
                 select = true
             },
             ['<c-e>'] = function()
-                local key = vim.api.nvim_replace_termcodes('<end>', true, false,
-                                                           true)
-                vim.api.nvim_feedkeys(key, 'i', false)
+                vim.fn.eval([[feedkeys("\<end>", "n")]])
             end,
             ['<c-a>'] = function()
-                local key = vim.api.nvim_replace_termcodes('<home>', true,
-                                                           false, true)
-                vim.api.nvim_feedkeys(key, 'i', false)
+                vim.fn.eval([[feedkeys("\<c-o>I", "n")]])
             end,
             ['<s-down>'] = cmp.mapping.scroll_docs(4),
             ['<s-up>'] = cmp.mapping.scroll_docs(-4)
