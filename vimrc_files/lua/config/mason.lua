@@ -284,8 +284,6 @@ local function setup_dap()
     utils.noremap('n', {'<leader>di', '+'}, '<cmd>DapStepInto<cr>')
     utils.noremap('n', {'<leader>do', '-'}, '<cmd>DapStepOut<cr>')
     utils.noremap('n', '<leader>dt', '<cmd>DapTerminate<cr>')
-    utils.noremap('n', '<leader>Dr', '<cmd>lua require("dap").repl.toggle()<cr>')
-    utils.noremap('n', '<leader>Du', '<cmd>lua require("dapui").toggle()<cr>')
     utils.noremap('n', '<leader>dn',
                   function() require('goto-breakpoints').next() end)
     utils.noremap('n', '<leader>dp',

@@ -48,8 +48,19 @@ function M.setup()
     utils.noremap("n", "<enter>", ":FzfLua files<cr>")
     utils.noremap("n", "<c-w><c-b>", "<cmd>FzfLua buffers<cr>")
     utils.noremap('n', '<c-w><c-d>', function()
-        vim.ui.select({'breakpoints', 'variables'}, {prompt = 'DAP Menu'},
-                      function(choice) vim.cmd('FzfLua dap_' .. choice) end)
+        vim.ui.select({
+            'Breakpoints', 'Variables', 'Toggle REPL', 'Toggle DAP UI'
+        }, {prompt = 'DAP Menu'}, function(choice)
+            if choice == 'Breakpoints' then
+                vim.cmd('FzfLua dap_breakpoints')
+            elseif choice == 'Variables' then
+                vim.cmd('FzfLua dap_variables')
+            elseif choice == 'Toggle REPL' then
+                require("dap").repl.toggle()
+            elseif choice == 'Toggle DAP UI' then
+                require("dapui").toggle()
+            end
+        end)
     end)
     utils.noremap("n", "<c-w><c-/>", ":FzfLua resume<cr>")
     utils.noremap("n", "<c-/>", ":FzfLuaSearch<cr>")
