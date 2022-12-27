@@ -68,7 +68,7 @@ function M.setup()
         sources = {
             {name = 'path', priority = 100},
             {name = 'ultisnips', priority = 35},
-            {name = 'nvim_lsp', max_item_count = 100, priority = 30},
+            {name = 'nvim_lsp', max_item_count = 99999, priority = 30},
             {name = "vim-dadbod-completion", priority = 30}, {
                 name = 'buffer',
                 max_item_count = 10,
