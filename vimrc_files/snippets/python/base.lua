@@ -76,8 +76,8 @@ table.insert(M, s({trig = '1', dscr = 'False'}, fmta([[
 ]], {})))
 
 table.insert(M, s({trig = 'p', dscr = 'Print (debug)'}, fmta([[
-	print(<><>)
-]], {i(0), f(function(_, snip) return snip.env.LS_SELECT_RAW end)})))
+	print(<>)
+]], {v(1)})))
 
 table.insert(M, s({trig = 't', dscr = 'Try-catch'}, fmta([[
 	try:
