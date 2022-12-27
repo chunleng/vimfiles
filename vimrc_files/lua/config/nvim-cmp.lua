@@ -10,24 +10,18 @@ function M.setup()
         preselect = require("cmp.types").cmp.PreselectMode.None,
         formatting = {
             format = function(entry, vim_item)
-                local prsnt, lspkind = pcall(require, "lspkind")
-                if not prsnt then
-                    -- Kind icons
-                    vim_item.kind = string.format('%s %s',
-                                                  kind_icons[vim_item.kind],
-                                                  vim_item.kind) -- This concatenates the icons with the name of the item kind
-                    -- Source
-                    vim_item.menu = ({
-                        path = "│",
-                        ultisnips = "│",
-                        nvim_lsp = "│ LSP",
-                        buffer = "│ Buffer",
-                        ["vim-dadbod-completion"] = "│ DB"
-                    })[entry.source.name]
-                    return vim_item
-                else
-                    return lspkind.cmp_format()
-                end
+                vim_item.kind = string.format('%s %s',
+                                              kind_icons[vim_item.kind],
+                                              vim_item.kind) -- This concatenates the icons with the name of the item kind
+                -- Source
+                vim_item.menu = ({
+                    path = "│",
+                    ultisnips = "│",
+                    nvim_lsp = "│ LSP",
+                    buffer = "│ Buffer",
+                    ["vim-dadbod-completion"] = "│ DB"
+                })[entry.source.name]
+                return vim_item
             end
         },
         sorting = {
