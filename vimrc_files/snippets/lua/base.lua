@@ -68,5 +68,9 @@ table.insert(M, s({trig = 't', dscr = 'Try-catch'}, fmta([[
 table.insert(M, s({trig = 'err', dscr = 'Raise error'}, fmta([[
 	error(<>)
 ]], {v(1)})))
+
+table.insert(M, s({trig = 'v', dscr = 'Variable'}, fmta([[
+	local <> = <>
+]], {i(1, 'var_a'), i(0, 'value')})))
 return M
 -- vim: noet
