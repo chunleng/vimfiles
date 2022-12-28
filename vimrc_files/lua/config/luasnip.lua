@@ -106,7 +106,10 @@ function M.setup()
             [types.choiceNode] = {
                 active = {hl_group = 'LuaSnipChoiceNodeActive', priority = 1}
             }
-        }
+        },
+        load_ft_func = require('luasnip.extras.filetype_functions').extend_load_ft(
+            {bash = {'sh'}})
+
     })
     require('luasnip.loaders.from_lua').load({
         paths = '~/.config/nvim/snippets/'
