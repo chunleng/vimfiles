@@ -11,8 +11,7 @@ table.insert(M, s({trig = '!', dscr = 'Image'}, fmta([[
 table.insert(M,
              s({trig = '|(%d+)x(%d+)', dscr = 'Table', regTrig = true},
                f(function(_, snip)
-    local w = snip.captures[1]
-    local h = snip.captures[2]
+    local w, h = unpack(snip.captures)
     local res = {}
 
     -- Template
@@ -23,7 +22,7 @@ table.insert(M,
     -- Format
     table.insert(res, row_text)
     table.insert(res, table.concat(row, '---'))
-    for _ = 0, h do table.insert(res, row_text) end
+    for _ = 1, h do table.insert(res, row_text) end
     return res
 end)))
 -- (\\d+)(?:x|X)(\\d+)
