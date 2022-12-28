@@ -47,6 +47,14 @@ local function setup_mappings()
 end
 
 function M.setup()
+    local theme = require('common-theme')
+    theme.set_hl('LuaSnipSnippetPassive', {fg = 15})
+    theme.set_hl('LuaSnipInsertNodeActiveVirtual',
+                 {bold = true, fg = 0, bg = 11})
+    theme.set_hl('LuaSnipInsertNodePassive', {fg = 3, underdotted = true})
+    theme.set_hl('LuaSnipInsertNodeActive', {fg = 11})
+    theme.set_hl('LuaSnipChoiceNodeActive', {link = 'Visual'})
+
     ls.setup({
         store_selection_keys = '<tab>',
         -- ref: https://github.com/L3MON4D3/LuaSnip/blob/master/lua/luasnip/config.lua#L122-L147
@@ -83,6 +91,21 @@ function M.setup()
                               {#visual > 0 and t(visual) or i(1, default_text)})
                 end)
             end
+        },
+        ext_opts = {
+            [types.snippet] = {
+                passive = {
+                    hl_group = 'LuaSnipSnippetPassive',
+                    virt_text = {{' ‥ ', 'LuaSnipInsertNodeActiveVirtual'}}
+                }
+            },
+            [types.insertNode] = {
+                active = {hl_group = 'LuaSnipInsertNodeActive', priority = 2},
+                passive = {hl_group = 'LuaSnipInsertNodePassive', priority = 2}
+            },
+            [types.choiceNode] = {
+                active = {hl_group = 'LuaSnipChoiceNodeActive', priority = 1}
+            }
         }
     })
     require('luasnip.loaders.from_lua').load({
