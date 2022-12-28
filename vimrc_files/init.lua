@@ -178,12 +178,19 @@ require('packer').startup(function(use)
                 if ls.jumpable() then
                     ls.jump(1)
                 else
-                    vim.fn.feedkeys(require('nvim-autopairs').autopairs_cr(),
-                                    'n')
+                    local is_end_of_line =
+                        #vim.api.nvim_get_current_line() ==
+                            vim.api.nvim_win_get_cursor(0)[2]
+                    if is_end_of_line and vim.o.filetype == 'markdown' then
+                        vim.cmd('InsertNewBullet')
+                    else
+                        vim.fn.feedkeys(
+                            require('nvim-autopairs').autopairs_cr(), 'n')
+                    end
                 end
             end)
         end,
-        after = {'nvim-autopairs', 'LuaSnip'}
+        after = {'nvim-autopairs', 'LuaSnip', 'bullets.vim'}
     }
 
     use {
@@ -288,11 +295,8 @@ require('packer').startup(function(use)
         config = function() require("config.dressing").setup() end
     }
 
-    -- https://github.com/dkarter/bullets.vim/issues/57
-    -- https://github.com/dkarter/bullets.vim/pull/93
-    -- Seems like creator is not dedicated to fixing this issue, PR has been requested over 1 year and not closed
     use {
-        "chunleng/bullets.vim",
+        "dkarter/bullets.vim",
         config = function() require("config.bullets").setup() end
     }
 
