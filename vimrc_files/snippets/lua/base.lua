@@ -33,7 +33,7 @@ table.insert(M, s({trig = 'l', dscr = 'Loop (for)'}, fmta([[
 ]], {
     c(1, {
         fmta('i = <>, <>', {i(1, '1'), i(2, '10,1')}),
-        fmta('<>, <> in ipairs(<>)', {i(1, 'index'), i(2, 'value'), i(3, 't')}),
+        fmta('<>, <> in ipairs(<>)', {i(1, 'i'), i(2, 'value'), i(3, 't')}),
         fmta('<>, <> in pairs(<>)', {i(1, 'key'), i(2, 'value'), i(3, 't')})
     }), i(0)
 })))
@@ -45,8 +45,8 @@ table.insert(M, s({trig = 'lw', dscr = 'Loop (while)'}, fmta([[
 ]], {i(1), i(0)})))
 
 table.insert(M, s({trig = 'r', dscr = 'Return'}, fmta([[
-	return
-]], {})))
+	return <>
+]], {i(0)})))
 
 table.insert(M, s({trig = '0', dscr = 'False'}, fmta([[
 	false
