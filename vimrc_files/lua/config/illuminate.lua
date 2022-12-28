@@ -6,11 +6,14 @@ function M.setup()
         filetypes_denylist = {
             "dashboard", "NvimTree", "aerial", "lsp-installer"
         },
+        modes_allowlist = {'n'},
         delay = 100
     })
 
-    vim.api.nvim_set_hl(0, "IlluminatedWordText", {underline = true})
-
+    local theme = require('common-theme')
+    theme.set_hl('IlluminatedWordText', {underdotted = true})
+    theme.set_hl('IlluminatedWordRead', {underdotted = true})
+    theme.set_hl('IlluminatedWordWrite', {underdotted = true})
 end
 
 return M
