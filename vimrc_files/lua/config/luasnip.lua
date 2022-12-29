@@ -44,6 +44,8 @@ local function setup_mappings()
     end)
     utils.noremap({'i', 's'}, '<c-j>', function() ls.change_choice(1) end)
     utils.noremap({'i', 's'}, '<c-k>', function() ls.change_choice(-1) end)
+    -- Go into normal mode when deleting select to improve completion flow
+    utils.noremap({'s'}, '<bs>', '<bs>i')
 end
 
 function M.setup()
@@ -56,6 +58,7 @@ function M.setup()
     theme.set_hl('LuaSnipChoiceNodeActive', {link = 'Visual'})
 
     ls.setup({
+        update_events = 'TextChanged,TextChangedI',
         store_selection_keys = '<tab>',
         -- ref: https://github.com/L3MON4D3/LuaSnip/blob/master/lua/luasnip/config.lua#L122-L147
         snip_env = {
