@@ -114,6 +114,8 @@ function M.setup()
             {bash = {'sh'}})
 
     })
+
+    require('luasnip.loaders').cleanup()
     require('luasnip.loaders.from_lua').load({
         paths = '~/.config/nvim/snippets/'
     })
