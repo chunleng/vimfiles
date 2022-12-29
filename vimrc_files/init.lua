@@ -38,12 +38,6 @@ require('packer').startup(function(use)
         config = function() require("config.mundo").setup() end
     }
 
-    -- https://github.com/lukas-reineke/indent-blankline.nvim/
-    use {
-        'lukas-reineke/indent-blankline.nvim',
-        config = function() require('config.indent-blankline') end
-    }
-
     use {
         'AndrewRadev/linediff.vim',
         config = function() require("config.linediff").setup() end
@@ -267,10 +261,13 @@ require('packer').startup(function(use)
         requires = "nvim-treesitter/nvim-treesitter"
     }
 
-    -- Allow autodetect of file indent
+    -- https://github.com/tpope/vim-sleuth
+    -- https://github.com/Yggdroot/indentLine/
     use {
-        'tpope/vim-sleuth',
-        config = function() require("config.sleuth").setup() end
+        'chunleng/nvim-null',
+        as = 'indent_config',
+        requires = {'tpope/vim-sleuth', 'Yggdroot/indentLine'},
+        config = function() require('config.indent').setup() end
     }
 
     -- Rails Development
