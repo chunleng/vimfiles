@@ -220,7 +220,7 @@ require('packer').startup(function(use)
                     elseif choice == 'Vim Local RC' then
                         vim.cmd([[
                             silent !mkdir -p .vim
-                            edit .vim/local.vim
+                            edit .vim/local.lua
                         ]])
                     elseif choice == 'LuaSnip' then
                         require('luasnip.loaders').edit_snippet_files()

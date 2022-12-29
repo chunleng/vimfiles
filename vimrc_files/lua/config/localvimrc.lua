@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
     local utils = require('common-utils')
-    vim.g.localvimrc_name = {".vim/local.vim"}
+    vim.g.localvimrc_name = {".vim/local.vim", '.vim/local.lua'}
     vim.g.localvimrc_file_directory_only = 0
 
     -- Disable sandbox to enable running of autocmd
