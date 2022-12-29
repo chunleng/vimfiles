@@ -22,10 +22,12 @@ require('packer').startup(function(use)
         config = function() require("config.galaxyline").setup() end
     }
 
+    -- https://github.com/akinsho/bufferline.nvim
+    -- https://github.com/famiu/bufdelete.nvim
     use {
-        'romgrk/barbar.nvim',
-        config = function() require('config.barbar').setup() end,
-        requires = 'kyazdani42/nvim-web-devicons'
+        'akinsho/bufferline.nvim',
+        requires = {'famiu/bufdelete.nvim'},
+        config = function() require('config.bufferline').setup() end
     }
 
     -- Allow to view edit history
