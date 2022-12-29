@@ -11,6 +11,8 @@ function M.setup()
     local gls = gl.section
     local theme = require('common-theme')
 
+    gps.setup()
+
     -- theme.set_hl(name, options)
     theme.set_hl('GalaxylineDiagnosticError', {fg = 0, bg = theme.blender.error})
     theme.set_hl('GalaxylineDiagnosticWarn', {fg = 0, bg = theme.blender.warn})

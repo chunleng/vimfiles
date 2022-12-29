@@ -15,21 +15,17 @@ require('packer').startup(function(use)
         after = "nvim-treesitter"
     }
 
-    -- Beautify
+    -- Cursorline Related
     use {
         'glepnir/galaxyline.nvim',
-        config = function() require("config.galaxyline").setup() end,
-        after = {"nvim-gps"}
+        requires = {'SmiteshP/nvim-gps', 'nvim-treesitter/nvim-treesitter'},
+        config = function() require("config.galaxyline").setup() end
     }
+
     use {
         'romgrk/barbar.nvim',
         config = function() require('config.barbar').setup() end,
         requires = 'kyazdani42/nvim-web-devicons'
-    }
-    use {
-        'SmiteshP/nvim-gps',
-        config = function() require("nvim-gps").setup() end,
-        requires = "nvim-treesitter/nvim-treesitter"
     }
 
     -- Allow to view edit history
