@@ -324,7 +324,8 @@ function M.setup()
     M.set_hl('DiffText', {underdashed = true, bg = M.blender.bg_lighter_1})
     M.set_hl('DiffChange', {})
 
-    M.set_hl('ErrorMsg', {fg = 9})
+    M.set_hl('ErrorMsg', {fg = M.blender.error})
+    M.set_hl('WarningMsg', {fg = M.blender.warn})
     M.set_hl('IncSearch', {fg = 15, bg = 2})
     M.set_hl('Search', {bg = 4, fg = 15})
     M.set_hl('MsgArea', {fg = M.blender.fg_darker_2})
@@ -369,7 +370,8 @@ function M.setup()
     M.set_hl('CursorLineNr', {})
     M.set_hl('SignColumn', {})
 
-    M.set_hl('StatusLine', {})
+    M.set_hl('StatusLine',
+             {fg = M.blender.fg_darker_1, bg = M.blender.bg_lighter_1})
     M.set_hl('Visual', {bg = M.blender.bg_lighter_2})
 
     -- :h treesitter-highlight-groups
