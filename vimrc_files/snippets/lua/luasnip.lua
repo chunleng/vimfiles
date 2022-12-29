@@ -1,7 +1,5 @@
 local M = {}
 
-local s_template = fmta
-
 table.insert(M, s({trig = 'ss', dscr = 'Snippet'}, fmta([=[
 	table.insert(M, s({trig = '<>', dscr = '<>'}, fmta([[
 		<>

@@ -3,7 +3,7 @@ local M = {}
 table.insert(M,
              s(
                  {
-        trig = 'template/autocommand_new',
+        trig = 'template/lua/autocommand_new',
         dscr = 'Template for autocommand'
     }, fmta([[
 	local group_name = "<>"
