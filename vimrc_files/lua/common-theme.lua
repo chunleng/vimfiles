@@ -403,6 +403,7 @@ function M.setup()
     M.set_hl('Title', {fg = 12, bold = true})
     M.set_hl('Exception', {fg = 1})
     M.set_hl('@text.literal', {link = "String"})
+    M.set_hl('Underlined', {fg = 3, underline = true})
 end
 
 return M
