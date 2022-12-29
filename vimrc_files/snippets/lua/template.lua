@@ -71,23 +71,22 @@ table.insert(M,
 table.insert(M,
              s({trig = 'template/dap/python', dscr = 'Template for DAP Python'},
                fmta([[
+	local function dap_python(config)
+		return vim.tbl_extend('force', {
+			type = 'python',
+			request = 'launch',
+			console = 'externalTerminal',
+			pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python'
+		}, config)
+	end
 	require('dap').configurations.python = {
-		{
-			type = 'python',
-			request = 'launch',
+		dap_python({
 			name = 'Launch current',
-			program = '${file}', -- current file
-			console = 'externalTerminal',
-			pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python'
-		},
-		{
-			type = 'python',
-			request = 'launch',
+			program = '${file}' -- current file
+		}), dap_python({
 			name = 'Test current',
-			code = 'import pytest; pytest.main(["${file}"])',
-			console = 'externalTerminal',
-			pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python'
-		}
+			code = 'import pytest; pytest.main(["${file}"])'
+		})
 	}
 ]], {})))
 
