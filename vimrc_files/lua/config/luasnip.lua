@@ -38,6 +38,9 @@ local function setup_mappings()
     utils.noremap({'i', 's'}, '<esc>', function()
         if ls.jumpable() then
             ls.jump(1)
+            if not ls.jumpable() then
+                vim.api.nvim_eval([[feedkeys("\<esc>", "n")]])
+            end
         else
             vim.api.nvim_eval([[feedkeys("\<esc>", "n")]])
         end
