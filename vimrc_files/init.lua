@@ -313,5 +313,11 @@ require('packer').startup(function(use)
 
     -- https://github.com/aduros/ai.vim
     use {'aduros/ai.vim', config = function() require('config.ai').setup() end}
+
+    -- https://github.com/tpope/vim-projectionist
+    use {
+        'tpope/vim-projectionist',
+        config = function() require('config.projectionist').setup() end
+    }
 end)
 

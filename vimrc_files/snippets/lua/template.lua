@@ -90,6 +90,24 @@ table.insert(M,
 	}
 ]], {})))
 
+table.insert(M, s({
+    trig = 'template/projectionist/project_setup',
+    dscr = 'Template for the projectionist setup'
+}, fmta([[
+	vim.g.projectionist_heuristics = {
+		['*'] = {
+			['src/main/java/*.java'] = {
+				alternate = 'src/test/java/{}.java',
+				type = 'source'
+			},
+			['src/test/java/*.java'] = {
+				alternate = 'src/main/java/{}.java',
+				type = 'test'
+			}
+		}
+	}
+]], {})))
+
 return M
 
 -- vim: noet
