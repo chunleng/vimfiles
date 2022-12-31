@@ -18,5 +18,14 @@ table.insert(M, s({
 }, fmta([[
     export DOCKER_HOST=$(docker context inspect <> -f '{{ .Endpoints.docker.Host }}')
 ]], {i(1)})))
+
+table.insert(M, s({
+    trig = 'template/vim/docstring_convention',
+    dscr = 'Template for the docstring convention to use'
+}, fmta([[
+	# https://github.com/danymat/neogen#supported-languages
+	DOC_CONV_<> = '<>'
+]], {i(1), i(2)})))
+
 return M
 -- vim: noet

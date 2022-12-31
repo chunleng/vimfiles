@@ -26,33 +26,12 @@ local postfix = require("luasnip.extras.postfix").postfix
 local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
 
-local function setup_mappings()
-    local utils = require('common-utils')
-    utils.noremap('i', '<tab>', function()
-        if ls.expandable() then
-            ls.expand()
-        else
-            vim.api.nvim_eval([[feedkeys("\<tab>", "n")]])
-        end
-    end)
-    utils.noremap({'i', 's'}, '<esc>', function()
-        if ls.jumpable() then
-            ls.jump(1)
-            if not ls.jumpable() then
-                vim.api.nvim_eval([[feedkeys("\<esc>", "n")]])
-            end
-        else
-            vim.api.nvim_eval([[feedkeys("\<esc>", "n")]])
-        end
-    end)
-    utils.noremap({'i', 's'}, '<c-j>', function() ls.change_choice(1) end)
-    utils.noremap({'i', 's'}, '<c-k>', function() ls.change_choice(-1) end)
-    -- Go into normal mode when deleting select to improve completion flow
-    utils.noremap({'s'}, '<bs>', '<bs>i')
-end
+local neogen = require('neogen')
 
-function M.setup()
-    local theme = require('common-theme')
+local theme = require('common-theme')
+local utils = require('common-utils')
+
+local function setup_luasnip()
     theme.set_hl('LuaSnipSnippetPassive', {fg = 15})
     theme.set_hl('LuaSnipInsertNodeActiveVirtual',
                  {bold = true, fg = 0, bg = 11})
@@ -122,7 +101,82 @@ function M.setup()
     require('luasnip.loaders.from_lua').load({
         paths = '~/.config/nvim/snippets/'
     })
-    setup_mappings()
+
+    utils.noremap('i', '<tab>', function()
+        if ls.expandable() then
+            ls.expand()
+        else
+            vim.api.nvim_eval([[feedkeys("\<tab>", "n")]])
+        end
+    end)
+    utils.noremap({'i', 's'}, '<esc>', function()
+        if ls.jumpable() then
+            ls.jump(1)
+            if not ls.jumpable() then
+                vim.api.nvim_eval([[feedkeys("\<esc>", "n")]])
+            end
+        else
+            vim.api.nvim_eval([[feedkeys("\<esc>", "n")]])
+        end
+    end)
+    utils.noremap({'i', 's'}, '<c-j>', function() ls.change_choice(1) end)
+    utils.noremap({'i', 's'}, '<c-k>', function() ls.change_choice(-1) end)
+    -- Go into normal mode when deleting select to improve completion flow
+    utils.noremap({'s'}, '<bs>', '<bs>i')
+end
+
+local function setup_neogen()
+    local languages_supported = {'python', 'lua'}
+    local convention = {}
+
+    local function d_generate_doc(type)
+        return d(1, function()
+            local snippet =
+                neogen.generate({type = type, return_snippet = true})
+            if snippet == nil then return sn(nil, t('')) end
+            return sn(nil, parse(nil, table.concat(snippet, '\n')))
+        end, {})
+    end
+
+    for _, language in ipairs(languages_supported) do
+        ls.add_snippets(language, {
+            s({trig = 'd', dscr = 'Template for file code documentation'},
+              d_generate_doc('file')),
+            s({trig = 'dc', dscr = 'Template for class code documentation'},
+              d_generate_doc('class')),
+            s({trig = 'df', dscr = 'Template for function code documentation'},
+              d_generate_doc('func'))
+        })
+        local lang_convention = os.getenv('DOC_CONV_' .. string.upper(language))
+        if lang_convention ~= nil then
+            convention[language] = {
+                template = {annotation_convention = lang_convention}
+            }
+        end
+    end
+
+    neogen.setup({
+        snippet_engine = 'luasnip',
+        placeholders_text = {
+            description = '[desc]',
+            tparam = '[param]',
+            parameter = '[param]',
+            ['return'] = '[return]',
+            class = '[class]',
+            throw = '[throws',
+            varargs = '[args]',
+            type = '[type]',
+            attribute = '[attr]',
+            args = '[args]',
+            kwargs = '[args]'
+        },
+        languages = convention
+    })
+end
+
+function M.setup()
+    setup_luasnip()
+    setup_neogen()
 end
 
 return M

@@ -154,10 +154,19 @@ require('packer').startup(function(use)
         after = {"nvim-cmp", "vim-dadbod"}
     }
 
+    -- https://github.com/danymat/neogen
     use {
-        'saadparwaiz1/cmp_luasnip', -- https://github.com/saadparwaiz1/cmp_luasnip
-        requires = 'L3MON4D3/LuaSnip', -- https://github.com/L3MON4D3/LuaSnip
-        config = function() require('config.luasnip').setup() end
+        'chunleng/nvim-null',
+        as = 'snippets',
+        requires = {'L3MON4D3/LuaSnip', 'danymat/neogen'},
+        config = function() require('config.snippets').setup() end
+    }
+    -- https://github.com/saadparwaiz1/cmp_luasnip
+    -- https://github.com/L3MON4D3/LuaSnip
+    use {
+        'saadparwaiz1/cmp_luasnip',
+        requires = 'L3MON4D3/LuaSnip',
+        after = 'nvim-cmp'
     }
 
     use {
