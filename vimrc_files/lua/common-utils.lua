@@ -280,8 +280,8 @@ function M.buf_noremap(b, mode, lhs, rhs, is_silent)
     is_silent = is_silent == nil and true or is_silent
 
     for i = 1, #lhs do
-        vim.api.nvim_buf_set_keymap(b, mode, lhs[i], rhs,
-                                    {silent = is_silent, noremap = true})
+        vim.keymap.set(mode, lhs[i], rhs,
+                       {silent = is_silent, noremap = true, buffer = b})
     end
 end
 return M

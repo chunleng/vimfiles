@@ -290,6 +290,8 @@ function M.setup()
         add = 2,
         change = 4,
         delete = 1,
+        passed = 10,
+        failed = 9,
         error = 9,
         warn = 11,
         info = 12,
