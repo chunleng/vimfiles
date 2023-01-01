@@ -7,6 +7,7 @@ function M.setup()
     wk.register({
         b = {name = "buffer"},
         c = {name = "code", t = {name = "test"}},
+        d = {name = "dap"},
         g = {name = "git"},
         t = {name = "toggle"}
     }, {prefix = "<leader>"})
