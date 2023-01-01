@@ -6,14 +6,14 @@ table.insert(M,
         trig = 'template/lua/autocommand_new',
         dscr = 'Template for autocommand'
     }, fmta([[
-	local group_name = "<>"
+	local group_name = '<>'
 	vim.api.nvim_create_augroup(group_name, {clear = true})
-	vim.api.nvim_create_autocmd("FileType", {
-		pattern = "<>",
-		callback = function() vim.bo.expandtab = false end,
+	vim.api.nvim_create_autocmd('FileType', {
+		pattern = '<>',
+		callback = function() <> end,
 		group = group_name
 	})
-	]], {i(1, 'group_name'), i(2, 'filetype')}, {})))
+	]], {i(1, 'group_name'), i(2, 'filetype'), i(0)}, {})))
 
 table.insert(M, s({trig = 'print/inspect', dscr = 'Print vim.inspect'}, fmta([[
 	print(vim.inspect(<>))
