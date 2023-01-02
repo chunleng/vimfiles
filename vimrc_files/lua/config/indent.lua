@@ -36,7 +36,7 @@ local function setup_indent_line()
     vim.g.indentLine_char = indent_char
     vim.g.indentLine_fileTypeExclude = {
         "Mundo", "MundoDiff", "aerial", "dashboard", "dbout", "dbui", "fzf",
-        "lspinfo", "help", 'mason', "", 'markdown', 'neotest-summary'
+        "lspinfo", "help", 'mason', "", 'neotest-summary'
     }
 end
 

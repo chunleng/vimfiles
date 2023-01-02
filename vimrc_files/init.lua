@@ -1,6 +1,7 @@
 local personal_project = '~/workspace-bootstrap/git/chunleng/'
 require("common-utils").setup()
 require("common-theme").setup()
+
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
@@ -416,6 +417,32 @@ require('packer').startup(function(use)
     use {
         'tpope/vim-projectionist',
         config = function() require('config.projectionist').setup() end
+    }
+
+    use {
+        'chunleng/nvim-null',
+        as = 'stop_conceal',
+        config = function()
+            -- Using this because there are some problems with control over conceals
+            -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2825
+
+            for _, lang in ipairs({'json', 'markdown', 'markdown_inline', 'help'}) do
+                local queries = {}
+                for _, file in ipairs(
+                                   require('vim.treesitter.query').get_query_files(
+                                       lang, 'highlights')) do
+                    for _, line in ipairs(vim.fn.readfile(file)) do
+                        local line_sub =
+                            line:gsub([[%(#set! conceal ""%)]], '')
+                        table.insert(queries, line_sub)
+                    end
+                end
+                require('vim.treesitter.query').set_query(lang, 'highlights',
+                                                          table.concat(queries,
+                                                                       '\n'))
+            end
+        end,
+        after = {'nvim-treesitter'}
     }
 end)
 
