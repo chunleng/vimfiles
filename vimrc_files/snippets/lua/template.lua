@@ -15,10 +15,6 @@ table.insert(M,
 	})
 	]], {i(1, 'group_name'), i(2, 'filetype'), i(0)}, {})))
 
-table.insert(M, s({trig = 'print/inspect', dscr = 'Print vim.inspect'}, fmta([[
-	print(vim.inspect(<>))
-]], {v(1)})))
-
 table.insert(M,
              s({trig = 'template/lua/module', dscr = 'Template for Lua Module'},
                fmta([[
