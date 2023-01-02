@@ -74,7 +74,7 @@ require('packer').startup(function(use)
             local neotest = require('neotest')
             -- https://github.com/nvim-neotest/neotest#supported-runners
             neotest.setup({
-                adapters = {require('neotest-python')({})},
+                adapters = {},
                 icons = {
                     child_indent = ' ',
                     child_prefix = ' ',

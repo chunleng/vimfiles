@@ -66,6 +66,17 @@ table.insert(M, s({
 	}
 ]], {})))
 
+table.insert(M, s({
+    trig = 'template/neotest/python',
+    dscr = 'Template for setting up a python neotest project'
+}, fmta([[
+	require('neotest').setup_project('.', {
+	    -- https://github.com/nvim-neotest/neotest-python#neotest-python
+	    adapters = {require('neotest-python')({})},
+	    default_strategy = "integrated"
+	})
+]], {})))
+
 return M
 -- vim: noet
 
