@@ -27,17 +27,6 @@ table.insert(M,
 	return M
 ]], {i(0)})))
 
-table.insert(M,
-             s({trig = 'template/lua/vimtest', dscr = 'Template for Vimtest'},
-               fmta([[
-	-- https://github.com/vim-test/vim-test#features
-	vim.g['test#<>#runner'] = '<>'
-	vim.g['test#<>#executable'] = '<>'
-]], {
-    i(1, '<language>'), i(2, '<runner>'), l(l._1 .. '#' .. l._2, {1, 2}),
-    i(3, '<path/to/executable>')
-})))
-
 table.insert(M, s({
     trig = 'template/lua/autoformat_on_save',
     dscr = 'Template for invoking format on save'
