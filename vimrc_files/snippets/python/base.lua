@@ -26,6 +26,10 @@ table.insert(M, s({trig = 'f', dscr = 'Function'}, fmta([[
 		<>
 ]], {i(1, '__init__'), i(2, 'self'), i(0)})))
 
+table.insert(M, s({trig = 'fx', dscr = 'Lambda Function'}, fmta([[
+	lambda <> : <>
+]], {i(1, 'x'), i(0, 'x + 1')})))
+
 table.insert(M, s({trig = 'i', dscr = 'If'}, fmta([[
 	if <>:
 		<>

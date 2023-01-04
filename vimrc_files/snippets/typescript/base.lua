@@ -39,6 +39,14 @@ table.insert(M, s({trig = 'f', dscr = 'Function'}, fmta([[
 	}
 ]], {i(1, 'functionA'), i(2, 'argA: number'), i(3, 'number'), i(0)})))
 
+table.insert(M, s({trig = 'fx', dscr = 'Lambda Function'}, c(1, {
+    fmt([[
+	{}: {} => 
+]], {i(1, 'x'), i(2, 'number')}), fmta([[
+	(<>) =>> { <> }
+	]], {i(1), i(2)})
+})))
+
 table.insert(M, s({trig = 'v', dscr = 'Variable'}, fmta([[
 	let <> = <>;
 ]], {i(1, 'varA: number'), i(2, 'value')})))
