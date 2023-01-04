@@ -81,15 +81,21 @@ local function setup_lsp()
                             {
                                 formatCommand = "isort --quiet -",
                                 formatStdin = true,
-                                rootMarkers = {".python-version"}
+                                rootMarkers = {
+                                    '.python-version', '.tools-versions', '.git'
+                                }
                             }, {
                                 formatCommand = "black --quiet -",
                                 formatStdin = true,
-                                rootMarkers = {".python-version"}
+                                rootMarkers = {
+                                    '.python-version', '.tools-versions', '.git'
+                                }
                             }, {
                                 formatCommand = "yapf --quiet",
                                 formatStdin = true,
-                                rootMarkers = {".python-version"}
+                                rootMarkers = {
+                                    '.python-version', '.tools-versions', '.git'
+                                }
                             }, {
                                 prefix = "Pylint",
                                 lintCommand = "pylint --from-stdin --output-format text --score no --msg-template {path}:{line}:{column}:{C}:{msg} ${INPUT}",
