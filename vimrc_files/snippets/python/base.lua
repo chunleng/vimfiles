@@ -7,9 +7,9 @@ local function get_file_upper_camel(_, snip)
     })
 end
 
-table.insert(M, s({trig = 'imp', dscr = 'Import'}, fmta([[
-	import <>
-]], {i(0)})))
+table.insert(M, s({trig = 'imp', dscr = 'Import'}, c(1, {
+    fmta('from <> import ', {i(1, 'lib')}), fmta('import ', {})
+})))
 
 table.insert(M, s({trig = 'c', dscr = 'Class'}, fmta([[
 	class <>:
