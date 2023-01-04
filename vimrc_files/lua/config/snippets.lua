@@ -91,11 +91,9 @@ local function setup_luasnip()
             [types.choiceNode] = {
                 active = {hl_group = 'LuaSnipChoiceNodeActive', priority = 1}
             }
-        },
-        load_ft_func = require('luasnip.extras.filetype_functions').extend_load_ft(
-            {bash = {'sh'}})
-
+        }
     })
+    ls.filetype_extend('bash', {'sh'})
 
     require('luasnip.loaders').cleanup()
     require('luasnip.loaders.from_lua').load({
