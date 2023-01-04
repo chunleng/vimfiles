@@ -94,6 +94,10 @@ local function setup_luasnip()
         }
     })
     ls.filetype_extend('bash', {'sh'})
+    ls.filetype_extend('javascriptreact', {'javascript'})
+    ls.filetype_extend('typescript', {'javascript'})
+    ls.filetype_extend('typescriptreact',
+                       {'javascriptreact', 'typescript', 'javascript'})
 
     require('luasnip.loaders').cleanup()
     require('luasnip.loaders.from_lua').load({
