@@ -69,11 +69,16 @@ local function setup_luasnip()
             types = types,
             parse = parse,
             -- customized
-            v = function(jump_index, default_text)
+            v = function(jump_index, default_text, editable)
+                editable = editable and editable or false
+
                 return d(jump_index, function(_, snip)
-                    local visual = snip.env.LS_SELECT_RAW
-                    return sn(nil,
-                              {#visual > 0 and t(visual) or i(1, default_text)})
+                    local visual = snip.env and snip.env.LS_SELECT_RAW or
+                                       snip.snippet.env.LS_SELECT_RAW
+                    return sn(nil, {
+                        #visual == 0 and i(1, default_text) or
+                            (editable and i(1, visual) or t(visual))
+                    })
                 end)
             end
         },

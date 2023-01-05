@@ -63,7 +63,7 @@ table.insert(M, s({trig = '1', dscr = 'True'}, fmta([[
 table.insert(M, s({trig = 'p', dscr = 'Print (debug)'}, fmta([[
 	print(<>)
 ]], {c(1, {fmta('vim.inspect(<>)', {r(1, 'msg')}), r(1, 'msg')})}),
-                  {stored = {msg = i(1)}}))
+                  {stored = {msg = v(1, nil, true)}}))
 
 table.insert(M, s({trig = 't', dscr = 'Try-catch'}, fmta([[
 	xpcall(<>, function(err)
