@@ -3,16 +3,7 @@ local M = {}
 function M.setup()
     local utils = require('common-utils')
     utils.noremap("n", "<leader>gf", "<cmd>GBrowse<cr>")
-    utils.noremap("n", "<c-w><c-g>", function()
-        vim.ui.select({'blame', 'browse file'}, {prompt = 'Git Menu'},
-                      function(choice)
-            if choice == 'blame' then
-                vim.cmd("Git blame")
-            elseif choice == 'browse file' then
-                vim.cmd("GBrowse")
-            end
-        end)
-    end)
+    utils.noremap("n", "<leader>gb", '<cmd>Git blame<cr>')
 
     vim.cmd [[
         augroup lFiletype
