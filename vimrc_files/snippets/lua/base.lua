@@ -66,9 +66,11 @@ table.insert(M, s({trig = 'p', dscr = 'Print (debug)'}, fmta([[
                   {stored = {msg = v(1, nil, true)}}))
 
 table.insert(M, s({trig = 't', dscr = 'Try-catch'}, fmta([[
-	xpcall(<>, function(err)
+	xpcall(function ()
+		<>
+	end, function(err)
 	end)
-]], {i(0, 'foo')})))
+]], {i(0)})))
 
 table.insert(M, s({trig = 'err', dscr = 'Raise error'}, fmta([[
 	error(<>)
