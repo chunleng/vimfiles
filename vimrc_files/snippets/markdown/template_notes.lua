@@ -10,7 +10,7 @@ local function zet_header(tags)
 
         ----
 
-        # Main
+        ## Main
     ]], {
         f(function(_, snip)
             local filename = snip.snippet.env.TM_FILENAME:gsub('.[^.]+$', '')
