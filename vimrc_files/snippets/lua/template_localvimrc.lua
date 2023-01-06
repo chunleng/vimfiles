@@ -29,12 +29,15 @@ table.insert(M,
 table.insert(M,
              s({trig = 'template/dap/python', dscr = 'Template for DAP Python'},
                fmta([[
+	-- For reference to the debugpy settings:
+	-- https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 	local function dap_python(config)
 		return vim.tbl_extend('force', {
 			type = 'python',
 			request = 'launch',
 			console = 'externalTerminal',
-			pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python'
+			pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python',
+			cwd = vim.fn.getcwd()
 		}, config)
 	end
 	require('dap').configurations.python = {
