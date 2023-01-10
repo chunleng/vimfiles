@@ -55,14 +55,15 @@ table.insert(M, s({
     trig = 'template/projectionist/project_setup',
     dscr = 'Template for the projectionist setup'
 }, fmta([[
+	-- :h projectionist
 	vim.g.projectionist_heuristics = {
 		['*'] = {
-			['src/main/java/*.java'] = {
-				alternate = 'src/test/java/{}.java',
+			['src/*.py'] = {
+				alternate = 'tests/{dirname}/test_{basename}.py',
 				type = 'source'
 			},
-			['src/test/java/*.java'] = {
-				alternate = 'src/main/java/{}.java',
+			['tests/**/test_*.py'] = {
+				alternate = 'src/{dirname}/{basename}.py',
 				type = 'test'
 			}
 		}
