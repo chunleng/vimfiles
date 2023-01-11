@@ -444,5 +444,32 @@ require('packer').startup(function(use)
         end,
         after = {'nvim-treesitter'}
     }
+
+    use {
+        'chunleng/nvim-null',
+        as = 'quick_replace',
+        config = function()
+            local utils = require('common-utils')
+
+            -- Easy replace with selection
+            utils.noremap('x', '<c-r>', function()
+                local separator = ''
+                local left_key = vim.api.nvim_replace_termcodes('<left>', true,
+                                                                false, true)
+                -- TODO replace fzf-lua get_visual_selection function with
+                -- https://github.com/neovim/neovim/issues/16843
+                local feedkeys = (':%%s%s\\(%s\\)%s%sg%s%s'):format(separator,
+                                                                     require(
+                                                                         'fzf-lua.utils').get_visual_selection(),
+                                                                     separator,
+                                                                     separator,
+                                                                     left_key,
+                                                                     left_key)
+                vim.api.nvim_feedkeys(feedkeys, 'n', false)
+            end)
+
+        end,
+        after = {'fzf-lua'}
+    }
 end)
 
