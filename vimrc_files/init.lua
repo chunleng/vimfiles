@@ -426,14 +426,15 @@ require('packer').startup(function(use)
             -- Using this because there are some problems with control over conceals
             -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2825
 
-            for _, lang in ipairs({'json', 'markdown', 'markdown_inline', 'help'}) do
+            for _, lang in ipairs({
+                'json', 'markdown', 'markdown_inline', 'help'
+            }) do
                 local queries = {}
                 for _, file in ipairs(
                                    require('vim.treesitter.query').get_query_files(
                                        lang, 'highlights')) do
                     for _, line in ipairs(vim.fn.readfile(file)) do
-                        local line_sub =
-                            line:gsub([[%(#set! conceal ""%)]], '')
+                        local line_sub = line:gsub([[%(#set! conceal ""%)]], '')
                         table.insert(queries, line_sub)
                     end
                 end
