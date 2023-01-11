@@ -14,6 +14,7 @@ function M.setup()
     bufferline.setup({
         options = {
             close_command = close_buffer,
+            numbers = function(opt) return opt.ordinal - 1 end,
             modified_icon = '⊙',
             show_buffer_icons = false,
             show_close_icon = false,
@@ -73,6 +74,11 @@ function M.setup()
                  {fg = theme.blender.fg_darker_2, bg = bgcolor})
     theme.set_hl('BufferLineBufferVisible', {bg = bgcolor, bold = true})
     theme.set_hl('BufferLineBufferSelected', {bold = true})
+    theme.set_hl('BufferLineNumbers',
+                 {fg = theme.blender.fg_darker_2, bg = bgcolor})
+    theme.set_hl('BufferLineNumbersVisible',
+                 {fg = theme.blender.bg_lighter_1, bg = bgcolor})
+    theme.set_hl('BufferLineNumbersSelected', {fg = theme.blender.bg_lighter_2})
     theme.set_hl('BufferLineDuplicate',
                  {fg = theme.blender.bg_lighter_3, bg = bgcolor})
     theme.set_hl('BufferLineDuplicateVisible',
