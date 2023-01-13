@@ -345,7 +345,7 @@ function M.setup()
 
     -- Float
     M.set_hl('NormalFloat', {fg = 15, bg = M.blender.bg_lighter_1, blend = 10})
-    M.set_hl('FloatBorder', {fg = 4, bg = M.blender.bg_lighter_1, blend = 10})
+    M.set_hl('FloatBorder', {fg = 6, bg = M.blender.bg_lighter_1, blend = 10})
     M.set_hl('FloatTitle',
              {bold = true, fg = 10, bg = M.blender.bg_lighter_1, blend = 10})
 

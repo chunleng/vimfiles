@@ -8,6 +8,15 @@ function M.setup()
     cmp.setup({
         -- Since I my sorting prioritize exact elements first, preselect is not required
         preselect = require("cmp.types").cmp.PreselectMode.None,
+        window = {
+            completion = cmp.config.window.bordered({
+                border = 'none',
+                winhighlight = 'Normal:Pmenu,CursorLine:PmenuSel'
+            }),
+            documentation = cmp.config.window.bordered({
+                winhighlight = 'Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel'
+            })
+        },
         formatting = {
             format = function(entry, vim_item)
                 vim_item.kind = string.format('%s %s',
@@ -15,11 +24,11 @@ function M.setup()
                                               vim_item.kind) -- This concatenates the icons with the name of the item kind
                 -- Source
                 vim_item.menu = ({
-                    path = "│",
-                    luasnip = "│",
-                    nvim_lsp = "│ LSP",
-                    buffer = "│ Buffer",
-                    ["vim-dadbod-completion"] = "│ DB"
+                    path = "",
+                    luasnip = "",
+                    nvim_lsp = " LSP",
+                    buffer = " Buffer",
+                    ["vim-dadbod-completion"] = " DB"
                 })[entry.source.name]
                 return vim_item
             end
@@ -126,6 +135,7 @@ function M.setup()
     theme.set_hl('CmpItemAbbrDeprecatedDefault',
                  {strikethrough = true, fg = theme.blender.fg_darker_3})
     theme.set_hl('CmpItemMenu', {italic = true, fg = theme.blender.fg_lighter_2})
+    theme.set_hl('CmpItemKind', {fg = 12})
     theme.set_hl('CmpItemKind', {fg = 12})
 end
 
