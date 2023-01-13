@@ -42,9 +42,9 @@ function M.setup()
     }
 
     local theme = require('common-theme')
-    theme.set_hl("GitSignsAdd", {fg = theme.blender.add, bold = true})
-    theme.set_hl("GitSignsChange", {fg = theme.blender.change, bold = true})
-    theme.set_hl("GitSignsDelete", {fg = theme.blender.delete, bold = true})
+    theme.set_hl("GitSignsAdd", {fg = theme.blender.add})
+    theme.set_hl("GitSignsChange", {fg = theme.blender.change})
+    theme.set_hl("GitSignsDelete", {fg = theme.blender.delete})
 
     theme.set_hl('GitSignsCurrentLineBlame', {link = 'Comment'})
     theme.set_hl('GitSignsCurrentLineBlameAccent', {fg = 4, italic = true})
