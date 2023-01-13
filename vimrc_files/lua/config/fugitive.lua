@@ -6,7 +6,7 @@ function M.setup()
     utils.noremap("n", "<leader>gb", '<cmd>Git blame<cr>')
 
     vim.cmd [[
-        augroup lFiletype
+        augroup FugitiveFiletype
             autocmd!
             autocmd FileType fugitiveblame nnoremap <buffer> q <cmd>bd<cr>
         augroup END
