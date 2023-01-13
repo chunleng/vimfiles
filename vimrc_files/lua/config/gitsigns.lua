@@ -10,13 +10,18 @@ function M.setup()
             changedelete = {hl = 'GitSignsChange', text = ''},
             untracked = {hl = 'GitSignsChange', text = ''}
         },
-        keymaps = {
-            buffer = false,
-            ['n <leader>gn'] = '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>',
-            ['n <leader>gp'] = '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>',
-            ['n <leader>gr'] = '<cmd>lua require\"gitsigns.actions\".reset_hunk()<CR>',
-            ['n <leader>gd'] = '<cmd>Gitsigns diffthis<CR>'
-        },
+        on_attach = function(bufnr)
+            local utils = require('common-utils')
+            local gs = require('gitsigns.actions')
+            utils.buf_noremap(bufnr, 'n', {'<leader>gn', '+'},
+                              function() gs.next_hunk() end)
+            utils.buf_noremap(bufnr, 'n', {'<leader>gp', '-'},
+                              function() gs.prev_hunk() end)
+            utils.buf_noremap(bufnr, 'n', {'<leader>gr'},
+                              function() gs.reset_hunk() end)
+            utils.buf_noremap(bufnr, 'n', {'<leader>gd'},
+                              function() gs.diffthis() end)
+        end,
         current_line_blame = true,
         current_line_blame_opts = {virt_text = true},
         current_line_blame_formatter = function(name, blame_info)
