@@ -2,7 +2,7 @@ local M = {}
 
 local function get_file_upper_camel(_, snip)
     return sn(nil, {
-        t(require('utils').snake_to_upper_camel(
+        i(1, require('utils').snake_to_upper_camel(
               snip.env.TM_FILENAME:match("^(.+)%..+$")))
     })
 end
