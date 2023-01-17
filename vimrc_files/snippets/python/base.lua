@@ -56,12 +56,12 @@ table.insert(M, s({trig = 'l', dscr = 'Loop (for)'}, fmta([[
 		<>
 ]], {
     c(1, {
-        fmta('<> in range(<>)', {i(1, 'i'), i(2, '10')}),
         fmta('<> in <>', {i(1, 'value'), i(2, 'lst')}),
-        fmta('<>, <> in enumerate(<>)', {i(1, 'i'), i(2, 'value'), i(3, 'lst')}),
         fmta('<>, <> in <>.items()', {i(1, 'key'), i(2, 'value'), i(3, 'dct')}),
+        fmta('<>, <> in enumerate(<>)', {i(1, 'i'), i(2, 'value'), i(3, 'lst')}),
         fmta('<>, (<>, <>) in enumerate(<>.items())',
-             {i(1, 'i'), i(2, 'key'), i(3, 'value'), i(4, 'dct')})
+             {i(1, 'i'), i(2, 'key'), i(3, 'value'), i(4, 'dct')}),
+        fmta('<> in range(<>)', {i(1, 'i'), i(2, '10')})
     }), i(0)
 })))
 
