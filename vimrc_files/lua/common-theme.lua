@@ -269,8 +269,8 @@ end
 
 function M.setup()
     vim.o.termguicolors = true
-    vim.o.pumblend = 1
-    vim.o.winblend = 1
+    vim.o.pumblend = 10
+    vim.o.winblend = 10
 
     update_color({
         '#202020', '#ff141d', '#6d9c10', '#bfbf31', '#3a5aa3', '#d182d6',
@@ -334,20 +334,15 @@ function M.setup()
     M.set_hl('MoreMsg', {fg = M.blender.fg_darker_2})
 
     -- Completion
-    M.set_hl('Pmenu', {
-        fg = M.blender.fg_darker_2,
-        bg = M.blender.bg_lighter_2,
-        blend = 10
-    })
-    M.set_hl('PmenuSel', {fg = 0, bg = 2, blend = 10})
+    M.set_hl('Pmenu', {fg = M.blender.fg_darker_2, bg = M.blender.bg_lighter_2})
+    M.set_hl('PmenuSel', {fg = 0, bg = 2})
     M.set_hl('PmenuSbar', {bg = M.blender.bg_lighter_3})
     M.set_hl('PmenuThumb', {bg = M.blender.scrollbar})
 
     -- Float
-    M.set_hl('NormalFloat', {fg = 15, bg = M.blender.bg_lighter_1, blend = 10})
-    M.set_hl('FloatBorder', {fg = 6, bg = M.blender.bg_lighter_1, blend = 10})
-    M.set_hl('FloatTitle',
-             {bold = true, fg = 10, bg = M.blender.bg_lighter_1, blend = 10})
+    M.set_hl('NormalFloat', {fg = 15, bg = M.blender.bg_lighter_1})
+    M.set_hl('FloatBorder', {fg = 6, bg = M.blender.bg_lighter_1})
+    M.set_hl('FloatTitle', {bold = true, fg = 10, bg = M.blender.bg_lighter_1})
 
     -- LSP Diagnostics
     M.set_hl('DiagnosticError', {fg = M.blender.error})
