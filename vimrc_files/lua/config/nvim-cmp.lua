@@ -1,10 +1,49 @@
 local M = {}
 
+local function get_tailwind_cmp_hl_group(entry, vim_item)
+    -- Reference from
+    -- https://github.com/roobert/tailwindcss-colorizer-cmp.nvim/blob/09fbf6dfd85ecae5e45b9200b37a79fc87e1fc40/lua/tailwindcss-colorizer-cmp/init.lua#L82
+    if vim.tbl_contains({'nvim_lsp'}, entry.source.name) and vim_item.kind ==
+        'Color' then
+        local words = {}
+        for word in string.gmatch(vim_item.word, '[^-]+') do
+            table.insert(words, word)
+        end
+
+        if #words < 3 or #words > 4 then return nil end
+
+        local color_name, color_number
+        if words[2] == "x" or words[2] == "y" or words[2] == "t" or words[2] ==
+            "b" or words[2] == "l" or words[2] == "r" then
+            color_name = words[3]
+            color_number = words[4]
+        else
+            color_name = words[2]
+            color_number = words[3]
+        end
+
+        if not color_name or not color_number then return nil end
+
+        local color_index = tonumber(color_number)
+        local tailwindcss_colors =
+            require("tailwindcss-colorizer-cmp.colors").TailwindcssColors
+
+        local color = vim.tbl_get(tailwindcss_colors, color_name, color_index)
+        if color == nil then return nil end
+
+        local hl_group = "lsp_documentColor_mf_" .. color
+        vim.api.nvim_set_hl(0, hl_group, {fg = "#" .. color, bg = "#" .. color})
+        return hl_group
+    end
+end
+
 function M.setup()
     local cmp = require 'cmp'
     local compare = require 'cmp.config.compare'
     local kind_icons = require("common-utils").kind_icons
+    local tailwindcss_cmp = require('tailwindcss-colorizer-cmp')
 
+    tailwindcss_cmp.setup()
     cmp.setup({
         -- Since I my sorting prioritize exact elements first, preselect is not required
         preselect = require("cmp.types").cmp.PreselectMode.None,
@@ -19,17 +58,24 @@ function M.setup()
         },
         formatting = {
             format = function(entry, vim_item)
+                local tw_hl_group = get_tailwind_cmp_hl_group(entry, vim_item)
                 vim_item.kind = string.format('%s %s',
                                               kind_icons[vim_item.kind],
                                               vim_item.kind) -- This concatenates the icons with the name of the item kind
-                -- Source
-                vim_item.menu = ({
-                    path = "",
-                    luasnip = "",
-                    nvim_lsp = " LSP",
-                    buffer = " Buffer",
-                    ["vim-dadbod-completion"] = " DB"
-                })[entry.source.name]
+
+                if tw_hl_group then
+                    vim_item.menu_hl_group = tw_hl_group
+                    vim_item.menu = string.format('  ')
+                else
+                    -- Source
+                    vim_item.menu = ({
+                        path = "",
+                        luasnip = "",
+                        nvim_lsp = " LSP",
+                        buffer = " Buffer",
+                        ["vim-dadbod-completion"] = " DB"
+                    })[entry.source.name]
+                end
                 return vim_item
             end
         },

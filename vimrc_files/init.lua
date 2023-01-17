@@ -231,16 +231,17 @@ require('packer').startup(function(use)
         config = function() require("config.dadbod-ui").setup() end,
         after = "vim-dadbod"
     }
+
+    -- https://github.com/roobert/tailwindcss-colorizer-cmp.nvim/
     use {
         'hrsh7th/nvim-cmp',
-        config = function() require("config.nvim-cmp").setup() end
-    }
-    use {'hrsh7th/cmp-nvim-lsp', after = {"nvim-cmp", "mason.nvim"}}
-    use {'hrsh7th/cmp-buffer', after = "nvim-cmp"}
-    use {'hrsh7th/cmp-path', after = "nvim-cmp"}
-    use {
-        "kristijanhusak/vim-dadbod-completion",
-        after = {"nvim-cmp", "vim-dadbod"}
+        requires = {
+            'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-nvim-lsp',
+            'kristijanhusak/vim-dadbod-completion',
+            'roobert/tailwindcss-colorizer-cmp.nvim'
+        },
+        config = function() require("config.nvim-cmp").setup() end,
+        after = {'mason.nvim', 'vim-dadbod'}
     }
 
     -- https://github.com/danymat/neogen
