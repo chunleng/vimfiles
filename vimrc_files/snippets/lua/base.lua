@@ -11,7 +11,7 @@ table.insert(M, s({trig = 'f', dscr = 'Function'}, fmta([[
 ]], {i(1, 'func_a'), i(2, 'var_a'), i(0)})))
 
 table.insert(M, s({trig = 'fx', dscr = 'Lambda Function'}, fmta([[
-	function (<>) <> end
+	function(<>) <> end
 ]], {i(1, 'var_a'), i(0)})))
 
 table.insert(M, s({trig = 'i', dscr = 'If'}, fmta([[
