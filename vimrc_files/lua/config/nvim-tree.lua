@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
     local utils = require('common-utils')
-    utils.noremap("n", '<c-enter>', "<cmd>NvimTreeFindFile|NvimTreeOpen<cr>")
+    utils.noremap("n", '<c-s-enter>', "<cmd>NvimTreeFindFile|NvimTreeOpen<cr>")
     require'nvim-tree'.setup {
         disable_netrw = false,
         open_on_setup = false,
@@ -29,7 +29,7 @@ function M.setup()
                     {key = 'x', action = "remove"},
                     {key = 'r', action = "rename"},
                     {key = 'R', action = "refresh"},
-                    {key = {'q', '<c-enter>'}, action = "close"},
+                    {key = {'q', '<c-s-enter>'}, action = "close"},
                     {key = {'zh'}, action = "toggle_git_ignored"},
                     {key = '<C-k>', action = ''},
                     {key = 'gp', action = 'parent_node'}

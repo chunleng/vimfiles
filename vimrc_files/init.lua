@@ -118,7 +118,7 @@ require('packer').startup(function(use)
             })
 
             local utils = require('common-utils')
-            utils.noremap('n', '<c-w><c-t>',
+            utils.noremap('n', '<c-s-t>',
                           function() neotest.summary.toggle() end)
             utils.noremap('n', '<c-t>', function() neotest.run.run() end)
             utils.noremap('n', '<leader>ct',
@@ -310,7 +310,7 @@ require('packer').startup(function(use)
         as = 'resolve_rc_menu',
         config = function()
             local utils = require('common-utils')
-            utils.noremap('n', '<c-w><c-r>', function()
+            utils.noremap('n', '<c-s-r>', function()
                 vim.ui.select({
                     'Vim RC', 'Vim Local RC', 'LuaSnip', 'Zsh', 'Hammerspoon',
                     'Kitty'
