@@ -36,7 +36,6 @@ table.insert(M, s({trig = 'l', dscr = 'Loop (for)'}, fmta([[
 	end
 ]], {
     c(1, {
-        fmta('<> in <>', {i(1, 'value'), i(2, '{}')}),
         fmta('<>, <> in ipairs(<>)', {i(1, 'i'), i(2, 'value'), i(3, 't')}),
         fmta('<>, <> in pairs(<>)', {i(1, 'key'), i(2, 'value'), i(3, 't')}),
         fmta('i = <>, <>', {i(1, '1'), i(2, '10,1')})
