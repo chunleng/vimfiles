@@ -126,7 +126,6 @@ local function setup_luasnip()
             vim.api.nvim_eval([[feedkeys("\<esc>", "n")]])
         end
     end)
-    utils.noremap({'i', 's'}, '<c-cr>', function() ls.change_choice(1) end)
     -- Go into normal mode when deleting select to improve completion flow
     utils.noremap({'s'}, '<bs>', '<bs>i')
 end

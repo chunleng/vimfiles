@@ -473,5 +473,33 @@ require('packer').startup(function(use)
         end,
         after = {'fzf-lua'}
     }
+
+    use {
+        'chunleng/nvim-null',
+        as = 'resolve_c_cr',
+        config = function()
+            local ls = require('luasnip')
+            local utils = require('common-utils')
+            utils.noremap('i', '<c-enter>', function()
+                if ls.choice_active() then
+                    ls.change_choice(1)
+                else
+                    vim.api.nvim_eval(
+                        [[feedkeys("\<c-r>=emmet#util#closePopup()\<cr>\<c-r>=emmet#expandAbbr(0,\"\")\<cr>", "n")]])
+                end
+            end)
+            utils.noremap('x', '<c-enter>', function()
+                if ls.choice_active() then
+                    ls.change_choice(1)
+                else
+                    vim.fn.call('emmet#expandAbbr', {2, ''})
+                end
+            end)
+            utils.noremap('s', '<c-enter>', function()
+                if ls.choice_active() then ls.change_choice(1) end
+            end)
+        end,
+        after = {'emmet-vim', 'LuaSnip'}
+    }
 end)
 
