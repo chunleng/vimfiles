@@ -81,11 +81,12 @@ local function configure_preferred_mappings()
     M.keymap("i", "<c-a>", "<c-o>I")
     M.keymap("i", "<c-e>", "<end>")
     M.keymap("i", "<c-k>", "<c-o>D")
-    M.keymap("c", "<c-a>", "<home>", false)
+    M.keymap("c", "<c-a>", "<home>", {silent = false})
     M.keymap("c", "<c-k>",
-             "<c-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>", false)
-    M.keymap("c", "<c-b>", "<left>", false)
-    M.keymap("c", "<c-f>", "<right>", false)
+             "<c-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>",
+             {silent = false})
+    M.keymap("c", "<c-b>", "<left>", {silent = false})
+    M.keymap("c", "<c-f>", "<right>", {silent = false})
 
     -- Add macos text edit mapping
     M.keymap("i", "<c-b>", "<left>")
