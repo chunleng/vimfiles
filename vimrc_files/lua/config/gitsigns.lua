@@ -13,9 +13,9 @@ function M.setup()
         on_attach = function(bufnr)
             local utils = require('common-utils')
             local gs = require('gitsigns.actions')
-            utils.buf_keymap(bufnr, 'n', {'<leader>gn', '+'},
+            utils.buf_keymap(bufnr, 'n', {']g', ']<c-g>'},
                              function() gs.next_hunk() end)
-            utils.buf_keymap(bufnr, 'n', {'<leader>gp', '-'},
+            utils.buf_keymap(bufnr, 'n', {'[g', '[<c-g>'},
                              function() gs.prev_hunk() end)
             utils.buf_keymap(bufnr, 'n', {'<leader>gr'},
                              function() gs.reset_hunk() end)

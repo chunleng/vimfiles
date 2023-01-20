@@ -100,6 +100,10 @@ local function configure_preferred_mappings()
 
     -- Faster completion
     M.keymap('i', '<c-l>', '<c-x><c-l>')
+
+    -- Easier reach to [, ]
+    M.keymap({'n', 'x'}, '<c-,>', function() vim.fn.eval('feedkeys("[")') end)
+    M.keymap({'n', 'x'}, '<c-.>', function() vim.fn.eval('feedkeys("]")') end)
 end
 
 local function configure_autogroup()

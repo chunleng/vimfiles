@@ -16,9 +16,9 @@ local function configure_lsp_mappings()
     utils.keymap('n', '<leader>cu', '<cmd>FzfLua lsp_references<cr>')
     utils.keymap('n', '<leader>cd', '<cmd>FzfLua lsp_document_diagnostics<cr>')
     utils.keymap('n', '<leader>c?', '<cmd>FzfLua lsp_workspace_diagnostics<cr>')
-    utils.keymap('n', {'(', '<leader>cp'},
+    utils.keymap('n', {'[d', '[<c-d>'},
                  '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-    utils.keymap('n', {')', '<leader>cn'},
+    utils.keymap('n', {']d', ']<c-d>'},
                  '<cmd>lua vim.diagnostic.goto_next()<cr>')
 end
 
@@ -285,14 +285,14 @@ local function setup_dap()
 
     utils.keymap('n', '<leader>db', '<cmd>DapToggleBreakpoint<cr>')
     utils.keymap('n', '<leader>dc', '<cmd>DapContinue<cr>')
-    utils.keymap('n', '<leader>dC', '<cmd>lua require("dap").run_last()<cr>')
-    utils.keymap('n', {'<leader>dd', '<right>'}, '<cmd>DapStepOver<cr>')
-    utils.keymap('n', {'<leader>di', '<down>'}, '<cmd>DapStepInto<cr>')
-    utils.keymap('n', {'<leader>do', '<up>'}, '<cmd>DapStepOut<cr>')
+    utils.keymap('n', '<leader>dd', '<cmd>lua require("dap").run_last()<cr>')
+    utils.keymap('n', {'<leader>dl', '<right>'}, '<cmd>DapStepOver<cr>')
+    utils.keymap('n', {'<leader>dj', '<down>'}, '<cmd>DapStepInto<cr>')
+    utils.keymap('n', {'<leader>dk', '<up>'}, '<cmd>DapStepOut<cr>')
     utils.keymap('n', '<leader>dt', '<cmd>DapTerminate<cr>')
-    utils.keymap('n', '<leader>dn',
+    utils.keymap('n', {']b', ']<c-b>'},
                  function() require('goto-breakpoints').next() end)
-    utils.keymap('n', '<leader>dp',
+    utils.keymap('n', {'[b', '[<c-b>'},
                  function() require('goto-breakpoints').prev() end)
 
     -- List of install name
