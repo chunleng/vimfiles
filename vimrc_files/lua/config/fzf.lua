@@ -45,9 +45,9 @@ function M.setup()
     end
     vim.cmd [[command! FzfLuaSearch call v:lua.fzf_lua_search()]]
     local utils = require('common-utils')
-    utils.noremap("n", "<enter>", ":FzfLua files<cr>")
-    utils.noremap("n", "<c-s-b>", "<cmd>FzfLua buffers<cr>")
-    utils.noremap('n', '<c-s-d>', function()
+    utils.keymap("n", "<enter>", ":FzfLua files<cr>")
+    utils.keymap("n", "<c-s-b>", "<cmd>FzfLua buffers<cr>")
+    utils.keymap('n', '<c-s-d>', function()
         vim.ui.select({
             'Breakpoints', 'Variables', 'Toggle REPL', 'Toggle DAP UI'
         }, {prompt = 'DAP Menu'}, function(choice)
@@ -62,10 +62,10 @@ function M.setup()
             end
         end)
     end)
-    utils.noremap("n", "<c-s-/>", ":FzfLua resume<cr>")
-    utils.noremap("n", "<c-/>", ":FzfLuaSearch<cr>")
-    utils.noremap("x", "<c-/>", ":<c-u>FzfLua grep_visual<cr>")
-    utils.noremap('n', '<c-s-h>', function()
+    utils.keymap("n", "<c-s-/>", ":FzfLua resume<cr>")
+    utils.keymap("n", "<c-/>", ":FzfLuaSearch<cr>")
+    utils.keymap("x", "<c-/>", ":<c-u>FzfLua grep_visual<cr>")
+    utils.keymap('n', '<c-s-h>', function()
         vim.ui.select({'help_tags', 'man_pages'}, {prompt = 'Help Menu'},
                       function(choice) vim.cmd('FzfLua ' .. choice) end)
     end)

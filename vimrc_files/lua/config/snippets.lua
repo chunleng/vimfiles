@@ -109,14 +109,14 @@ local function setup_luasnip()
         paths = '~/.config/nvim/snippets/'
     })
 
-    utils.noremap('i', '<tab>', function()
+    utils.keymap('i', '<tab>', function()
         if ls.expandable() then
             ls.expand()
         else
             vim.api.nvim_eval([[feedkeys("\<tab>", "n")]])
         end
     end)
-    utils.noremap({'i', 's'}, '<esc>', function()
+    utils.keymap({'i', 's'}, '<esc>', function()
         if ls.jumpable() then
             ls.jump(1)
             if not ls.jumpable() then
@@ -127,7 +127,7 @@ local function setup_luasnip()
         end
     end)
     -- Go into normal mode when deleting select to improve completion flow
-    utils.noremap({'s'}, '<bs>', '<bs>i')
+    utils.keymap({'s'}, '<bs>', '<bs>i')
 end
 
 local function setup_neogen()

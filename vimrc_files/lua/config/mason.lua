@@ -3,23 +3,23 @@ local M = {}
 local utils = require('common-utils')
 
 local function configure_lsp_mappings()
-    utils.noremap('n', '<leader>cf', '<cmd>lua require("lsp-fixcurrent")()<cr>')
+    utils.keymap('n', '<leader>cf', '<cmd>lua require("lsp-fixcurrent")()<cr>')
     -- TODO In typescript-language-server, no matter the kind, it always include disable rules as a result.
     --      Thus, the code_action does not work as expected. We can probably fix this by allowing
     --      apply_strategy to be "first" or "only"
     -- noremap('n', '<leader>cf', '<cmd>lua vim.lsp.buf.code_action({context={only={"quickfix"}}, apply=true})<cr>')
-    utils.noremap('n', '<leader>ca',
-                  '<cmd>lua vim.lsp.buf.code_action({apply=true})<cr>')
-    utils.noremap('n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<cr>')
-    utils.noremap('n', '<leader>c=',
-                  '<cmd>lua vim.lsp.buf.format({async=true})<cr>')
-    utils.noremap('n', '<leader>cu', '<cmd>FzfLua lsp_references<cr>')
-    utils.noremap('n', '<leader>cd', '<cmd>FzfLua lsp_document_diagnostics<cr>')
-    utils.noremap('n', '<leader>c?', '<cmd>FzfLua lsp_workspace_diagnostics<cr>')
-    utils.noremap('n', {'(', '<leader>cp'},
-                  '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-    utils.noremap('n', {')', '<leader>cn'},
-                  '<cmd>lua vim.diagnostic.goto_next()<cr>')
+    utils.keymap('n', '<leader>ca',
+                 '<cmd>lua vim.lsp.buf.code_action({apply=true})<cr>')
+    utils.keymap('n', '<leader>cr', '<cmd>lua vim.lsp.buf.rename()<cr>')
+    utils.keymap('n', '<leader>c=',
+                 '<cmd>lua vim.lsp.buf.format({async=true})<cr>')
+    utils.keymap('n', '<leader>cu', '<cmd>FzfLua lsp_references<cr>')
+    utils.keymap('n', '<leader>cd', '<cmd>FzfLua lsp_document_diagnostics<cr>')
+    utils.keymap('n', '<leader>c?', '<cmd>FzfLua lsp_workspace_diagnostics<cr>')
+    utils.keymap('n', {'(', '<leader>cp'},
+                 '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+    utils.keymap('n', {')', '<leader>cn'},
+                 '<cmd>lua vim.diagnostic.goto_next()<cr>')
 end
 
 local function setup_lsp()
@@ -27,10 +27,10 @@ local function setup_lsp()
     local lspconfig = require('lspconfig')
     local common_on_attach = function(_, bufnr)
         -- Insert keymap that might override default ones
-        utils.buf_noremap(bufnr, 'n', 'gd', '<cmd>FzfLua lsp_definitions<cr>')
-        utils.buf_noremap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
-        utils.buf_noremap(bufnr, 'v', '=',
-                          ':\'<,\'>lua vim.lsp.buf.range_formatting()<cr>')
+        utils.buf_keymap(bufnr, 'n', 'gd', '<cmd>FzfLua lsp_definitions<cr>')
+        utils.buf_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+        utils.buf_keymap(bufnr, 'v', '=',
+                         ':\'<,\'>lua vim.lsp.buf.range_formatting()<cr>')
     end
 
     configure_lsp_mappings()
@@ -283,17 +283,17 @@ local function setup_dap()
         linehl = 'CursorLine'
     })
 
-    utils.noremap('n', '<leader>db', '<cmd>DapToggleBreakpoint<cr>')
-    utils.noremap('n', '<leader>dc', '<cmd>DapContinue<cr>')
-    utils.noremap('n', '<leader>dC', '<cmd>lua require("dap").run_last()<cr>')
-    utils.noremap('n', {'<leader>dd', '<right>'}, '<cmd>DapStepOver<cr>')
-    utils.noremap('n', {'<leader>di', '<down>'}, '<cmd>DapStepInto<cr>')
-    utils.noremap('n', {'<leader>do', '<up>'}, '<cmd>DapStepOut<cr>')
-    utils.noremap('n', '<leader>dt', '<cmd>DapTerminate<cr>')
-    utils.noremap('n', '<leader>dn',
-                  function() require('goto-breakpoints').next() end)
-    utils.noremap('n', '<leader>dp',
-                  function() require('goto-breakpoints').prev() end)
+    utils.keymap('n', '<leader>db', '<cmd>DapToggleBreakpoint<cr>')
+    utils.keymap('n', '<leader>dc', '<cmd>DapContinue<cr>')
+    utils.keymap('n', '<leader>dC', '<cmd>lua require("dap").run_last()<cr>')
+    utils.keymap('n', {'<leader>dd', '<right>'}, '<cmd>DapStepOver<cr>')
+    utils.keymap('n', {'<leader>di', '<down>'}, '<cmd>DapStepInto<cr>')
+    utils.keymap('n', {'<leader>do', '<up>'}, '<cmd>DapStepOut<cr>')
+    utils.keymap('n', '<leader>dt', '<cmd>DapTerminate<cr>')
+    utils.keymap('n', '<leader>dn',
+                 function() require('goto-breakpoints').next() end)
+    utils.keymap('n', '<leader>dp',
+                 function() require('goto-breakpoints').prev() end)
 
     -- List of install name
     -- https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua

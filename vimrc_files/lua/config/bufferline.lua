@@ -35,39 +35,39 @@ function M.setup()
         }
     })
     local utils = require('common-utils')
-    utils.noremap({'n', 'x'}, "<c-p>", "<cmd>BufferLineCyclePrev<cr>")
-    utils.noremap({'n', 'x'}, "<c-n>", "<cmd>BufferLineCycleNext<cr>")
-    utils.noremap({'n', 'x'}, "<c-,>", "<cmd>BufferLineMovePrev<cr>")
-    utils.noremap({'n', 'x'}, "<c-.>", "<cmd>BufferLineMoveNext<cr>")
-    utils.noremap({'n', 'x'}, "gp", "<cmd>BufferLineTogglePin<cr>")
-    utils.noremap({'n', 'x'}, "<leader>bh",
-                  "<cmd>confirm BufferLineCloseLeft<cr>")
-    utils.noremap({'n', 'x'}, "<leader>bl",
-                  "<cmd>confirm BufferLineCloseRight<cr>")
-    utils.noremap({'n', 'x'}, "<c-q>", close_buffer)
-    utils.noremap({'n', 'x'}, "<leader>ba", function()
+    utils.keymap({'n', 'x'}, "<c-p>", "<cmd>BufferLineCyclePrev<cr>")
+    utils.keymap({'n', 'x'}, "<c-n>", "<cmd>BufferLineCycleNext<cr>")
+    utils.keymap({'n', 'x'}, "<c-{>", "<cmd>BufferLineMovePrev<cr>")
+    utils.keymap({'n', 'x'}, "<c-}>", "<cmd>BufferLineMoveNext<cr>")
+    utils.keymap({'n', 'x'}, "gp", "<cmd>BufferLineTogglePin<cr>")
+    utils.keymap({'n', 'x'}, "<leader>bh",
+                 "<cmd>confirm BufferLineCloseLeft<cr>")
+    utils.keymap({'n', 'x'}, "<leader>bl",
+                 "<cmd>confirm BufferLineCloseRight<cr>")
+    utils.keymap({'n', 'x'}, "<c-q>", close_buffer)
+    utils.keymap({'n', 'x'}, "<leader>ba", function()
         for _, element in ipairs(require('bufferline').get_elements().elements) do
             close_buffer(element.id)
         end
     end)
-    utils.noremap({'n', 'x'}, "<leader>bo", function()
+    utils.keymap({'n', 'x'}, "<leader>bo", function()
         for _, element in ipairs(require('bufferline').get_elements().elements) do
             if element.id ~= vim.api.nvim_get_current_buf() then
                 close_buffer(element.id)
             end
         end
     end)
-    utils.noremap({'n', 'x'}, "g0", "<cmd>BufferLineGoToBuffer 1<cr>")
-    utils.noremap({'n', 'x'}, "g1", "<cmd>BufferLineGoToBuffer 2<cr>")
-    utils.noremap({'n', 'x'}, "g2", "<cmd>BufferLineGoToBuffer 3<cr>")
-    utils.noremap({'n', 'x'}, "g3", "<cmd>BufferLineGoToBuffer 4<cr>")
-    utils.noremap({'n', 'x'}, "g4", "<cmd>BufferLineGoToBuffer 5<cr>")
-    utils.noremap({'n', 'x'}, "g5", "<cmd>BufferLineGoToBuffer 6<cr>")
-    utils.noremap({'n', 'x'}, "g6", "<cmd>BufferLineGoToBuffer 7<cr>")
-    utils.noremap({'n', 'x'}, "g7", "<cmd>BufferLineGoToBuffer 8<cr>")
-    utils.noremap({'n', 'x'}, "g8", "<cmd>BufferLineGoToBuffer 9<cr>")
-    utils.noremap({'n', 'x'}, "g9", "<cmd>BufferLineGoToBuffer 10<cr>")
-    utils.noremap({'n', 'x'}, "g$", "<cmd>BufferLineGoToBuffer -1<cr>")
+    utils.keymap({'n', 'x'}, "g0", "<cmd>BufferLineGoToBuffer 1<cr>")
+    utils.keymap({'n', 'x'}, "g1", "<cmd>BufferLineGoToBuffer 2<cr>")
+    utils.keymap({'n', 'x'}, "g2", "<cmd>BufferLineGoToBuffer 3<cr>")
+    utils.keymap({'n', 'x'}, "g3", "<cmd>BufferLineGoToBuffer 4<cr>")
+    utils.keymap({'n', 'x'}, "g4", "<cmd>BufferLineGoToBuffer 5<cr>")
+    utils.keymap({'n', 'x'}, "g5", "<cmd>BufferLineGoToBuffer 6<cr>")
+    utils.keymap({'n', 'x'}, "g6", "<cmd>BufferLineGoToBuffer 7<cr>")
+    utils.keymap({'n', 'x'}, "g7", "<cmd>BufferLineGoToBuffer 8<cr>")
+    utils.keymap({'n', 'x'}, "g8", "<cmd>BufferLineGoToBuffer 9<cr>")
+    utils.keymap({'n', 'x'}, "g9", "<cmd>BufferLineGoToBuffer 10<cr>")
+    utils.keymap({'n', 'x'}, "g$", "<cmd>BufferLineGoToBuffer -1<cr>")
 
     local theme = require('common-theme')
     local bgcolor = theme.blender.bg_darker_2

@@ -2,8 +2,8 @@ local M = {}
 
 function M.setup()
     local utils = require('common-utils')
-    utils.noremap("n", "<leader>gf", "<cmd>GBrowse<cr>")
-    utils.noremap("n", "<c-s-g>", function()
+    utils.keymap("n", "<leader>gf", "<cmd>GBrowse<cr>")
+    utils.keymap("n", "<c-s-g>", function()
         vim.ui.select({'File Blame', 'File Log'}, {}, function(choice)
             if choice == 'File Blame' then
                 vim.cmd('Git blame --date=short')

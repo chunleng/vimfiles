@@ -47,58 +47,58 @@ end
 
 local function configure_preferred_mappings()
 
-    M.noremap("n", "<esc>", "<cmd>nohl<cr>")
+    M.keymap("n", "<esc>", "<cmd>nohl<cr>")
 
-    M.noremap("n", "<leader>tu", "<cmd>set termguicolors!<cr>")
-    M.noremap("n", "<leader>tl", "<cmd>set list!<cr>")
-    M.noremap("n", "<leader>tp", "<cmd>set paste!<cr>")
-    M.noremap("n", "<leader>tw", "<cmd>set wrap!<cr>")
-    M.noremap("n", "<c-w><c-q>", "<cmd>close!<cr>")
+    M.keymap("n", "<leader>tu", "<cmd>set termguicolors!<cr>")
+    M.keymap("n", "<leader>tl", "<cmd>set list!<cr>")
+    M.keymap("n", "<leader>tp", "<cmd>set paste!<cr>")
+    M.keymap("n", "<leader>tw", "<cmd>set wrap!<cr>")
+    M.keymap("n", "<c-w><c-q>", "<cmd>close!<cr>")
 
     -- split control
-    M.noremap("n", "<c-l>", "<c-w>l")
-    M.noremap("n", "<c-h>", "<c-w>h")
-    M.noremap("n", "<c-j>", "<c-w>j")
-    M.noremap("n", "<c-k>", "<c-w>k")
+    M.keymap("n", "<c-l>", "<c-w>l")
+    M.keymap("n", "<c-h>", "<c-w>h")
+    M.keymap("n", "<c-j>", "<c-w>j")
+    M.keymap("n", "<c-k>", "<c-w>k")
 
     -- Make visual mode yank and delete go to clipboard as well
-    M.noremap("n", "vv", "viw")
-    M.noremap("n", "vV", "viW")
-    M.noremap("x", "y", "ygv\"*y")
-    M.noremap("x", "d", "ygv\"*d")
-    M.noremap("x", "x", "ygv\"*x")
+    M.keymap("n", "vv", "viw")
+    M.keymap("n", "vV", "viW")
+    M.keymap("x", "y", "ygv\"*y")
+    M.keymap("x", "d", "ygv\"*d")
+    M.keymap("x", "x", "ygv\"*x")
 
     -- Make ZQ and ZZ more useful for multiple buffer situation
     -- TODO any way to integrate with dressing?
-    M.noremap("n", "ZQ", ":confirm qa<cr>")
-    M.noremap("n", "ZZ", ":confirm wqa<cr>")
+    M.keymap("n", "ZQ", ":confirm qa<cr>")
+    M.keymap("n", "ZZ", ":confirm wqa<cr>")
 
     -- Add command like mapping
     -- command ctrl-e already mapped to <end>
     -- cM.noremap <c-e> <end>
     -- cM.noremap silent for <home> key causes cursor to freeze
-    M.noremap("i", "<c-a>", "<c-o>I")
-    M.noremap("i", "<c-e>", "<end>")
-    M.noremap("i", "<c-k>", "<c-o>D")
-    M.noremap("c", "<c-a>", "<home>", false)
-    M.noremap("c", "<c-k>",
-              "<c-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>", false)
-    M.noremap("c", "<c-b>", "<left>", false)
-    M.noremap("c", "<c-f>", "<right>", false)
+    M.keymap("i", "<c-a>", "<c-o>I")
+    M.keymap("i", "<c-e>", "<end>")
+    M.keymap("i", "<c-k>", "<c-o>D")
+    M.keymap("c", "<c-a>", "<home>", false)
+    M.keymap("c", "<c-k>",
+             "<c-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>", false)
+    M.keymap("c", "<c-b>", "<left>", false)
+    M.keymap("c", "<c-f>", "<right>", false)
 
     -- Add macos text edit mapping
-    M.noremap("i", "<c-b>", "<left>")
-    M.noremap("i", "<c-f>", "<right>")
+    M.keymap("i", "<c-b>", "<left>")
+    M.keymap("i", "<c-f>", "<right>")
 
     -- Add on to existing feature
-    M.noremap("n", "gF", "<cmd>e %:h/<cfile><cr>")
+    M.keymap("n", "gF", "<cmd>e %:h/<cfile><cr>")
 
     -- Make cycling between easier
-    M.noremap('n', '<bs>', '<cmd>b #<cr>')
-    M.noremap('n', '<c-bs>', '<cmd>wincmd p<cr>')
+    M.keymap('n', '<bs>', '<cmd>b #<cr>')
+    M.keymap('n', '<c-bs>', '<cmd>wincmd p<cr>')
 
     -- Faster completion
-    M.noremap('i', '<c-l>', '<c-x><c-l>')
+    M.keymap('i', '<c-l>', '<c-x><c-l>')
 end
 
 local function configure_autogroup()
@@ -266,22 +266,18 @@ function _G.fold_text()
     return leveltext .. " " .. foldtext
 end
 
-function M.noremap(mode, lhs, rhs, is_silent)
+function M.keymap(mode, lhs, rhs, opt)
     lhs = type(lhs) == 'string' and {lhs} or lhs
-    is_silent = is_silent == nil and true or is_silent
+    opt = opt or {}
 
     for i = 1, #lhs do
-        vim.keymap.set(mode, lhs[i], rhs, {silent = is_silent, noremap = true})
+        opt = vim.tbl_extend('force', {silent = true, noremap = false}, opt)
+        vim.keymap.set(mode, lhs[i], rhs, opt)
     end
 end
 
-function M.buf_noremap(b, mode, lhs, rhs, is_silent)
-    lhs = type(lhs) == 'string' and {lhs} or lhs
-    is_silent = is_silent == nil and true or is_silent
-
-    for i = 1, #lhs do
-        vim.keymap.set(mode, lhs[i], rhs,
-                       {silent = is_silent, noremap = true, buffer = b})
-    end
+function M.buf_keymap(b, mode, lhs, rhs, opt)
+    opt = vim.tbl_extend('force', opt or {}, {buffer = b})
+    M.keymap(mode, lhs, rhs, opt)
 end
 return M

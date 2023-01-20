@@ -118,11 +118,12 @@ require('packer').startup(function(use)
             })
 
             local utils = require('common-utils')
-            utils.noremap('n', '<c-s-t>',
-                          function() neotest.summary.toggle() end)
-            utils.noremap('n', '<c-t>', function() neotest.run.run() end)
-            utils.noremap('n', '<leader>ct',
-                          function()
+            utils.keymap('n', '<c-s-t>', function()
+                neotest.summary.toggle()
+            end)
+            utils.keymap('n', '<c-t>', function() neotest.run.run() end)
+            utils.keymap('n', '<leader>ct',
+                         function()
                 neotest.run.run(vim.fn.expand('%'))
             end)
 
@@ -131,8 +132,8 @@ require('packer').startup(function(use)
             vim.api.nvim_create_autocmd('FileType', {
                 pattern = 'neotest-summary',
                 callback = function(opt)
-                    utils.buf_noremap(opt.buf, 'n', 'q',
-                                      function()
+                    utils.buf_keymap(opt.buf, 'n', 'q',
+                                     function()
                         neotest.summary.close()
                     end)
                 end,
@@ -266,7 +267,7 @@ require('packer').startup(function(use)
             local utils = require('common-utils')
             local ls = require('luasnip')
 
-            utils.noremap({'i', 's'}, '<cr>', function()
+            utils.keymap({'i', 's'}, '<cr>', function()
                 if ls.jumpable() then
                     ls.jump(1)
                 else
@@ -292,7 +293,7 @@ require('packer').startup(function(use)
             local utils = require('common-utils')
             local ls = require('luasnip')
 
-            utils.noremap({'i', 's'}, '<s-cr>', function()
+            utils.keymap({'i', 's'}, '<s-cr>', function()
                 if ls.jumpable() then
                     ls.jump(-1)
                 else
@@ -310,7 +311,7 @@ require('packer').startup(function(use)
         as = 'resolve_rc_menu',
         config = function()
             local utils = require('common-utils')
-            utils.noremap('n', '<c-s-r>', function()
+            utils.keymap('n', '<c-s-r>', function()
                 vim.ui.select({
                     'Vim RC', 'Vim Local RC', 'LuaSnip', 'Zsh', 'Hammerspoon',
                     'Kitty'
@@ -454,7 +455,7 @@ require('packer').startup(function(use)
             local utils = require('common-utils')
 
             -- Easy replace with selection
-            utils.noremap('x', '<c-r>', function()
+            utils.keymap('x', '<c-r>', function()
                 local separator = ''
                 local left_key = vim.api.nvim_replace_termcodes('<left>', true,
                                                                 false, true)
@@ -480,7 +481,7 @@ require('packer').startup(function(use)
         config = function()
             local ls = require('luasnip')
             local utils = require('common-utils')
-            utils.noremap('i', '<c-enter>', function()
+            utils.keymap('i', '<c-enter>', function()
                 if ls.choice_active() then
                     ls.change_choice(1)
                 else
@@ -488,14 +489,14 @@ require('packer').startup(function(use)
                         [[feedkeys("\<c-r>=emmet#util#closePopup()\<cr>\<c-r>=emmet#expandAbbr(0,\"\")\<cr>", "n")]])
                 end
             end)
-            utils.noremap('x', '<c-enter>', function()
+            utils.keymap('x', '<c-enter>', function()
                 if ls.choice_active() then
                     ls.change_choice(1)
                 else
                     vim.fn.call('emmet#expandAbbr', {2, ''})
                 end
             end)
-            utils.noremap('s', '<c-enter>', function()
+            utils.keymap('s', '<c-enter>', function()
                 if ls.choice_active() then ls.change_choice(1) end
             end)
         end,

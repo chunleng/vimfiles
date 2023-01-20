@@ -13,14 +13,14 @@ function M.setup()
         on_attach = function(bufnr)
             local utils = require('common-utils')
             local gs = require('gitsigns.actions')
-            utils.buf_noremap(bufnr, 'n', {'<leader>gn', '+'},
-                              function() gs.next_hunk() end)
-            utils.buf_noremap(bufnr, 'n', {'<leader>gp', '-'},
-                              function() gs.prev_hunk() end)
-            utils.buf_noremap(bufnr, 'n', {'<leader>gr'},
-                              function() gs.reset_hunk() end)
-            utils.buf_noremap(bufnr, 'n', {'<leader>gd'},
-                              function() gs.diffthis() end)
+            utils.buf_keymap(bufnr, 'n', {'<leader>gn', '+'},
+                             function() gs.next_hunk() end)
+            utils.buf_keymap(bufnr, 'n', {'<leader>gp', '-'},
+                             function() gs.prev_hunk() end)
+            utils.buf_keymap(bufnr, 'n', {'<leader>gr'},
+                             function() gs.reset_hunk() end)
+            utils.buf_keymap(bufnr, 'n', {'<leader>gd'},
+                             function() gs.diffthis() end)
         end,
         current_line_blame = true,
         current_line_blame_opts = {virt_text = true},

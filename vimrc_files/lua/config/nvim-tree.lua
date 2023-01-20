@@ -2,7 +2,7 @@ local M = {}
 
 function M.setup()
     local utils = require('common-utils')
-    utils.noremap("n", '<c-s-enter>', "<cmd>NvimTreeFindFile|NvimTreeOpen<cr>")
+    utils.keymap("n", '<c-s-enter>', "<cmd>NvimTreeFindFile|NvimTreeOpen<cr>")
     require'nvim-tree'.setup {
         disable_netrw = false,
         open_on_setup = false,

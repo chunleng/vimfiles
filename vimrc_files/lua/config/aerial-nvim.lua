@@ -50,7 +50,7 @@ function M.setup()
     })
 
     local utils = require('common-utils')
-    utils.noremap('n', '<c-s-a>', '<cmd>AerialToggle!<cr>')
+    utils.keymap('n', '<c-s-a>', '<cmd>AerialToggle!<cr>')
 
     local theme = require('common-theme')
     theme.set_hl('AerialLine', {fg = 0, bg = 6})
