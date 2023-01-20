@@ -154,12 +154,6 @@ function M.setup()
                     fallback()
                 end
             end, {'i', 's'}),
-            ['<c-e>'] = function()
-                vim.fn.eval([[feedkeys("\<end>", "n")]])
-            end,
-            ['<c-a>'] = function()
-                vim.fn.eval([[feedkeys("\<c-o>I", "n")]])
-            end,
             ['<s-down>'] = cmp.mapping.scroll_docs(4),
             ['<s-up>'] = cmp.mapping.scroll_docs(-4)
         }),
