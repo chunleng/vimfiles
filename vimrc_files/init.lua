@@ -313,8 +313,8 @@ require('packer').startup(function(use)
             local utils = require('common-utils')
             utils.keymap('n', '<c-s-r>', function()
                 vim.ui.select({
-                    'Vim RC', 'Vim Local RC', 'LuaSnip', 'Zsh', 'Hammerspoon',
-                    'Kitty'
+                    'Vim RC', 'Vim Local RC', 'Direnvrc', 'LuaSnip', 'Zsh',
+                    'Hammerspoon', 'Kitty'
                 }, {}, function(choice)
                     if choice == 'Vim RC' then
                         vim.cmd('edit ~/.config/nvim/init.lua')
@@ -323,6 +323,8 @@ require('packer').startup(function(use)
                             silent !mkdir -p .vim
                             edit .vim/local.lua
                         ]])
+                    elseif choice == 'Direnvrc' then
+                        vim.cmd('edit .envrc')
                     elseif choice == 'LuaSnip' then
                         require('luasnip.loaders').edit_snippet_files()
                     elseif choice == 'Zsh' then
