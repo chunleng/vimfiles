@@ -72,6 +72,7 @@ local function configure_preferred_mappings()
     -- TODO any way to integrate with dressing?
     M.keymap("n", "ZQ", ":confirm qa<cr>")
     M.keymap("n", "ZZ", ":confirm wqa<cr>")
+    M.keymap('n', '<c-s>', '<cmd>w<cr>')
 
     -- Add command like mapping
     -- command ctrl-e already mapped to <end>
