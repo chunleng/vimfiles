@@ -105,6 +105,19 @@ local function configure_preferred_mappings()
     -- Easier reach to [, ]
     M.keymap({'n', 'x'}, '<c-,>', function() vim.fn.eval('feedkeys("[")') end)
     M.keymap({'n', 'x'}, '<c-.>', function() vim.fn.eval('feedkeys("]")') end)
+
+    -- Yank
+    M.keymap('i', '<c-y>', '<esc>0"*y$gi')
+    M.keymap('c', '<c-y>', function()
+        local t = vim.fn.getcmdtype()
+        -- 4x \\<c-c> is to escape previously opened q:, q/ and q? dialog
+        -- However, for the case where dialog is opened, it might not work properly
+        -- TODO find out how to detect the window that is opened and deal with it properly
+        if vim.tbl_contains({':', '/', '?'}, t) then
+            vim.fn.eval('feedkeys("\\<c-c>q' .. t .. 'k\\"*y$\\<c-c>\\<c-c>' ..
+                            t .. '\\<c-p>")')
+        end
+    end)
 end
 
 local function configure_autogroup()
