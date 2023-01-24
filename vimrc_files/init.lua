@@ -181,8 +181,13 @@ require('packer').startup(function(use)
     use {
         'windwp/nvim-ts-autotag',
         config = function() require('nvim-ts-autotag').setup() end,
-        requires = "tpope/vim-commentary", -- for commenting
         after = "nvim-treesitter"
+    }
+
+    -- https://github.com/numToStr/Comment.nvim
+    use {
+        'numToStr/Comment.nvim',
+        config = function() require('config.comment').setup() end
     }
 
     use {
