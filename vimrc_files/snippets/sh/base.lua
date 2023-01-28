@@ -51,11 +51,11 @@ table.insert(M, s({trig = 'lw', dscr = 'Loop (while)'}, fmta([[
 	done
 ]], {i(1), i(0)})))
 
-table.insert(M, s({trig = '0', dscr = 'False'}, fmta([[
+table.insert(M, s({trig = 'F', dscr = 'False'}, fmta([[
 	false
 ]], {})))
 
-table.insert(M, s({trig = '1', dscr = 'True'}, fmta([[
+table.insert(M, s({trig = 'T', dscr = 'True'}, fmta([[
 	true
 ]], {})))
 

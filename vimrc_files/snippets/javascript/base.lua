@@ -105,11 +105,11 @@ table.insert(M, s({trig = 'r', dscr = 'Return'}, fmta([[
 	return <>;
 ]], {i(1)})))
 
-table.insert(M, s({trig = '0', dscr = 'False'}, fmta([[
+table.insert(M, s({trig = 'F', dscr = 'False'}, fmta([[
 	false
 ]], {})))
 
-table.insert(M, s({trig = '1', dscr = 'True'}, fmta([[
+table.insert(M, s({trig = 'T', dscr = 'True'}, fmta([[
 	true
 ]], {})))
 
