@@ -154,6 +154,7 @@ function M.setup()
                     fallback()
                 end
             end, {'i', 's'}),
+            ['<c-e>'] = cmp.mapping(function(fallback) fallback() end),
             ['<s-down>'] = cmp.mapping.scroll_docs(4),
             ['<s-up>'] = cmp.mapping.scroll_docs(-4)
         }),

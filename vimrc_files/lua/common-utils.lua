@@ -79,7 +79,7 @@ local function configure_preferred_mappings()
     -- cM.noremap <c-e> <end>
     -- cM.noremap silent for <home> key causes cursor to freeze
     M.keymap("i", "<c-a>", "<c-o>I")
-    M.keymap("i", "<c-e>", "<c-o>A") -- use instead of <end> so that pmenu won't affect the result
+    M.keymap("i", "<c-e>", "<end>")
     M.keymap("i", "<c-k>", "<c-o>D")
     M.keymap("c", "<c-a>", "<home>", {silent = false})
     M.keymap("c", "<c-k>",
