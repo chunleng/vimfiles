@@ -9,7 +9,7 @@ table.insert(M, s({trig = 'ss', dscr = 'Snippet'}, fmta([=[
 table.insert(M,
              s(
                  {
-        trig = 'template/luasnip/module',
+        trig = '?luasnip/module',
         dscr = 'Template for luasnip module'
     }, fmta([[
 	local M = {}

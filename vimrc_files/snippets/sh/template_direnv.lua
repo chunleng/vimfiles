@@ -2,7 +2,7 @@ local M = {}
 
 table.insert(M, s(
                  {
-        trig = 'template/direnv/virtualenv',
+        trig = '?direnv/virtualenv',
         dscr = 'Template for virtualenv setup'
     }, fmta([[
 	# Since we are expecting the virtualenv to be in the same folder,
@@ -13,14 +13,14 @@ table.insert(M, s(
 ]], {})))
 
 table.insert(M, s({
-    trig = 'template/direnv/dockerenv_setting',
+    trig = '?direnv/dockerenv_setting',
     dscr = 'Template for program where docker host is read instead of docker context (Like scaffold)'
 }, fmta([[
     export DOCKER_HOST=$(docker context inspect <> -f '{{ .Endpoints.docker.Host }}')
 ]], {i(1)})))
 
 table.insert(M, s({
-    trig = 'template/vim/docstring_convention',
+    trig = '?vim/docstring_convention',
     dscr = 'Template for the docstring convention to use'
 }, fmta([[
 	# https://github.com/danymat/neogen#supported-languages

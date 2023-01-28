@@ -28,8 +28,7 @@ local function zet_footer()
     ]], {}))
 end
 
-table.insert(M,
-             s({trig = 'template/notes', dscr = 'Template for notes'}, fmta([[
+table.insert(M, s({trig = '?notes', dscr = 'Template for notes'}, fmta([[
 	<>
 
 	<>
@@ -38,11 +37,8 @@ table.insert(M,
 ]], {zet_header(), i(0), zet_footer()})))
 
 table.insert(M,
-             s(
-                 {
-        trig = 'template/notes/writing_idea',
-        dscr = 'Template for writing'
-    }, fmta([[
+             s({trig = '?notes/writing_idea', dscr = 'Template for writing'},
+               fmta([[
     <>
 
     ### Motivation for this writing
@@ -66,10 +62,12 @@ table.insert(M,
     <>
 ]], {zet_header(), i(0), zet_footer()})))
 
-table.insert(M, s({
-    trig = 'template/notes/cooking_recipe',
-    dscr = 'Template for cooking recipe'
-}, fmta([[
+table.insert(M,
+             s(
+                 {
+        trig = '?notes/cooking_recipe',
+        dscr = 'Template for cooking recipe'
+    }, fmta([[
 	<>
 
 	[Image goes here]
@@ -100,11 +98,8 @@ table.insert(M, s({
 ]], {zet_header({'cooking-recipe'}), zet_footer()})))
 
 table.insert(M,
-             s(
-                 {
-        trig = 'template/notes/journal',
-        dscr = 'Template for journal writing'
-    }, fmta([[
+             s({trig = '?notes/journal', dscr = 'Template for journal writing'},
+               fmta([[
 	<>
 
 	### Summary of Feeling
@@ -132,10 +127,12 @@ table.insert(M,
 	<>
 ]], {zet_header({'reflection'}), i(0), zet_footer()})))
 
-table.insert(M, s({
-    trig = 'template/notes/relation',
-    dscr = 'Template for relationship management'
-}, fmta([[
+table.insert(M,
+             s(
+                 {
+        trig = '?notes/relation',
+        dscr = 'Template for relationship management'
+    }, fmta([[
 	<>
 
 	### Like

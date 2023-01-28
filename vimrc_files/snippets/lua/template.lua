@@ -3,7 +3,7 @@ local M = {}
 table.insert(M,
              s(
                  {
-        trig = 'template/lua/autocommand_new',
+        trig = '?lua/autocommand_new',
         dscr = 'Template for autocommand'
     }, fmta([[
 	local group_name = '<>'
@@ -16,7 +16,7 @@ table.insert(M,
 	]], {i(1, 'group_name'), i(2, 'filetype'), i(0)}, {})))
 
 table.insert(M,
-             s({trig = 'template/lua/module', dscr = 'Template for Lua Module'},
+             s({trig = '?lua/module', dscr = 'Template for Lua Module'},
                fmta([[
 	local M = {}
 

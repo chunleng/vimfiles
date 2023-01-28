@@ -17,7 +17,7 @@ end
 table.insert(M,
              s(
                  {
-        trig = 'template/sh/option_reading',
+        trig = '?sh/option_reading',
         dscr = 'Template for option reading'
     }, fmta([[
 	show_usage(){

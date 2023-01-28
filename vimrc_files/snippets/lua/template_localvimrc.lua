@@ -1,7 +1,7 @@
 local M = {}
 
 table.insert(M, s({
-    trig = 'template/lua/autoformat_on_save',
+    trig = '?lua/autoformat_on_save',
     dscr = 'Template for invoking format on save'
 }, fmta([[
 	local group_name = 'LspAutoformat'
@@ -16,7 +16,7 @@ table.insert(M, s({
 table.insert(M,
              s(
                  {
-        trig = 'template/dadbod/db_setup',
+        trig = '?dadbod/db_setup',
         dscr = 'Template for Vim Dadbod Setup'
     }, fmta([[
 	-- :h dadbod
@@ -27,7 +27,7 @@ table.insert(M,
 ]], {})))
 
 table.insert(M,
-             s({trig = 'template/dap/python', dscr = 'Template for DAP Python'},
+             s({trig = '?dap/python', dscr = 'Template for DAP Python'},
                fmta([[
 	-- For reference to the debugpy settings:
 	-- https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
@@ -52,7 +52,7 @@ table.insert(M,
 ]], {})))
 
 table.insert(M, s({
-    trig = 'template/projectionist/project_setup',
+    trig = '?projectionist/project_setup',
     dscr = 'Template for the projectionist setup'
 }, fmta([[
 	-- :h projectionist
@@ -71,7 +71,7 @@ table.insert(M, s({
 ]], {})))
 
 table.insert(M, s({
-    trig = 'template/neotest/python',
+    trig = '?neotest/python',
     dscr = 'Template for setting up a python neotest project'
 }, fmta([[
 	require('neotest').setup_project('.', {

@@ -8,10 +8,10 @@ local function s_if_main(trig)
 end
 
 table.insert(M, s_if_main('i/main'))
-table.insert(M, s_if_main('template/if_main'))
+table.insert(M, s_if_main('?if_main'))
 
 table.insert(M, s({
-    trig = 'template/googlestyle_module_docstring',
+    trig = '?googlestyle_module_docstring',
     dscr = 'Template for Google style module docstring'
 }, fmta([[
 """A one line summary of the module or program, terminated by a period.
@@ -29,7 +29,7 @@ examples.
 ]], {})))
 
 table.insert(M, s({
-    trig = 'template/googlestyle_class_docstring',
+    trig = '?googlestyle_class_docstring',
     dscr = 'Template for Google style function docstring'
 }, fmta([[
 """Summary of class here.
@@ -44,7 +44,7 @@ Attributes:
 ]], {})))
 
 table.insert(M, s({
-    trig = 'template/googlestyle_function_docstring',
+    trig = '?googlestyle_function_docstring',
     dscr = 'Template for Google style function docstring'
 }, fmta([[
 """${1:Fetches rows from a Smalltable.}

@@ -1,7 +1,7 @@
 local M = {}
 
 table.insert(M, s({
-    trig = 'template/git/readme',
+    trig = '?git/readme',
     dscr = 'Template for README.md of Git Repository'
 }, fmt([[
     # {}

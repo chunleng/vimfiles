@@ -7,7 +7,7 @@ end
 table.insert(M,
              s(
                  {
-        trig = 'template/fastapi/init',
+        trig = '?fastapi/init',
         dscr = 'Template for FastAPI init'
     }, fmta([[
 	from fastapi import FastAPI
@@ -22,7 +22,7 @@ table.insert(M,
 table.insert(M,
              s(
                  {
-        trig = 'template/fastapi/function',
+        trig = '?fastapi/function',
         dscr = 'Template for FastAPI'
     }, fmta([[
 @app.<>(
@@ -42,7 +42,7 @@ async def <>(<>):
 table.insert(M,
              s(
                  {
-        trig = 'template/fastapi/model',
+        trig = '?fastapi/model',
         dscr = 'Template for FastAPI model'
     }, fmta([[
 class <>(BaseModel):

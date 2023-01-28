@@ -1,7 +1,7 @@
 local M = {}
 
 table.insert(M, s({
-    trig = 'template/typescriptreact/tsconfig',
+    trig = '?typescriptreact/tsconfig',
     dscr = 'Template for tsconfig.json'
 }, fmta([[
 	// For TypeScript 4.4.3
@@ -33,7 +33,7 @@ table.insert(M, s({
 ]], {})))
 
 table.insert(M, s({
-    trig = 'template/typescriptreact/eslint',
+    trig = '?typescriptreact/eslint',
     dscr = 'Template for TypeScript React ESLint'
 }, fmta([[
 	// `yarn add -D` or `npm i --save-dev`

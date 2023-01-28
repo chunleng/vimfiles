@@ -14,12 +14,12 @@ local function s_details(trig)
 ]], {i(1), i(2), i(0)}))
 end
 table.insert(M, s_details('<details>'))
-table.insert(M, s_details('template/details'))
+table.insert(M, s_details('?details'))
 
 table.insert(M,
              s(
                  {
-        trig = 'template/user_story',
+        trig = '?user_story',
         dscr = 'Template for writing a user story'
     }, fmta([[
 	snippet __user_story "Description" b
