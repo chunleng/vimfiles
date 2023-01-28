@@ -7,8 +7,7 @@ local function s_if_main(trig)
 	]], {i(0)}))
 end
 
-table.insert(M, s_if_main('i/main'))
-table.insert(M, s_if_main('?if_main'))
+table.insert(M, s_if_main('?main'))
 
 table.insert(M, s({
     trig = '?googlestyle_module_docstring',
