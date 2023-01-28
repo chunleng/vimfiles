@@ -14,7 +14,15 @@ table.insert(M, s({trig = 'imp', dscr = 'Import'}, c(1, {
 table.insert(M, s({trig = 'c', dscr = 'Class'}, fmta([[
 	class <>:
 		<>
-]], {d(1, get_file_upper_camel, {}), i(0)})))
+]], {
+    c(1, {
+        d(1, get_file_upper_camel, {}), sn(nil, {
+            d(1, function(_, snip)
+                return get_file_upper_camel(nil, snip.snippet)
+            end, {}), t('('), i(2, 'Bar'), t(')')
+        })
+    }), i(0)
+})))
 
 table.insert(M, s({trig = 'en', dscr = 'Enum'}, fmta([[
 	class <>(enum.Enum):
