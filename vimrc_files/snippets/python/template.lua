@@ -71,5 +71,12 @@ Raises:
 """
 ]], {})))
 
+table.insert(M,
+             s({trig = '?open', dscr = 'Template for opening a file pointer'},
+               fmta([[
+	with open(<>, '<>') as f:
+		<>
+]], {i(1, "'filepath'"), i(2, 'r'), i(0, 'content = json.load(f)')})))
+
 return M
 -- vim: noet
