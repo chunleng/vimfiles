@@ -37,8 +37,10 @@ function M.setup()
     local utils = require('common-utils')
     utils.keymap({'n', 'x'}, "<c-p>", "<cmd>BufferLineCyclePrev<cr>")
     utils.keymap({'n', 'x'}, "<c-n>", "<cmd>BufferLineCycleNext<cr>")
-    utils.keymap({'n', 'x'}, "<c-{>", "<cmd>BufferLineMovePrev<cr>")
-    utils.keymap({'n', 'x'}, "<c-}>", "<cmd>BufferLineMoveNext<cr>")
+    utils.keymap({'n', 'x'}, "<c-s-[>", "<cmd>BufferLineMovePrev<cr>",
+                 {silent = false})
+    utils.keymap({'n', 'x'}, "<c-s-]>", "<cmd>BufferLineMoveNext<cr>",
+                 {silent = false})
     utils.keymap({'n', 'x'}, "gp", "<cmd>BufferLineTogglePin<cr>")
     utils.keymap({'n', 'x'}, "<leader>bh",
                  "<cmd>confirm BufferLineCloseLeft<cr>")
