@@ -38,6 +38,11 @@ table.insert(M, s({trig = 'fx', dscr = 'Lambda Function'}, fmta([[
 	lambda <> : <>
 ]], {i(1, 'x'), i(0, 'x + 1')})))
 
+table.insert(M, s({trig = '?', dscr = 'Ternary if'}, c(1, {
+    fmta('<> or <>', {i(1, 'var_a'), i(2, 'var_b')}),
+    fmta('<> if <> else <>', {i(2, 'var_a'), i(1, 'var_a'), i(3, 'var_b')})
+})))
+
 table.insert(M, s({trig = 'i', dscr = 'If'}, fmta([[
 	if <>:
 		<>
@@ -52,6 +57,18 @@ table.insert(M, s({trig = 'ei', dscr = 'Else-if'}, fmta([[
 	elif <>:
 		<>
 ]], {i(1), i(0)})))
+
+table.insert(M, s({trig = 'a', dscr = 'Short-circuit and'}, fmta([[
+	and
+]], {})))
+
+table.insert(M, s({trig = 'o', dscr = 'Short-circuit or'}, fmta([[
+	or
+]], {})))
+
+table.insert(M, s({trig = 'ne', dscr = 'Not equal'}, fmta([[
+	!=
+]], {})))
 
 table.insert(M, s({trig = 's', dscr = 'Switch case'}, fmta([[
 	match <>:
@@ -72,6 +89,10 @@ table.insert(M, s({trig = 'l', dscr = 'Loop (for)'}, fmta([[
         fmta('<> in range(<>)', {i(1, 'i'), i(2, '10')})
     }), i(0)
 })))
+
+table.insert(M, s({trig = 'lc', dscr = 'List Comprehension'}, fmta([[
+	[<> for <> in <>]
+]], {i(3, 'x'), i(1, 'x'), i(2, 'lst if x == 1')})))
 
 table.insert(M, s({trig = 'lw', dscr = 'Loop (while)'}, fmta([[
 	while <>:
@@ -107,6 +128,10 @@ table.insert(M, s({trig = 'err', dscr = 'Raise error'}, fmta([[
 table.insert(M, s({trig = 'v', dscr = 'Variable'}, fmta([[
 	<> = <>
 ]], {i(1, 'var_a'), i(0, 'value')})))
+
+table.insert(M, s({trig = 'V', dscr = 'Constant'}, fmta([[
+	<> = <>
+]], {i(1, 'CONST_A'), i(0, 'value')})))
 
 table.insert(M, s({trig = 'n', dscr = 'Null'}, fmta([[
 	None
