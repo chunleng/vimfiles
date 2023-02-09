@@ -102,6 +102,7 @@ local function setup_lsp()
                                 lintStdin = true,
                                 lintFormats = {'%f:%l:%c:%t:%m'},
                                 lintOffsetColumns = 1,
+                                lintIgnoreExitCode = true,
                                 lintCategoryMap = {
                                     I = "H",
                                     R = "I",
@@ -110,7 +111,9 @@ local function setup_lsp()
                                     E = "E",
                                     F = "E"
                                 },
-                                rootMarkers = {".python-version"}
+                                rootMarkers = {
+                                    '.python-version', '.tools-versions', '.git'
+                                }
                             }
                         },
                         markdown = {
