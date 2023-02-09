@@ -29,10 +29,16 @@ table.insert(M, s({trig = 'en', dscr = 'Enum'}, fmta([[
 		<>
 ]], {d(1, get_file_upper_camel, {}), i(0)})))
 
-table.insert(M, s({trig = 'f', dscr = 'Function'}, fmta([[
+table.insert(M, s({trig = 'f', dscr = 'Function'}, c(1, {
+    fmta([[
 	def <>(<>):
 		<>
-]], {i(1, '__init__'), i(2, 'self'), i(0)})))
+]], {i(1, '__init__'), i(2, 'self'), i(0)}), fmta([[
+	@classmethod
+	def <>(cls<>):
+		<>
+]], {i(1, 'foo_a'), i(2, ', var_a'), i(0)})
+})))
 
 table.insert(M, s({trig = 'fx', dscr = 'Lambda Function'}, fmta([[
 	lambda <> : <>
