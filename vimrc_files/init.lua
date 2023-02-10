@@ -509,5 +509,12 @@ require('packer').startup(function(use)
         end,
         after = {'emmet-vim', 'LuaSnip'}
     }
+
+    use {
+        'Wansmer/treesj',
+        requires = {'nvim-treesitter'},
+        config = function() require('config.treesj').setup() end
+    }
+
 end)
 
