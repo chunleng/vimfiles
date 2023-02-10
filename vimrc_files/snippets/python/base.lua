@@ -65,11 +65,11 @@ table.insert(M, s({trig = 'ei', dscr = 'Else-if'}, fmta([[
 ]], {i(1), i(0)})))
 
 table.insert(M, s({trig = 'a', dscr = 'Short-circuit and'}, fmta([[
-	and
+	and 
 ]], {})))
 
 table.insert(M, s({trig = 'o', dscr = 'Short-circuit or'}, fmta([[
-	or
+	or 
 ]], {})))
 
 table.insert(M, s({trig = 'ne', dscr = 'Not equal'}, fmta([[
