@@ -10,17 +10,9 @@ table.insert(M, s({trig = '?', dscr = 'Ternary if'}, fmta([[
 	<> ? <> : <>
 ]], {i(1, 'var.var_a'), i(2, 'a'), i(0, 'b')})))
 
-table.insert(M, s({trig = 'a', dscr = 'Short-circuit and'}, fmta([[
-	&&
-]], {})))
-
-table.insert(M, s({trig = 'o', dscr = 'Short-circuit or'}, fmta([[
-	||
-]], {})))
-
-table.insert(M, s({trig = 'no', dscr = 'Not equal'}, fmta([[
-	!=
-]], {})))
+table.insert(M, s({trig = 'o', dscr = 'Short-circuit or'}, t('|| ')))
+table.insert(M, s({trig = 'a', dscr = 'Short-circuit and'}, t('&& ')))
+table.insert(M, s({trig = 'ne', dscr = 'Not equal'}, t('!= ')))
 
 table.insert(M, s({trig = 'l', dscr = 'Loop'}, c(1, {
     fmta('for_each = <>', {i(1, '[] # to use: each.key, each.value')}),

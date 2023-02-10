@@ -14,6 +14,10 @@ table.insert(M, s({trig = 'fx', dscr = 'Lambda Function'}, fmta([[
 	function(<>) <> end
 ]], {i(1, 'var_a'), i(0)})))
 
+table.insert(M, s({trig = '?', dscr = 'Ternary-if'}, fmta([[
+	<> and <> or <>
+]], {i(1, 'foo_a == "bar"'), i(2, '\'a\''), i(3, '\'b\'')})))
+
 table.insert(M, s({trig = 'i', dscr = 'If'}, fmta([[
 	if <> then
 		<>
@@ -29,6 +33,10 @@ table.insert(M, s({trig = 'ei', dscr = 'Else-if'}, fmta([[
 	elseif <> then
 		<>
 ]], {i(1), i(0)})))
+
+table.insert(M, s({trig = 'o', dscr = 'Short-circuit or'}, t('or ')))
+table.insert(M, s({trig = 'a', dscr = 'Short-circuit and'}, t('and ')))
+table.insert(M, s({trig = 'ne', dscr = 'Not equal'}, t('~= ')))
 
 table.insert(M, s({trig = 'l', dscr = 'Loop (for)'}, fmta([[
 	for <> do
@@ -60,6 +68,10 @@ table.insert(M, s({trig = 'T', dscr = 'True'}, fmta([[
 	true
 ]], {})))
 
+table.insert(M, s({trig = 'N', dscr = 'Null'}, fmta([[
+	nil
+]], {})))
+
 table.insert(M, s({trig = 'p', dscr = 'Print (debug)'}, fmta([[
 	print(<>)
 ]], {c(1, {fmta('vim.inspect(<>)', {r(1, 'msg')}), r(1, 'msg')})}),
@@ -79,10 +91,6 @@ table.insert(M, s({trig = 'err', dscr = 'Raise error'}, fmta([[
 table.insert(M, s({trig = 'v', dscr = 'Variable'}, fmta([[
 	local <> = <>
 ]], {i(1, 'var_a'), i(0, 'value')})))
-
-table.insert(M, s({trig = 'n', dscr = 'Null'}, fmta([[
-	nil
-]], {})))
 
 return M
 -- vim: noet

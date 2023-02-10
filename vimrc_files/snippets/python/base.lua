@@ -64,17 +64,9 @@ table.insert(M, s({trig = 'ei', dscr = 'Else-if'}, fmta([[
 		<>
 ]], {i(1), i(0)})))
 
-table.insert(M, s({trig = 'a', dscr = 'Short-circuit and'}, fmta([[
-	and 
-]], {})))
-
-table.insert(M, s({trig = 'o', dscr = 'Short-circuit or'}, fmta([[
-	or 
-]], {})))
-
-table.insert(M, s({trig = 'ne', dscr = 'Not equal'}, fmta([[
-	!=
-]], {})))
+table.insert(M, s({trig = 'o', dscr = 'Short-circuit or'}, t('or ')))
+table.insert(M, s({trig = 'a', dscr = 'Short-circuit and'}, t('and ')))
+table.insert(M, s({trig = 'ne', dscr = 'Not equal'}, t('and ')))
 
 table.insert(M, s({trig = 's', dscr = 'Switch case'}, fmta([[
 	match <>:
@@ -117,6 +109,10 @@ table.insert(M, s({trig = 'T', dscr = 'True'}, fmta([[
 	True
 ]], {})))
 
+table.insert(M, s({trig = 'N', dscr = 'Null'}, fmta([[
+	None
+]], {})))
+
 table.insert(M, s({trig = 'p', dscr = 'Print (debug)'}, fmta([[
 	print(<>)
 ]], {v(1)})))
@@ -138,10 +134,6 @@ table.insert(M, s({trig = 'v', dscr = 'Variable'}, fmta([[
 table.insert(M, s({trig = 'V', dscr = 'Constant'}, fmta([[
 	<> = <>
 ]], {i(1, 'CONST_A'), i(0, 'value')})))
-
-table.insert(M, s({trig = 'n', dscr = 'Null'}, fmta([[
-	None
-]], {})))
 
 return M
 -- vim: noet

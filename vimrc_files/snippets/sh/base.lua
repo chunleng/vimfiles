@@ -10,6 +10,10 @@ table.insert(M, s({trig = 'f', dscr = 'Function'}, fmta([[
     }
 ]], {i(1, 'func_a'), i(0)})))
 
+table.insert(M, s({trig = '?', dscr = 'Ternary-if'}, fmta([[
+	$([ <> ] && echo <> || echo <>)
+]], {i(1, '"$foo" == "bar"'), i(2, "a"), i(3, "b")})))
+
 table.insert(M, s({trig = 'i', dscr = 'If'}, fmta([[
 	if [ <> ]; then
 		<>
@@ -25,6 +29,12 @@ table.insert(M, s({trig = 'ei', dscr = 'Else-if'}, fmta([[
 	elif [ <> ]; then
 		<>
 ]], {i(1), i(0)})))
+
+table.insert(M, s({trig = 'o', dscr = 'Short-circuit or'}, t('|| ')))
+table.insert(M, s({trig = 'a', dscr = 'Short-circuit and'}, t('&& ')))
+
+table.insert(M, s({trig = 'ne', dscr = 'Not equal'},
+                  c(1, {i(1, '-ne '), i(1, '!= ')})))
 
 table.insert(M, s({trig = 's', dscr = 'Switch-case'}, fmta([[
 	case <> in

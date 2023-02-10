@@ -54,6 +54,10 @@ table.insert(M, s({trig = 'fx', dscr = 'Lambda Function'}, c(1, {
 	]], {i(1), i(2)})
 })))
 
+table.insert(M, s({trig = '?', dscr = 'Ternary-if'}, fmta([[
+	<> ? <> : <>
+]], {i(1, 'fooA == "bar"'), i(2, '"a"'), i(0, '"b"')})))
+
 table.insert(M, s({trig = 'i', dscr = 'If'}, fmta([[
 	if (<>) {
 		<>
@@ -67,6 +71,10 @@ table.insert(M, s({trig = 'e', dscr = 'Else'}, fmta([[
 table.insert(M, s({trig = 'ei', dscr = 'Else-if'}, fmta([[
 	} else if (<>) {
 ]], {i(1)})))
+
+table.insert(M, s({trig = 'o', dscr = 'Short-circuit or'}, t('|| ')))
+table.insert(M, s({trig = 'a', dscr = 'Short-circuit and'}, t('&& ')))
+table.insert(M, s({trig = 'ne', dscr = 'Not equal'}, t('!= ')))
 
 table.insert(M, s({trig = 's', dscr = 'Switch-case'}, fmta([[
 	switch (<>) {
@@ -113,6 +121,8 @@ table.insert(M, s({trig = 'T', dscr = 'True'}, fmta([[
 	true
 ]], {})))
 
+table.insert(M, s({trig = 'N', dscr = 'Null'}, t('null')))
+
 table.insert(M, s({trig = 'p', dscr = 'Debug print'}, fmta([[
 	console.log(<>)
 ]], {v(1)})))
@@ -131,8 +141,6 @@ table.insert(M, s({trig = 'err', dscr = 'Raise Exception'}, fmta([[
 table.insert(M, s({trig = 'v', dscr = 'Variable'}, fmta([[
 	let <> = <>;
 ]], {i(1, 'varA'), i(2, 'value')})))
-
-table.insert(M, s({trig = 'n', dscr = 'Null'}, t('null')))
 
 return M
 -- vim: noet
