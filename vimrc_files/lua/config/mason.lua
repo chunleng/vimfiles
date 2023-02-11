@@ -69,6 +69,50 @@ local function setup_lsp()
 
         end,
         efm = function()
+            local python_efm = {}
+            local python_root_markers = {
+                '.python-version', '.tools-versions', '.git'
+            }
+            if os.execute('type isort > /dev/null') == 0 then
+                table.insert(python_efm, {
+                    formatCommand = "isort --quiet -",
+                    formatStdin = true,
+                    rootMarkers = python_root_markers
+                })
+            end
+            if os.execute('type black > /dev/null') == 0 then
+                table.insert(python_efm, {
+                    formatCommand = "black --quiet -",
+                    formatStdin = true,
+                    rootMarkers = python_root_markers
+                })
+            end
+            if os.execute('type yapf > /dev/null') == 0 then
+                table.insert(python_efm, {
+                    formatCommand = "yapf --quiet",
+                    formatStdin = true,
+                    rootMarkers = python_root_markers
+                })
+            end
+            if os.execute('type pylint > /dev/null') == 0 then
+                table.insert(python_efm, {
+                    prefix = "Pylint",
+                    lintCommand = "pylint --from-stdin --output-format text --score no --msg-template {path}:{line}:{column}:{C}:{msg} ${INPUT}",
+                    lintStdin = true,
+                    lintFormats = {'%f:%l:%c:%t:%m'},
+                    lintOffsetColumns = 1,
+                    lintIgnoreExitCode = true,
+                    lintCategoryMap = {
+                        I = "H",
+                        R = "I",
+                        C = "I",
+                        W = "W",
+                        E = "E",
+                        F = "E"
+                    },
+                    rootMarkers = python_root_markers
+                })
+            end
             lspconfig.efm.setup({
                 on_attach = common_on_attach,
                 init_options = {documentFormatting = true},
@@ -77,45 +121,7 @@ local function setup_lsp()
                 settings = {
                     lintDebounce = "500ms",
                     languages = {
-                        python = {
-                            {
-                                formatCommand = "isort --quiet -",
-                                formatStdin = true,
-                                rootMarkers = {
-                                    '.python-version', '.tools-versions', '.git'
-                                }
-                            }, {
-                                formatCommand = "black --quiet -",
-                                formatStdin = true,
-                                rootMarkers = {
-                                    '.python-version', '.tools-versions', '.git'
-                                }
-                            }, {
-                                formatCommand = "yapf --quiet",
-                                formatStdin = true,
-                                rootMarkers = {
-                                    '.python-version', '.tools-versions', '.git'
-                                }
-                            }, {
-                                prefix = "Pylint",
-                                lintCommand = "pylint --from-stdin --output-format text --score no --msg-template {path}:{line}:{column}:{C}:{msg} ${INPUT}",
-                                lintStdin = true,
-                                lintFormats = {'%f:%l:%c:%t:%m'},
-                                lintOffsetColumns = 1,
-                                lintIgnoreExitCode = true,
-                                lintCategoryMap = {
-                                    I = "H",
-                                    R = "I",
-                                    C = "I",
-                                    W = "W",
-                                    E = "E",
-                                    F = "E"
-                                },
-                                rootMarkers = {
-                                    '.python-version', '.tools-versions', '.git'
-                                }
-                            }
-                        },
+                        python = python_efm,
                         markdown = {
                             {
                                 prefix = "Markdownlint",
