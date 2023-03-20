@@ -33,5 +33,24 @@ table.insert(M, s({trig = 'T', dscr = 'True'}, fmta([[
 	true
 ]], {})))
 
+table.insert(M, s({trig = 'variable', dscr = 'Terraform variable'}, fmta([[
+	variable "<>" {
+		type = string
+		description = "<>"
+	}
+]], {i(1, 'foo'), i(2, 'Description of the variable')})))
+
+table.insert(M, s({trig = 'resource', dscr = 'Terraform resource'}, fmta([[
+	resource "<>" "<>" {
+		<>
+	}
+]], {i(1, 'resource_type'), i(2, 'resource-name'), i(0)})))
+
+table.insert(M, s({trig = 'data', dscr = 'Terraform data'}, fmta([[
+	data "<>" "<>" {
+		<>
+	}
+]], {i(1, 'data_type'), i(2, 'data-name'), i(0)})))
+
 return M
 -- vim: noet
