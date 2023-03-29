@@ -2,7 +2,10 @@ local M = {}
 
 function M.setup()
     local utils = require('common-utils')
+    local api = require("nvim-tree.api")
+
     utils.keymap("n", '<c-s-enter>', "<cmd>NvimTreeFindFile|NvimTreeOpen<cr>")
+
     require'nvim-tree'.setup {
         disable_netrw = false,
         open_on_setup = false,
@@ -11,31 +14,7 @@ function M.setup()
             enable = true,
             icons = {hint = "", info = "", warning = "", error = ""}
         },
-        view = {
-            width = 30,
-            hide_root_folder = true,
-            mappings = {
-                custom_only = true,
-                list = {
-                    -- :h nvim-tree-default-mappings
-                    {key = 'a', action = "create"},
-                    {key = {'<CR>', 'e'}, action = "edit"},
-                    {key = 'l', action = 'preview'},
-                    {key = 'h', action = "close_node"},
-                    {key = 'J', action = "next_sibling"},
-                    {key = 'K', action = "prev_sibling"},
-                    {key = 'dd', action = "cut"}, {key = 'yy', action = "copy"},
-                    {key = 'p', action = "paste"},
-                    {key = 'x', action = "remove"},
-                    {key = 'r', action = "rename"},
-                    {key = 'R', action = "refresh"},
-                    {key = {'q', '<c-s-enter>'}, action = "close"},
-                    {key = {'zh'}, action = "toggle_git_ignored"},
-                    {key = '<C-k>', action = ''},
-                    {key = 'gp', action = 'parent_node'}
-                }
-            }
-        },
+        view = {width = 30, hide_root_folder = true},
         filters = {custom = {"__pycache__"}},
         actions = {
             open_file = {
@@ -70,7 +49,45 @@ function M.setup()
 
                 }
             }
-        }
+        },
+        on_attach = function(bufnr)
+            utils.buf_keymap(bufnr, 'n', 'a', api.fs.create)
+            utils.buf_keymap(bufnr, 'n', {'<cr>', 'e'}, api.node.open.edit)
+            -- TODO handle node.type == 'link'
+            utils.buf_keymap(bufnr, 'n', 'l', function()
+                local node = api.tree.get_node_under_cursor()
+                if node.type == 'file' then
+                    api.node.open.preview()
+                else
+                    if not node.open then
+                        api.node.open.edit()
+                    end
+                    -- Goto child
+                    -- TODO The following goes to the next folder when child is empty
+                    vim.api.nvim_feedkeys('j', 'n', false)
+                end
+            end)
+            utils.buf_keymap(bufnr, 'n', 'h', function()
+                local node = api.tree.get_node_under_cursor()
+                print(node.type)
+                if node.type == 'directory' and node.open then
+                    api.node.open.edit()
+                else
+                    api.node.navigate.parent_close()
+                end
+            end)
+            utils.buf_keymap(bufnr, 'n', 'J', api.node.navigate.sibling.next)
+            utils.buf_keymap(bufnr, 'n', 'K', api.node.navigate.sibling.prev)
+            utils.buf_keymap(bufnr, 'n', 'dd', api.fs.cut)
+            utils.buf_keymap(bufnr, 'n', 'yy', api.fs.copy.node)
+            utils.buf_keymap(bufnr, 'n', 'p', api.fs.paste)
+            utils.buf_keymap(bufnr, 'n', 'x', api.fs.remove)
+            utils.buf_keymap(bufnr, 'n', 'r', api.fs.rename)
+            utils.buf_keymap(bufnr, 'n', 'R', api.tree.reload)
+            utils.buf_keymap(bufnr, 'n', {'q', '<c-s-enter>'}, api.tree.close)
+            utils.buf_keymap(bufnr, 'n', 'zh', api.tree.toggle_gitignore_filter)
+            utils.buf_keymap(bufnr, 'n', 'gp', api.node.navigate.parent)
+        end
     }
 
     local theme = require('common-theme')
@@ -86,7 +103,7 @@ function M.setup()
     theme.set_hl('NvimTreeSymlink', {fg = 6, bold = true})
     theme.set_hl('NvimTreeEndOfBuffer', {bg = 0})
 
-    local events = require("nvim-tree.api").events
+    local events = api.events
     events.subscribe(events.Event.TreeOpen,
                      function() vim.opt_local.cursorline = true end)
 
