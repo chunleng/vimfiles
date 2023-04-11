@@ -308,16 +308,16 @@ local function setup_dap()
     -- https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
     dap_setup.setup({
         ensure_installed = {'python'},
-        automatic_installation = true
-    })
-
-    dap_setup.setup_handlers({
-        python = function()
-            dap.adapters.python = {
-                command = "debugpy-adapter",
-                type = "executable"
-            }
-        end
+        automatic_installation = true,
+        handlers = {
+            python = function(config)
+                config.adapters = {
+                    command = "debugpy-adapter",
+                    type = "executable"
+                }
+                dap_setup.default_setup(config)
+            end
+        }
     })
 
     dapui.setup({
