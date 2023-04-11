@@ -39,7 +39,7 @@ local function setup_lsp()
         ensure_installed = {
             "cssls", "cssmodules_ls", "denols", "dockerls", "efm", "eslint",
             "grammarly", "html", "intelephense", "jdtls", "jsonls", "pyright",
-            "purescriptls", "rust_analyzer", "solargraph", "sumneko_lua",
+            "purescriptls", "rust_analyzer", "solargraph", "lua_ls",
             "tailwindcss", "terraformls", "tflint", "tsserver", "vimls",
             "yamlls"
 
@@ -221,9 +221,9 @@ local function setup_lsp()
                 }
             })
         end,
-        sumneko_lua = function()
+        lua_ls = function()
             require("neodev").setup()
-            lspconfig.sumneko_lua.setup({
+            lspconfig.lua_ls.setup({
                 on_attach = function(client, bufnr)
                     -- Use efm lua-format instead
                     client.server_capabilities.documentFormattingProvider =
