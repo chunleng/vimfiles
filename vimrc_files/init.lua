@@ -4,11 +4,6 @@ require("common-theme").setup()
 
 require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
-
-    use {
-        'folke/which-key.nvim',
-        config = function() require("config.which-key").setup() end
-    }
     use {
         'kyazdani42/nvim-tree.lua',
         config = function() require('config.nvim-tree').setup() end,
