@@ -8,13 +8,12 @@ function M.setup()
 
     require'nvim-tree'.setup {
         disable_netrw = false,
-        open_on_setup = false,
         hijack_cursor = true,
         diagnostics = {
             enable = true,
             icons = {hint = "", info = "", warning = "", error = ""}
         },
-        view = {width = 30, hide_root_folder = true},
+        view = {width = 30},
         filters = {custom = {"__pycache__"}},
         actions = {
             open_file = {
@@ -35,6 +34,7 @@ function M.setup()
         renderer = {
             group_empty = true,
             highlight_git = false,
+            root_folder_label = false,
             icons = {
                 glyphs = {
                     git = {
