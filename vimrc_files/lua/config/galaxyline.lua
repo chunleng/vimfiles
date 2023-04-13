@@ -7,11 +7,11 @@ end
 function M.setup()
     local gl = require('galaxyline')
     local condition = require('galaxyline.condition')
-    local gps = require("nvim-gps")
+    local navic = require("nvim-navic")
     local gls = gl.section
     local theme = require('common-theme')
 
-    gps.setup()
+    navic.setup({lsp = {auto_attach = true}})
 
     -- theme.set_hl(name, options)
     theme.set_hl('GalaxylineDiagnosticError', {fg = 0, bg = theme.blender.error})
@@ -63,9 +63,11 @@ function M.setup()
                 end
             }
         }, {
-            nvimGPS = {
-                provider = function() return gps.get_location() end,
-                condition = function() return gps.is_available() end,
+            nvimNavic = {
+                provider = function() return navic.get_location() end,
+                condition = function()
+                    return navic.is_available()
+                end,
                 highlight = 'StatusLine'
             }
         }

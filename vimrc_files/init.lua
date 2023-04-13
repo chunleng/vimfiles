@@ -14,10 +14,10 @@ require('packer').startup(function(use)
     -- Cursorline Related
     use {
         'glepnir/galaxyline.nvim',
-        requires = {'SmiteshP/nvim-gps'},
-        config = function() require("config.galaxyline").setup() end
+        requires = {'SmiteshP/nvim-navic'},
+        config = function() require("config.galaxyline").setup() end,
+        after = {'mason.nvim'}
     }
-    use {'SmiteshP/nvim-gps', requires = {'nvim-treesitter/nvim-treesitter'}}
 
     -- https://github.com/akinsho/bufferline.nvim
     -- https://github.com/famiu/bufdelete.nvim
