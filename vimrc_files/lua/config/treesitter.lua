@@ -7,7 +7,6 @@ function M.setup()
 
     require'nvim-treesitter.configs'.setup {
         ensure_installed = "all",
-        ignore_install = {"phpdoc"},
         highlight = {enable = true},
         matchup = {enable = true, disable_virtual_text = true},
         -- Still really unstable
