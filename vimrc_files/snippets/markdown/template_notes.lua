@@ -102,9 +102,13 @@ table.insert(M,
                fmta([[
 	<>
 
-	### Summary of Feeling
+	### Goal Update
 
 	<>
+
+	### Summary of Feeling
+
+	I feel 
 
 	### Things That I am Grateful for
 
@@ -118,14 +122,14 @@ table.insert(M,
 
 	### What Worked
 
-	-
+	- 
 
 	### What Didn't Work
 
-	-
+	- 
 
 	<>
-]], {zet_header({'reflection'}), i(0), zet_footer()})))
+]], {zet_header({}), i(0), zet_footer()})))
 
 table.insert(M,
              s(
