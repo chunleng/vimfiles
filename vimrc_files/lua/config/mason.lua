@@ -73,28 +73,28 @@ local function setup_lsp()
             local python_root_markers = {
                 '.python-version', '.tools-versions', '.git'
             }
-            if os.execute('type isort > /dev/null') == 0 then
+            if os.execute('type isort >& /dev/null') == 0 then
                 table.insert(python_efm, {
                     formatCommand = "isort --quiet -",
                     formatStdin = true,
                     rootMarkers = python_root_markers
                 })
             end
-            if os.execute('type black > /dev/null') == 0 then
+            if os.execute('type black >& /dev/null') == 0 then
                 table.insert(python_efm, {
                     formatCommand = "black --quiet -",
                     formatStdin = true,
                     rootMarkers = python_root_markers
                 })
             end
-            if os.execute('type yapf > /dev/null') == 0 then
+            if os.execute('type yapf >& /dev/null') == 0 then
                 table.insert(python_efm, {
                     formatCommand = "yapf --quiet",
                     formatStdin = true,
                     rootMarkers = python_root_markers
                 })
             end
-            if os.execute('type pylint > /dev/null') == 0 then
+            if os.execute('type pylint >& /dev/null') == 0 then
                 table.insert(python_efm, {
                     prefix = "Pylint",
                     lintCommand = "pylint --from-stdin --output-format text --score no --msg-template {path}:{line}:{column}:{C}:{msg} ${INPUT}",
