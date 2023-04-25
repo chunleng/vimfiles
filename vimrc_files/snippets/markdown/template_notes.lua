@@ -16,7 +16,8 @@ local function zet_header(tags)
             local filename = snip.snippet.env.TM_FILENAME:gsub('.[^.]+$', '')
             return table.concat(require('utils').title_case(vim.split(filename,
                                                                       '_')), ' ')
-        end, {}), t(os.date('%Y-%m-%d %X')), t(table.concat(tags, ', #'))
+        end, {}), f(function(_, _) return os.date('%Y-%m-%d %X') end),
+        t(table.concat(tags, ', #'))
     }))
 end
 
