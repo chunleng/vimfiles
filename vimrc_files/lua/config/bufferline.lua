@@ -18,7 +18,6 @@ function M.setup()
             modified_icon = '⊙',
             show_buffer_icons = false,
             show_close_icon = false,
-            show_buffer_default_icon = false,
             show_buffer_close_icons = false,
             always_show_bufferline = true,
             separator_style = {'', ''},
