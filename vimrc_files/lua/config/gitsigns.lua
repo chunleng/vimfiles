@@ -33,7 +33,7 @@ function M.setup()
             local author = blame_info.author == name and "Me" or
                                blame_info.author
             return {
-                {'	  ', 'Normal'}, {'  ', 'GitSignsCurrentLineBlameAccent'},
+                {'	  ', 'Normal'}, {'  ', 'GitSignsCurrentLineBlameAccent'},
                 {
                     string.format("%s on %s", author,
                                   os.date("%Y-%m-%d", blame_info.author_time)),
@@ -52,7 +52,7 @@ function M.setup()
     theme.set_hl("GitSignsDelete", {fg = theme.blender.delete})
 
     theme.set_hl('GitSignsCurrentLineBlame', {link = 'Comment'})
-    theme.set_hl('GitSignsCurrentLineBlameAccent', {fg = 4, italic = true})
+    theme.set_hl('GitSignsCurrentLineBlameAccent', {fg = 4})
 end
 
 return M
