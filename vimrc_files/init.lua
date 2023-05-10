@@ -507,5 +507,17 @@ require('packer').startup(function(use)
         config = function() require('config.treesj').setup() end
     }
 
+    use {
+        'mg979/vim-visual-multi',
+        config = function()
+            vim.g.VM_default_mappings = 0
+            vim.g.VM_mouse_mappings = 0
+            vim.g.VM_maps = {
+                ["Find Under"] = "\\",
+                ["Find Subword Under"] = "\\",
+                ["Select All"] = "g\\"
+            }
+        end
+    }
 end)
 
