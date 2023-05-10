@@ -519,5 +519,31 @@ require('packer').startup(function(use)
             }
         end
     }
+
+    use {
+        'https://github.com/monaqa/dial.nvim',
+        config = function()
+            local utils = require('common-utils')
+            local augend = require("dial.augend")
+            require("dial.config").augends:register_group{
+                default = {
+                    augend.integer.alias.decimal_int, augend.integer.alias.hex,
+                    augend.integer.alias.octal, augend.integer.alias.binary,
+                    augend.date.alias["%Y/%m/%d"],
+                    augend.date.alias["%Y-%m-%d"], augend.date.alias["%m/%d"],
+                    augend.date.alias["%H:%M"], augend.semver.alias.semver
+                }
+            }
+            local map = require('dial.map')
+            utils.keymap('n', '<c-a>', map.inc_normal(), {noremap = true})
+            utils.keymap('n', '<c-x>', map.dec_normal(), {noremap = true})
+            utils.keymap('n', 'g<c-a>', map.inc_gnormal(), {noremap = true})
+            utils.keymap('n', 'g<c-x>', map.dec_gnormal(), {noremap = true})
+            utils.keymap('v', '<c-a>', map.inc_visual(), {noremap = true})
+            utils.keymap('v', '<c-x>', map.dec_visual(), {noremap = true})
+            utils.keymap('v', 'g<c-a>', map.inc_gvisual(), {noremap = true})
+            utils.keymap('v', 'g<c-x>', map.dec_gvisual(), {noremap = true})
+        end
+    }
 end)
 
