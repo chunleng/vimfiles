@@ -10,8 +10,9 @@ function M.setup()
     local navic = require("nvim-navic")
     local gls = gl.section
     local theme = require('common-theme')
+    local utils = require('common-utils')
 
-    navic.setup({lsp = {auto_attach = true}})
+    navic.setup({lsp = {auto_attach = true}, icons = utils.kind_icons})
 
     -- theme.set_hl(name, options)
     theme.set_hl('GalaxylineDiagnosticError', {fg = 0, bg = theme.blender.error})
