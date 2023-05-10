@@ -42,7 +42,7 @@ function M.setup()
                         deleted = "✖ ",
                         staged = " ",
                         unmerged = " ",
-                        renamed = " ",
+                        renamed = " ",
                         untracked = " ",
                         ignored = "◌ "
                     }
