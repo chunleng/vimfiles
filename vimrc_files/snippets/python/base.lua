@@ -66,7 +66,8 @@ table.insert(M, s({trig = 'ei', dscr = 'Else-if'}, fmta([[
 
 table.insert(M, s({trig = 'o', dscr = 'Short-circuit or'}, t('or ')))
 table.insert(M, s({trig = 'a', dscr = 'Short-circuit and'}, t('and ')))
-table.insert(M, s({trig = 'ne', dscr = 'Not equal'}, t('and ')))
+table.insert(M, s({trig = 'n', dscr = 'Boolean not'}, t('not ')))
+table.insert(M, s({trig = 'ne', dscr = 'Not equal'}, t('!= ')))
 
 table.insert(M, s({trig = 's', dscr = 'Switch case'}, fmta([[
 	match <>:
