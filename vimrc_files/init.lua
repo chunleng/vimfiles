@@ -80,8 +80,8 @@ require('packer').startup(function(use)
                     final_child_prefix = ' ',
                     non_collapsible = ' ',
                     failed = '',
-                    passed = '',
-                    unknown = '',
+                    passed = '',
+                    unknown = '',
                     skipped = '',
                     running = ''
                 },
