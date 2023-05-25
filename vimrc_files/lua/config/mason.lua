@@ -113,6 +113,16 @@ local function setup_lsp()
                     rootMarkers = python_root_markers
                 })
             end
+            if os.execute('type mypy >& /dev/null') == 0 then
+                table.insert(python_efm, {
+                    lintCommand = "mypy --show-column-numbers",
+                    lintFormats = {
+                        '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m',
+                        '%f:%l:%c: %tote: %m'
+                    },
+                    rootMarkers = python_root_markers
+                })
+            end
             lspconfig.efm.setup({
                 on_attach = common_on_attach,
                 init_options = {documentFormatting = true},
