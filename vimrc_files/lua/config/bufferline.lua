@@ -58,17 +58,28 @@ function M.setup()
             end
         end
     end)
-    utils.keymap({'n', 'x'}, "g0", "<cmd>BufferLineGoToBuffer 1<cr>")
-    utils.keymap({'n', 'x'}, "g1", "<cmd>BufferLineGoToBuffer 2<cr>")
-    utils.keymap({'n', 'x'}, "g2", "<cmd>BufferLineGoToBuffer 3<cr>")
-    utils.keymap({'n', 'x'}, "g3", "<cmd>BufferLineGoToBuffer 4<cr>")
-    utils.keymap({'n', 'x'}, "g4", "<cmd>BufferLineGoToBuffer 5<cr>")
-    utils.keymap({'n', 'x'}, "g5", "<cmd>BufferLineGoToBuffer 6<cr>")
-    utils.keymap({'n', 'x'}, "g6", "<cmd>BufferLineGoToBuffer 7<cr>")
-    utils.keymap({'n', 'x'}, "g7", "<cmd>BufferLineGoToBuffer 8<cr>")
-    utils.keymap({'n', 'x'}, "g8", "<cmd>BufferLineGoToBuffer 9<cr>")
-    utils.keymap({'n', 'x'}, "g9", "<cmd>BufferLineGoToBuffer 10<cr>")
-    utils.keymap({'n', 'x'}, "g$", "<cmd>BufferLineGoToBuffer -1<cr>")
+    utils.keymap({'n', 'x'}, "g0",
+                 function() bufferline.go_to_buffer(1, true) end)
+    utils.keymap({'n', 'x'}, "g1",
+                 function() bufferline.go_to_buffer(2, true) end)
+    utils.keymap({'n', 'x'}, "g2",
+                 function() bufferline.go_to_buffer(3, true) end)
+    utils.keymap({'n', 'x'}, "g3",
+                 function() bufferline.go_to_buffer(4, true) end)
+    utils.keymap({'n', 'x'}, "g4",
+                 function() bufferline.go_to_buffer(5, true) end)
+    utils.keymap({'n', 'x'}, "g5",
+                 function() bufferline.go_to_buffer(6, true) end)
+    utils.keymap({'n', 'x'}, "g6",
+                 function() bufferline.go_to_buffer(7, true) end)
+    utils.keymap({'n', 'x'}, "g7",
+                 function() bufferline.go_to_buffer(8, true) end)
+    utils.keymap({'n', 'x'}, "g8",
+                 function() bufferline.go_to_buffer(9, true) end)
+    utils.keymap({'n', 'x'}, "g9",
+                 function() bufferline.go_to_buffer(10, true) end)
+    utils.keymap({'n', 'x'}, "g$",
+                 function() bufferline.go_to_buffer(-1, true) end)
 
     local theme = require('common-theme')
     local bgcolor = theme.blender.bg_darker_2
