@@ -52,5 +52,10 @@ table.insert(M, s({trig = 'data', dscr = 'Terraform data'}, fmta([[
 	}
 ]], {i(1, 'data_type'), i(2, 'data-name'), i(0)})))
 
+table.insert(M, s({trig = 'output', dscr = 'Terraform output'}, fmta([[
+	output "<>" {
+	}
+]], {i(1, "output_name")})))
+
 return M
 -- vim: noet
