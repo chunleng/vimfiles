@@ -202,6 +202,20 @@ local function setup_lsp()
                 capabilities = capabilities
             })
         end,
+        lua_ls = function()
+            require("neodev").setup()
+            lspconfig.lua_ls.setup({
+                on_attach = function(client, bufnr)
+                    -- Use efm lua-format instead
+                    client.server_capabilities.documentFormattingProvider =
+                        false
+                    client.server_capabilities.documentRangeFormattingProvider =
+                        false
+                    common_on_attach(client, bufnr)
+                end,
+                settings = {Lua = {completion = {callSnippet = "Replace"}}}
+            })
+        end,
         pyright = function()
             local setup_dict = {on_attach = common_on_attach}
             local exit_code = os.execute(
@@ -229,20 +243,6 @@ local function setup_lsp()
                     os.getenv("HOME") .. "/.asdf/shims/bundle", "exec",
                     "solargraph", "stdio"
                 }
-            })
-        end,
-        lua_ls = function()
-            require("neodev").setup()
-            lspconfig.lua_ls.setup({
-                on_attach = function(client, bufnr)
-                    -- Use efm lua-format instead
-                    client.server_capabilities.documentFormattingProvider =
-                        false
-                    client.server_capabilities.documentRangeFormattingProvider =
-                        false
-                    common_on_attach(client, bufnr)
-                end,
-                settings = {Lua = {completion = {callSnippet = "Replace"}}}
             })
         end,
         tailwindcss = function()
