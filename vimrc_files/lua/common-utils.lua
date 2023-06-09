@@ -280,7 +280,7 @@ M.kind_icons = {
 -- Better foldtext
 function _G.fold_text()
     local leveltext = "   "
-    for _ = 1, vim.v.foldlevel do leveltext = leveltext .. "" end
+    for _ = 2, vim.v.foldlevel do leveltext = leveltext .. "" end
     local foldtext = vim.api.nvim_buf_get_lines(0, vim.v.foldstart - 1,
                                                 vim.v.foldstart, false)[1]
     return leveltext .. " " .. foldtext
