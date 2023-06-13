@@ -1,13 +1,15 @@
 local M = {}
 
 local function configure_provider()
-    if vim.fn.filereadable('/usr/local/bin/python3') == 1 then
-        vim.g.python3_host_prog = '/usr/local/bin/python3'
-    elseif vim.fn.filereadable('/opt/homebrew/bin/python3') == 1 then
-        vim.g.python3_host_prog = '/opt/homebrew/bin/python3'
+    local homedir = os.getenv("HOME")
+
+    if vim.fn
+        .filereadable(homedir .. '.asdf/installs/python/3.11.4/bin/python3') ==
+        1 then
+        vim.g.python3_host_prog = homedir ..
+                                      '.asdf/installs/python/3.11.4/bin/python3'
     end
 
-    local homedir = os.getenv("HOME")
     if vim.fn.filereadable(homedir ..
                                "/.asdf/installs/nodejs/lts-gallium/bin/neovim-node-host") ==
         1 then
