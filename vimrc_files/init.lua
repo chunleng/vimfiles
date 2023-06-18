@@ -545,5 +545,15 @@ require('packer').startup(function(use)
             utils.keymap('v', 'g<c-x>', map.dec_gvisual(), {noremap = true})
         end
     }
+
+    use {
+        'goerz/jupytext.vim',
+        config = function()
+            vim.g.jupytext_command =
+                '_jupytext_vim() { zsh --login --interactive -c "asdf shell python 3.11.4 && jupytext $*" } && _jupytext_vim'
+            vim.g.jupytext_fmt = 'py'
+        end
+    }
+
 end)
 
