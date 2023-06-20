@@ -3,9 +3,8 @@ local M = {}
 local function configure_provider()
     local homedir = os.getenv("HOME")
 
-    if vim.fn
-        .filereadable(homedir .. '.asdf/installs/python/3.11.4/bin/python3') ==
-        1 then
+    if vim.fn.filereadable(homedir ..
+                               '/.asdf/installs/python/3.11.4/bin/python3') == 1 then
         -- Allow running of correct version even if using virtualenv
         vim.g.python3_host_prog =
             'zsh --login --interactive -c "asdf shell python 3.11.4 && python"'
