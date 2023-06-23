@@ -555,5 +555,34 @@ require('packer').startup(function(use)
         end
     }
 
+    -- A more sane gf
+    use {
+        'chunleng/nvim-null',
+        after = {'nvim-tree.lua'},
+        as = 'resolve_gf',
+        config = function()
+            local utils = require('common-utils')
+            local tree_api = require("nvim-tree.api")
+
+            -- Add on to existing feature
+            utils.keymap("n", "gf", function()
+                local path = vim.fn.visua
+                vim.fn.expand('<cfile>')
+                if vim.fn.filereadable(path) == 1 then
+                    vim.cmd(":e " .. path)
+                elseif vim.fn.isdirectory(path) == 1 then
+                    tree_api.tree.open()
+                    tree_api.tree.find_file(path)
+                else
+                    local response = vim.fn.confirm('Create "' .. path .. '"?')
+                    if response == 1 then
+                        vim.cmd(":e " .. path)
+                    end
+                end
+            end)
+            -- utils.keymap("x", "gf", "<cmd>e %:h/<cword><cr>")
+        end
+    }
+
 end)
 

@@ -95,9 +95,6 @@ local function configure_preferred_mappings()
     M.keymap("i", "<c-b>", "<left>")
     M.keymap("i", "<c-f>", "<right>")
 
-    -- Add on to existing feature
-    M.keymap("n", "gF", "<cmd>e %:h/<cfile><cr>")
-
     -- Make cycling between easier
     M.keymap('n', '<bs>', '<cmd>b #<cr>')
     M.keymap('n', '<c-bs>', '<cmd>wincmd p<cr>')
