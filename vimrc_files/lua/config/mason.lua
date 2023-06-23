@@ -97,7 +97,7 @@ local function setup_lsp()
             if os.execute('type pylint >& /dev/null') == 0 then
                 table.insert(python_efm, {
                     prefix = "Pylint",
-                    lintCommand = "pylint --from-stdin --output-format text --score no --msg-template {path}:{line}:{column}:{C}:{msg} ${INPUT}",
+                    lintCommand = "pylint --from-stdin --output-format text --score no --msg-template {path}:{line}:{column}:{C}:{msg}\\ \\({symbol}\\) ${INPUT}",
                     lintStdin = true,
                     lintFormats = {'%f:%l:%c:%t:%m'},
                     lintOffsetColumns = 1,
