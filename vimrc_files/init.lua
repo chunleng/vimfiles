@@ -64,7 +64,8 @@ require('packer').startup(function(use)
         'nvim-neotest/neotest',
         requires = {
             'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter',
-            'antoinemadec/FixCursorHold.nvim', 'nvim-neotest/neotest-python'
+            'antoinemadec/FixCursorHold.nvim', 'nvim-neotest/neotest-python',
+            'nvim-neotest/neotest-jest', 'haydenmeade/neotest-jest'
         },
         config = function()
             local neotest = require('neotest')

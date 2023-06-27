@@ -27,8 +27,8 @@ table.insert(M,
 ]], {})))
 
 table.insert(M,
-             s({trig = '?dap/python', dscr = 'Template for DAP Python'},
-               fmta([[
+             s({trig = '?dap/python', dscr = 'Template for DAP Python'}, fmta(
+                   [[
 	-- For reference to the debugpy settings:
 	-- https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
 	local function dap_python(config)
@@ -77,6 +77,17 @@ table.insert(M, s({
 	require('neotest').setup_project('.', {
 	    -- https://github.com/nvim-neotest/neotest-python#neotest-python
 	    adapters = {require('neotest-python')({})},
+	    default_strategy = "integrated"
+	})
+]], {})))
+
+table.insert(M, s({
+    trig = '?neotest/javascript/jest',
+    dscr = 'Template for setting up a Javascript Jest neotest project'
+}, fmta([[
+	require('neotest').setup_project('.', {
+	    -- https://github.com/nvim-neotest/neotest-jest#neotest-jest
+	    adapters = {require('neotest-jest')({})},
 	    default_strategy = "integrated"
 	})
 ]], {})))
