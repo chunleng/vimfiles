@@ -568,8 +568,7 @@ require('packer').startup(function(use)
 
             -- Add on to existing feature
             utils.keymap("n", "gf", function()
-                local path = vim.fn.visua
-                vim.fn.expand('<cfile>')
+                local path = vim.fn.expand('<cfile>')
                 if vim.fn.filereadable(path) == 1 then
                     vim.cmd(":e " .. path)
                 elseif vim.fn.isdirectory(path) == 1 then
