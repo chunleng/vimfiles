@@ -217,7 +217,7 @@ require('packer').startup(function(use)
             'jayp0521/mason-nvim-dap.nvim', 'mfussenegger/nvim-dap',
             'rcarriga/nvim-dap-ui', 'ofirgall/goto-breakpoints.nvim',
             personal_project .. 'nvim-dap-kitty-launcher',
-            'jose-elias-alvarez/null-ls.nvim'
+            'jose-elias-alvarez/null-ls.nvim', 'barreiroleo/ltex_extra.nvim'
         },
         after = {"aerial.nvim"}
     }
@@ -586,4 +586,3 @@ require('packer').startup(function(use)
     }
 
 end)
-

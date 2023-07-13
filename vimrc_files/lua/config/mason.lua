@@ -37,8 +37,8 @@ local function setup_lsp()
     local lsp_setup = require("mason-lspconfig")
     lsp_setup.setup({
         ensure_installed = {
-            "cssls", "cssmodules_ls", "denols", "dockerls", "eslint",
-            "grammarly", "html", "intelephense", "jdtls", "jsonls", "pyright",
+            "cssls", "cssmodules_ls", "denols", "dockerls", "eslint", "html",
+            "intelephense", "jdtls", "jsonls", "ltex", "pyright",
             "purescriptls", "rust_analyzer", "solargraph", "lua_ls",
             "tailwindcss", "terraformls", "tflint", "tsserver", "vimls",
             "yamlls"
@@ -76,12 +76,6 @@ local function setup_lsp()
                 end
             })
         end,
-        grammarly = function()
-            lspconfig.grammarly.setup({
-                -- https://github.com/znck/grammarly/blob/23ace62e1568a49349807bae500157246a85aff3/extension/src/GrammarlyClient.ts#L71
-                init_options = {clientId = "client_BaDkMgx4X19X9UxxYRCXZo"}
-            })
-        end,
         html = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport =
@@ -116,6 +110,24 @@ local function setup_lsp()
                     json = {schemas = require('schemastore').json.schemas()}
                 },
                 capabilities = capabilities
+            })
+        end,
+        ltex = function()
+            local export_path = vim.fn.getcwd() .. '/.vim/'
+            local dict_path = export_path .. 'ltex.dictionary.en-US.txt'
+            local words = {}
+            if vim.fn.filereadable(dict_path) == 1 then
+                for word in io.open(dict_path, "r"):lines() do
+                    table.insert(words, word)
+                end
+            end
+
+            lspconfig.ltex.setup({
+                on_attach = function(client, bufnr)
+                    require("ltex_extra").setup({path = export_path})
+                    common_on_attach(client, bufnr)
+                end,
+                settings = {ltex = {dictionary = {['en-US'] = words}}}
             })
         end,
         lua_ls = function()
