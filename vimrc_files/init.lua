@@ -216,7 +216,8 @@ require('packer').startup(function(use)
             'folke/neodev.nvim', 'b0o/schemastore.nvim', 'ibhagwan/fzf-lua',
             'jayp0521/mason-nvim-dap.nvim', 'mfussenegger/nvim-dap',
             'rcarriga/nvim-dap-ui', 'ofirgall/goto-breakpoints.nvim',
-            personal_project .. 'nvim-dap-kitty-launcher'
+            personal_project .. 'nvim-dap-kitty-launcher',
+            'jose-elias-alvarez/null-ls.nvim'
         },
         after = {"aerial.nvim"}
     }

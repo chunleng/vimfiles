@@ -37,7 +37,7 @@ local function setup_lsp()
     local lsp_setup = require("mason-lspconfig")
     lsp_setup.setup({
         ensure_installed = {
-            "cssls", "cssmodules_ls", "denols", "dockerls", "efm", "eslint",
+            "cssls", "cssmodules_ls", "denols", "dockerls", "eslint",
             "grammarly", "html", "intelephense", "jdtls", "jsonls", "pyright",
             "purescriptls", "rust_analyzer", "solargraph", "lua_ls",
             "tailwindcss", "terraformls", "tflint", "tsserver", "vimls",
@@ -67,90 +67,6 @@ local function setup_lsp()
                 single_file_support = false
             })
 
-        end,
-        efm = function()
-            local python_efm = {}
-            local python_root_markers = {
-                '.python-version', '.tools-versions', '.git'
-            }
-            if os.execute('type isort >& /dev/null') == 0 then
-                table.insert(python_efm, {
-                    formatCommand = "isort --quiet -",
-                    formatStdin = true,
-                    rootMarkers = python_root_markers
-                })
-            end
-            if os.execute('type black >& /dev/null') == 0 then
-                table.insert(python_efm, {
-                    formatCommand = "black --quiet -",
-                    formatStdin = true,
-                    rootMarkers = python_root_markers
-                })
-            end
-            if os.execute('type yapf >& /dev/null') == 0 then
-                table.insert(python_efm, {
-                    formatCommand = "yapf --quiet",
-                    formatStdin = true,
-                    rootMarkers = python_root_markers
-                })
-            end
-            if os.execute('type pylint >& /dev/null') == 0 then
-                table.insert(python_efm, {
-                    prefix = "Pylint",
-                    lintCommand = "pylint --from-stdin --output-format text --score no --msg-template {path}:{line}:{column}:{C}:{msg}\\ \\({symbol}\\) ${INPUT}",
-                    lintStdin = true,
-                    lintFormats = {'%f:%l:%c:%t:%m'},
-                    lintOffsetColumns = 1,
-                    lintIgnoreExitCode = true,
-                    lintCategoryMap = {
-                        I = "H",
-                        R = "I",
-                        C = "I",
-                        W = "W",
-                        E = "E",
-                        F = "E"
-                    },
-                    rootMarkers = python_root_markers
-                })
-            end
-            if os.execute('type mypy >& /dev/null') == 0 then
-                table.insert(python_efm, {
-                    lintCommand = "mypy --show-column-numbers",
-                    lintFormats = {
-                        '%f:%l:%c: %trror: %m', '%f:%l:%c: %tarning: %m',
-                        '%f:%l:%c: %tote: %m'
-                    },
-                    rootMarkers = python_root_markers
-                })
-            end
-            lspconfig.efm.setup({
-                on_attach = common_on_attach,
-                init_options = {documentFormatting = true},
-                filetypes = {"python", "markdown", "lua"},
-                -- https://github.com/mattn/efm-langserver#example-for-configyaml
-                settings = {
-                    lintDebounce = "500ms",
-                    languages = {
-                        python = python_efm,
-                        markdown = {
-                            {
-                                prefix = "Markdownlint",
-                                lintCommand = "markdownlint -s",
-                                lintStdin = true,
-                                lintFormats = {
-                                    '%f:%l %m', '%f:%l:%c %m', '%f: %l: %m'
-                                }
-                            }
-                        },
-                        lua = {
-                            {
-                                formatCommand = "lua-format -i",
-                                formatStdin = true
-                            }
-                        }
-                    }
-                }
-            })
         end,
         eslint = function()
             lspconfig.eslint.setup({
@@ -378,11 +294,45 @@ local function setup_dap()
     end
 end
 
+local function setup_null_ls()
+    local null_ls = require('null-ls')
+
+    local sources = {}
+
+    -- formatters
+    if os.execute('type yapf >& /dev/null') == 0 then
+        table.insert(sources, null_ls.builtins.formatting.yapf)
+    end
+    if os.execute('type black >& /dev/null') == 0 then
+        table.insert(sources, null_ls.builtins.formatting.black)
+    end
+    if os.execute('type isort >& /dev/null') == 0 then
+        table.insert(sources, null_ls.builtins.formatting.isort)
+    end
+    if os.execute('type lua-format >& /dev/null') == 0 then
+        table.insert(sources, null_ls.builtins.formatting.lua_format)
+    end
+
+    -- diagnostics
+    if os.execute('type pylint >& /dev/null') == 0 then
+        table.insert(sources, null_ls.builtins.diagnostics.pylint)
+    end
+    if os.execute('type mypy >& /dev/null') == 0 then
+        table.insert(sources, null_ls.builtins.diagnostics.mypy)
+    end
+    if os.execute('type markdownlint >& /dev/null') == 0 then
+        table.insert(sources, null_ls.builtins.diagnostics.markdownlint)
+    end
+
+    null_ls.setup({sources = sources})
+end
+
 function M.setup()
     require("mason").setup()
     require('kitty-launcher').setup()
     setup_lsp()
     setup_dap()
+    setup_null_ls()
 end
 
 return M
