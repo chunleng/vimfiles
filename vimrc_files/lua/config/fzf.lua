@@ -74,6 +74,11 @@ function M.setup()
     theme.set_hl("FzfLuaFloat", {link = "NormalFloat"})
     theme.set_hl("FzfLuaFloatBorder", {link = "FloatBorder"})
     theme.set_hl("FzfLuaCursor", {link = "PmenuSel"})
+    theme.set_hl("FzfLuaPreviewBorder", {link = "FloatBorder"})
+    theme.set_hl("FzfLuaPreviewNormal", {link = "NormalFloat"})
+    theme.set_hl("FzfLuaPreviewTitle", {link = "NormalFloat"})
+    theme.set_hl("FzfLuaCursorLine", {bg = 4, fg = theme.blender.fg_darker_1})
+    theme.set_hl("FzfLuaCursorLineNr", {bg = 4, fg = theme.blender.fg_darker_1})
 end
 
 return M
