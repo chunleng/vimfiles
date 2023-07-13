@@ -11,10 +11,10 @@ local function configure_provider()
     end
 
     if vim.fn.filereadable(homedir ..
-                               "/.asdf/installs/nodejs/lts-gallium/bin/neovim-node-host") ==
+                               "/.asdf/installs/nodejs/18.16.1/bin/neovim-node-host") ==
         1 then
         vim.g.node_host_prog = homedir ..
-                                   "/.asdf/installs/nodejs/lts-gallium/bin/neovim-node-host"
+                                   "/.asdf/installs/nodejs/18.16.1/bin/neovim-node-host"
     end
 
     if vim.fn.filereadable(homedir .. "/.gem/bin/neovim-ruby-host") == 1 then
