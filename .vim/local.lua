@@ -7,6 +7,12 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 })
 vim.api.nvim_create_autocmd('BufWritePost', {
     pattern = '*.lua',
-    command = 'source <afile> | PackerCompile',
+    callback = function()
+        vim.cmd('source <afile>')
+        for _, client in ipairs(vim.lsp.get_active_clients()) do
+            if client.config.name == 'lua_ls' then client.stop() end
+        end
+        vim.cmd('PackerCompile')
+    end,
     group = group_name
 })
