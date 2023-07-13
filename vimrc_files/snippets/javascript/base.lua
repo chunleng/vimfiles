@@ -4,8 +4,8 @@ table.insert(M, s({trig = 'imp', dscr = 'Import'}, fmta([[
     import <>
 ]], {
     c(1, {
-        fmta('{ <> } from "<>"', {i(1), r(2, 'lib')}),
-        fmta('<> from "<>"', {i(1), r(2, 'lib')})
+        fmta('{ <> } from "<>"', {i(2), r(1, 'lib')}),
+        fmta('<> from "<>"', {i(2), r(1, 'lib')})
     }, {stored = {lib = i(1)}})
 })))
 
