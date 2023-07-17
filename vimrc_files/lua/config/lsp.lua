@@ -127,7 +127,8 @@ local function setup_lsp()
                     require("ltex_extra").setup({path = export_path})
                     common_on_attach(client, bufnr)
                 end,
-                settings = {ltex = {dictionary = {['en-US'] = words}}}
+                settings = {ltex = {dictionary = {['en-US'] = words}}},
+                root_dir = function() return vim.fn.getcwd() end
             })
         end,
         lua_ls = function()
