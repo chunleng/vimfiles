@@ -9,7 +9,6 @@ function M.setup()
     require'nvim-treesitter.configs'.setup {
         ensure_installed = "all",
         highlight = {enable = true},
-        matchup = {enable = true, disable_virtual_text = true},
         -- Still really unstable
         -- indent = { enable = true },
         playground = {enable = true},
