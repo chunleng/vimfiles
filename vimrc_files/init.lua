@@ -419,7 +419,7 @@ require("lazy").setup({
         config = function() require('config.treesj').setup() end
     }, {
         'mg979/vim-visual-multi',
-        config = function()
+        init = function()
             vim.g.VM_default_mappings = 0
             vim.g.VM_mouse_mappings = 0
             vim.g.VM_maps = {
