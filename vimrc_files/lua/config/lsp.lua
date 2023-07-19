@@ -32,6 +32,16 @@ local function setup_lsp()
         utils.buf_keymap(bufnr, 'v', '=',
                          ':\'<,\'>lua vim.lsp.buf.range_formatting()<cr>')
     end
+    local common_handlers = {
+        ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+            border = {
+                {"┌", "FloatBorder"}, {"─", "FloatBorder"},
+                {"┐", "FloatBorder"}, {"│", "FloatBorder"},
+                {"┘", "FloatBorder"}, {"─", "FloatBorder"},
+                {"└", "FloatBorder"}, {"│", "FloatBorder"}
+            }
+        })
+    }
 
     configure_lsp_mappings()
     local lsp_setup = require("mason-lspconfig")
@@ -47,7 +57,10 @@ local function setup_lsp()
     })
     lsp_setup.setup_handlers {
         function(server_name)
-            lspconfig[server_name].setup({on_attach = common_on_attach})
+            lspconfig[server_name].setup({
+                on_attach = common_on_attach,
+                handlers = common_handlers
+            })
         end,
         cssls = function()
             local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -55,12 +68,14 @@ local function setup_lsp()
                 true
             lspconfig.cssls.setup({
                 on_attach = common_on_attach,
+                handlers = common_handlers,
                 capabilities = capabilities
             })
         end,
         denols = function()
             lspconfig.denols.setup({
                 on_attach = common_on_attach,
+                handlers = common_handlers,
                 root_dir = require("lspconfig").util.root_pattern("deno.json",
                                                                   "deno.jsonc"),
                 -- To ensure that deno does not interfere with tsserver
@@ -73,7 +88,8 @@ local function setup_lsp()
                 on_attach = function(client, bufnr)
                     client.server_capabilities.documentFormattingProvider = true
                     common_on_attach(client, bufnr)
-                end
+                end,
+                handlers = common_handlers
             })
         end,
         html = function()
@@ -82,6 +98,7 @@ local function setup_lsp()
                 true
             lspconfig.html.setup({
                 on_attach = common_on_attach,
+                handlers = common_handlers,
                 capabilities = capabilities
             })
         end,
@@ -94,6 +111,7 @@ local function setup_lsp()
             local workspace = os.getenv("HOME") .. "/.java-workspace"
             lspconfig.jdtls.setup({
                 on_attach = common_on_attach,
+                handlers = common_handlers,
                 use_lombok_agent = true,
                 root_dir = function() return vim.fn.getcwd() end,
                 workspace = workspace,
@@ -106,6 +124,7 @@ local function setup_lsp()
                 true
             lspconfig.jsonls.setup({
                 on_attach = common_on_attach,
+                handlers = common_handlers,
                 settings = {
                     json = {schemas = require('schemastore').json.schemas()}
                 },
@@ -127,6 +146,7 @@ local function setup_lsp()
                     require("ltex_extra").setup({path = export_path})
                     common_on_attach(client, bufnr)
                 end,
+                handlers = common_handlers,
                 settings = {ltex = {dictionary = {['en-US'] = words}}},
                 root_dir = function() return vim.fn.getcwd() end
             })
@@ -142,11 +162,15 @@ local function setup_lsp()
                         false
                     common_on_attach(client, bufnr)
                 end,
+                handlers = common_handlers,
                 settings = {Lua = {completion = {callSnippet = "Replace"}}}
             })
         end,
         pyright = function()
-            local setup_dict = {on_attach = common_on_attach}
+            local setup_dict = {
+                on_attach = common_on_attach,
+                handlers = common_handlers
+            }
             local exit_code = os.execute(
                                   'which -a pyright|grep -v ${HOME}/.local/share/nvim/mason/bin/pyright')
             if exit_code ~= 0 then -- turn off diagnostic because no pyright found
@@ -177,6 +201,7 @@ local function setup_lsp()
         tailwindcss = function()
             lspconfig.tailwindcss.setup({
                 on_attach = common_on_attach,
+                handlers = common_handlers,
                 filetypes = {
                     "aspnetcorerazor", "astro", "astro-markdown", "blade",
                     "css", "django-html", "edge", "eelixir", "ejs", "erb",
@@ -202,6 +227,7 @@ local function setup_lsp()
                         false
                     common_on_attach(client, bufnr)
                 end,
+                handlers = common_handlers,
                 root_dir = require("lspconfig").util.root_pattern(
                     "package.json", "tsconfig.json", "jsconfig.json")
             })
@@ -209,6 +235,7 @@ local function setup_lsp()
         yamlls = function()
             lspconfig.yamlls.setup({
                 on_attach = common_on_attach,
+                handlers = common_handlers,
                 settings = {yaml = {format = {enable = true}}}
             })
         end
