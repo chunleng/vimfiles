@@ -21,5 +21,9 @@ table.insert(M,
 	esac
 ]], {i(0), i(1, 'func_a'), i(2, 'func_b')})))
 
+table.insert(M, s({trig = '?sh/default_variable', dscr = 'Template for calling variable with default value if not already set'}, fmta([[
+	: ${<>="<>"}
+]], {i(1, 'VAR_NAME'), i(2, 'value')})))
+
 return M
 -- vim: noet
