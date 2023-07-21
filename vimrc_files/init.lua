@@ -333,7 +333,7 @@ require("lazy").setup({
     }, {
         -- https://github.com/aduros/ai.vim
         'aduros/ai.vim',
-        config = function() require('config.ai').setup() end
+        init = function() require('config.ai').setup() end
     }, {
         -- https://github.com/tpope/vim-projectionist
         'tpope/vim-projectionist',
