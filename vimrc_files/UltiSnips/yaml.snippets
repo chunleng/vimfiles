@@ -1,17 +1,5 @@
 # Snippets
 
-snippet __docker_compose_new "Docker-compose template" b
-version: "3.9"
-services:
-	web:
-		image: ${1:imagename:version}
-		ports:
-			- "${2:host:docker}"
-		volumes:
-			- ${3:local_path:docker_path}
-	$0
-endsnippet
-
 snippet __rubocop_new "Rubocop lint config template" b
 AllCops:
 	TargetRubyVersion: 2.7.1
