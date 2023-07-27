@@ -1,6 +1,7 @@
 local M = {}
 
-table.insert(M, s(
+table.insert(M,
+             s(
                  {
         trig = '?direnv/virtualenv',
         dscr = 'Template for virtualenv setup'
@@ -26,6 +27,14 @@ table.insert(M, s({
 	# https://github.com/danymat/neogen#supported-languages
 	DOC_CONV_<> = '<>'
 ]], {i(1), i(2)})))
+
+table.insert(M, s({
+    trig = '?direnv/add_path',
+    dscr = 'Add path for direnv, useful as a replacement for script to run alias'
+}, fmta([[
+	# Use the following to add executable scripts at directory level
+	export PATH=${PWD}/.bin:$PATH
+]], {})))
 
 return M
 -- vim: noet
