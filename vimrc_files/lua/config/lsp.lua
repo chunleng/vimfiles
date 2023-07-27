@@ -47,8 +47,8 @@ local function setup_lsp()
     local lsp_setup = require("mason-lspconfig")
     lsp_setup.setup({
         ensure_installed = {
-            "cssls", "cssmodules_ls", "denols", "dockerls", "eslint", "html",
-            "intelephense", "jdtls", "jsonls", "ltex", "pyright",
+            "cssls", "cssmodules_ls", "denols", "dockerls", "eslint", "gopls",
+            "html", "intelephense", "jdtls", "jsonls", "ltex", "pyright",
             "purescriptls", "rust_analyzer", "solargraph", "lua_ls",
             "tailwindcss", "terraformls", "tflint", "tsserver", "vimls",
             "yamlls"
