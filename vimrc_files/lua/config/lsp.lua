@@ -352,6 +352,9 @@ local function setup_null_ls()
     if os.execute('type lua-format >& /dev/null') == 0 then
         table.insert(sources, null_ls.builtins.formatting.lua_format)
     end
+    if os.execute('type goimports >& /dev/null') == 0 then
+        table.insert(sources, null_ls.builtins.formatting.goimports)
+    end
 
     -- diagnostics
     if os.execute('type pylint >& /dev/null') == 0 then
