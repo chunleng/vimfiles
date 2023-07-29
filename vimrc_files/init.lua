@@ -187,8 +187,7 @@ require("lazy").setup({
         'chunleng/nvim-null',
         name = 'snippets',
         dependencies = {'L3MON4D3/LuaSnip', 'danymat/neogen'},
-        config = function() require('config.snippets').setup() end,
-        event = 'InsertEnter'
+        config = function() require('config.snippets').setup() end
     }, {
         -- https://github.com/saadparwaiz1/cmp_luasnip
         -- https://github.com/L3MON4D3/LuaSnip
