@@ -355,6 +355,18 @@ local function setup_null_ls()
     if os.execute('type goimports >& /dev/null') == 0 then
         table.insert(sources, null_ls.builtins.formatting.goimports)
     end
+    if os.execute('type leptosfmt >& /dev/null') then
+        table.insert(sources, {
+            method = null_ls.methods.FORMATTING,
+            filetypes = {'rust'},
+            generator = null_ls.formatter({
+                async = false,
+                command = "leptosfmt",
+                to_stdin = true,
+                args = {'-s'}
+            })
+        })
+    end
 
     -- diagnostics
     if os.execute('type pylint >& /dev/null') == 0 then
