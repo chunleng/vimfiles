@@ -345,7 +345,9 @@ require("lazy").setup({
             -- Using this because there are some problems with control over conceals
             -- https://github.com/nvim-treesitter/nvim-treesitter/issues/2825
 
-            for _, lang in ipairs({'json', 'markdown', 'markdown_inline'}) do
+            for _, lang in ipairs({
+                'json', 'jsonc', 'markdown', 'markdown_inline'
+            }) do
                 local queries = {}
                 for _, file in ipairs(require('vim.treesitter.query').get_files(
                                           lang, 'highlights')) do
