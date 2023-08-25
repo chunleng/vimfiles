@@ -81,5 +81,25 @@ table.insert(M,
 		<>
 ]], {i(1, "'filepath'"), i(2, 'r'), i(0, 'content = json.load(f)')})))
 
+table.insert(M,
+             s(
+                 {
+        trig = '?python/argparse',
+        dscr = 'Basic argparse template for python'
+    }, fmta([[
+parser = argparse.ArgumentParser()
+# Keep either required or default
+parser.add_argument(
+	'-v',
+	'--variable',
+	type=str,
+	required=True,
+	default="default")
+args = parser.parse_args()
+
+# Get the variable like this
+args.variable
+]], {})))
+
 return M
 -- vim: noet
