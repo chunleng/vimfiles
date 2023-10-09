@@ -201,7 +201,7 @@ require("lazy").setup({
             local ls = require('luasnip')
 
             utils.keymap({'i', 's'}, '<cr>', function()
-                if ls.jumpable() then
+                if ls.jumpable(1) then
                     ls.jump(1)
                 else
                     local is_end_of_line =
@@ -227,7 +227,7 @@ require("lazy").setup({
             local ls = require('luasnip')
 
             utils.keymap({'i', 's'}, '<s-cr>', function()
-                if ls.jumpable() then
+                if ls.jumpable(-1) then
                     ls.jump(-1)
                 else
                     -- Enter without cursor going to the next line

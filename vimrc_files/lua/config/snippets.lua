@@ -117,9 +117,9 @@ local function setup_luasnip()
         end
     end)
     utils.keymap({'i', 's'}, '<esc>', function()
-        if ls.jumpable() then
+        if ls.jumpable(1) then
             ls.jump(1)
-            if not ls.jumpable() then
+            if not ls.jumpable(1) then
                 vim.api.nvim_eval([[feedkeys("\<esc>", "n")]])
             end
         else
@@ -185,4 +185,3 @@ function M.setup()
 end
 
 return M
-
