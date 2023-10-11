@@ -4,6 +4,7 @@ function M.setup()
     vim.g.bullets_enabled_file_types = {
         'markdown', 'text', 'gitcommit', 'scratch'
     }
+    vim.g.bullets_enable_in_empty_buffers = 0
     vim.g.bullets_set_mappings = 0
     vim.g.bullets_custom_mappings = {
         {'nnoremap', 'o', '<plug>(bullets-newline)'},

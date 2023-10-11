@@ -316,7 +316,7 @@ require("lazy").setup({
     }, {
         -- https://github.com/dkarter/bullets.vim
         "dkarter/bullets.vim",
-        config = function() require("config.bullets").setup() end
+        init = function() require("config.bullets").setup() end
     }, {
         -- https://github.com/b0o/incline.nvim
         "b0o/incline.nvim",
