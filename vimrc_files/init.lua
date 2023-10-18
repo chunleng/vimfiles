@@ -330,9 +330,9 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter-context",
         config = function() require('config.treesitter-context').setup() end
     }, {
-        -- https://github.com/aduros/ai.vim
-        'aduros/ai.vim',
-        init = function() require('config.ai').setup() end
+        -- https://github.com/Robitx/gp.nvim
+        'Robitx/gp.nvim',
+        config = function() require('config.ai').setup() end
     }, {
         -- https://github.com/tpope/vim-projectionist
         'tpope/vim-projectionist',
