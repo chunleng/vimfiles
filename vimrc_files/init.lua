@@ -553,5 +553,9 @@ require("lazy").setup({
             local utils = require('common-utils')
             utils.keymap('n', '<c-s-o>', '<cmd>OverseerToggle bottom<cr>')
         end
+    }, {
+        -- https://github.com/mickael-menu/zk-nvim
+        'mickael-menu/zk-nvim',
+        config = function() require("zk").setup() end
     }
 })

@@ -51,8 +51,7 @@ local function setup_lsp()
             "html", "intelephense", "jdtls", "jsonls", "ltex", "pyright",
             "purescriptls", "rust_analyzer", "solargraph", "lua_ls",
             "tailwindcss", "terraformls", "tflint", "tsserver", "vimls",
-            "yamlls"
-
+            "yamlls", 'zk'
         }
     })
     lsp_setup.setup_handlers {
