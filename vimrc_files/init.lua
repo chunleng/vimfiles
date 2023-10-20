@@ -473,6 +473,11 @@ require("lazy").setup({
             -- Add on to existing feature
             utils.keymap("n", "gf", function()
                 local path = vim.fn.expand('<cfile>')
+
+                if not path:match("^/") then
+                    path = vim.fn.expand('%:h') .. '/' .. path
+                end
+
                 if vim.fn.filereadable(path) == 1 then
                     vim.cmd(":e " .. path)
                 elseif vim.fn.isdirectory(path) == 1 then
