@@ -24,7 +24,7 @@ end
 
 local function configure_preferred_settings()
     vim.o.number = true
-    vim.o.relativenumber = false
+    vim.o.relativenumber = true
     vim.o.swapfile = false
     vim.o.list = true
     vim.o.listchars = "tab:⇥ ,trail:·,extends:,precedes:,nbsp:+,eol: "
