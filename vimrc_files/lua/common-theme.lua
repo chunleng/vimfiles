@@ -303,7 +303,7 @@ function M.setup()
     M.set_hl('Normal', {fg = 15})
     M.set_hl('NonText', {fg = 10})
     M.set_hl('Whitespace', {fg = M.blender.bg_lighter_2})
-    M.set_hl('VertSplit', {fg = M.blender.bg_lighter_2})
+    M.set_hl('WinSeparator', {fg = M.blender.bg_lighter_2})
     M.set_hl('ColorColumn', {bg = M.blender.void})
     M.set_hl('CursorLine', {bg = M.blender.bg_lighter_1})
     M.set_hl('Folded', {
