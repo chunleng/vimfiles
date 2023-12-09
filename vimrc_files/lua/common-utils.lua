@@ -118,6 +118,9 @@ local function configure_preferred_mappings()
                             t .. '\\<c-p>")')
         end
     end)
+
+    -- Prevent accidentally quiting
+    M.keymap({'n', 'x'}, '<c-s-z>', function() end)
 end
 
 local function configure_autogroup()
