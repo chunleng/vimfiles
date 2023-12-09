@@ -306,6 +306,26 @@ local function setup_dap()
         },
         controls = {enabled = false}
     })
+    local group_name = 'lDap'
+    vim.api.nvim_create_augroup(group_name, {clear = true})
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'dapui_*',
+        callback = function(opt)
+            utils.buf_keymap(opt.buf, 'n', 'q', function()
+                dapui.close()
+            end)
+        end,
+        group = group_name
+    })
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'dap-repl',
+        callback = function(opt)
+            utils.buf_keymap(opt.buf, 'n', 'q', function()
+                dap.repl.close()
+            end)
+        end,
+        group = group_name
+    })
     theme.set_hl('DapUIVariable', {fg = theme.blender.fg_darker_2})
     theme.set_hl('DapUIScope', {bold = true, fg = 4})
     theme.set_hl('DapUIType', {link = 'Type'})
