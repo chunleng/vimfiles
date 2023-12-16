@@ -7,13 +7,13 @@ end
 table.insert(M,
              s({trig = '?react/module', dscr = 'Template for new React module'},
                fmta([[
-	import { ReactElement } from "react";
+	import { ReactNode } from "react";
 
 	type <>Props = {
 		
 	};
 
-	export default function <>({  }: <>Props): ReactElement {
+	export default function <>({  }: <>Props): ReactNode {
 		return (
 			<<>>
 				<>
@@ -29,7 +29,7 @@ table.insert(M,
         trig = '?react/function',
         dscr = 'Template for new React function'
     }, fmta([[
-	function <>(): ReactElement {
+	function <>(): ReactNode {
 		return (
 			<>
 		)
