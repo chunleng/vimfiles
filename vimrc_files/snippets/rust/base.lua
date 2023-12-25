@@ -73,7 +73,7 @@ table.insert(M, s({trig = 'e', dscr = 'Else'}, fmta([[
 ]], {i(0)})))
 
 table.insert(M, s({trig = 'ei', dscr = 'Else-if'}, fmta([[
-	else if <> {
+	} else if <> {
 		<>
 ]], {i(1), i(0)})))
 
