@@ -285,6 +285,7 @@ require("lazy").setup({
         -- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
         -- https://github.com/nvim-treesitter/nvim-treesitter
         'JoosepAlviste/nvim-ts-context-commentstring',
+        config = function() require('ts_context_commentstring').setup({}) end,
         dependencies = "nvim-treesitter/nvim-treesitter"
     }, {
         -- https://github.com/tpope/vim-sleuth

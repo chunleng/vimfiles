@@ -12,7 +12,6 @@ function M.setup()
         -- Still really unstable
         -- indent = { enable = true },
         playground = {enable = true},
-        context_commentstring = {enable = true},
         endwise = {enable = true},
         incremental_selection = {
             enable = true,
