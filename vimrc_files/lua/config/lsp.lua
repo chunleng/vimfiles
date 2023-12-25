@@ -162,7 +162,12 @@ local function setup_lsp()
                     common_on_attach(client, bufnr)
                 end,
                 handlers = common_handlers,
-                settings = {Lua = {completion = {callSnippet = "Replace"}}}
+                settings = {
+                    Lua = {
+                        completion = {callSnippet = "Replace"},
+                        workspace = {checkThirdParty = false}
+                    }
+                }
             })
         end,
         pyright = function()
