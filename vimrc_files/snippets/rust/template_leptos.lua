@@ -6,7 +6,7 @@ table.insert(M,
 	use leptos::*;
 
 	fn main() {
-		mount_to_body(|cx| view! { cx,  <<p>>"Hello, world!"<</p>> })
+		mount_to_body(|| view! { <<p>>"Hello, world!"<</p>> })
 	}
 ]], {})))
 
@@ -17,8 +17,8 @@ table.insert(M,
         dscr = 'Template for Leptos component'
     }, fmta([[
 	#[component]
-	fn <>(cx: Scope) ->> impl IntoView {
-		view! { cx, <> }
+	fn <>() ->> impl IntoView {
+		view! { <> }
 	}
 ]], {i(1, "ComponentName"), i(0, "<p>\"Foo\"</p>")})))
 
@@ -28,7 +28,7 @@ table.insert(M,
         trig = '?leptos/signal',
         dscr = 'Template for creating Leptos signal'
     }, fmta([[
-	let (<>, set_<>) = create_signal(cx, <>);
+	let (<>, set_<>) = create_signal(<>);
 ]], {i(1, "count"), l(l._1, 1), i(2, '"foo".to_string()')})))
 
 return M
