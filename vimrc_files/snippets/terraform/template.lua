@@ -18,5 +18,16 @@ table.insert(M,
 	}
 ]], {i(1, "ami_name")})))
 
+table.insert(M, s({
+    trig = '?terraform/lifecycle_ignore_changes',
+    dscr = 'Template for ignoring changes'
+}, fmta([[
+	lifecycle {
+		ignore_changes = [
+			<>
+		]
+	}
+]], {i(0)})))
+
 return M
 -- vim: noet
