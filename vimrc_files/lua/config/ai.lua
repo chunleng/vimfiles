@@ -55,7 +55,7 @@ function M.setup()
                 send("Having following from {{filename}}:\n\n" ..
                          "```{{filetype}}\n{{selection}}\n```\n\n" ..
                          "Please rewrite the code with the following instruction:\n\n{{command}}",
-                     {target = gp.Target.rewrite})
+                     {has_prompt = true, target = gp.Target.rewrite})
             elseif choice == 'Programmer: Write Unit Test' then
                 send("Having following from {{filename}}:\n\n" ..
                          "```{{filetype}}\n{{selection}}\n```\n\n" ..
