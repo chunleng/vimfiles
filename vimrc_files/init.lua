@@ -415,11 +415,6 @@ require("lazy").setup({
             end)
         end
     }, {
-        -- https://github.com/Wansmer/treesj
-        'Wansmer/treesj',
-        dependencies = {'nvim-treesitter'},
-        config = function() require('config.treesj').setup() end
-    }, {
         'mg979/vim-visual-multi',
         init = function()
             vim.g.VM_default_mappings = 0
