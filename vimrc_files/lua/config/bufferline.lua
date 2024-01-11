@@ -36,9 +36,9 @@ function M.setup()
     local utils = require('common-utils')
     utils.keymap({'n', 'x'}, "<c-p>", "<cmd>BufferLineCyclePrev<cr>")
     utils.keymap({'n', 'x'}, "<c-n>", "<cmd>BufferLineCycleNext<cr>")
-    utils.keymap({'n', 'x'}, "<c-s-[>", "<cmd>BufferLineMovePrev<cr>",
+    utils.keymap({'n', 'x'}, "<c-s-,>", "<cmd>BufferLineMovePrev<cr>",
                  {silent = false})
-    utils.keymap({'n', 'x'}, "<c-s-]>", "<cmd>BufferLineMoveNext<cr>",
+    utils.keymap({'n', 'x'}, "<c-s-.>", "<cmd>BufferLineMoveNext<cr>",
                  {silent = false})
     utils.keymap({'n', 'x'}, "gp", function()
         local bufnr = vim.api.nvim_get_current_buf()
