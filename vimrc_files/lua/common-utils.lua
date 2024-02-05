@@ -38,7 +38,7 @@ local function configure_preferred_settings()
     vim.o.shiftwidth = 4
     vim.o.tabstop = 4
     vim.o.expandtab = true
-    vim.o.mouse = ""
+    vim.o.mouse = "n"
     vim.o.foldcolumn = '1'
     vim.o.foldnestmax = 9
     vim.o.foldminlines = 10
