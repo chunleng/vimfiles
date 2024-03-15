@@ -31,9 +31,9 @@ table.insert(M, s({trig = 'en', dscr = 'Enum'}, fmta([[
 
 table.insert(M, s({trig = 'f', dscr = 'Function'}, c(1, {
     fmta([[
-	def <>(<>):
+	def <>(self<>):
 		<>
-]], {i(1, '__init__'), i(2, 'self'), i(0)}), fmta([[
+]], {i(1, '__init__'), i(2), i(0)}), fmta([[
 	@classmethod
 	def <>(cls<>):
 		<>
