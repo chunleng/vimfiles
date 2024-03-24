@@ -8,12 +8,6 @@ local function get_file_upper_camel(_, snip)
     })
 end
 
-local struct_template = fmta([[
-	struct <> {
-		<>
-	}
-	]], {d(1, get_file_upper_camel, {}), i(2, "attr_a: String")})
-
 table.insert(M, s({trig = 'imp', dscr = 'Import'}, fmta([[
 	use <>;<>
 ]], {i(1, "std::println"), i(0)})))
@@ -24,7 +18,11 @@ table.insert(M, s({trig = 'm', dscr = 'Module'}, fmta([[
 	}
 ]], {d(1, get_file_upper_camel, {}), i(0)})))
 
-table.insert(M, s({trig = 'c', dscr = 'Class'}, struct_template))
+table.insert(M, s({trig = 'c', dscr = 'Class'}, fmta([[
+	struct <> {
+		<>
+	}
+	]], {d(1, get_file_upper_camel, {}), i(2, "attr_a: String")})))
 
 table.insert(M, s({trig = 'en', dscr = 'Enum'}, fmta([[
 	enum <> {
@@ -38,7 +36,11 @@ table.insert(M, s({trig = 'if', dscr = 'Interface'}, c(1, {
 		<>
 	}
 ]], {d(1, get_file_upper_camel, {}), i(0, "fn func_name() -> String;")}),
-    struct_template
+    fmta([[
+	struct <> {
+		<>
+	}
+	]], {d(1, get_file_upper_camel, {}), i(2, "attr_a: String")})
 })))
 
 table.insert(M, s({trig = 'f', dscr = 'Function'}, fmta([[
@@ -87,7 +89,7 @@ table.insert(M, s({trig = 's', dscr = 'Switch case'}, fmta([[
 		<> =>> 1,
 		_ =>> 2
 	}
-]], {i(1, 'var_a'), i(0, 'var_b')})))
+]], {v(1, 'var_a'), i(0, 'var_b')})))
 
 table.insert(M, s({trig = 'l', dscr = 'Loop (for)'}, fmta([[
 	for <> {
@@ -115,8 +117,8 @@ table.insert(M, s({trig = 'T', dscr = 'True'}, t('true')))
 table.insert(M, s({trig = 'N', dscr = 'Null'}, t('None')))
 
 table.insert(M, s({trig = 'p', dscr = 'Print (debug)'}, fmta([[
-	println!(<>);<>
-]], {v(1, '"{}", 1'), i(0)})))
+	println!("{:?}", <>);<>
+]], {v(1, '1'), i(0)})))
 
 table.insert(M, s({trig = 'err', dscr = 'Raise error'}, fmta([[
 	panic!(<>);<>
