@@ -94,6 +94,8 @@ require("lazy").setup({
 		-- https://github.com/nvim-treesitter/nvim-treesitter
 		-- https://github.com/nvim-neotest/neotest-python
 		-- https://github.com/nvim-neotest/neotest-jest
+		-- https://github.com/rouge8/neotest-rust
+		-- https://github.com/nvim-neotest/nvim-nio
 		"nvim-neotest/neotest",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -101,6 +103,7 @@ require("lazy").setup({
 			-- https://github.com/nvim-neotest/neotest#supported-runners
 			"nvim-neotest/neotest-python",
 			"nvim-neotest/neotest-jest",
+			"rouge8/neotest-rust",
 			"nvim-neotest/nvim-nio",
 		},
 		config = function()

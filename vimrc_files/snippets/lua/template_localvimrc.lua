@@ -180,5 +180,27 @@ vim.api.nvim_create_autocmd('FileType', {
 	)
 )
 
+table.insert(
+	M,
+	s(
+		{
+			trig = "?neotest/rust",
+			dscr = "Template for setting up a rust neotest project",
+		},
+		fmta(
+			[[
+	require('neotest').setup_project('.', {
+		-- https://github.com/rouge8/neotest-rust#neotest-rust
+		-- To run, install cargo-nextest
+		-- cargo install cargo-nextest
+		adapters = {require('neotest-rust')({args = {"--no-capture"}})},
+		default_strategy = "integrated"
+	})
+]],
+			{}
+		)
+	)
+)
+
 return M
 -- vim: noet
