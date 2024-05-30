@@ -1,9 +1,14 @@
 local M = {}
 
-table.insert(M, s({
-    trig = '?typescriptreact/tsconfig',
-    dscr = 'Template for tsconfig.json'
-}, fmta([[
+table.insert(
+	M,
+	s(
+		{
+			trig = "?typescriptreact/tsconfig",
+			dscr = "Template for tsconfig.json",
+		},
+		fmta(
+			[[
 	// For TypeScript 4.4.3
 	{
 		"compilerOptions": {
@@ -30,12 +35,21 @@ table.insert(M, s({
 		"include": ["**/*.ts", "**/*.tsx"${1:, ...}],
 		"exclude": ["node_modules"]
 	}
-]], {})))
+]],
+			{}
+		)
+	)
+)
 
-table.insert(M, s({
-    trig = '?typescriptreact/eslint',
-    dscr = 'Template for TypeScript React ESLint'
-}, fmta([[
+table.insert(
+	M,
+	s(
+		{
+			trig = "?typescriptreact/eslint",
+			dscr = "Template for TypeScript React ESLint",
+		},
+		fmta(
+			[[
 	// `yarn add -D` or `npm i --save-dev`
 	//   eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-config-prettier eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y
 	// `yarn add -D -E` or `npm i --save-dev -E`
@@ -69,7 +83,11 @@ table.insert(M, s({
 		"plugins": [],
 		"rules": {}
 	}
-]], {})))
+]],
+			{}
+		)
+	)
+)
 
 return M
 -- vim: noet

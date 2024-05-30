@@ -1,8 +1,11 @@
 local M = {}
 
-table.insert(M,
-             s({trig = '?erd', dscr = 'A new template for ERD diagram'}, fmta(
-                   [[
+table.insert(
+	M,
+	s(
+		{ trig = "?erd", dscr = "A new template for ERD diagram" },
+		fmta(
+			[[
 	@startuml
 	' https://plantuml.com/ie-diagram
 	title <>
@@ -34,27 +37,46 @@ table.insert(M,
 	' }|--o| Cardinality and Optionality
 	' ||-ri-|| With direction: up/do/le/ri
 	@enduml
-]], {i(1, 'Title')})))
+]],
+			{ i(1, "Title") }
+		)
+	)
+)
 
-table.insert(M, s({trig = '?erd/table', dscr = 'A new ERD table'}, fmta([[
+table.insert(
+	M,
+	s(
+		{ trig = "?erd/table", dscr = "A new ERD table" },
+		fmta(
+			[[
 	entity <> {
 		🔑id: number
 		--
 		<>
 	}
-]], {
-    i(1, 'table_name'), i(2, {
-        '* owner_id: number <<FK>>', '\t* not_null: text', '\tnull: text',
-        '\tdefault: number (default:0)'
-    })
-})))
+]],
+			{
+				i(1, "table_name"),
+				i(2, {
+					"* owner_id: number <<FK>>",
+					"\t* not_null: text",
+					"\tnull: text",
+					"\tdefault: number (default:0)",
+				}),
+			}
+		)
+	)
+)
 
-table.insert(M,
-             s(
-                 {
-        trig = '?sequence',
-        dscr = 'A new template for sequence diagram'
-    }, fmta([[
+table.insert(
+	M,
+	s(
+		{
+			trig = "?sequence",
+			dscr = "A new template for sequence diagram",
+		},
+		fmta(
+			[[
 	@startuml
 	' https://plantuml.com/sequence-diagram
 	title <>
@@ -93,11 +115,18 @@ table.insert(M,
 	' note right: message
 	' note across: message
 	@enduml
-]], {i(1, 'Title')})))
+]],
+			{ i(1, "Title") }
+		)
+	)
+)
 
-table.insert(M,
-             s({trig = '?state', dscr = 'A new template for state diagram'},
-               fmta([[
+table.insert(
+	M,
+	s(
+		{ trig = "?state", dscr = "A new template for state diagram" },
+		fmta(
+			[[
 	@startuml
 	' https://plantuml.com/state-diagram
 	title <>
@@ -128,11 +157,18 @@ table.insert(M,
 
 	' -ri->> With direction: up/do/le/ri
 	@enduml
-]], {i(1, 'Title')})))
+]],
+			{ i(1, "Title") }
+		)
+	)
+)
 
-table.insert(M,
-             s({trig = '?flowchart', dscr = 'A new template for flowchart'},
-               fmta([[
+table.insert(
+	M,
+	s(
+		{ trig = "?flowchart", dscr = "A new template for flowchart" },
+		fmta(
+			[[
 	@startuml
 	' https://plantuml.com/activity-diagram-beta
 	title <>
@@ -162,11 +198,18 @@ table.insert(M,
 	' end merge
 	stop
 	@enduml
-]], {i(1, 'Title')})))
+]],
+			{ i(1, "Title") }
+		)
+	)
+)
 
-table.insert(M,
-             s({trig = '?c4model/context', dscr = 'A new template for C4Model'},
-               fmta([[
+table.insert(
+	M,
+	s(
+		{ trig = "?c4model/context", dscr = "A new template for C4Model" },
+		fmta(
+			[[
 	 @startuml
 	' https://github.com/plantuml-stdlib/C4-PlantUML
 	!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
@@ -194,7 +237,11 @@ table.insert(M,
 
 	SHOW_LEGEND()
 	@enduml
-]], {i(1, 'Title')})))
+]],
+			{ i(1, "Title") }
+		)
+	)
+)
 
 return M
 -- vim: noet

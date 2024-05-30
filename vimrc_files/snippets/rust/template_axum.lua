@@ -1,7 +1,11 @@
 local M = {}
 
-table.insert(M,
-             s({trig = '?axum/init', dscr = 'Template for Axum Init'}, fmta([[
+table.insert(
+	M,
+	s(
+		{ trig = "?axum/init", dscr = "Template for Axum Init" },
+		fmta(
+			[[
 	use axum::{routing::get, Router};
 
 	#[tokio::main]
@@ -12,7 +16,11 @@ table.insert(M,
 			.await
 			.unwrap();
 	}
-]], {})))
+]],
+			{}
+		)
+	)
+)
 
 return M
 -- vim: noet

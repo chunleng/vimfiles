@@ -1,8 +1,11 @@
 local M = {}
 
 local function zet_header(tags)
-    tags = tags and tags or {}
-    return sn(nil, fmta([[
+	tags = tags and tags or {}
+	return sn(
+		nil,
+		fmta(
+			[[
         # <>
 
         - created on: <>
@@ -11,35 +14,58 @@ local function zet_header(tags)
         ----
 
         ## Main
-    ]], {
-        f(function(_, snip)
-            local filename = snip.snippet.env.TM_FILENAME:gsub('.[^.]+$', '')
-            return table.concat(require('utils').title_case(vim.split(filename,
-                                                                      '_')), ' ')
-        end, {}), f(function(_, _) return os.date('%Y-%m-%d %X') end),
-        t(table.concat(tags, ', #'))
-    }))
+    ]],
+			{
+				f(function(_, snip)
+					local filename = snip.snippet.env.TM_FILENAME:gsub(".[^.]+$", "")
+					return table.concat(require("utils").title_case(vim.split(filename, "_")), " ")
+				end, {}),
+				f(function(_, _)
+					return os.date("%Y-%m-%d %X")
+				end),
+				t(table.concat(tags, ", #")),
+			}
+		)
+	)
 end
 
 local function zet_footer()
-    return sn(nil, fmta([[
+	return sn(
+		nil,
+		fmta(
+			[[
         ----
 
         ## References
-    ]], {}))
+    ]],
+			{}
+		)
+	)
 end
 
-table.insert(M, s({trig = '?notes', dscr = 'Template for notes'}, fmta([[
+table.insert(
+	M,
+	s(
+		{ trig = "?notes", dscr = "Template for notes" },
+		fmta(
+			[[
 	<>
 
 	<>
 
 	<>
-]], {zet_header(), i(0), zet_footer()})))
+]],
+			{ zet_header(), i(0), zet_footer() }
+		)
+	)
+)
 
-table.insert(M,
-             s({trig = '?notes/writing_idea', dscr = 'Template for writing'},
-               fmta([[
+table.insert(
+	M,
+	s(
+		{ trig = "?notes/writing_idea", dscr = "Template for writing" },
+		fmta(
+			[[
     <>
 
     ### Motivation for this writing
@@ -61,14 +87,21 @@ table.insert(M,
     ### Draft
 
     <>
-]], {zet_header(), i(0), zet_footer()})))
+]],
+			{ zet_header(), i(0), zet_footer() }
+		)
+	)
+)
 
-table.insert(M,
-             s(
-                 {
-        trig = '?notes/cooking_recipe',
-        dscr = 'Template for cooking recipe'
-    }, fmta([[
+table.insert(
+	M,
+	s(
+		{
+			trig = "?notes/cooking_recipe",
+			dscr = "Template for cooking recipe",
+		},
+		fmta(
+			[[
 	<>
 
 	[Image goes here]
@@ -96,11 +129,18 @@ table.insert(M,
 	1.
 
 	<>
-]], {zet_header({'cooking-recipe'}), zet_footer()})))
+]],
+			{ zet_header({ "cooking-recipe" }), zet_footer() }
+		)
+	)
+)
 
-table.insert(M,
-             s({trig = '?notes/journal', dscr = 'Template for journal writing'},
-               fmta([[
+table.insert(
+	M,
+	s(
+		{ trig = "?notes/journal", dscr = "Template for journal writing" },
+		fmta(
+			[[
 	<>
 
 	### Goal Update
@@ -130,14 +170,21 @@ table.insert(M,
 	- 
 
 	<>
-]], {zet_header({}), i(0), zet_footer()})))
+]],
+			{ zet_header({}), i(0), zet_footer() }
+		)
+	)
+)
 
-table.insert(M,
-             s(
-                 {
-        trig = '?notes/relation',
-        dscr = 'Template for relationship management'
-    }, fmta([[
+table.insert(
+	M,
+	s(
+		{
+			trig = "?notes/relation",
+			dscr = "Template for relationship management",
+		},
+		fmta(
+			[[
 	<>
 
 	### Like
@@ -153,7 +200,11 @@ table.insert(M,
 	- ...
 
 	<>
-]], {zet_header({'relation'}), i(0, '...'), zet_footer()})))
+]],
+			{ zet_header({ "relation" }), i(0, "..."), zet_footer() }
+		)
+	)
+)
 
 return M
 -- vim: noet

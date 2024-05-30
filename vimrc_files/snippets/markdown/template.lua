@@ -1,9 +1,14 @@
 local M = {}
 
-table.insert(M, s({
-    trig = '?git/readme',
-    dscr = 'Template for README.md of Git Repository'
-}, fmt([[
+table.insert(
+	M,
+	s(
+		{
+			trig = "?git/readme",
+			dscr = "Template for README.md of Git Repository",
+		},
+		fmt(
+			[[
     # {}
 
     ## Features
@@ -39,6 +44,10 @@ table.insert(M, s({
     ### Credits
 
     I would like to thank...
-]], {i(0, 'App Name')})))
+]],
+			{ i(0, "App Name") }
+		)
+	)
+)
 return M
 -- vim: noet
