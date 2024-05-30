@@ -456,8 +456,8 @@ local function setup_null_ls()
 
 	-- both (format and diagnose)
 	if os.execute("type ruff >& /dev/null") == 0 then
-		table.insert(sources, null_ls.builtins.formatting.ruff)
-		table.insert(sources, null_ls.builtins.diagnostics.ruff)
+		table.insert(sources, require("none-ls.formatting.ruff"))
+		table.insert(sources, require("none-ls.diagnostics.ruff"))
 	end
 
 	null_ls.setup({ sources = sources })

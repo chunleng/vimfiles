@@ -204,6 +204,7 @@ require("lazy").setup({
 		-- https://github.com/rcarriga/nvim-dap-ui
 		-- https://github.com/ofirgall/goto-breakpoints.nvim
 		-- https://github.com/nvimtools/none-ls.nvim
+		-- https://github.com/nvimtools/none-ls-extras.nvim
 		-- https://github.com/barreiroleo/ltex_extra.nvim
 		-- https://github.com/stevearc/aerial.nvim
 		"williamboman/mason.nvim",
@@ -218,7 +219,7 @@ require("lazy").setup({
 			"mfussenegger/nvim-dap",
 			"rcarriga/nvim-dap-ui",
 			"ofirgall/goto-breakpoints.nvim",
-			"nvimtools/none-ls.nvim",
+			{ "nvimtools/none-ls.nvim", dependencies = { "nvimtools/none-ls-extras.nvim" } },
 			"barreiroleo/ltex_extra.nvim",
 			"stevearc/aerial.nvim",
 			{ dir = personal_project .. "nvim-dap-kitty-launcher" },
