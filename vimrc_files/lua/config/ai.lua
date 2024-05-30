@@ -6,7 +6,10 @@ local M = {
         programmer_code = "I want you to act as an expert programmer.\n\n" ..
             "Please avoid any commentary outside of the snippet response\n\n" ..
             "Start and end your answer with:\n\n```",
-        programmer_chat = "I want you to act as an expert programmer."
+        programmer_chat = "I want you to act as an expert programmer.",
+        casual_writer = "I want you to act as a writer.\n\n" ..
+            "Please avoid any commentary outside of the response.\n\n" ..
+            "Use a more casual and friendly tone in your writing."
     }
 }
 
@@ -36,26 +39,41 @@ function M.setup()
 
     local utils = require('common-utils')
     utils.keymap('n', '<c-space>', function()
-        vim.ui.select({'Programmer: Complete Code'}, {}, function(choice)
+        vim.ui.select({
+            'Programmer: Complete Code', 'Casual Writer: Write Article'
+        }, {}, function(choice)
             if choice == "Programmer: Complete Code" then
                 send("Having following from {{filename}}:\n\n" ..
                          "```{{filetype}}\n{{selection}}\n```\n\n" ..
                          "Please reply with only the code added.\n\n" ..
                          "Please continue the code with the following instruction: {{command}}",
                      {has_prompt = true, range_type = RangeType.ALL_BEFORE})
+            elseif choice == "Casual Writer: Write Article" then
+                send("Having the following start:\n\n" ..
+                         "```\n{{selection}}\n```\n\n" ..
+                         "Please continue the writing with the following instruction: {{command}}",
+                     {has_prompt = true, range_type = RangeType.ALL_BEFORE})
             end
         end)
     end, {silent = false})
     utils.keymap('v', '<c-space>', function()
         vim.ui.select({
-            'Programmer: Refine Code', 'Programmer: Summarize Code',
-            'Programmer: Code Review', 'Programmer: Write Unit Test'
+            'Programmer: Refine Code', 'Programmer: Ask',
+            'Programmer: Summarize Code', 'Programmer: Code Review',
+            'Programmer: Write Unit Test', 'Casual Writer: Refine Writing'
         }, {}, function(choice)
             if choice == 'Programmer: Refine Code' then
                 send("Having following from {{filename}}:\n\n" ..
                          "```{{filetype}}\n{{selection}}\n```\n\n" ..
                          "Please rewrite the code with the following instruction:\n\n{{command}}",
                      {has_prompt = true, target = gp.Target.rewrite})
+            elseif choice == 'Programmer: Ask' then
+                send("Having following from {{filename}}:\n\n" ..
+                         "```{{filetype}}\n{{selection}}\n```\n\n{{command}}", {
+                    has_prompt = true,
+                    target = gp.Target.popup,
+                    system_prompt = M.system_prompts.programmer_chat
+                })
             elseif choice == 'Programmer: Write Unit Test' then
                 send("Having following from {{filename}}:\n\n" ..
                          "```{{filetype}}\n{{selection}}\n```\n\n" ..
@@ -79,6 +97,11 @@ function M.setup()
                     target = gp.Target.popup,
                     system_prompt = M.system_prompts.programmer_chat
                 })
+            elseif choice == 'Casual Writer: Refine Writing' then
+                send("Having the following:\n\n" ..
+                         "```\n{{selection}}\n```\n\n" ..
+                         "Please rewrite it with the following instruction: {{command}}",
+                     {has_prompt = true, target = gp.Target.rewrite})
             end
         end)
     end)
