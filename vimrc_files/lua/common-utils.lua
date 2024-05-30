@@ -49,7 +49,7 @@ end
 
 local function configure_preferred_mappings()
 
-    M.keymap("n", "<esc>", "<cmd>nohl<cr>")
+    M.keymap("n", "<esc>", "<cmd>nohl<cr><cmd>GpStop<cr>")
 
     M.keymap("n", "<leader>tu", "<cmd>set termguicolors!<cr>")
     M.keymap("n", "<leader>tl", "<cmd>set list!<cr>")
