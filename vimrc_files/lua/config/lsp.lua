@@ -373,8 +373,8 @@ local function setup_null_ls()
     if os.execute('type isort >& /dev/null') == 0 then
         table.insert(sources, null_ls.builtins.formatting.isort)
     end
-    if os.execute('type lua-format >& /dev/null') == 0 then
-        table.insert(sources, null_ls.builtins.formatting.lua_format)
+    if os.execute('type stylua >& /dev/null') == 0 then
+        table.insert(sources, null_ls.builtins.formatting.stylua)
     end
     if os.execute('type goimports >& /dev/null') == 0 then
         table.insert(sources, null_ls.builtins.formatting.goimports)
