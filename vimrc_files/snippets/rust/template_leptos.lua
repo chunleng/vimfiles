@@ -52,5 +52,51 @@ table.insert(
 	)
 )
 
+table.insert(
+	M,
+	s(
+		{
+			trig = "?leptos/action",
+			dscr = "Template for creating Leptos action",
+		},
+		fmta(
+			[[
+	let <> = create_action(|<>| {
+	    <>
+	    async {}
+	});
+]],
+			{
+				i(1, "handle_click"),
+				i(2, "value: &String"),
+				i(0, 'logging::log!("{}", value.clone());'),
+			}
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
+		{
+			trig = "?leptos/action",
+			dscr = "Template for creating Leptos action",
+		},
+		fmta(
+			[[
+	let <> = create_action(|<>| {
+	    <>
+	    async {}
+	});
+]],
+			{
+				i(1, "handle_click"),
+				i(2, "value: &String"),
+				i(0, 'logging::log!("{}", value.clone());'),
+			}
+		)
+	)
+)
+
 return M
 -- vim: noet
