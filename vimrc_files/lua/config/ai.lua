@@ -1,7 +1,7 @@
 local RangeType = { SELECTION = 0, ALL_BEFORE = 1 }
 local gp = require("gp")
 local M = {
-	models = { programmer = { model = "gpt-4", temperature = 0.5, top_p = 1 } },
+	models = { programmer = { model = "gpt-4o", temperature = 0.5, top_p = 1 } },
 	system_prompts = {
 		programmer_code = "I want you to act as an expert programmer.\n\n"
 			.. "Please avoid any commentary outside of the snippet response\n\n"
