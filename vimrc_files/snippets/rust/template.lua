@@ -12,14 +12,9 @@ table.insert(
 	#[cfg(test)]
 	mod tests {
 		use super::*;
-
-		#[test]
-		fn <>() {
-			<>
-		}
 	}
 ]],
-			{ i(1, "func_name"), i(0, "assert_eq!(1 + 1, 2);") }
+			{}
 		)
 	)
 )
@@ -28,15 +23,26 @@ table.insert(
 	M,
 	s(
 		{ trig = "?test", dscr = "Template for creating a new test" },
-		fmta(
-			[[
+		c(1, {
+			fmta(
+				[[
 	#[test]
 	fn <>() {
 		<>
 	}
 ]],
-			{ i(1, "func_name"), i(0, "assert_eq!(1 + 1, 2);") }
-		)
+				{ i(1, "func_name"), i(0, "assert_eq!(1 + 1, 2);") }
+			),
+			fmta(
+				[[
+	#[tokio::test]
+	async fn <>() {
+		<>
+	}
+]],
+				{ i(1, "func_name"), i(0, "assert_eq!(1 + 1, 2);") }
+			),
+		})
 	)
 )
 return M
