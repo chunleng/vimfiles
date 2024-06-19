@@ -31,7 +31,7 @@ table.insert(
 		<>
 	}
 ]],
-				{ i(1, "func_name"), i(0, "assert_eq!(1 + 1, 2);") }
+				{ i(1, "test_func_name"), i(0, "assert_eq!(1 + 1, 2);") }
 			),
 			fmta(
 				[[
@@ -40,7 +40,7 @@ table.insert(
 		<>
 	}
 ]],
-				{ i(1, "func_name"), i(0, "assert_eq!(1 + 1, 2);") }
+				{ i(1, "test_func_name"), i(0, "assert_eq!(1 + 1, 2);") }
 			),
 		})
 	)
