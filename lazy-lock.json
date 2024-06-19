@@ -13,7 +13,7 @@
   "emmet-vim": { "branch": "master", "commit": "3fb2f63799e1922f7647ed9ff3b32154031a76ee" },
   "fzf-lua": { "branch": "main", "commit": "6991c1f86eb9fa449a186ab047e88063d3a14484" },
   "galaxyline.nvim": { "branch": "main", "commit": "20f5f750002532a35193f55cd499074fc97d933d" },
-  "gitsigns.nvim": { "branch": "main", "commit": "47c8e3e571376b24de62408fd0c9d12f0a9fc0a3" },
+  "gitsigns.nvim": { "branch": "main", "commit": "def49e48c6329527e344d0c99a0d2cd9fdf6bb84" },
   "goto-breakpoints.nvim": { "branch": "master", "commit": "d14776899eda4023667b246e5c53c14a7c41f88e" },
   "gp.nvim": { "branch": "main", "commit": "486a061d95a50e3c9a2e7c0309464fd32e3df590" },
   "incline.nvim": { "branch": "main", "commit": "16fc9c073e3ea4175b66ad94375df6d73fc114c0" },
