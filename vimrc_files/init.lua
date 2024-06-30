@@ -57,9 +57,9 @@ require("lazy").setup({
 	{
 		-- https://github.com/AndrewRadev/linediff.vim
 		"AndrewRadev/linediff.vim",
-		config = function()
-			require("config.linediff").setup()
-		end,
+		keys = {
+			{ "<leader>d", ":Linediff<cr>", mode = { "x" } },
+		},
 	},
 	{
 		-- https://github.com/tpope/vim-fugitive
@@ -152,9 +152,14 @@ require("lazy").setup({
 		-- https://github.com/nvim-treesitter/nvim-treesitter
 		"windwp/nvim-autopairs",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require("config.autopairs").setup()
-		end,
+		opts = {
+			disable_in_macro = true,
+			disable_in_visualblock = true,
+			enable_afterquote = false,
+			map_c_w = true,
+			map_cr = false,
+			check_ts = true,
+		},
 	},
 	{
 		-- https://github.com/RRethy/nvim-treesitter-endwise
@@ -167,9 +172,7 @@ require("lazy").setup({
 		-- https://github.com/nvim-treesitter/nvim-treesitter
 		"windwp/nvim-ts-autotag",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require("nvim-ts-autotag").setup()
-		end,
+		opts = {},
 	},
 	{
 		-- https://github.com/numToStr/Comment.nvim
@@ -400,10 +403,8 @@ require("lazy").setup({
 		-- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
 		-- https://github.com/nvim-treesitter/nvim-treesitter
 		"JoosepAlviste/nvim-ts-context-commentstring",
-		config = function()
-			require("ts_context_commentstring").setup({})
-		end,
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		opts = {},
 	},
 	{
 		-- https://github.com/tpope/vim-sleuth
