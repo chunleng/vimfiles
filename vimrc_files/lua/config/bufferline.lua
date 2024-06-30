@@ -115,6 +115,7 @@ function M.setup()
 	theme.set_hl("BufferLineTabSelected", { fg = 14, bg = bgcolor, bold = true })
 	theme.set_hl("BufferLineTabSeparator", { fg = bgcolor, bg = bgcolor })
 	theme.set_hl("BufferLineTabSeparatorSelected", { fg = bgcolor, bg = bgcolor })
+	theme.set_hl("BufferLineTruncMarker", { fg = theme.blender.bg_lighter_2, bg = bgcolor, bold = true })
 end
 
 return M
