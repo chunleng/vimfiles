@@ -73,6 +73,15 @@ require("lazy").setup({
 		end,
 	},
 	{
+		-- https://github.com/linrongbin16/gitlinker.nvim
+		"linrongbin16/gitlinker.nvim",
+		cmd = "GitLink",
+		opts = {},
+		keys = {
+			{ "<leader>gf", "<cmd>GitLink<cr>", mode = { "n", "v" }, desc = "Open git link" },
+		},
+	},
+	{
 		-- https://github.com/lewis6991/gitsigns.nvim
 		-- https://github.com/nvim-lua/plenary.nvim
 		"lewis6991/gitsigns.nvim",
