@@ -19,7 +19,6 @@
   "gp.nvim": { "branch": "main", "commit": "486a061d95a50e3c9a2e7c0309464fd32e3df590" },
   "incline.nvim": { "branch": "main", "commit": "16fc9c073e3ea4175b66ad94375df6d73fc114c0" },
   "indentLine": { "branch": "master", "commit": "b96a75985736da969ac38b72a7716a8c57bdde98" },
-  "jupytext.vim": { "branch": "master", "commit": "ec8f337bd5799e16a02816d04b7c91b9555d79c2" },
   "lazy.nvim": { "branch": "main", "commit": "38d6b74b63dc410ac5d7f4bb4c62dfeec74e366a" },
   "linediff.vim": { "branch": "main", "commit": "ddae71ef5f94775d101c1c70032ebe8799f32745" },
   "lsp": { "branch": "main", "commit": "0950b15060067f752fde13a779a994f59516ce3d" },

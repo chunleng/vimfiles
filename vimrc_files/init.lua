@@ -584,14 +584,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"goerz/jupytext.vim",
-		config = function()
-			vim.g.jupytext_command =
-				'_jupytext_vim() { zsh --login --interactive -c "asdf shell python 3.11.4 && jupytext $*" } && _jupytext_vim'
-			vim.g.jupytext_fmt = "py"
-		end,
-	},
-	{
 		-- A more sane gf
 		-- https://github.com/nvim-tree/nvim-tree.lua
 		"chunleng/nvim-null",
