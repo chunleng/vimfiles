@@ -5,7 +5,7 @@ local M = {
 	-- * Temperature (0-1) adjust creativity with 0 (highly deterministic) and 1 (highly creative)
 	-- * Top P (0-1) adjust next word use. e.g. 0.1 will only use 10% of the commonly used words for the next token
 	models = {
-		programmer = { model = "gpt-4o", temperature = 0.1, top_p = 0.2 },
+		logic = { model = "gpt-4o", temperature = 0.1, top_p = 0.2 },
 		writing = { model = "gpt-4o", temperature = 0.8, top_p = 0.8 },
 	},
 	system_prompts = {
@@ -31,7 +31,7 @@ local function send(template, table)
 	end
 	local target = table.target or gp.Target.append
 	local prompt_text = table.has_prompt and "󱚤  ~" or nil
-	local model = table.model or M.models.programmer
+	local model = table.model or M.models.logic
 	local system_prompt = table.system_prompt or M.system_prompts.programmer_code
 	gp.Prompt(range, target, prompt_text, model, template, system_prompt)
 end
@@ -44,6 +44,7 @@ function M.setup()
 		vim.ui.select({
 			"Programmer: Complete Code",
 			"Casual Writer: Write Article",
+			"Technical Writer: Write technical documents",
 		}, {}, function(choice)
 			if choice == "Programmer: Complete Code" then
 				send(
@@ -56,6 +57,13 @@ function M.setup()
 			elseif choice == "Casual Writer: Write Article" then
 				send(
 					"Having the following start:\n\n"
+						.. "```\n{{selection}}\n```\n\n"
+						.. "Please continue the writing with the following instruction in a casual style: {{command}}",
+					{ has_prompt = true, range_type = RangeType.ALL_BEFORE, model = M.models.writing }
+				)
+			elseif choice == "Technical Writer: Write technical documents" then
+				send(
+					"You are a technical writer. Having the following start:\n\n"
 						.. "```\n{{selection}}\n```\n\n"
 						.. "Please continue the writing with the following instruction: {{command}}",
 					{ has_prompt = true, range_type = RangeType.ALL_BEFORE, model = M.models.writing }
@@ -71,6 +79,7 @@ function M.setup()
 			"Programmer: Code Review",
 			"Programmer: Write Unit Test",
 			"Casual Writer: Refine Writing",
+			"Technical Writer: Refine Writing",
 		}, {}, function(choice)
 			if choice == "Programmer: Refine Code" then
 				send(
@@ -120,6 +129,13 @@ function M.setup()
 			elseif choice == "Casual Writer: Refine Writing" then
 				send(
 					"Having the following:\n\n"
+						.. "```\n{{selection}}\n```\n\n"
+						.. "Please rewrite it with the following instruction in a casual style: {{command}}",
+					{ has_prompt = true, target = gp.Target.rewrite, system_prompt = M.system_prompts.casual_writer }
+				)
+			elseif choice == "Technical Writer: Refine Writing" then
+				send(
+					"You are a technical writer. Having the following:\n\n"
 						.. "```\n{{selection}}\n```\n\n"
 						.. "Please rewrite it with the following instruction: {{command}}",
 					{ has_prompt = true, target = gp.Target.rewrite, system_prompt = M.system_prompts.casual_writer }
