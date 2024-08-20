@@ -17,16 +17,16 @@ table.insert(
 	skinparam linetype ortho
 
 	entity owner {
-		🔑id: number
+		id: number <<<<PK>>>>
 		--
 		* age: number
 		* weight: decimal
 	}
 
 	entity animal {
-		🔑id: number
+		id: number <<<<PK>>>>
 		--
-		* owner_id: number <<FK>>
+		* owner_id: number <<<<FK>>>>
 		* not_null: text
 		null: text
 		default: number (default: 0)
