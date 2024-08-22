@@ -60,7 +60,7 @@ table.insert(
 		<>
 	}
 ]],
-			{ d(1, get_file_upper_camel, {}), i(0, { "FOO_BAR", "\tBAZ" }) }
+			{ d(1, get_file_upper_camel, {}), i(0, { "FooBar,", "\tBaz" }) }
 		)
 	)
 )
@@ -132,7 +132,7 @@ table.insert(
 ]],
 				{ i(1, "var_a"), i(2, "var_b") }
 			),
-			fmta("if <> { <> } else <>", { i(1, "x > 0"), i(2, "var_a"), i(3, "var_b") }),
+			fmta("if <> { <> } else { <> }", { i(1, "x > 0"), i(2, "var_a"), i(3, "var_b") }),
 		})
 	)
 )

@@ -3,6 +3,32 @@ local M = {}
 table.insert(
 	M,
 	s(
+		{ trig = "?main", dscr = "Template for main function" },
+		c(1, {
+			fmta(
+				[[
+	fn main() {
+		<>
+	}
+]],
+				{ i(1) }
+			),
+			fmta(
+				[[
+	#[tokio::main]
+	async fn main() {
+		<>
+	}
+			]],
+				{ i(1) }
+			),
+		})
+	)
+)
+
+table.insert(
+	M,
+	s(
 		{
 			trig = "?test/init",
 			dscr = "Template for starting unit testing",
