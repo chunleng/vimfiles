@@ -71,7 +71,7 @@ require("lazy").setup({
 		-- https://github.com/linrongbin16/gitlinker.nvim
 		"linrongbin16/gitlinker.nvim",
 		cmd = "GitLink",
-		opt = function()
+		config = function()
 			require("gitlinker").setup({
 				router = {
 					browse = {
