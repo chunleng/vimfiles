@@ -189,7 +189,8 @@ local function setup_lsp()
 				on_attach = common_on_attach,
 				handlers = common_handlers,
 			}
-			local exit_code = os.execute("which -a pyright|grep -v ${HOME}/.local/share/nvim/mason/bin/pyright")
+			local exit_code =
+				os.execute("which -a pyright|grep -v ${HOME}/.local/share/nvim/mason/bin/pyright >& /dev/null")
 			if exit_code ~= 0 then -- turn off diagnostic because no pyright found
 				setup_dict["settings"] = {
 					python = {
