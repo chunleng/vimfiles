@@ -38,11 +38,16 @@ require("lazy").setup({
 		end,
 	},
 	{
-		-- https://github.com/simnalamburt/vim-mundo
-		"simnalamburt/vim-mundo",
-		config = function()
-			require("config.mundo").setup()
-		end,
+		-- https://github.com/jiaoshijie/undotree
+		"jiaoshijie/undotree",
+		dependencies = "nvim-lua/plenary.nvim",
+		config = true,
+		opts = {
+			window = { winblend = 10 }
+		},
+		keys = {
+			{ "<c-s-u>", "<cmd>lua require('undotree').toggle()<cr>", mode = { "n" } },
+		},
 	},
 	{
 		-- https://github.com/AndrewRadev/linediff.vim
