@@ -3,12 +3,12 @@ local M = {}
 function M.setup()
 	require("gitsigns").setup({
 		signs = {
-			add = { hl = "GitSignsAdd", text = "" },
-			change = { hl = "GitSignsChange", text = "" },
-			delete = { hl = "GitSignsDelete", text = "" },
-			topdelete = { hl = "GitSignsDelete", text = "" },
-			changedelete = { hl = "GitSignsChange", text = "" },
-			untracked = { hl = "GitSignsChange", text = "" },
+			add = { text = "" },
+			change = { text = "" },
+			delete = { text = "" },
+			topdelete = { text = "" },
+			changedelete = { text = "" },
+			untracked = { text = "" },
 		},
 		on_attach = function(bufnr)
 			local utils = require("common-utils")
@@ -52,6 +52,9 @@ function M.setup()
 	theme.set_hl("GitSignsAdd", { fg = theme.blender.add })
 	theme.set_hl("GitSignsChange", { fg = theme.blender.change })
 	theme.set_hl("GitSignsDelete", { fg = theme.blender.delete })
+	theme.set_hl("GitSignsTopDelete", { link = "GitSignsDelete" })
+	theme.set_hl("GitSignsChangedelete", { link = "GitSignsChange" })
+	theme.set_hl("GitSignsUntracked", { link = "GitSignsChange" })
 
 	theme.set_hl("GitSignsCurrentLineBlame", { link = "Comment" })
 	theme.set_hl("GitSignsCurrentLineBlameAccent", { fg = 4 })
