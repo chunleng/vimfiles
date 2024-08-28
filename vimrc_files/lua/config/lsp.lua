@@ -274,6 +274,20 @@ local function setup_lsp()
 				init_options = { userLanguages = { rust = "html" } },
 			})
 		end,
+		rust_analyzer = function()
+			lspconfig.rust_analyzer.setup({
+				capabilities = {
+					textDocument = {
+						completion = {
+							completionItem = {
+								snippetSupport = false,
+							},
+						},
+					},
+				},
+				handlers = common_handlers,
+			})
+		end,
 		tsserver = function()
 			lspconfig.tsserver.setup({
 				on_attach = function(client, bufnr)
