@@ -5,7 +5,7 @@ local M = {
 	-- * Temperature (0-1) adjust creativity with 0 (highly deterministic) and 1 (highly creative)
 	-- * Top P (0-1) adjust next word use. e.g. 0.1 will only use 10% of the commonly used words for the next token
 	models = {
-		logic = { model = "gpt-4o", temperature = 0.1, top_p = 0.2 },
+		logic = { model = "gpt-4", temperature = 0.1, top_p = 0.2 },
 		writing = { model = "gpt-4o", temperature = 0.8, top_p = 0.8 },
 	},
 	system_prompts = {
@@ -93,7 +93,7 @@ function M.setup()
 					"Having following from {{filename}}:\n\n" .. "```{{filetype}}\n{{selection}}\n```\n\n{{command}}",
 					{
 						has_prompt = true,
-						target = gp.Target.popup,
+						target = gp.Target.vnew("markdown"),
 						system_prompt = M.system_prompts.programmer_chat,
 					}
 				)
@@ -112,7 +112,7 @@ function M.setup()
 						.. "respond with a summary the core logic in steps but as short as possible.\n\n"
 						.. "It's okay to drop steps which are not relevant to understand the logic",
 					{
-						target = gp.Target.popup,
+						target = gp.Target.vnew("markdown"),
 						system_prompt = M.system_prompts.programmer_chat,
 					}
 				)
@@ -122,7 +122,7 @@ function M.setup()
 						.. "```{{filetype}}\n{{selection}}\n```\n\n"
 						.. "Please analyze for code smells and suggest improvements.",
 					{
-						target = gp.Target.popup,
+						target = gp.Target.vnew("markdown"),
 						system_prompt = M.system_prompts.programmer_chat,
 					}
 				)
