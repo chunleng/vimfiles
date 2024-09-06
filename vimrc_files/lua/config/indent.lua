@@ -45,7 +45,6 @@ local function setup_indent_line()
 		"help",
 		"mason",
 		"",
-		"neotest-summary",
 	}
 end
 

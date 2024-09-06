@@ -13,7 +13,6 @@ function M.setup()
 		"help",
 		"mason",
 		"",
-		"neotest-summary",
 		"fugitiveblame",
 		"git",
 	}

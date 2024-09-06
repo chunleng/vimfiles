@@ -43,7 +43,7 @@ require("lazy").setup({
 		dependencies = "nvim-lua/plenary.nvim",
 		config = true,
 		opts = {
-			window = { winblend = 10 }
+			window = { winblend = 10 },
 		},
 		keys = {
 			{ "<c-s-u>", "<cmd>lua require('undotree').toggle()<cr>", mode = { "n" } },
@@ -104,23 +104,8 @@ require("lazy").setup({
 		end,
 	},
 	{
-		-- https://github.com/nvim-neotest/neotest
-		-- https://github.com/nvim-lua/plenary.nvim
-		-- https://github.com/nvim-treesitter/nvim-treesitter
-		-- https://github.com/nvim-neotest/neotest-python
-		-- https://github.com/nvim-neotest/neotest-jest
-		-- https://github.com/rouge8/neotest-rust
-		-- https://github.com/nvim-neotest/nvim-nio
-		"nvim-neotest/neotest",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-			-- https://github.com/nvim-neotest/neotest#supported-runners
-			"nvim-neotest/neotest-python",
-			"nvim-neotest/neotest-jest",
-			"rouge8/neotest-rust",
-			"nvim-neotest/nvim-nio",
-		},
+		-- https://github.com/vim-test/vim-test
+		"vim-test/vim-test",
 		config = function()
 			require("config.test").setup()
 		end,
@@ -223,6 +208,7 @@ require("lazy").setup({
 		-- https://github.com/jayp0521/mason-nvim-dap.nvim
 		-- https://github.com/mfussenegger/nvim-dap
 		-- https://github.com/rcarriga/nvim-dap-ui
+		-- https://github.com/nvim-neotest/nvim-nio
 		-- https://github.com/ofirgall/goto-breakpoints.nvim
 		-- https://github.com/nvimtools/none-ls.nvim
 		-- https://github.com/nvimtools/none-ls-extras.nvim
@@ -238,7 +224,7 @@ require("lazy").setup({
 			"ibhagwan/fzf-lua",
 			"jayp0521/mason-nvim-dap.nvim",
 			"mfussenegger/nvim-dap",
-			"rcarriga/nvim-dap-ui",
+			{ "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
 			"ofirgall/goto-breakpoints.nvim",
 			{ "nvimtools/none-ls.nvim", dependencies = { "nvimtools/none-ls-extras.nvim" } },
 			"barreiroleo/ltex_extra.nvim",

@@ -106,38 +106,18 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?neotest/python",
-			dscr = "Template for setting up a python neotest project",
+			trig = "?vim-test",
+			dscr = "Template for setting up vimtest",
 		},
 		fmta(
-			[[
-	require('neotest').setup_project('.', {
-	    -- https://github.com/nvim-neotest/neotest-python#neotest-python
-	    adapters = {require('neotest-python')({})},
-	    default_strategy = "integrated"
-	})
-]],
-			{}
-		)
-	)
-)
-
-table.insert(
-	M,
-	s(
-		{
-			trig = "?neotest/javascript/jest",
-			dscr = "Template for setting up a Javascript Jest neotest project",
-		},
-		fmta(
-			[[
-	require('neotest').setup_project('.', {
-	    -- https://github.com/nvim-neotest/neotest-jest#neotest-jest
-	    adapters = {require('neotest-jest')({})},
-	    default_strategy = "integrated"
-	})
-]],
-			{}
+			[=[
+	-- Check the following for setup
+	-- https://github.com/vim-test/vim-test?tab=readme-ov-file#features
+	vim.cmd[[
+		let test#<>#<>#executable = '<>'
+	]]
+]=],
+			{ i(1, "python"), i(2, "pytest"), i(0, "poetry run pytest") }
 		)
 	)
 )
@@ -176,28 +156,6 @@ vim.api.nvim_create_autocmd('FileType', {
 
 ]],
 			{ i(1, "bundle_name") }
-		)
-	)
-)
-
-table.insert(
-	M,
-	s(
-		{
-			trig = "?neotest/rust",
-			dscr = "Template for setting up a rust neotest project",
-		},
-		fmta(
-			[[
-	require('neotest').setup_project('.', {
-		-- https://github.com/rouge8/neotest-rust#neotest-rust
-		-- To run, install cargo-nextest
-		-- cargo install cargo-nextest
-		adapters = {require('neotest-rust')({args = {"--no-capture"}})},
-		default_strategy = "integrated"
-	})
-]],
-			{}
 		)
 	)
 )

@@ -27,7 +27,7 @@ function M.setup()
 			left_trunc_marker = "",
 			right_trunc_marker = "",
 			custom_filter = function(bufnr)
-				if vim.tbl_contains({ "dap-repl", "neotest-summary", "qf" }, vim.bo[bufnr].filetype) then
+				if vim.tbl_contains({ "dap-repl", "qf" }, vim.bo[bufnr].filetype) then
 					return false
 				end
 				return true
