@@ -48,8 +48,6 @@ function M.setup()
 			"yaml",
 		},
 		highlight = { enable = true },
-		-- Still really unstable
-		indent = { enable = true },
 		playground = { enable = true },
 		endwise = { enable = true },
 		incremental_selection = {
