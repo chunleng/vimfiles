@@ -45,7 +45,7 @@ table.insert(
 		<>
 	}
 	]],
-			{ d(1, get_file_upper_camel, {}), i(2, "attr_a: String") }
+			{ d(1, get_file_upper_camel, {}), i(0, "attr_a: String") }
 		)
 	)
 )
