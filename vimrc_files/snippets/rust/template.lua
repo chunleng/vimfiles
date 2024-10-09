@@ -7,19 +7,20 @@ table.insert(
 		fmta(
 			[[
 	<><>
+		Ok(())
 	}]],
 			{
 				c(1, {
 					fmta(
 						[[
-	fn main() {
+	fn main() ->> Result<<(), Box<<dyn Error>>>>  {
 		<>]],
 						{ i(1) }
 					),
 					fmta(
 						[[
 	#[tokio::main]
-	async fn main() {
+	async fn main() ->> Result<<(), Box<<dyn Error>>>>  {
 		<>]],
 						{ i(1) }
 					),
