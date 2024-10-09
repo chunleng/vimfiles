@@ -11,6 +11,7 @@ table.insert(
 			[[
 [workspace]
 
+resolver = "2"
 members = [
 	"<>"
 ]
