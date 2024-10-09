@@ -75,5 +75,20 @@ table.insert(
 		})
 	)
 )
+
+table.insert(
+	M,
+	s(
+		{ trig = "?benchmark", dscr = "" },
+		fmta(
+			[[
+let start = Instant::now();
+println!("Parallel sum: {}", <>);
+println!("Time elapsed for <> is: {:?}", start.elapsed());
+]],
+			{ v(1, "func()"), l(l._1, 1) }
+		)
+	)
+)
 return M
 -- vim: noet
