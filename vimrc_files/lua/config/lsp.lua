@@ -445,7 +445,7 @@ local function setup_null_ls()
 	if os.execute("type goimports >& /dev/null") == 0 then
 		table.insert(sources, null_ls.builtins.formatting.goimports)
 	end
-	if os.execute("type leptosfmt >& /dev/null") then
+	if os.execute("type leptosfmt >& /dev/null") == 0 then
 		table.insert(sources, {
 			method = null_ls.methods.FORMATTING,
 			filetypes = { "rust" },
