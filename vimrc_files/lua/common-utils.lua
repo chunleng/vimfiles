@@ -77,7 +77,13 @@ local function configure_preferred_mappings()
 	-- cM.noremap silent for <home> key causes cursor to freeze
 	M.keymap("i", "<c-a>", "<c-o>I")
 	M.keymap("i", "<c-e>", "<end>")
-	M.keymap("i", "<c-k>", "<c-o>D")
+	M.keymap("i", "<c-k>", function()
+		local r, c = unpack(vim.api.nvim_win_get_cursor(0))
+		local textlength = #vim.api.nvim_buf_get_lines(0, r - 1, r, false)[1]
+		if textlength ~= c then
+			vim.api.nvim_buf_set_text(0, r - 1, c, r - 1, textlength, { "" })
+		end
+	end)
 	M.keymap("c", "<c-a>", "<home>", { silent = false })
 	M.keymap("c", "<c-k>", "<c-\\>e(strpart(getcmdline(), 0, getcmdpos() - 1))<cr>", { silent = false })
 	M.keymap("c", "<c-b>", "<left>", { silent = false })
