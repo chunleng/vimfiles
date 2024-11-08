@@ -111,9 +111,9 @@ table.insert(
 		{ trig = "fx", dscr = "Lambda Function" },
 		fmta(
 			[[
-	|<>|<> { <> }
+	|<>| { <> }
 ]],
-			{ i(1, "i: i32"), i(2, "-> i32"), i(0, "i + 1") }
+			{ i(1, "i: i32"), i(0, "i + 1") }
 		)
 	)
 )
