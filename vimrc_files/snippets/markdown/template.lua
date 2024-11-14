@@ -49,5 +49,31 @@ table.insert(
 		)
 	)
 )
+
+table.insert(
+	M,
+	s(
+		{ trig = "?git/readme/sandbox", dscr = "Template for github.com/chunleng/sandbox's README.md" },
+		fmta(
+			[[
+    # <>
+
+    <>
+
+    ## Status
+
+    WIP
+
+    ## Getting Started
+
+    ```
+
+    ```
+]],
+			{ i(1, "Sandbox"), i(0) }
+		)
+	)
+)
+
 return M
 -- vim: noet
