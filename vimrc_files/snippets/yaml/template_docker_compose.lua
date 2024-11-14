@@ -11,19 +11,21 @@ table.insert(
 			[[
 	services:
 		web:
-			image: <>
+			image: imagename:version
 			ports:
-				- "<>"
+				- host:docker
 			volumes:
-				- <>
-		<>
+				- web_volume:docker_path
+			networks:
+				- intranet
+
+	volumes:
+		web_volume:
+
+	networks:
+		intranet:
 ]],
-			{
-				i(1, "imagename:version"),
-				i(2, "host:docker"),
-				i(3, "local_path:docker_path"),
-				i(0),
-			}
+			{}
 		)
 	)
 )
