@@ -256,6 +256,8 @@ require("lazy").setup({
 		-- https://github.com/roobert/tailwindcss-colorizer-cmp.nvim
 		-- https://github.com/williamboman/mason.nvim
 		-- https://github.com/tpope/vim-dadbod
+		-- https://github.com/saadparwaiz1/cmp_luasnip
+		-- https://github.com/L3MON4D3/LuaSnip
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"hrsh7th/cmp-buffer",
@@ -265,6 +267,7 @@ require("lazy").setup({
 			"roobert/tailwindcss-colorizer-cmp.nvim",
 			"williamboman/mason.nvim",
 			"tpope/vim-dadbod",
+			{"saadparwaiz1/cmp_luasnip", dependencies = { "L3MON4D3/LuaSnip" }},
 		},
 		config = function()
 			require("config.nvim-cmp").setup()
@@ -284,12 +287,6 @@ require("lazy").setup({
 		config = function()
 			require("config.neogen").setup()
 		end,
-	},
-	{
-		-- https://github.com/saadparwaiz1/cmp_luasnip
-		-- https://github.com/L3MON4D3/LuaSnip
-		"saadparwaiz1/cmp_luasnip",
-		dependencies = { "L3MON4D3/LuaSnip", "hrsh7th/nvim-cmp" },
 	},
 	{
 		"chunleng/nvim-null",
