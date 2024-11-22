@@ -180,13 +180,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		-- https://github.com/RRethy/vim-illuminate
-		"RRethy/vim-illuminate",
-		config = function()
-			require("config.illuminate").setup()
-		end,
-	},
-	{
 		-- https://github.com/tpope/vim-surround
 		"tpope/vim-surround",
 	},
@@ -444,13 +437,6 @@ require("lazy").setup({
 		"dkarter/bullets.vim",
 		init = function()
 			require("config.bullets").setup()
-		end,
-	},
-	{
-		-- https://github.com/b0o/incline.nvim
-		"b0o/incline.nvim",
-		config = function()
-			require("config.incline").setup()
 		end,
 	},
 	{
