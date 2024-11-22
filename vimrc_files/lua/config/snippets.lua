@@ -1,6 +1,8 @@
 local M = {}
 
 local ls = require("luasnip")
+local types = require("luasnip.util.types")
+
 local s = require("luasnip.nodes.snippet").S
 local sn = require("luasnip.nodes.snippet").SN
 local isn = require("luasnip.nodes.snippet").ISN
@@ -10,20 +12,9 @@ local f = require("luasnip.nodes.functionNode").F
 local c = require("luasnip.nodes.choiceNode").C
 local d = require("luasnip.nodes.dynamicNode").D
 local r = require("luasnip.nodes.restoreNode").R
-local events = require("luasnip.util.events")
-local ai = require("luasnip.nodes.absolute_indexer")
-local extras = require("luasnip.extras")
 local l = require("luasnip.extras").lambda
-local rep = require("luasnip.extras").rep
-local p = require("luasnip.extras").partial
-local m = require("luasnip.extras").match
-local n = require("luasnip.extras").nonempty
-local dl = require("luasnip.extras").dynamic_lambda
 local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
-local conds = require("luasnip.extras.expand_conditions")
-local postfix = require("luasnip.extras.postfix").postfix
-local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
 
 local neogen = require("neogen")
@@ -52,20 +43,9 @@ local function setup_luasnip()
 			c = c,
 			d = d,
 			r = r,
-			events = events,
-			ai = ai,
-			extras = extras,
 			l = l,
-			rep = rep,
-			p = p,
-			m = m,
-			n = n,
-			dl = dl,
 			fmt = fmt,
 			fmta = fmta,
-			conds = conds,
-			postfix = postfix,
-			types = types,
 			parse = parse,
 			-- customized
 			v = function(jump_index, default_text, editable)
@@ -127,7 +107,7 @@ local function setup_luasnip()
 end
 
 local function setup_neogen()
-	local languages_supported = { "python", "lua" }
+	local languages_supported = { "python", "lua", "rust" }
 	local convention = {}
 
 	local function d_generate_doc(type)
