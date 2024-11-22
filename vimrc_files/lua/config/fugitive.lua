@@ -3,13 +3,20 @@ local M = {}
 function M.setup()
 	local utils = require("common-utils")
 	utils.keymap("n", "<c-s-g>", function()
-		vim.ui.select({ "File Blame", "File Log" }, {}, function(choice)
-			if choice == "File Blame" then
-				vim.cmd("Git blame --date=short")
-			elseif choice == "File Log" then
-				vim.cmd("vert Git log %")
-			end
-		end)
+		utils.action_menu({
+			{
+				choice = "File Blame",
+				func = function()
+					vim.cmd("Git blame --date=short")
+				end,
+			},
+			{
+				choice = "File Log",
+				func = function()
+					vim.cmd("vert Git log %")
+				end,
+			},
+		})
 	end)
 
 	vim.cmd([[

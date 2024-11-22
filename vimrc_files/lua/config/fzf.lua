@@ -50,22 +50,32 @@ function M.setup()
 	utils.keymap("n", "<enter>", ":FzfLua files<cr>")
 	utils.keymap("n", "<c-s-b>", "<cmd>FzfLua buffers<cr>")
 	utils.keymap("n", "<c-s-d>", function()
-		vim.ui.select({
-			"Breakpoints",
-			"Variables",
-			"Toggle REPL",
-			"Toggle DAP UI",
-		}, { prompt = "DAP Menu" }, function(choice)
-			if choice == "Breakpoints" then
-				vim.cmd("FzfLua dap_breakpoints")
-			elseif choice == "Variables" then
-				vim.cmd("FzfLua dap_variables")
-			elseif choice == "Toggle REPL" then
-				require("dap").repl.toggle()
-			elseif choice == "Toggle DAP UI" then
-				require("dapui").toggle()
-			end
-		end)
+		utils.action_menu({
+			{
+				choice = "Breakpoints",
+				func = function()
+					vim.cmd("FzfLua dap_breakpoints")
+				end,
+			},
+			{
+				choice = "Variables",
+				func = function()
+					vim.cmd("FzfLua dap_variables")
+				end,
+			},
+			{
+				choice = "Toggle REPL",
+				func = function()
+					require("dap").repl.toggle()
+				end,
+			},
+			{
+				choice = "Toggle DAP UI",
+				func = function()
+					require("dapui").toggle()
+				end,
+			},
+		})
 	end)
 	utils.keymap("n", "<c-s-/>", ":FzfLua resume<cr>")
 	utils.keymap("n", "g/", ":FzfLuaSearch<cr>")

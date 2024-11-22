@@ -306,4 +306,19 @@ function M.buf_keymap(b, mode, lhs, rhs, opt)
 	opt = vim.tbl_extend("force", opt or {}, { buffer = b })
 	M.keymap(mode, lhs, rhs, opt)
 end
+
+function M.action_menu(arr)
+	local menu = {}
+	local lookup = {}
+	for _, m in ipairs(arr) do
+		table.insert(menu, m["choice"])
+		lookup[m["choice"]] = m["func"]
+	end
+	vim.ui.select(menu, {}, function(choice)
+		local func_to_call = lookup[choice]
+		if func_to_call ~= nil then
+			func_to_call()
+		end
+	end)
+end
 return M
