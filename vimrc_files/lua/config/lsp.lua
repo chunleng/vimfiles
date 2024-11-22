@@ -65,7 +65,7 @@ local function setup_lsp()
 			"tailwindcss",
 			"terraformls",
 			"tflint",
-			"tsserver",
+			"ts_ls",
 			"vimls",
 			"yamlls",
 			"zk",
@@ -288,8 +288,8 @@ local function setup_lsp()
 				handlers = common_handlers,
 			})
 		end,
-		tsserver = function()
-			lspconfig.tsserver.setup({
+		ts_ls = function()
+			lspconfig.ts_ls.setup({
 				on_attach = function(client, bufnr)
 					-- prefer eslint
 					client.server_capabilities.documentFormattingProvider = false
