@@ -271,13 +271,18 @@ require("lazy").setup({
 		end,
 	},
 	{
-		-- https://github.com/danymat/neogen
 		-- https://github.com/L3MON4D3/LuaSnip
-		"chunleng/nvim-null",
-		name = "snippets",
-		dependencies = { "L3MON4D3/LuaSnip", "danymat/neogen" },
+		"L3MON4D3/LuaSnip",
 		config = function()
 			require("config.snippets").setup()
+		end,
+	},
+	{
+		-- https://github.com/danymat/neogen
+		"danymat/neogen",
+		dependencies = { "L3MON4D3/LuaSnip" },
+		config = function()
+			require("config.neogen").setup()
 		end,
 	},
 	{

@@ -17,12 +17,10 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local parse = require("luasnip.util.parser").parse_snippet
 
-local neogen = require("neogen")
-
 local theme = require("common-theme")
 local utils = require("common-utils")
 
-local function setup_luasnip()
+function M.setup()
 	theme.set_hl("LuaSnipSnippetPassive", { fg = 15 })
 	theme.set_hl("LuaSnipInsertNodeActiveVirtual", { bold = true, fg = 0, bg = 11 })
 	theme.set_hl("LuaSnipInsertNodePassive", { fg = 3, underdotted = true })
@@ -104,58 +102,6 @@ local function setup_luasnip()
 	end)
 	-- Go into normal mode when deleting select to improve completion flow
 	utils.keymap({ "s" }, "<bs>", "<bs>i")
-end
-
-local function setup_neogen()
-	local languages_supported = { "python", "lua", "rust" }
-	local convention = {}
-
-	local function d_generate_doc(type)
-		return d(1, function()
-			local snippet = neogen.generate({ type = type, return_snippet = true })
-			if snippet == nil then
-				return sn(nil, t(""))
-			end
-			return sn(nil, parse(nil, table.concat(snippet, "\n")))
-		end, {})
-	end
-
-	for _, language in ipairs(languages_supported) do
-		ls.add_snippets(language, {
-			s({ trig = "d", dscr = "Template for file code documentation" }, d_generate_doc("file")),
-			s({ trig = "dc", dscr = "Template for class code documentation" }, d_generate_doc("class")),
-			s({ trig = "df", dscr = "Template for function code documentation" }, d_generate_doc("func")),
-		})
-		local lang_convention = os.getenv("DOC_CONV_" .. string.upper(language))
-		if lang_convention ~= nil then
-			convention[language] = {
-				template = { annotation_convention = lang_convention },
-			}
-		end
-	end
-
-	neogen.setup({
-		snippet_engine = "luasnip",
-		placeholders_text = {
-			description = "[desc]",
-			tparam = "[param]",
-			parameter = "[param]",
-			["return"] = "[return]",
-			class = "[class]",
-			throw = "[throws",
-			varargs = "[args]",
-			type = "[type]",
-			attribute = "[attr]",
-			args = "[args]",
-			kwargs = "[args]",
-		},
-		languages = convention,
-	})
-end
-
-function M.setup()
-	setup_luasnip()
-	setup_neogen()
 end
 
 return M
