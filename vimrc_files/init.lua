@@ -606,4 +606,139 @@ require("lazy").setup({
 			require("zk").setup()
 		end,
 	},
+	{
+		-- Autocompletion menu
+		-- https://github.com/Robitx/gp.nvim
+		-- https://github.com/danymat/neogen
+		"chunleng/nvim-null",
+		name = "resolve_c_space",
+		dependencies = { "Robitx/gp.nvim", "danymat/neogen" },
+		config = function()
+			local utils = require("common-utils")
+			local ai = require("config.ai")
+			local gp = require("gp")
+			local neogen = require("neogen")
+			utils.keymap("n", "<c-space>", function()
+				vim.ui.select({
+					"Docstring: function",
+					"Docstring: class",
+					"Docstring: file",
+					"Programmer: Complete Code",
+					"Casual Writer: Write Article",
+					"Technical Writer: Write technical documents",
+				}, {}, function(choice)
+					if choice == "Docstring: function" then
+						neogen.generate({ type = "func" })
+					elseif choice == "Docstring: class" then
+						neogen.generate({ type = "class" })
+					elseif choice == "Docstring: file" then
+						neogen.generate({ type = "file" })
+					elseif choice == "Programmer: Complete Code" then
+						ai.send(
+							"Having following from {{filename}}:\n\n"
+								.. "```{{filetype}}\n{{selection}}\n```\n\n"
+								.. "Please reply with only the code added.\n\n"
+								.. "Please continue the code with the following instruction: {{command}}",
+							{ has_prompt = true, range_type = ai.RangeType.ALL_BEFORE }
+						)
+					elseif choice == "Casual Writer: Write Article" then
+						ai.send(
+							"Having the following start:\n\n"
+								.. "```\n{{selection}}\n```\n\n"
+								.. "Please continue the writing with the following instruction in a casual style: {{command}}",
+							{ has_prompt = true, range_type = ai.RangeType.ALL_BEFORE, model = ai.models.writing }
+						)
+					elseif choice == "Technical Writer: Write technical documents" then
+						ai.send(
+							"You are a technical writer. Having the following start:\n\n"
+								.. "```\n{{selection}}\n```\n\n"
+								.. "Please continue the writing with the following instruction: {{command}}",
+							{ has_prompt = true, range_type = ai.RangeType.ALL_BEFORE, model = ai.models.writing }
+						)
+					end
+				end)
+			end, { silent = false })
+			utils.keymap("v", "<c-space>", function()
+				vim.ui.select({
+					"Programmer: Refine Code",
+					"Programmer: Ask",
+					"Programmer: Summarize Code",
+					"Programmer: Code Review",
+					"Programmer: Write Unit Test",
+					"Casual Writer: Refine Writing",
+					"Technical Writer: Refine Writing",
+				}, {}, function(choice)
+					if choice == "Programmer: Refine Code" then
+						ai.send(
+							"Having following from {{filename}}:\n\n"
+								.. "```{{filetype}}\n{{selection}}\n```\n\n"
+								.. "Please rewrite the code with the following instruction:\n\n{{command}}",
+							{ has_prompt = true, target = gp.Target.rewrite }
+						)
+					elseif choice == "Programmer: Ask" then
+						ai.send(
+							"Having following from {{filename}}:\n\n"
+								.. "```{{filetype}}\n{{selection}}\n```\n\n{{command}}",
+							{
+								has_prompt = true,
+								target = gp.Target.vnew("markdown"),
+								system_prompt = ai.system_prompts.programmer_chat,
+							}
+						)
+					elseif choice == "Programmer: Write Unit Test" then
+						ai.send(
+							"Having following from {{filename}}:\n\n"
+								.. "```{{filetype}}\n{{selection}}\n```\n\n"
+								.. "Please write unit test to test if the code is working",
+							{ target = gp.Target.enew }
+						)
+					elseif choice == "Programmer: Summarize Code" then
+						ai.send(
+							"Having following from {{filename}}:\n\n"
+								.. "```{{filetype}}\n{{selection}}\n```\n\n"
+								.. "Please understand what the code is trying to do and "
+								.. "respond with a summary the core logic in steps but as short as possible.\n\n"
+								.. "It's okay to drop steps which are not relevant to understand the logic",
+							{
+								target = gp.Target.vnew("markdown"),
+								system_prompt = ai.system_prompts.programmer_chat,
+							}
+						)
+					elseif choice == "Programmer: Code Review" then
+						ai.send(
+							"Having following from {{filename}}:\n\n"
+								.. "```{{filetype}}\n{{selection}}\n```\n\n"
+								.. "Please analyze for code smells and suggest improvements.",
+							{
+								target = gp.Target.vnew("markdown"),
+								system_prompt = ai.system_prompts.programmer_chat,
+							}
+						)
+					elseif choice == "Casual Writer: Refine Writing" then
+						ai.send(
+							"Having the following:\n\n"
+								.. "```\n{{selection}}\n```\n\n"
+								.. "Please rewrite it with the following instruction in a casual style: {{command}}",
+							{
+								has_prompt = true,
+								target = gp.Target.rewrite,
+								system_prompt = ai.system_prompts.casual_writer,
+							}
+						)
+					elseif choice == "Technical Writer: Refine Writing" then
+						ai.send(
+							"You are a technical writer. Having the following:\n\n"
+								.. "```\n{{selection}}\n```\n\n"
+								.. "Please rewrite it with the following instruction: {{command}}",
+							{
+								has_prompt = true,
+								target = gp.Target.rewrite,
+								system_prompt = ai.system_prompts.casual_writer,
+							}
+						)
+					end
+				end)
+			end)
+		end,
+	},
 })
