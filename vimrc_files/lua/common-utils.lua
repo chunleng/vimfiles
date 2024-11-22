@@ -282,6 +282,8 @@ M.kind_icons = {
 	String = " ",
 }
 
+M.programming_languages = { "rust", "python", "javascript", "javascriptreact", "typescript", "typescriptreact", "lua" }
+
 -- Better foldtext
 function _G.fold_text()
 	local leveltext = "   "
@@ -311,8 +313,10 @@ function M.action_menu(arr)
 	local menu = {}
 	local lookup = {}
 	for _, m in ipairs(arr) do
-		table.insert(menu, m["choice"])
-		lookup[m["choice"]] = m["func"]
+		if m["ft"] == nil or vim.tbl_contains(m["ft"], vim.bo.filetype) then
+			table.insert(menu, m["choice"])
+			lookup[m["choice"]] = m["func"]
+		end
 	end
 	vim.ui.select(menu, {}, function(choice)
 		local func_to_call = lookup[choice]

@@ -641,18 +641,21 @@ require("lazy").setup({
 						func = function()
 							neogen.generate({ type = "func" })
 						end,
+						ft = utils.programming_languages,
 					},
 					{
 						choice = "Docstring: class",
 						func = function()
 							neogen.generate({ type = "class" })
 						end,
+						ft = utils.programming_languages,
 					},
 					{
 						choice = "Docstring: file",
 						func = function()
 							neogen.generate({ type = "file" })
 						end,
+						ft = utils.programming_languages,
 					},
 					{
 						choice = "Programmer: Complete Code",
@@ -665,6 +668,7 @@ require("lazy").setup({
 								{ has_prompt = true, range_type = ai.RangeType.ALL_BEFORE }
 							)
 						end,
+						ft = utils.programming_languages,
 					},
 					{
 						choice = "Casual Writer: Write Article",
@@ -702,6 +706,7 @@ require("lazy").setup({
 								{ has_prompt = true, target = gp.Target.rewrite }
 							)
 						end,
+						ft = utils.programming_languages,
 					},
 					{
 						choice = "Programmer: Ask",
@@ -732,6 +737,7 @@ require("lazy").setup({
 								}
 							)
 						end,
+						ft = utils.programming_languages,
 					},
 					{
 						choice = "Programmer: Code Review",
@@ -746,6 +752,7 @@ require("lazy").setup({
 								}
 							)
 						end,
+						ft = utils.programming_languages,
 					},
 					{
 						choice = "Programmer: Write Unit Test",
@@ -757,6 +764,7 @@ require("lazy").setup({
 								{ target = gp.Target.enew }
 							)
 						end,
+						ft = utils.programming_languages,
 					},
 					{
 						choice = "Casual Writer: Refine Writing",
