@@ -258,7 +258,6 @@ local function setup_lsp()
 					"razor",
 					"reason",
 					"rescript",
-					"rust",
 					"sass",
 					"scss",
 					"slim",
@@ -271,7 +270,6 @@ local function setup_lsp()
 					"vue",
 				},
 				settings = { tailwindCSS = { emmetCompletions = true } },
-				init_options = { userLanguages = { rust = "html" } },
 			})
 		end,
 		rust_analyzer = function()
