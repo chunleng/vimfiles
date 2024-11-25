@@ -55,6 +55,21 @@ table.insert(
 table.insert(
 	M,
 	s(
+		{ trig = "?leptos/effect", dscr = "Template for creating Leptos effect" },
+		fmta(
+			[[
+	create_effect(move |_| {
+		<>
+	});
+]],
+			{ i(0) }
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
 		{
 			trig = "?leptos/action",
 			dscr = "Template for creating Leptos action",
@@ -62,14 +77,14 @@ table.insert(
 		fmta(
 			[[
 	let <> = create_action(|<>| {
-	    <>
-	    async {}
+		<>
+		async {}
 	});
 ]],
 			{
 				i(1, "handle_click"),
-				i(2, "value: &String"),
-				i(0, 'logging::log!("{}", value.clone());'),
+				i(2, "(): &()"),
+				i(0),
 			}
 		)
 	)

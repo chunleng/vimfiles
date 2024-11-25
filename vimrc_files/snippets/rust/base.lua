@@ -113,7 +113,7 @@ table.insert(
 			[[
 	|<>| { <> }
 ]],
-			{ i(1, "i: i32"), i(0, "i + 1") }
+			{ i(1, "x"), i(0, "x + 1") }
 		)
 	)
 )
@@ -306,6 +306,19 @@ table.insert(
 	const <> = <>;<>
 ]],
 			{ i(1, "CONST_A: i32"), i(2, "value"), i(0) }
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
+		{ trig = "@", dscr = "Annotation" },
+		fmta(
+			[[
+	#[<>]
+]],
+			{ i(0) }
 		)
 	)
 )
