@@ -620,21 +620,48 @@ require("lazy").setup({
 		"mickael-menu/zk-nvim",
 		config = function()
 			require("zk").setup()
+			local utils = require("common-utils")
+			utils.keymap({ "n" }, "<c-s-n>", function()
+				utils.action_menu({
+					{
+						choice = "Tags",
+						func = function()
+							vim.cmd("ZkTags")
+						end,
+						ft = { "markdown" },
+					},
+					{
+						choice = "Links",
+						func = function()
+							vim.cmd("ZkLinks")
+						end,
+						ft = { "markdown" },
+					},
+					{
+						choice = "Back Links",
+						func = function()
+							vim.cmd("ZkBacklinks")
+						end,
+						ft = { "markdown" },
+					},
+				})
+			end)
 		end,
 	},
 	{
 		-- Autocompletion menu
 		-- https://github.com/Robitx/gp.nvim
 		-- https://github.com/danymat/neogen
+		-- https://github.com/mickael-menu/zk-nvim
 		"chunleng/nvim-null",
 		name = "resolve_c_space",
-		dependencies = { "Robitx/gp.nvim", "danymat/neogen" },
+		dependencies = { "Robitx/gp.nvim", "danymat/neogen", "mickael-menu/zk-nvim" },
 		config = function()
 			local utils = require("common-utils")
 			local ai = require("config.ai")
 			local gp = require("gp")
 			local neogen = require("neogen")
-			utils.keymap("n", "<c-space>", function()
+			utils.keymap({ "n", "i" }, "<c-space>", function()
 				utils.action_menu({
 					{
 						choice = "Docstring: function",
@@ -656,6 +683,13 @@ require("lazy").setup({
 							neogen.generate({ type = "file" })
 						end,
 						ft = utils.programming_languages,
+					},
+					{
+						choice = "Add ZK link",
+						func = function()
+							vim.cmd("ZkInsertLink")
+						end,
+						ft = { "markdown" },
 					},
 					{
 						choice = "Programmer: Complete Code",
@@ -696,6 +730,13 @@ require("lazy").setup({
 			end, { silent = false })
 			utils.keymap("v", "<c-space>", function()
 				utils.action_menu({
+					{
+						choice = "Add ZK link at selection",
+						func = function()
+							vim.cmd("'<,'>ZkInsertLinkAtSelection")
+						end,
+						ft = { "markdown" },
+					},
 					{
 						choice = "Programmer: Refine Code",
 						func = function()
