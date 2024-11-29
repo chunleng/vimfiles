@@ -178,6 +178,9 @@ local function setup_lsp()
 				handlers = common_handlers,
 				settings = {
 					Lua = {
+						diagnostics = {
+							globals = { "vim" },
+						},
 						completion = { callSnippet = "Replace" },
 						workspace = { checkThirdParty = false },
 					},
