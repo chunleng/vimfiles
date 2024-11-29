@@ -42,6 +42,36 @@ table.insert(
 	)
 )
 
+table.insert(
+	M,
+	s(
+		{ trig = "?lua/localvimrc_init", dscr = "Init for localvimrc" },
+		fmta(
+			[[
+	------------------------------
+	-- Load every buffer change --
+	------------------------------
+
+	if vim.g.localvimrc_sourced_once_for_file == 1 then
+		return
+	end
+	-----------------------------
+	-- Load once for each file --
+	-----------------------------
+
+	if vim.g.localvimrc_sourced_once == 1 then
+		return
+	end
+	--------------------------------
+	-- Load once per vim instance --
+	--------------------------------
+	
+]],
+			{}
+		)
+	)
+)
+
 return M
 
 -- vim: noet
