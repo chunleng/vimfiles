@@ -207,6 +207,7 @@ require("lazy").setup({
 		-- https://github.com/nvimtools/none-ls-extras.nvim
 		-- https://github.com/barreiroleo/ltex_extra.nvim
 		-- https://github.com/stevearc/aerial.nvim
+		-- https://github.com/zapling/mason-lock.nvim
 		"williamboman/mason.nvim",
 		name = "lsp",
 		dependencies = {
@@ -223,6 +224,7 @@ require("lazy").setup({
 			"barreiroleo/ltex_extra.nvim",
 			"stevearc/aerial.nvim",
 			{ dir = personal_project .. "nvim-dap-kitty-launcher" },
+			"zapling/mason-lock.nvim",
 		},
 		config = function()
 			require("config.lsp").setup()

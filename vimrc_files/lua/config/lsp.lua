@@ -44,33 +44,7 @@ local function setup_lsp()
 
 	configure_lsp_mappings()
 	local lsp_setup = require("mason-lspconfig")
-	lsp_setup.setup({
-		ensure_installed = {
-			"cssls",
-			"cssmodules_ls",
-			"denols",
-			"dockerls",
-			"eslint",
-			"gopls",
-			"html",
-			"intelephense",
-			"jdtls",
-			"jsonls",
-			"ltex",
-			"pyright",
-			"purescriptls",
-			"rust_analyzer",
-			"solargraph",
-			"lua_ls",
-			"tailwindcss",
-			"terraformls",
-			"tflint",
-			"ts_ls",
-			"vimls",
-			"yamlls",
-			"zk",
-		},
-	})
+	lsp_setup.setup({})
 	lsp_setup.setup_handlers({
 		function(server_name)
 			lspconfig[server_name].setup({
@@ -481,6 +455,7 @@ end
 
 function M.setup()
 	require("mason").setup()
+	require("mason-lock").setup()
 	require("kitty-launcher").setup()
 	setup_lsp()
 	setup_dap()
