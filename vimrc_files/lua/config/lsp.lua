@@ -251,6 +251,7 @@ local function setup_lsp()
 		end,
 		rust_analyzer = function()
 			lspconfig.rust_analyzer.setup({
+				on_attach = common_on_attach,
 				capabilities = {
 					textDocument = {
 						completion = {
