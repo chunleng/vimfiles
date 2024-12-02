@@ -630,6 +630,16 @@ require("lazy").setup({
 			utils.keymap({ "n" }, "<c-s-n>", function()
 				utils.action_menu({
 					{
+						choice = "Today's Journal",
+						func = function()
+							local folder = os.date("./journal/%Y/%m")
+							local file = folder .. "/" .. os.date("%Y%m%d.md")
+							os.execute("mkdir -p " .. folder)
+							os.execute("touch " .. file)
+							vim.cmd("e " .. file)
+						end,
+					},
+					{
 						choice = "Tags",
 						func = function()
 							vim.cmd("ZkTags")
