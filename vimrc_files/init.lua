@@ -623,6 +623,10 @@ require("lazy").setup({
 		config = function()
 			require("zk").setup()
 			local utils = require("common-utils")
+			-- Check if folder is ZK Enabled
+			if vim.fn.filereadable(".zk/notebook.db") == 0 then
+				return
+			end
 			utils.keymap({ "n" }, "<c-s-n>", function()
 				utils.action_menu({
 					{
@@ -630,21 +634,18 @@ require("lazy").setup({
 						func = function()
 							vim.cmd("ZkTags")
 						end,
-						ft = { "markdown" },
 					},
 					{
 						choice = "Links",
 						func = function()
 							vim.cmd("ZkLinks")
 						end,
-						ft = { "markdown" },
 					},
 					{
 						choice = "Back Links",
 						func = function()
 							vim.cmd("ZkBacklinks")
 						end,
-						ft = { "markdown" },
 					},
 				})
 			end)
