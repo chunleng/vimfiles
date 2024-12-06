@@ -119,6 +119,10 @@ local function configure_preferred_mappings()
 			vim.fn.eval('feedkeys("\\<c-c>q' .. t .. 'k\\"*y$\\<c-c>\\<c-c>' .. t .. '\\<c-p>")')
 		end
 	end)
+	M.keymap("n", "y<c-g>", function()
+		local filename = vim.fn.expand("%")
+		os.execute("echo " .. vim.fn.expand("%:p") .. "|pbcopy")
+	end)
 
 	-- Prevent accidentally quiting
 	M.keymap({ "n", "x" }, "<c-s-z>", function() end)
