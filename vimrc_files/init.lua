@@ -465,7 +465,7 @@ require("lazy").setup({
 	{
 		-- https://github.com/mattn/emmet-vim
 		"mattn/emmet-vim",
-		config = function()
+		init = function()
 			require("config.emmet").setup()
 		end,
 	},
