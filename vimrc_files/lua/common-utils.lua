@@ -92,6 +92,9 @@ local function configure_preferred_mappings()
 	-- Add macos text edit mapping
 	M.keymap("i", "<c-b>", "<left>")
 	M.keymap("i", "<c-f>", "<right>")
+	M.keymap("i", "<s-cr>", function()
+		vim.api.nvim_eval([[feedkeys("\<enter>\<c-o>k\<c-o>Aa\<c-o>==\<c-o>A\<bs>", "n")]]) -- `a<c-o>==<c-o>A<bs>` is to make auto indent work
+	end)
 
 	-- Make cycling between easier
 	M.keymap("n", "<bs>", "<cmd>b #<cr>")

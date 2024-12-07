@@ -317,24 +317,6 @@ require("lazy").setup({
 		},
 	},
 	{
-		"chunleng/nvim-null",
-		name = "resolve_s_cr",
-		config = function()
-			local utils = require("common-utils")
-			local ls = require("luasnip")
-
-			utils.keymap({ "i", "s" }, "<s-cr>", function()
-				if ls.jumpable(-1) then
-					ls.jump(-1)
-				else
-					-- Enter without cursor going to the next line
-					vim.api.nvim_eval([[feedkeys("\<enter>\<c-o>k\<c-o>Aa\<c-o>==\<c-o>A\<bs>", "n")]]) -- `a<c-o>==<c-o>A<bs>` is to make auto indent work
-				end
-			end)
-		end,
-		dependencies = { "L3MON4D3/LuaSnip" },
-	},
-	{
 		-- https://github.com/L3MON4D3/LuaSnip
 		-- https://github.com/embear/vim-localvimrc
 		"chunleng/nvim-null",
