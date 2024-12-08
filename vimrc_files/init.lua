@@ -535,9 +535,7 @@ require("lazy").setup({
 				if ls.choice_active() then
 					ls.change_choice(1)
 				else
-					vim.api.nvim_eval(
-						[[feedkeys("\<c-r>=emmet#util#closePopup()\<cr>\<c-r>=emmet#expandAbbr(0,\"\")\<cr>", "n")]]
-					)
+					vim.api.nvim_eval([[feedkeys("\<c-o>:Emmet ", "n")]])
 				end
 			end)
 			utils.keymap("x", "<c-enter>", function()
