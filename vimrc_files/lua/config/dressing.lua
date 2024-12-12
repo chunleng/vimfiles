@@ -2,7 +2,14 @@ local M = {}
 
 function M.setup()
 	require("dressing").setup({
-		input = { win_options = { winblend = 15 }, min_width = 40 },
+		input = {
+			win_options = { winblend = 15 },
+			min_width = 40,
+			mappings = {
+				n = { ["<c-c>"] = "Close" },
+				i = { ["<c-n>"] = "HistoryNext", ["<c-p>"] = "HistoryPrev" },
+			},
+		},
 		select = {
 			backend = { "fzf_lua" },
 			fzf_lua = { winopts = { width = 0.4, height = 0.3 } },
