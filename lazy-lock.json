@@ -57,7 +57,6 @@
   "resolve_cr": { "branch": "main", "commit": "a8fb7c1568f0bf03970d2983d0272a484930da9a" },
   "resolve_gf": { "branch": "main", "commit": "a8fb7c1568f0bf03970d2983d0272a484930da9a" },
   "resolve_rc_menu": { "branch": "main", "commit": "a8fb7c1568f0bf03970d2983d0272a484930da9a" },
-  "resolve_s_cr": { "branch": "main", "commit": "a8fb7c1568f0bf03970d2983d0272a484930da9a" },
   "schemastore.nvim": { "branch": "main", "commit": "dd374887d6e1de38e9d7041da824a8dc10cae401" },
   "stop_conceal": { "branch": "main", "commit": "a8fb7c1568f0bf03970d2983d0272a484930da9a" },
   "tailwindcss-colorizer-cmp.nvim": { "branch": "main", "commit": "3d3cd95e4a4135c250faf83dd5ed61b8e5502b86" },
