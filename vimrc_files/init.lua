@@ -642,6 +642,23 @@ require("lazy").setup({
 		end,
 	},
 	{
+		-- https://github.com/diepm/vim-rest-console
+		"diepm/vim-rest-console",
+		init = function()
+			vim.g.vrc_trigger = "<c-enter>"
+			vim.g.vrc_split_request_body = 1
+			vim.g.vrc_follow_redirects = 1
+			vim.g.vrc_response_default_content_type = "application/json"
+			vim.g.vrc_auto_format_response_patterns = {
+				json = "jq",
+			}
+			vim.g.vrc_curl_opts = {
+				["-s"] = "",
+				["-i"] = "",
+			}
+		end,
+	},
+	{
 		-- Autocompletion menu
 		-- https://github.com/Robitx/gp.nvim
 		-- https://github.com/danymat/neogen
