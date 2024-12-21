@@ -647,7 +647,6 @@ require("lazy").setup({
 		init = function()
 			vim.g.vrc_trigger = "<c-enter>"
 			vim.g.vrc_split_request_body = 1
-			vim.g.vrc_follow_redirects = 1
 			vim.g.vrc_response_default_content_type = "application/json"
 			vim.g.vrc_auto_format_response_patterns = {
 				json = "jq",
@@ -655,6 +654,7 @@ require("lazy").setup({
 			vim.g.vrc_curl_opts = {
 				["-s"] = "",
 				["-i"] = "",
+				["-L"] = "",
 			}
 		end,
 	},
