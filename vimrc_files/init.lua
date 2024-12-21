@@ -185,8 +185,10 @@ require("lazy").setup({
 	},
 	{
 		-- https://github.com/ibhagwan/fzf-lua
+		-- https://github.com/kyazdani42/nvim-web-devicons
+		-- https://github.com/nvim-treesitter/nvim-treesitter-context
 		"ibhagwan/fzf-lua",
-		dependencies = { "kyazdani42/nvim-web-devicons", "lsp" },
+		dependencies = { "kyazdani42/nvim-web-devicons", "nvim-treesitter/nvim-treesitter-context", "lsp" },
 		config = function()
 			require("config.fzf").setup()
 		end,
