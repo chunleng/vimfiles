@@ -112,7 +112,13 @@ local function selection_actions()
 			{
 				choice = "Programmer: Write Unit Test",
 				func = function()
-					ai.send(ai.agent.programmer_code, { template = "Please write unit test.", target = gp.Target.enew })
+					ai.send(
+						ai.agent.programmer_code,
+						{
+							template = "Please implement the unit test for the selected code. Give me only the code snippet",
+							target = gp.Target.enew,
+						}
+					)
 				end,
 				ft = utils.programming_languages,
 			},
