@@ -3,37 +3,29 @@ local gp = require("gp")
 -- * Temperature (0-1) adjust creativity with 0 (highly deterministic) and 1 (highly creative)
 -- * Top P (0-1) adjust next word use. e.g. 0.1 will only use 10% of the commonly used words for the next token
 local models = {
-	logic = { model = "o1-mini", temperature = 0.1, top_p = 0.2 },
-	writing = { model = "gpt-4o-mini", temperature = 0.8, top_p = 0.8 },
+	logic = { model = { model = "o1-mini", temperature = 0.1, top_p = 0.2 }, provider = "openai" },
+	writing = { model = { model = "gpt-4o-mini", temperature = 0.8, top_p = 0.8 }, provider = "openai" },
 }
 
 local M = {
 	agent = {
-		programmer_code = {
+		programmer_code = vim.tbl_extend("keep", {
 			system_prompt = "I want you to act as an expert programmer.\n"
 				.. "Please think through step-by-step and solve the problem with clear and add the smallest amount of "
 				.. "changes to the code that can achieve the objective provided in the instruction, you can skip all "
 				.. "the explanations using print line or logging.\n"
 				.. "STRICTLY NO COMMENTARY OUTSIDE OF THE SNIPPET RESPONSE\n"
 				.. "START AND END YOUR ANSWER WITH SNIPPET: ```",
-			model = models.logic,
-			provider = "openai",
-		},
-		programmer_chat = {
+		}, models.logic),
+		programmer_chat = vim.tbl_extend("keep", {
 			system_prompt = "I want you to act as an expert programmer. Please think through step-by-step.",
-			model = models.writing,
-			provider = "openai",
-		},
-		casual_writer = {
+		}, models.writing),
+		casual_writer = vim.tbl_extend("keep", {
 			system_prompt = "I want you to reply in a casual style, as if you are talking to someone familiar.",
-			model = models.writing,
-			provider = "openai",
-		},
-		technical_writer = {
+		}, models.writing),
+		technical_writer = vim.tbl_extend("keep", {
 			system_prompt = "I want you to phrase the reply in a way that is suitable for code documentation or software design document.",
-			model = models.writing,
-			provider = "openai",
-		},
+		}, models.writing),
 	},
 	RangeType = { SELECTION = 0, ALL_BEFORE = 1 },
 }
