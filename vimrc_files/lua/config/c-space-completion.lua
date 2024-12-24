@@ -4,6 +4,7 @@ local utils = require("common-utils")
 local ai = require("config.ai")
 local gp = require("gp")
 local neogen = require("neogen")
+local prog_and_cfg_lang = vim.tbl_extend("keep", utils.programming_languages, utils.config_languages)
 
 local function insertion_actions()
 	utils.keymap({ "n", "i" }, "<c-space>", function()
@@ -41,19 +42,21 @@ local function insertion_actions()
 				func = function()
 					ai.send(ai.agent.programmer_code, { range_type = ai.RangeType.ALL_BEFORE })
 				end,
-				ft = utils.programming_languages,
+				ft = prog_and_cfg_lang,
 			},
 			{
 				choice = "Casual Writer: Write Article",
 				func = function()
 					ai.send(ai.agent.casual_writer, { range_type = ai.RangeType.ALL_BEFORE })
 				end,
+				ft = utils.text_languages,
 			},
 			{
 				choice = "Technical Writer: Write technical documents",
 				func = function()
 					ai.send(ai.agent.technical_writer, { range_type = ai.RangeType.ALL_BEFORE })
 				end,
+				ft = utils.text_languages,
 			},
 		})
 	end, { silent = false })
@@ -74,13 +77,14 @@ local function selection_actions()
 				func = function()
 					ai.send(ai.agent.programmer_code, { target = gp.Target.rewrite })
 				end,
-				ft = utils.programming_languages,
+				ft = prog_and_cfg_lang,
 			},
 			{
 				choice = "Programmer: Ask",
 				func = function()
 					ai.send(ai.agent.programmer_chat, { target = gp.Target.vnew("markdown") })
 				end,
+				ft = prog_and_cfg_lang,
 			},
 			{
 				choice = "Programmer: Summarize Code",
@@ -92,7 +96,7 @@ local function selection_actions()
 						target = gp.Target.vnew("markdown"),
 					})
 				end,
-				ft = utils.programming_languages,
+				ft = prog_and_cfg_lang,
 			},
 			{
 				choice = "Programmer: Code Review",
@@ -103,7 +107,7 @@ local function selection_actions()
 						target = gp.Target.vnew("markdown"),
 					})
 				end,
-				ft = utils.programming_languages,
+				ft = prog_and_cfg_lang,
 			},
 			{
 				choice = "Programmer: Write Unit Test",
@@ -117,12 +121,14 @@ local function selection_actions()
 				func = function()
 					ai.send(ai.agent.casual_writer, { target = gp.Target.rewrite })
 				end,
+				ft = utils.text_languages,
 			},
 			{
 				choice = "Technical Writer: Refine Writing",
 				func = function()
 					ai.send(ai.agent.technical_writer, { target = gp.Target.rewrite })
 				end,
+				ft = utils.text_languages,
 			},
 		})
 	end)

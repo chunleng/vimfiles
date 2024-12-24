@@ -290,6 +290,8 @@ M.kind_icons = {
 }
 
 M.programming_languages = { "rust", "python", "javascript", "javascriptreact", "typescript", "typescriptreact", "lua" }
+M.config_languages = { "yaml", "json" }
+M.text_languages = { "markdown", "text" }
 
 -- Better foldtext
 function _G.fold_text()
