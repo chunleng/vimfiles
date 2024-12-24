@@ -39,36 +39,20 @@ local function insertion_actions()
 			{
 				choice = "Programmer: Complete Code",
 				func = function()
-					ai.send(
-						"Having following from {{filename}}:\n\n"
-							.. "```{{filetype}}\n{{selection}}\n```\n\n"
-							.. "Please reply with only the code added.\n\n"
-							.. "Please continue the code with the following instruction: {{command}}",
-						{ has_prompt = true, range_type = ai.RangeType.ALL_BEFORE }
-					)
+					ai.send(ai.agent.programmer_code, { range_type = ai.RangeType.ALL_BEFORE })
 				end,
 				ft = utils.programming_languages,
 			},
 			{
 				choice = "Casual Writer: Write Article",
 				func = function()
-					ai.send(
-						"Having the following start:\n\n"
-							.. "```\n{{selection}}\n```\n\n"
-							.. "Please continue the writing with the following instruction in a casual style: {{command}}",
-						{ has_prompt = true, range_type = ai.RangeType.ALL_BEFORE, model = ai.models.writing }
-					)
+					ai.send(ai.agent.casual_writer, { range_type = ai.RangeType.ALL_BEFORE })
 				end,
 			},
 			{
 				choice = "Technical Writer: Write technical documents",
 				func = function()
-					ai.send(
-						"You are a technical writer. Having the following start:\n\n"
-							.. "```\n{{selection}}\n```\n\n"
-							.. "Please continue the writing with the following instruction: {{command}}",
-						{ has_prompt = true, range_type = ai.RangeType.ALL_BEFORE, model = ai.models.writing }
-					)
+					ai.send(ai.agent.technical_writer, { range_type = ai.RangeType.ALL_BEFORE })
 				end,
 			},
 		})
@@ -88,101 +72,56 @@ local function selection_actions()
 			{
 				choice = "Programmer: Refine Code",
 				func = function()
-					ai.send(
-						"Having following from {{filename}}:\n\n"
-							.. "```{{filetype}}\n{{selection}}\n```\n\n"
-							.. "Please rewrite the code with the following instruction:\n\n{{command}}",
-						{ has_prompt = true, target = gp.Target.rewrite }
-					)
+					ai.send(ai.agent.programmer_code, { target = gp.Target.rewrite })
 				end,
 				ft = utils.programming_languages,
 			},
 			{
 				choice = "Programmer: Ask",
 				func = function()
-					ai.send(
-						"Having following from {{filename}}:\n\n"
-							.. "```{{filetype}}\n{{selection}}\n```\n\n{{command}}",
-						{
-							has_prompt = true,
-							target = gp.Target.vnew("markdown"),
-							system_prompt = ai.system_prompts.programmer_chat,
-						}
-					)
+					ai.send(ai.agent.programmer_chat, { target = gp.Target.vnew("markdown") })
 				end,
 			},
 			{
 				choice = "Programmer: Summarize Code",
 				func = function()
-					ai.send(
-						"Having following from {{filename}}:\n\n"
-							.. "```{{filetype}}\n{{selection}}\n```\n\n"
-							.. "Please understand what the code is trying to do and "
-							.. "respond with a summary the core logic in steps but as short as possible.\n\n"
-							.. "It's okay to drop steps which are not relevant to understand the logic",
-						{
-							target = gp.Target.vnew("markdown"),
-							system_prompt = ai.system_prompts.programmer_chat,
-						}
-					)
+					ai.send(ai.agent.programmer_chat, {
+						template = "Please understand what the code is trying to do and respond with a summary the "
+							.. "core logic in steps. Please remove unnecessary comments that are not useful for "
+							.. "understanding the big picture of what the code is doing, e.g. import or printing",
+						target = gp.Target.vnew("markdown"),
+					})
 				end,
 				ft = utils.programming_languages,
 			},
 			{
 				choice = "Programmer: Code Review",
 				func = function()
-					ai.send(
-						"Having following from {{filename}}:\n\n"
-							.. "```{{filetype}}\n{{selection}}\n```\n\n"
-							.. "Please analyze for code smells and suggest improvements.",
-						{
-							target = gp.Target.vnew("markdown"),
-							system_prompt = ai.system_prompts.programmer_chat,
-						}
-					)
+					ai.send(ai.agent.programmer_chat, {
+						template = "Please analyze for code smells and suggest improvements that can make code "
+							.. "easier to read.",
+						target = gp.Target.vnew("markdown"),
+					})
 				end,
 				ft = utils.programming_languages,
 			},
 			{
 				choice = "Programmer: Write Unit Test",
 				func = function()
-					ai.send(
-						"Having following from {{filename}}:\n\n"
-							.. "```{{filetype}}\n{{selection}}\n```\n\n"
-							.. "Please write unit test to test if the code is working",
-						{ target = gp.Target.enew }
-					)
+					ai.send(ai.agent.programmer_code, { template = "Please write unit test.", target = gp.Target.enew })
 				end,
 				ft = utils.programming_languages,
 			},
 			{
 				choice = "Casual Writer: Refine Writing",
 				func = function()
-					ai.send(
-						"Having the following:\n\n"
-							.. "```\n{{selection}}\n```\n\n"
-							.. "Please rewrite it with the following instruction in a casual style: {{command}}",
-						{
-							has_prompt = true,
-							target = gp.Target.rewrite,
-							system_prompt = ai.system_prompts.casual_writer,
-						}
-					)
+					ai.send(ai.agent.casual_writer, { target = gp.Target.rewrite })
 				end,
 			},
 			{
 				choice = "Technical Writer: Refine Writing",
 				func = function()
-					ai.send(
-						"You are a technical writer. Having the following:\n\n"
-							.. "```\n{{selection}}\n```\n\n"
-							.. "Please rewrite it with the following instruction: {{command}}",
-						{
-							has_prompt = true,
-							target = gp.Target.rewrite,
-							system_prompt = ai.system_prompts.casual_writer,
-						}
-					)
+					ai.send(ai.agent.technical_writer, { target = gp.Target.rewrite })
 				end,
 			},
 		})
