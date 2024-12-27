@@ -290,7 +290,20 @@ M.kind_icons = {
 }
 
 M.programming_languages = { "rust", "python", "javascript", "javascriptreact", "typescript", "typescriptreact", "lua" }
-M.config_languages = { "yaml", "json" }
+M.config_languages = { "yaml", "json", "terraform" }
+-- TODO find a better way to do this join table
+M.prog_and_cfg_lang = {
+	"rust",
+	"python",
+	"javascript",
+	"javascriptreact",
+	"typescript",
+	"typescriptreact",
+	"lua",
+	"yaml",
+	"json",
+	"terraform",
+}
 M.text_languages = { "markdown", "text" }
 
 -- Better foldtext

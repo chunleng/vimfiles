@@ -4,7 +4,6 @@ local utils = require("common-utils")
 local ai = require("config.ai")
 local gp = require("gp")
 local neogen = require("neogen")
-local prog_and_cfg_lang = vim.tbl_extend("keep", utils.programming_languages, utils.config_languages)
 
 local function insertion_actions()
 	utils.keymap({ "n", "i" }, "<c-space>", function()
@@ -42,7 +41,7 @@ local function insertion_actions()
 				func = function()
 					ai.send(ai.agent.programmer_code, { range_type = ai.RangeType.ALL_BEFORE })
 				end,
-				ft = prog_and_cfg_lang,
+				ft = utils.prog_and_cfg_lang,
 			},
 			{
 				choice = "Casual Writer: Write Article",
@@ -77,14 +76,14 @@ local function selection_actions()
 				func = function()
 					ai.send(ai.agent.programmer_code, { target = gp.Target.rewrite })
 				end,
-				ft = prog_and_cfg_lang,
+				ft = utils.prog_and_cfg_lang,
 			},
 			{
 				choice = "Programmer: Ask",
 				func = function()
 					ai.send(ai.agent.programmer_chat, { target = gp.Target.vnew("markdown") })
 				end,
-				ft = prog_and_cfg_lang,
+				ft = utils.prog_and_cfg_lang,
 			},
 			{
 				choice = "Programmer: Summarize Code",
@@ -96,7 +95,7 @@ local function selection_actions()
 						target = gp.Target.vnew("markdown"),
 					})
 				end,
-				ft = prog_and_cfg_lang,
+				ft = utils.prog_and_cfg_lang,
 			},
 			{
 				choice = "Programmer: Code Review",
@@ -107,18 +106,15 @@ local function selection_actions()
 						target = gp.Target.vnew("markdown"),
 					})
 				end,
-				ft = prog_and_cfg_lang,
+				ft = utils.prog_and_cfg_lang,
 			},
 			{
 				choice = "Programmer: Write Unit Test",
 				func = function()
-					ai.send(
-						ai.agent.programmer_code,
-						{
-							template = "Please implement the unit test for the selected code. Give me only the code snippet",
-							target = gp.Target.enew,
-						}
-					)
+					ai.send(ai.agent.programmer_code, {
+						template = "Please implement the unit test for the selected code. Give me only the code snippet",
+						target = gp.Target.enew,
+					})
 				end,
 				ft = utils.programming_languages,
 			},
