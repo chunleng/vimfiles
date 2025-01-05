@@ -7,11 +7,11 @@ require("lazy").setup({
 	{ import = "common", priority = 99 },
 	{
 		-- https://github.com/nvim-tree/nvim-tree.lua
-		-- https://github.com/kyazdani42/nvim-web-devicons
+		-- https://github.com/nvim-tree/nvim-web-devicons
 		-- https://github.com/nvim-treesitter/nvim-treesitter
-		"kyazdani42/nvim-tree.lua",
+		"nvim-tree/nvim-tree.lua",
 		dependencies = {
-			"kyazdani42/nvim-web-devicons",
+			"nvim-tree/nvim-web-devicons",
 			"nvim-treesitter/nvim-treesitter",
 		},
 		config = function()
@@ -185,10 +185,10 @@ require("lazy").setup({
 	},
 	{
 		-- https://github.com/ibhagwan/fzf-lua
-		-- https://github.com/kyazdani42/nvim-web-devicons
+		-- https://github.com/nvim-tree/nvim-web-devicons
 		-- https://github.com/nvim-treesitter/nvim-treesitter-context
 		"ibhagwan/fzf-lua",
-		dependencies = { "kyazdani42/nvim-web-devicons", "nvim-treesitter/nvim-treesitter-context", "lsp" },
+		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-treesitter/nvim-treesitter-context", "lsp" },
 		config = function()
 			require("config.fzf").setup()
 		end,
@@ -571,7 +571,7 @@ require("lazy").setup({
 		-- https://github.com/nvim-tree/nvim-tree.lua
 		"chunleng/nvim-null",
 		name = "resolve_gf",
-		dependencies = { "kyazdani42/nvim-tree.lua" },
+		dependencies = { "nvim-tree/nvim-tree.lua" },
 		config = function()
 			local utils = require("common-utils")
 			local tree_api = require("nvim-tree.api")
