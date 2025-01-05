@@ -672,4 +672,36 @@ require("lazy").setup({
 			require("config.c-space-completion").setup()
 		end,
 	},
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		build = "make",
+		dependencies = {
+			"stevearc/dressing.nvim",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			--- The below dependencies are optional,
+			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+			"nvim-tree/nvim-web-devicons",
+		},
+		config = function()
+			require("avante").setup({
+				provider = "openai",
+				auto_suggestions_provider = "openai_mini",
+				openai = {
+					endpoint = "https://api.openai.com/v1",
+					model = "gpt-4o",
+					timeout = 30000, -- Timeout in milliseconds
+					temperature = 0,
+					max_tokens = 4096,
+				},
+				vendors = {
+					openai_mini = {
+						__inherited_from = "openai",
+						model = "gpt-4o-mini",
+					},
+				},
+			})
+		end,
+	},
 })
