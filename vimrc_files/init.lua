@@ -673,6 +673,12 @@ require("lazy").setup({
 		end,
 	},
 	{
+		-- https://github.com/yetone/avante.nvim
+		-- https://github.com/stevearc/dressing.nvim
+		-- https://github.com/nvim-lua/plenary.nvim
+		-- https://github.com/MunifTanjim/nui.nvim
+		-- https://github.com/hrsh7th/cmp-nvim-lsp
+		-- https://github.com/nvim-tree/nvim-web-devicons
 		"yetone/avante.nvim",
 		event = "VeryLazy",
 		build = "make",
@@ -680,12 +686,12 @@ require("lazy").setup({
 			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			--- The below dependencies are optional,
-			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+			"hrsh7th/nvim-cmp",
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
 			require("avante").setup({
+				hints = { enabled = false },
 				provider = "openai",
 				auto_suggestions_provider = "openai_mini",
 				openai = {
