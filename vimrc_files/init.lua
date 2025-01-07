@@ -690,7 +690,9 @@ require("lazy").setup({
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
-			require("avante").setup({
+			local utils = require("common-utils")
+			local avante = require("avante")
+			avante.setup({
 				hints = { enabled = false },
 				provider = "openai",
 				auto_suggestions_provider = "openai_mini",
@@ -707,6 +709,17 @@ require("lazy").setup({
 						model = "gpt-4o-mini",
 					},
 				},
+			})
+			local group_name = "lAvante"
+			vim.api.nvim_create_augroup(group_name, { clear = true })
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "Avante*",
+				callback = function(opt)
+					utils.buf_keymap(opt.buf, "n", "q", function()
+						avante.toggle_sidebar()
+					end)
+				end,
+				group = group_name,
 			})
 		end,
 	},
