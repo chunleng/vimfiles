@@ -72,7 +72,6 @@ function M.setup()
 			end)
 			utils.buf_keymap(bufnr, "n", "h", function()
 				local node = api.tree.get_node_under_cursor()
-				print(node.type)
 				if node.type == "directory" and node.open then
 					api.node.open.edit()
 				else
