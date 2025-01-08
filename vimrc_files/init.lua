@@ -644,20 +644,38 @@ require("lazy").setup({
 		end,
 	},
 	{
-		-- https://github.com/diepm/vim-rest-console
-		"diepm/vim-rest-console",
-		init = function()
-			vim.g.vrc_trigger = "<c-enter>"
-			vim.g.vrc_split_request_body = 1
-			vim.g.vrc_response_default_content_type = "application/json"
-			vim.g.vrc_auto_format_response_patterns = {
-				json = "jq",
-			}
-			vim.g.vrc_curl_opts = {
-				["-s"] = "",
-				["-i"] = "",
-				["-L"] = "",
-			}
+		-- https://github.com/mistweaverco/kulala.nvim/
+		"mistweaverco/kulala.nvim",
+		config = function()
+			local utils = require("common-utils")
+			local kulala = require("kulala")
+			kulala.setup({
+				default_view = "headers_body",
+				default_winbar_panes = { "body", "headers_body", "stats" },
+				winbar = true,
+				show_icons = nil,
+			})
+			local group_name = "lKulala"
+			vim.api.nvim_create_augroup(group_name, { clear = true })
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "http",
+				callback = function(opt)
+					utils.buf_keymap(opt.buf, { "n", "i" }, "<c-enter>", function()
+						kulala.run_all()
+					end)
+				end,
+				group = group_name,
+			})
+			-- Need BufEnter because somehow the buf number changes after the initial buffer creation
+			vim.api.nvim_create_autocmd("BufEnter", {
+				pattern = "kulala://ui",
+				callback = function(opt)
+					utils.buf_keymap(opt.buf, "n", "q", function()
+						vim.cmd("bd")
+					end)
+				end,
+				group = group_name,
+			})
 		end,
 	},
 	{
