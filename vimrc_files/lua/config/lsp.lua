@@ -61,15 +61,6 @@ local function setup_lsp()
 				capabilities = capabilities,
 			})
 		end,
-		denols = function()
-			lspconfig.denols.setup({
-				on_attach = common_on_attach,
-				handlers = common_handlers,
-				root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
-				-- To ensure that deno does not interfere with tsserver
-				single_file_support = false,
-			})
-		end,
 		eslint = function()
 			lspconfig.eslint.setup({
 				on_attach = function(client, bufnr)
