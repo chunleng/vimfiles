@@ -309,8 +309,6 @@ local function setup_dap()
 	-- List of install name
 	-- https://github.com/jayp0521/mason-nvim-dap.nvim/blob/main/lua/mason-nvim-dap/mappings/source.lua
 	dap_setup.setup({
-		ensure_installed = { "python" },
-		automatic_installation = true,
 		handlers = {
 			python = function(config)
 				config.adapters = {
