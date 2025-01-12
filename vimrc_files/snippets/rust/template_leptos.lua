@@ -6,7 +6,7 @@ table.insert(
 		{ trig = "?leptos/init", dscr = "Template for Leptos Init" },
 		fmta(
 			[[
-	use leptos::*;
+	use leptos::prelude::*;
 
 	fn main() {
 		mount_to_body(|| view! { <<p>>"Hello, world!"<</p>> })
@@ -45,7 +45,7 @@ table.insert(
 		},
 		fmta(
 			[[
-	let (<>, set_<>) = create_signal(<>);
+	let (<>, set_<>) = signal(<>);
 ]],
 			{ i(1, "count"), l(l._1, 1), i(2, '"foo".to_string()') }
 		)
@@ -58,7 +58,7 @@ table.insert(
 		{ trig = "?leptos/effect", dscr = "Template for creating Leptos effect" },
 		fmta(
 			[[
-	create_effect(move |_| {
+	Effect::new(move |_| {
 		<>
 	});
 ]],
@@ -76,7 +76,7 @@ table.insert(
 		},
 		fmta(
 			[[
-	let <> = create_action(|<>| {
+	let <> = Action::new_local(|<>| {
 		<>
 		async {}
 	});
