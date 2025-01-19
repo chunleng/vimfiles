@@ -3,11 +3,7 @@ local M = {}
 local utils = require("common-utils")
 
 local function configure_lsp_mappings()
-	utils.keymap("n", "<leader>cf", '<cmd>lua require("lsp-fixcurrent")()<cr>')
-	-- TODO In typescript-language-server, no matter the kind, it always include disable rules as a result.
-	--      Thus, the code_action does not work as expected. We can probably fix this by allowing
-	--      apply_strategy to be "first" or "only"
-	-- noremap('n', '<leader>cf', '<cmd>lua vim.lsp.buf.code_action({context={only={"quickfix"}}, apply=true})<cr>')
+	utils.keymap("n", "<leader>cf", '<cmd>lua vim.lsp.buf.code_action({context={only={"quickfix"}}, apply=true})<cr>')
 	utils.keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action({apply=true})<cr>")
 	utils.keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<cr>")
 	utils.keymap("n", "<leader>c=", "<cmd>lua vim.lsp.buf.format({async=true})<cr>")
