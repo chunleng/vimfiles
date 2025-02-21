@@ -9,6 +9,12 @@ local function insertion_actions()
 	utils.keymap({ "n", "i" }, "<c-space>", function()
 		utils.action_menu({
 			{
+				choice = "Avante",
+				func = function()
+					vim.cmd("AvanteAsk")
+				end,
+			},
+			{
 				choice = "Docstring: function",
 				func = function()
 					neogen.generate({ type = "func" })
@@ -64,6 +70,12 @@ end
 local function selection_actions()
 	utils.keymap("v", "<c-space>", function()
 		utils.action_menu({
+			{
+				choice = "Avante",
+				func = function()
+					vim.cmd("AvanteAsk")
+				end,
+			},
 			{
 				choice = "Add ZK link at selection",
 				func = function()

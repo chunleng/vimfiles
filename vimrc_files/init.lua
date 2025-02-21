@@ -680,12 +680,13 @@ require("lazy").setup({
 	},
 	{
 		-- Autocompletion menu
+		-- https://github.com/yetone/avante.nvim
 		-- https://github.com/Robitx/gp.nvim
 		-- https://github.com/danymat/neogen
 		-- https://github.com/mickael-menu/zk-nvim
 		"chunleng/nvim-null",
 		name = "resolve_c_space",
-		dependencies = { "Robitx/gp.nvim", "danymat/neogen", "mickael-menu/zk-nvim" },
+		dependencies = { "Robitx/gp.nvim", "danymat/neogen", "mickael-menu/zk-nvim", "yetone/avante.nvim" },
 		config = function()
 			require("config.c-space-completion").setup()
 		end,
@@ -725,6 +726,42 @@ require("lazy").setup({
 					openai_mini = {
 						__inherited_from = "openai",
 						model = "gpt-4o-mini",
+					},
+				},
+				-- Enable default mapping for now as visual selection does not work properly
+				-- behaviour = {
+				-- 	auto_set_keymaps = false,
+				-- },
+				mappings = {
+					-- Using U+2800 (braille pattern blank) to void keys
+					diff = {
+						ours = "⠀",
+						theirs = "⠀",
+						all_theirs = "⠀",
+						both = "⠀",
+						cursor = "<c-->",
+						next = "<c-.>s",
+						prev = "<c-,>s",
+					},
+					suggestion = {
+						accept = "⠀",
+						next = "⠀",
+						prev = "⠀",
+						dismiss = "⠀",
+					},
+					jump = {
+						next = "<c-.>s",
+						prev = "<c-,>s",
+					},
+					submit = {
+						normal = "<c-cr>",
+						insert = "<c-cr>",
+					},
+					sidebar = {
+						apply_all = "⠀",
+						apply_cursor = "<c-->",
+						switch_windows = "⠀",
+						reverse_switch_windows = "⠀",
 					},
 				},
 			})
