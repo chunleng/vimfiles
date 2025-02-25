@@ -122,43 +122,5 @@ table.insert(
 	)
 )
 
-table.insert(
-	M,
-	s(
-		{ trig = "?overseer/setup", dscr = "Template to setup overseer" },
-		fmta(
-			[[
-local overseer_group_name = 'OverseerCustom'
-local overseer_bundle_name = '<>'
-local overseer_bundle = require('overseer.task_bundle')
-vim.api.nvim_create_augroup(overseer_group_name, {clear = true})
-vim.api.nvim_create_autocmd('VimEnter', {
-	buffer = 0,
-	callback = function()
-	overseer_bundle.load_task_bundle(overseer_bundle_name, {
-		ignore_missing = true,
-		autostart = false
-	})
-	end,
-	group = overseer_group_name
-})
-vim.api.nvim_create_autocmd('FileType', {
-    callback = function()
-        local utils = require('common-utils')
-        utils.keymap('n', '<<c-s>>', function()
-            overseer_bundle.save_task_bundle(overseer_bundle_name, nil,
-                                             {on_conflict = 'overwrite'})
-        end, {buffer = true})
-    end,
-    pattern = {'OverseerList'},
-    group = overseer_group_name
-})
-
-]],
-			{ i(1, "bundle_name") }
-		)
-	)
-)
-
 return M
 -- vim: noet
