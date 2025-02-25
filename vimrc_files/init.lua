@@ -661,6 +661,11 @@ require("lazy").setup({
 				pattern = "http",
 				callback = function(opt)
 					utils.buf_keymap(opt.buf, { "n", "i" }, "<c-enter>", function()
+						for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+							if vim.api.nvim_buf_get_name(buf):match("^kulala://ui$") then
+								vim.api.nvim_buf_delete(buf, {})
+							end
+						end
 						kulala.run_all()
 					end)
 				end,

@@ -30,6 +30,9 @@ function M.setup()
 				if vim.tbl_contains({ "dap-repl", "qf" }, vim.bo[bufnr].filetype) then
 					return false
 				end
+				if vim.api.nvim_buf_get_name(bufnr) == "kulala://ui" then
+					return false
+				end
 				return true
 			end,
 		},
