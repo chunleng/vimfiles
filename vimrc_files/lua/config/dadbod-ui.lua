@@ -32,6 +32,17 @@ function M.setup()
 		blend = 10,
 	})
 	theme.set_hl("NotificationInfo", { fg = 15, bg = theme.blender.bg_lighter_1, blend = 10 })
+
+	local group_name = "Dadbod"
+	vim.api.nvim_create_augroup(group_name, { clear = true })
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "sql",
+		callback = function()
+			utils.buf_keymap(0, "n", "<c-cr>", "<cmd>w<cr>")
+			utils.buf_keymap(0, "i", "<c-cr>", "<esc><cmd>w<cr>")
+		end,
+		group = group_name,
+	})
 end
 
 return M
