@@ -544,7 +544,10 @@ require("lazy").setup({
 				if ls.choice_active() then
 					ls.change_choice(1)
 				else
-					vim.fn.call("emmet#expandAbbr", { 2, "" })
+					vim.cmd('normal! "vy')
+					local selection = vim.fn.getreg('"')
+
+					vim.fn.call("emmet#expandAbbr", { 2, selection })
 				end
 			end)
 			utils.keymap("s", "<c-enter>", function()
