@@ -33,6 +33,36 @@ table.insert(
 table.insert(
 	M,
 	s(
+		{ trig = "?time/unix", dscr = "Insert current time in Unix Timestamp" },
+		fmta(
+			[[
+	<>
+]],
+			{ f(function()
+				return os.time()
+			end) }
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
+		{ trig = "?time/unix_nano", dscr = "Insert current time in Unix Timestamp with 0-padded nanoseconds" },
+		fmta(
+			[[
+	<>
+]],
+			{ f(function()
+				return tostring(os.time()) .. "000000000"
+			end) }
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
 		{ trig = "?datetime", dscr = "Insert current datetime" },
 		fmta(
 			[[
