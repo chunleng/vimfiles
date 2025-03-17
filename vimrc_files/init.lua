@@ -721,8 +721,15 @@ require("lazy").setup({
 			local avante = require("avante")
 			avante.setup({
 				hints = { enabled = false },
-				provider = "openai",
-				auto_suggestions_provider = "openai_mini",
+				provider = "claude",
+				auto_suggestions_provider = "claude_fast",
+				claude = {
+					endpoint = "https://api.anthropic.com",
+					model = "claude-3-7-sonnet-latest",
+					timeout = 30000, -- Timeout in milliseconds
+					temperature = 0,
+					max_tokens = 4096,
+				},
 				openai = {
 					endpoint = "https://api.openai.com/v1",
 					model = "gpt-4o",
@@ -734,6 +741,10 @@ require("lazy").setup({
 					openai_mini = {
 						__inherited_from = "openai",
 						model = "gpt-4o-mini",
+					},
+					claude_fast = {
+						__inherited_from = "claude",
+						model = "claude-3-haiku-20240307",
 					},
 				},
 				-- Enable default mapping for now as visual selection does not work properly
