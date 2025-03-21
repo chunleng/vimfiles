@@ -18,7 +18,7 @@
   "goto-breakpoints.nvim": { "branch": "master", "commit": "d14776899eda4023667b246e5c53c14a7c41f88e" },
   "gp.nvim": { "branch": "main", "commit": "2372d5323c6feaa2e9c19f7ccb537c615d878e18" },
   "indentLine": { "branch": "master", "commit": "b96a75985736da969ac38b72a7716a8c57bdde98" },
-  "kulala.nvim": { "branch": "main", "commit": "eb0804ef7c98680bfe1844c8e4bfd62c0ccd34c7" },
+  "kulala.nvim": { "branch": "main", "commit": "bde8be17bf9983f302442ec91ad443f651bdef47" },
   "lazy.nvim": { "branch": "main", "commit": "38d6b74b63dc410ac5d7f4bb4c62dfeec74e366a" },
   "linediff.vim": { "branch": "main", "commit": "ddae71ef5f94775d101c1c70032ebe8799f32745" },
   "lsp": { "branch": "main", "commit": "0950b15060067f752fde13a779a994f59516ce3d" },
