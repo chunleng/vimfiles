@@ -100,6 +100,12 @@ function M.setup()
 			vim.api.nvim_eval([[feedkeys("\<esc>", "n")]])
 		end
 	end)
+	utils.keymap({ "s", "x", "i" }, "<c-enter>", function()
+		if ls.choice_active() then
+			ls.change_choice(1)
+		end
+	end)
+
 	-- Go into normal mode when deleting select to improve completion flow
 	utils.keymap({ "s" }, "<bs>", "<bs>i")
 end

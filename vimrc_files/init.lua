@@ -447,13 +447,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		-- https://github.com/mattn/emmet-vim
-		"mattn/emmet-vim",
-		init = function()
-			require("config.emmet").setup()
-		end,
-	},
-	{
 		-- https://github.com/nvim-treesitter/nvim-treesitter-context
 		"nvim-treesitter/nvim-treesitter-context",
 		config = function()
@@ -523,37 +516,6 @@ require("lazy").setup({
 					left_key
 				)
 				vim.api.nvim_feedkeys(feedkeys, "n", false)
-			end)
-		end,
-	},
-	{
-		"chunleng/nvim-null",
-		name = "resolve_c_cr",
-		dependencies = { "mattn/emmet-vim", "L3MON4D3/LuaSnip" },
-		config = function()
-			local ls = require("luasnip")
-			local utils = require("common-utils")
-			utils.keymap("i", "<c-enter>", function()
-				if ls.choice_active() then
-					ls.change_choice(1)
-				else
-					vim.api.nvim_eval([[feedkeys("\<c-o>:Emmet ", "n")]])
-				end
-			end)
-			utils.keymap("x", "<c-enter>", function()
-				if ls.choice_active() then
-					ls.change_choice(1)
-				else
-					vim.cmd('normal! "vy')
-					local selection = vim.fn.getreg('"')
-
-					vim.fn.call("emmet#expandAbbr", { 2, selection })
-				end
-			end)
-			utils.keymap("s", "<c-enter>", function()
-				if ls.choice_active() then
-					ls.change_choice(1)
-				end
 			end)
 		end,
 	},
