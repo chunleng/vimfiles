@@ -646,6 +646,16 @@ require("lazy").setup({
 				end,
 				group = group_name,
 			})
+
+			-- TODO format the copied curl to exclude some header and remove silence (This feature might not be
+			-- available in Kulala.nvim yet
+			vim.api.nvim_create_user_command("KulalaCopy", function(opts)
+				local restore_env = kulala.get_selected_env()
+				local env = opts.args == "" and restore_env or opts.args
+				kulala.set_selected_env(env)
+				kulala.copy()
+				kulala.set_selected_env(restore_env)
+			end, { nargs = "?" })
 		end,
 	},
 	{
