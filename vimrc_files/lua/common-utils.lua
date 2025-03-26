@@ -113,6 +113,9 @@ local function configure_preferred_mappings()
 
 	-- Yank
 	M.keymap("i", "<c-y>", '<esc>0"*y$gi')
+	-- TODO resolve for mode n,x There's linebreak behind, which shouldn't be there
+	M.keymap("n", "<c-y>", '"*yy')
+	M.keymap("x", "<c-y>", '"*y')
 	M.keymap("c", "<c-y>", function()
 		local t = vim.fn.getcmdtype()
 		-- 4x \\<c-c> is to escape previously opened q:, q/ and q? dialog
