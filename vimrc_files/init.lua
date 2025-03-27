@@ -408,11 +408,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		-- https://github.com/purescript-contrib/purescript-vim
-		"purescript-contrib/purescript-vim",
-		ft = { "purescript" },
-	},
-	{
 		-- https://github.com/aklt/plantuml-syntax
 		"aklt/plantuml-syntax",
 		ft = { "plantuml" },
