@@ -98,21 +98,24 @@ function M.setup()
 	end)
 
 	local theme = require("common-theme")
+	-- TODO seems like there's this small block on the left of the selected tab that cannot be highlighted
 	local bgcolor = theme.blender.bg_darker_2
+	local selected_bgcolor = theme.blender.bg_lighter_1
 	theme.set_hl("BufferLineFill", { bg = bgcolor })
 	theme.set_hl("BufferLineBackground", { fg = theme.blender.fg_darker_2, bg = bgcolor })
 	theme.set_hl("BufferLineBufferVisible", { bg = bgcolor, bold = true })
-	theme.set_hl("BufferLineBufferSelected", { bold = true })
+	theme.set_hl("BufferLineBufferSelected", { bg = selected_bgcolor, bold = true })
 	theme.set_hl("BufferLineNumbers", { fg = theme.blender.fg_darker_2, bg = bgcolor })
 	theme.set_hl("BufferLineNumbersVisible", { fg = theme.blender.bg_lighter_1, bg = bgcolor })
-	theme.set_hl("BufferLineNumbersSelected", { fg = theme.blender.bg_lighter_2 })
+	theme.set_hl("BufferLineNumbersSelected", { fg = theme.blender.bg_lighter_2, bg = selected_bgcolor })
 	theme.set_hl("BufferLineDuplicate", { fg = theme.blender.bg_lighter_3, bg = bgcolor })
 	theme.set_hl("BufferLineDuplicateVisible", { fg = theme.blender.bg_lighter_3, bg = bgcolor, bold = true })
-	theme.set_hl("BufferLineDuplicateSelected", { fg = theme.blender.bg_lighter_3, bold = true })
+	theme.set_hl("BufferLineDuplicateSelected", { fg = theme.blender.bg_lighter_3, bg = selected_bgcolor, bold = true })
 	theme.set_hl("BufferLineModified", { fg = 2, bg = bgcolor })
 	theme.set_hl("BufferLineModifiedVisible", { fg = 2, bg = bgcolor })
-	theme.set_hl("BufferLineModifiedSelected", { fg = 2 })
+	theme.set_hl("BufferLineModifiedSelected", { fg = 2, bg = selected_bgcolor })
 	theme.set_hl("BufferLineIndicatorVisible", { bg = bgcolor })
+	theme.set_hl("BufferLineIndicatorSelected", { bg = selected_bgcolor })
 
 	theme.set_hl("BufferLineTab", { fg = theme.blender.bg_lighter_3, bg = bgcolor })
 	theme.set_hl("BufferLineTabSelected", { fg = 14, bg = bgcolor, bold = true })
