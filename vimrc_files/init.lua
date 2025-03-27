@@ -10,6 +10,7 @@ require("lazy").setup({
 		-- https://github.com/nvim-tree/nvim-web-devicons
 		-- https://github.com/nvim-treesitter/nvim-treesitter
 		"nvim-tree/nvim-tree.lua",
+		version = "*",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			"nvim-treesitter/nvim-treesitter",
@@ -134,6 +135,7 @@ require("lazy").setup({
 	{
 		-- https://github.com/nvim-treesitter/nvim-treesitter
 		"nvim-treesitter/nvim-treesitter",
+		version = "*",
 		config = function()
 			require("config.treesitter").setup()
 		end,
@@ -212,6 +214,7 @@ require("lazy").setup({
 		-- https://github.com/zapling/mason-lock.nvim
 		"williamboman/mason.nvim",
 		name = "lsp",
+		version = "*",
 		dependencies = {
 			"williamboman/mason-lspconfig",
 			"neovim/nvim-lspconfig",
@@ -235,6 +238,7 @@ require("lazy").setup({
 	{
 		-- https://github.com/stevearc/aerial.nvim
 		"stevearc/aerial.nvim",
+		version = "*",
 		config = function()
 			require("config.aerial-nvim").setup()
 		end,
@@ -598,6 +602,8 @@ require("lazy").setup({
 	{
 		-- https://github.com/mistweaverco/kulala.nvim/
 		"mistweaverco/kulala.nvim",
+		-- TODO turn this back on after gRPC is included in the
+		-- version = "*",
 		config = function()
 			local utils = require("common-utils")
 			local kulala = require("kulala")
@@ -666,6 +672,7 @@ require("lazy").setup({
 		-- https://github.com/hrsh7th/cmp-nvim-lsp
 		-- https://github.com/nvim-tree/nvim-web-devicons
 		"yetone/avante.nvim",
+		version = "*",
 		event = "VeryLazy",
 		build = "make",
 		dependencies = {
