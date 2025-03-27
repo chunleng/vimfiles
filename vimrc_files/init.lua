@@ -408,14 +408,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		-- https://github.com/tpope/vim-rails
-		"tpope/vim-rails",
-		config = function()
-			require("config.rails").setup()
-		end,
-		ft = { "ruby" },
-	},
-	{
 		-- https://github.com/purescript-contrib/purescript-vim
 		"purescript-contrib/purescript-vim",
 		ft = { "purescript" },
