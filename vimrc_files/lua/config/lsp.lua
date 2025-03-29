@@ -3,15 +3,36 @@ local M = {}
 local utils = require("common-utils")
 
 local function configure_lsp_mappings()
-	utils.keymap("n", "<leader>cf", '<cmd>lua vim.lsp.buf.code_action({context={only={"quickfix"}}, apply=true})<cr>')
-	utils.keymap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action({apply=true})<cr>")
-	utils.keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<cr>")
-	utils.keymap("n", "<leader>c=", "<cmd>lua vim.lsp.buf.format({async=true})<cr>")
+	utils.keymap("n", "<leader>cf", function()
+		local first = true
+		vim.lsp.buf.code_action({
+			context = { only = { "quickfix" } },
+			filter = function(x)
+				local f = first
+				first = false
+				return f
+			end,
+			apply = true,
+		})
+	end)
+	utils.keymap("n", "<leader>ca", function()
+		vim.lsp.buf.code_action({ apply = true })
+	end)
+	utils.keymap("n", "<leader>cr", function()
+		vim.lsp.buf.rename()
+	end)
+	utils.keymap("n", "<leader>c=", function()
+		vim.lsp.buf.format({ async = true })
+	end)
 	utils.keymap("n", "<leader>cu", "<cmd>FzfLua lsp_references<cr>")
 	utils.keymap("n", "<leader>cd", "<cmd>FzfLua lsp_document_diagnostics<cr>")
 	utils.keymap("n", "<leader>c?", "<cmd>FzfLua lsp_workspace_diagnostics<cr>")
-	utils.keymap("n", { "[d", "[<c-d>" }, "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-	utils.keymap("n", { "]d", "]<c-d>" }, "<cmd>lua vim.diagnostic.goto_next()<cr>")
+	utils.keymap("n", { "[d", "[<c-d>" }, function()
+		vim.diagnostic.goto_prev()
+	end)
+	utils.keymap("n", { "]d", "]<c-d>" }, function()
+		vim.diagnostic.goto_next()
+	end)
 end
 
 local function setup_lsp()
