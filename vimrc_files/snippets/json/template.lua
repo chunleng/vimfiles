@@ -89,5 +89,30 @@ table.insert(
 	)
 )
 
+table.insert(
+	M,
+	s(
+		{ trig = "?kulala/http-client/init", dscr = "Template for Kulala http-client.env.json" },
+		fmta(
+			[[
+{
+	"$schema": "https://raw.githubusercontent.com/mistweaverco/kulala.nvim/main/schemas/http-client.env.schema.json",
+	"$shared": {
+		"$default_headers": {
+			"Content-Type": "application/json",
+			"Accept": "application/json"
+		},
+		"var_foo": "bar"
+	},
+	"dev": {
+		"URL": "https://localhost:3000"
+	}
+}
+]],
+			{}
+		)
+	)
+)
+
 return M
 -- vim: noet
