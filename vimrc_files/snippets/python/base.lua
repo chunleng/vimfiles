@@ -340,5 +340,18 @@ table.insert(
 	)
 )
 
+table.insert(
+	M,
+	s(
+		{ trig = "@", dscr = "Annotation" },
+		fmta(
+			[[
+	@<>
+]],
+			{ i(0, "dataclass") }
+		)
+	)
+)
+
 return M
 -- vim: noet

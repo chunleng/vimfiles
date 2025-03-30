@@ -293,6 +293,19 @@ table.insert(
 	)
 )
 
+table.insert(
+	M,
+	s(
+		{ trig = "@", dscr = "Annotation" },
+		fmta(
+			[[
+	@<>
+]],
+			{ i(0, "Override") }
+		)
+	)
+)
+
 return M
 
 -- vim: noet

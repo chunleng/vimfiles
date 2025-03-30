@@ -318,7 +318,7 @@ table.insert(
 			[[
 	#[<>]
 ]],
-			{ i(0) }
+			{ i(1, "derive(Debug, Clone)") }
 		)
 	)
 )
