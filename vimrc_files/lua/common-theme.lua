@@ -358,9 +358,9 @@ function M.setup()
 	M.set_hl("PmenuThumb", { bg = M.blender.scrollbar })
 
 	-- Float
-	M.set_hl("NormalFloat", { fg = 15, bg = M.blender.bg_lighter_1 })
-	M.set_hl("FloatBorder", { fg = 6, bg = M.blender.bg_lighter_1 })
-	M.set_hl("FloatTitle", { bold = true, fg = 10, bg = M.blender.bg_lighter_1 })
+	M.set_hl("NormalFloat", { fg = 15, bg = 236 })
+	M.set_hl("FloatBorder", { fg = 6, bg = 236 })
+	M.set_hl("FloatTitle", { bold = true, fg = 10, bg = 236 })
 
 	-- LSP Diagnostics
 	M.set_hl("DiagnosticError", { fg = M.blender.error })
