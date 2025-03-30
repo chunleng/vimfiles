@@ -6,8 +6,8 @@ local function configure_lsp_mappings()
 	utils.keymap("n", "<leader>cf", function()
 		local first = true
 		vim.lsp.buf.code_action({
-			context = { only = { "quickfix" } },
-			filter = function(x)
+			context = { diagnostics = {}, only = { "quickfix" } },
+			filter = function()
 				local f = first
 				first = false
 				return f
@@ -28,10 +28,10 @@ local function configure_lsp_mappings()
 	utils.keymap("n", "<leader>cd", "<cmd>FzfLua lsp_document_diagnostics<cr>")
 	utils.keymap("n", "<leader>c?", "<cmd>FzfLua lsp_workspace_diagnostics<cr>")
 	utils.keymap("n", { "[d", "[<c-d>" }, function()
-		vim.diagnostic.goto_prev()
+		vim.diagnostic.jump({ count = -1, float = true })
 	end)
 	utils.keymap("n", { "]d", "]<c-d>" }, function()
-		vim.diagnostic.goto_next()
+		vim.diagnostic.jump({ count = 1, float = true })
 	end)
 	utils.keymap("i", { "<c-h>" }, function()
 		vim.lsp.buf.signature_help()
