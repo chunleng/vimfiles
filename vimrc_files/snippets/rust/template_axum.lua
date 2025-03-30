@@ -6,15 +6,18 @@ table.insert(
 		{ trig = "?axum/init", dscr = "Template for Axum Init" },
 		fmta(
 			[[
-	use axum::{routing::get, Router};
+	use std::error::Error;
+
+	use axum::{Router, routing::get};
+	use tokio::net::TcpListener;
 
 	#[tokio::main]
-	async fn main() {
+	async fn main() ->> Result<<(), Box<<dyn Error>>>> {
 		let app = Router::new().route("/", get(|| async { "Hello world" }));
-		axum::Server::bind(&"127.0.0.1:3000".parse().unwrap())
-			.serve(app.into_make_service())
-			.await
-			.unwrap();
+		let listener = TcpListener::bind("127.0.0.1:3000").await?;
+		axum::serve(listener, app).await?;
+
+		Ok(())
 	}
 ]],
 			{}
