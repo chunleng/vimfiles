@@ -2,7 +2,8 @@ local M = {}
 
 function M.setup()
 	local actions = require("fzf-lua.actions")
-	require("fzf-lua").setup({
+	local fzf = require("fzf-lua")
+	fzf.setup({
 		keymap = {
 			builtin = {
 				["<c-/>"] = "toggle-preview",
@@ -95,6 +96,7 @@ function M.setup()
 	theme.set_hl("FzfLuaPreviewTitle", { link = "NormalFloat" })
 	theme.set_hl("FzfLuaCursorLine", { bg = 4, fg = theme.blender.fg_darker_1 })
 	theme.set_hl("FzfLuaCursorLineNr", { bg = 4, fg = theme.blender.fg_darker_1 })
+	fzf.register_ui_select()
 end
 
 return M

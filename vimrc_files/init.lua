@@ -666,7 +666,6 @@ require("lazy").setup({
 	},
 	{
 		-- https://github.com/yetone/avante.nvim
-		-- https://github.com/stevearc/dressing.nvim
 		-- https://github.com/nvim-lua/plenary.nvim
 		-- https://github.com/MunifTanjim/nui.nvim
 		-- https://github.com/hrsh7th/cmp-nvim-lsp
@@ -676,7 +675,6 @@ require("lazy").setup({
 		event = "VeryLazy",
 		build = "make",
 		dependencies = {
-			"stevearc/dressing.nvim",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 			"hrsh7th/nvim-cmp",
