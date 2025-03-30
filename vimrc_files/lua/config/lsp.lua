@@ -33,6 +33,9 @@ local function configure_lsp_mappings()
 	utils.keymap("n", { "]d", "]<c-d>" }, function()
 		vim.diagnostic.goto_next()
 	end)
+	utils.keymap("i", { "<c-h>" }, function()
+		vim.lsp.buf.signature_help()
+	end)
 end
 
 local function setup_lsp()
