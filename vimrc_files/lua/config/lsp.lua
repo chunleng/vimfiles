@@ -2,7 +2,7 @@ local M = {}
 
 local utils = require("common-utils")
 
-local function configure_lsp_mappings()
+local function setup_lsp_mappings()
 	utils.keymap("n", "<leader>cf", function()
 		local first = true
 		vim.lsp.buf.code_action({
@@ -36,265 +36,6 @@ local function configure_lsp_mappings()
 	utils.keymap("i", { "<c-h>" }, function()
 		vim.lsp.buf.signature_help()
 	end)
-end
-
-local function setup_lsp()
-	-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
-	local lspconfig = require("lspconfig")
-	local common_on_attach = function(_, bufnr)
-		-- Insert keymap that might override default ones
-		utils.buf_keymap(bufnr, "n", "gd", "<cmd>FzfLua lsp_definitions<cr>")
-		utils.buf_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
-		utils.buf_keymap(bufnr, "v", "=", ":'<,'>lua vim.lsp.buf.range_formatting()<cr>")
-	end
-	local common_handlers = {
-		["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = {
-				{ "┌", "FloatBorder" },
-				{ "─", "FloatBorder" },
-				{ "┐", "FloatBorder" },
-				{ "│", "FloatBorder" },
-				{ "┘", "FloatBorder" },
-				{ "─", "FloatBorder" },
-				{ "└", "FloatBorder" },
-				{ "│", "FloatBorder" },
-			},
-		}),
-	}
-
-	configure_lsp_mappings()
-	local lsp_setup = require("mason-lspconfig")
-	lsp_setup.setup({})
-	lsp_setup.setup_handlers({
-		function(server_name)
-			lspconfig[server_name].setup({
-				on_attach = common_on_attach,
-				handlers = common_handlers,
-			})
-		end,
-		cssls = function()
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.completion.completionItem.snippetSupport = true
-			lspconfig.cssls.setup({
-				on_attach = common_on_attach,
-				handlers = common_handlers,
-				capabilities = capabilities,
-			})
-		end,
-		eslint = function()
-			lspconfig.eslint.setup({
-				on_attach = function(client, bufnr)
-					client.server_capabilities.documentFormattingProvider = true
-					common_on_attach(client, bufnr)
-				end,
-				handlers = common_handlers,
-			})
-		end,
-		html = function()
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.completion.completionItem.snippetSupport = true
-			lspconfig.html.setup({
-				on_attach = common_on_attach,
-				handlers = common_handlers,
-				capabilities = capabilities,
-			})
-		end,
-		jdtls = function()
-			-- Currently, jdtls latest version is not allowing Java 11 to be used
-			-- To allow Java 11 to be used, we need to use the jdtls version the version that is supported
-			-- To do so:
-			--   :MasonInstall jdtls@1.9.0
-			-- ref: https://github.com/williamboman/nvim-lsp-installer/issues/763
-			local workspace = os.getenv("HOME") .. "/.java-workspace"
-			lspconfig.jdtls.setup({
-				on_attach = common_on_attach,
-				handlers = common_handlers,
-				use_lombok_agent = true,
-				root_dir = function()
-					return vim.fn.getcwd()
-				end,
-				workspace = workspace,
-				vmargs = { "-data", workspace },
-			})
-		end,
-		jsonls = function()
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.completion.completionItem.snippetSupport = true
-			lspconfig.jsonls.setup({
-				on_attach = common_on_attach,
-				handlers = common_handlers,
-				settings = {
-					json = { schemas = require("schemastore").json.schemas() },
-				},
-				capabilities = capabilities,
-			})
-		end,
-		ltex = function()
-			local export_path = vim.fn.getcwd() .. "/.vim/"
-			local dict_path = export_path .. "ltex.dictionary.en-US.txt"
-			local words = {}
-			if vim.fn.filereadable(dict_path) == 1 then
-				for word in io.open(dict_path, "r"):lines() do
-					table.insert(words, word)
-				end
-			end
-
-			lspconfig.ltex.setup({
-				on_attach = function(client, bufnr)
-					require("ltex_extra").setup({ path = export_path })
-					common_on_attach(client, bufnr)
-				end,
-				handlers = common_handlers,
-				settings = { ltex = { dictionary = { ["en-US"] = words } } },
-				root_dir = function()
-					return vim.fn.getcwd()
-				end,
-			})
-		end,
-		lua_ls = function()
-			require("neodev").setup()
-			lspconfig.lua_ls.setup({
-				on_attach = function(client, bufnr)
-					-- Use efm lua-format instead
-					client.server_capabilities.documentFormattingProvider = false
-					client.server_capabilities.documentRangeFormattingProvider = false
-					common_on_attach(client, bufnr)
-				end,
-				handlers = common_handlers,
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { "vim" },
-						},
-						completion = { callSnippet = "Replace" },
-						workspace = { checkThirdParty = false },
-					},
-				},
-			})
-		end,
-		pyright = function()
-			local setup_dict = {
-				on_attach = common_on_attach,
-				handlers = common_handlers,
-			}
-			local exit_code =
-				os.execute("which -a pyright|grep -v ${HOME}/.local/share/nvim/mason/bin/pyright >& /dev/null")
-			if exit_code ~= 0 then -- turn off diagnostic because no pyright found
-				setup_dict["settings"] = {
-					python = {
-						analysis = {
-							typeCheckingMode = "off",
-							diagnosticSeverityOverrides = {
-								reportMissingModuleSource = "none",
-								reportMissingImports = "none",
-								reportUndefinedVariable = "none",
-							},
-						},
-					},
-				}
-			end
-
-			lspconfig.pyright.setup(setup_dict)
-		end,
-		solargraph = function()
-			lspconfig.solargraph.setup({
-				cmd = {
-					os.getenv("HOME") .. "/.asdf/shims/bundle",
-					"exec",
-					"solargraph",
-					"stdio",
-				},
-			})
-		end,
-		tailwindcss = function()
-			lspconfig.tailwindcss.setup({
-				on_attach = common_on_attach,
-				handlers = common_handlers,
-				filetypes = {
-					"aspnetcorerazor",
-					"astro",
-					"astro-markdown",
-					"blade",
-					"css",
-					"django-html",
-					"edge",
-					"eelixir",
-					"ejs",
-					"erb",
-					"eruby",
-					"gohtml",
-					"haml",
-					"handlebars",
-					"hbs",
-					"heex",
-					"html",
-					"html-eex",
-					"htmldjango",
-					"jade",
-					"javascript",
-					"javascriptreact",
-					"leaf",
-					"less",
-					"liquid",
-					"markdown",
-					"mdx",
-					"mustache",
-					"njk",
-					"nunjucks",
-					"php",
-					"postcss",
-					"razor",
-					"reason",
-					"rescript",
-					"sass",
-					"scss",
-					"slim",
-					"stylus",
-					"sugarss",
-					"svelte",
-					"twig",
-					"typescript",
-					"typescriptreact",
-					"vue",
-				},
-				settings = { tailwindCSS = { emmetCompletions = true } },
-			})
-		end,
-		rust_analyzer = function()
-			lspconfig.rust_analyzer.setup({
-				on_attach = common_on_attach,
-				capabilities = {
-					textDocument = {
-						completion = {
-							completionItem = {
-								snippetSupport = false,
-							},
-						},
-					},
-				},
-				handlers = common_handlers,
-			})
-		end,
-		ts_ls = function()
-			lspconfig.ts_ls.setup({
-				on_attach = function(client, bufnr)
-					-- prefer eslint
-					client.server_capabilities.documentFormattingProvider = false
-					client.server_capabilities.documentRangeFormattingProvider = false
-					common_on_attach(client, bufnr)
-				end,
-				handlers = common_handlers,
-				root_dir = require("lspconfig").util.root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
-			})
-		end,
-		yamlls = function()
-			lspconfig.yamlls.setup({
-				on_attach = common_on_attach,
-				handlers = common_handlers,
-				settings = { yaml = { format = { enable = true } } },
-			})
-		end,
-	})
 end
 
 local function setup_dap()
@@ -409,68 +150,134 @@ local function setup_dap()
 	end
 end
 
-local function setup_null_ls()
-	local null_ls = require("null-ls")
-
-	local sources = {}
-
-	-- formatters
-	if os.execute("type yapf >& /dev/null") == 0 then
-		table.insert(sources, null_ls.builtins.formatting.yapf)
-	end
-	if os.execute("type black >& /dev/null") == 0 then
-		table.insert(sources, null_ls.builtins.formatting.black)
-	end
-	if os.execute("type isort >& /dev/null") == 0 then
-		table.insert(sources, null_ls.builtins.formatting.isort)
-	end
-	if os.execute("type stylua >& /dev/null") == 0 then
-		table.insert(sources, null_ls.builtins.formatting.stylua)
-	end
-	if os.execute("type goimports >& /dev/null") == 0 then
-		table.insert(sources, null_ls.builtins.formatting.goimports)
-	end
-	if os.execute("type leptosfmt >& /dev/null") == 0 then
-		table.insert(sources, {
-			method = null_ls.methods.FORMATTING,
-			filetypes = { "rust" },
-			generator = null_ls.formatter({
-				async = false,
-				command = "leptosfmt",
-				to_stdin = true,
-				args = { "-s" },
-			}),
-		})
-	end
-
-	-- diagnostics
-	if os.execute("type pylint >& /dev/null") == 0 then
-		table.insert(sources, null_ls.builtins.diagnostics.pylint)
-	end
-	if os.execute("type mypy >& /dev/null") == 0 then
-		table.insert(sources, null_ls.builtins.diagnostics.mypy)
-	end
-	if os.execute("type markdownlint >& /dev/null") == 0 then
-		table.insert(sources, null_ls.builtins.diagnostics.markdownlint)
-	end
-
-	-- both (format and diagnose)
-	if os.execute("type ruff >& /dev/null") == 0 then
-		table.insert(sources, require("none-ls.formatting.ruff"))
-		table.insert(sources, require("none-ls.formatting.ruff_format"))
-		table.insert(sources, require("none-ls.diagnostics.ruff"))
-	end
-
-	null_ls.setup({ sources = sources })
-end
-
 function M.setup()
 	require("mason").setup()
 	require("mason-lock").setup()
 	require("kitty-launcher").setup()
-	setup_lsp()
+	setup_lsp_mappings()
 	setup_dap()
-	setup_null_ls()
 end
+
+-- LSP on_attach common invoke
+function M.common_on_attach(_, bufnr)
+	-- Insert keymap that might override default ones
+	utils.buf_keymap(bufnr, "n", "gd", "<cmd>FzfLua lsp_definitions<cr>")
+	utils.buf_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
+	utils.buf_keymap(bufnr, "v", "=", ":'<,'>lua vim.lsp.buf.range_formatting()<cr>")
+end
+
+local jdtls_workspace = os.getenv("HOME") .. "/.java-workspace"
+
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
+M.default_setup = {
+	cssls = {
+		on_attach = M.common_on_attach,
+		capabilities = vim.tbl_extend(
+			"keep",
+			{ textDocument = { completion = { completionItem = { snippetSupport = true } } } },
+			vim.lsp.protocol.make_client_capabilities()
+		),
+	},
+	cssmodules_ls = { on_attach = M.common_on_attach },
+	dockerls = { on_attach = M.common_on_attach },
+	eslint = {
+		on_attach = function(client, bufnr)
+			client.server_capabilities.documentFormattingProvider = true
+			M.common_on_attach(client, bufnr)
+		end,
+	},
+	html = {
+		on_attach = M.common_on_attach,
+		capabilities = vim.tbl_extend(
+			"keep",
+			{ textDocument = { completion = { completionItem = { snippetSupport = true } } } },
+			vim.lsp.protocol.make_client_capabilities()
+		),
+	},
+	jdtls = {
+		-- Currently, jdtls latest version is not allowing Java 11 to be used
+		-- To allow Java 11 to be used, we need to use the jdtls version the version that is supported
+		-- To do so:
+		--   :MasonInstall jdtls@1.9.0
+		-- ref: https://github.com/williamboman/nvim-lsp-installer/issues/763
+		on_attach = M.common_on_attach,
+		use_lombok_agent = true,
+		root_dir = function()
+			return vim.fn.getcwd()
+		end,
+	},
+	jsonls = {
+		on_attach = M.common_on_attach,
+		settings = {
+			json = { schemas = require("schemastore").json.schemas() },
+		},
+		capabilities = vim.tbl_extend(
+			"keep",
+			{ textDocument = { completion = { completionItem = { snippetSupport = true } } } },
+			vim.lsp.protocol.make_client_capabilities()
+		),
+	},
+	ltex = (function()
+		local dict_path = vim.fn.getcwd() .. "/.vim/ltex.dictionary.en-US.txt"
+		local words = {}
+		if vim.fn.filereadable(dict_path) == 1 then
+			for word in io.open(dict_path, "r"):lines() do
+				table.insert(words, word)
+			end
+		end
+
+		return {
+			on_attach = function(client, bufnr)
+				require("ltex_extra").setup({ path = vim.fn.getcwd() .. "/.vim/" })
+				M.common_on_attach(client, bufnr)
+			end,
+			settings = { ltex = { dictionary = { ["en-US"] = words } } },
+			root_dir = function()
+				return vim.fn.getcwd()
+			end,
+		}
+	end)(),
+	lua_ls = {
+		on_attach = function(client, bufnr)
+			-- Use efm lua-format instead
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
+			M.common_on_attach(client, bufnr)
+		end,
+		settings = {
+			Lua = {
+				diagnostics = { globals = { "vim" } },
+				completion = { callSnippet = "Replace" },
+				workspace = { checkThirdParty = false },
+			},
+		},
+	},
+	pyright = {
+		on_attach = M.common_on_attach,
+	},
+	rust_analyzer = {
+		on_attach = M.common_on_attach,
+		capabilities = {
+			textDocument = { completion = { completionItem = { snippetSupport = false } } },
+		},
+	},
+	tailwindcss = {
+		on_attach = M.common_on_attach,
+		settings = { tailwindCSS = { emmetCompletions = true } },
+	},
+	ts_ls = {
+		on_attach = function(client, bufnr)
+			-- prefer eslint
+			client.server_capabilities.documentFormattingProvider = false
+			client.server_capabilities.documentRangeFormattingProvider = false
+			M.common_on_attach(client, bufnr)
+		end,
+		root_dir = require("lspconfig").util.root_pattern("package.json", "tsconfig.json", "jsconfig.json"),
+	},
+	yamlls = {
+		on_attach = M.common_on_attach,
+		settings = { yaml = { format = { enable = true } } },
+	},
+}
 
 return M
