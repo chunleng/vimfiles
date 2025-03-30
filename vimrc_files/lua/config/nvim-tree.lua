@@ -89,6 +89,8 @@ function M.setup()
 			utils.buf_keymap(bufnr, "n", { "q", "<c-s-enter>" }, api.tree.close)
 			utils.buf_keymap(bufnr, "n", "zh", api.tree.toggle_gitignore_filter)
 			utils.buf_keymap(bufnr, "n", "gp", api.node.navigate.parent)
+			utils.buf_keymap(bufnr, "n", ">>", "10<c-w>>")
+			utils.buf_keymap(bufnr, "n", "<<", "10<c-w><")
 		end,
 	})
 
