@@ -18,7 +18,7 @@ end
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function()
-		vim.lsp.buf.format({ timeout_ms = 5000 })
+		vim.cmd("silent! lua vim.lsp.buf.format({ timeout_ms = 5000 })")
 	end,
 })
 
