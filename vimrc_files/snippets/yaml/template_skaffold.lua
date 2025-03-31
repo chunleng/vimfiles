@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?skaffold/init", dscr = "Template for Skaffold init" },
+		{ trig = "----skaffold/init", dscr = "Template for Skaffold init" },
 		fmta(
 			[[
 	apiVersion: skaffold/v3

@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?erd", dscr = "A new template for ERD diagram" },
+		{ trig = "----erd", dscr = "A new template for ERD diagram" },
 		fmta(
 			[[
 	@startuml
@@ -46,7 +46,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?erd/table", dscr = "A new ERD table" },
+		{ trig = "----erd/table", dscr = "A new ERD table" },
 		fmta(
 			[[
 	entity <> {
@@ -72,7 +72,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?sequence",
+			trig = "----sequence",
 			dscr = "A new template for sequence diagram",
 		},
 		fmta(
@@ -124,7 +124,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?state", dscr = "A new template for state diagram" },
+		{ trig = "----state", dscr = "A new template for state diagram" },
 		fmta(
 			[[
 	@startuml
@@ -166,7 +166,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?flowchart", dscr = "A new template for flowchart" },
+		{ trig = "----flowchart", dscr = "A new template for flowchart" },
 		fmta(
 			[[
 	@startuml
@@ -207,7 +207,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?c4model/context", dscr = "A new template for C4Model" },
+		{ trig = "----c4model/context", dscr = "A new template for C4Model" },
 		fmta(
 			[[
 	 @startuml

@@ -4,7 +4,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?typescriptreact/tsconfig",
+			trig = "----typescriptreact/tsconfig",
 			dscr = "Template for tsconfig.json",
 		},
 		fmta(
@@ -45,7 +45,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?typescriptreact/eslint",
+			trig = "----typescriptreact/eslint",
 			dscr = "Template for TypeScript React ESLint",
 		},
 		fmta(
@@ -92,7 +92,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?kulala/http-client/init", dscr = "Template for Kulala http-client.env.json" },
+		{ trig = "----kulala/http-client/init", dscr = "Template for Kulala http-client.env.json" },
 		fmta(
 			[[
 {

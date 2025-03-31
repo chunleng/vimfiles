@@ -4,7 +4,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?git/readme",
+			trig = "----git/readme",
 			dscr = "Template for README.md of Git Repository",
 		},
 		fmt(
@@ -53,7 +53,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?git/readme/sandbox", dscr = "Template for github.com/chunleng/sandbox's README.md" },
+		{ trig = "----git/readme/sandbox", dscr = "Template for github.com/chunleng/sandbox's README.md" },
 		fmta(
 			[[
     # <>

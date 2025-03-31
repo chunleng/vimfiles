@@ -46,7 +46,7 @@ end
 table.insert(
 	M,
 	s(
-		{ trig = "?notes", dscr = "Template for notes" },
+		{ trig = "----notes", dscr = "Template for notes" },
 		fmta(
 			[[
 	<>
@@ -63,7 +63,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?notes/writing_idea", dscr = "Template for writing" },
+		{ trig = "----notes/writing_idea", dscr = "Template for writing" },
 		fmta(
 			[[
     <>
@@ -97,7 +97,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?notes/cooking_recipe",
+			trig = "----notes/cooking_recipe",
 			dscr = "Template for cooking recipe",
 		},
 		fmta(
@@ -138,7 +138,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?notes/journal", dscr = "Template for journal writing" },
+		{ trig = "----notes/journal", dscr = "Template for journal writing" },
 		fmta(
 			[[
 	<>
@@ -180,7 +180,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?notes/relation",
+			trig = "----notes/relation",
 			dscr = "Template for relationship management",
 		},
 		fmta(

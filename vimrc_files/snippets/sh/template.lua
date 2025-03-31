@@ -4,7 +4,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?sh/app_path",
+			trig = "----sh/app_path",
 			dscr = "Template for variable that returns the APP_PATH",
 		},
 		fmta(
@@ -20,7 +20,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?sh/short_input",
+			trig = "----sh/short_input",
 			dscr = "Template for a short input",
 		},
 		fmta(
@@ -40,7 +40,10 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?sh/default_variable", dscr = "Template for calling variable with default value if not already set" },
+		{
+			trig = "----sh/default_variable",
+			dscr = "Template for calling variable with default value if not already set",
+		},
 		fmta(
 			[[
 	: ${<>="<>"}

@@ -4,7 +4,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?docker_compose/init",
+			trig = "----docker_compose/init",
 			dscr = "Template for docker-compose init",
 		},
 		fmta(

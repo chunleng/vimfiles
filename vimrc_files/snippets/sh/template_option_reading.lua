@@ -18,7 +18,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?sh/option_reading",
+			trig = "----sh/option_reading",
 			dscr = "Template for option reading",
 		},
 		fmta(

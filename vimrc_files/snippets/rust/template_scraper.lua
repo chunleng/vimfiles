@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?scraper/init", dscr = "Template for Scraper Init" },
+		{ trig = "----scraper/init", dscr = "Template for Scraper Init" },
 		fmta(
 			[[
 use reqwest::{get, Result};

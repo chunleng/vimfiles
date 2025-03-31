@@ -10,7 +10,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?python/pytest/fixture",
+			trig = "----python/pytest/fixture",
 			dscr = "Pytest fixture template",
 		},
 		fmta(
@@ -28,7 +28,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?python/pytest/fixture_mock",
+			trig = "----python/pytest/fixture_mock",
 			dscr = "Pytest fixture with mock template",
 		},
 		fmta(
@@ -47,7 +47,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?python/unittest/class",
+			trig = "----python/unittest/class",
 			dscr = "Template for Unittest",
 		},
 		fmta(
@@ -68,7 +68,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?python/unittest/function",
+			trig = "----python/unittest/function",
 			dscr = "Template for Unittest",
 		},
 		fmta(

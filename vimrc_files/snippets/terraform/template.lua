@@ -4,7 +4,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?terraform/aws_ami_amazon_linux_2",
+			trig = "----terraform/aws_ami_amazon_linux_2",
 			dscr = "Amazon Linux 2 AMI",
 		},
 		fmta(
@@ -29,7 +29,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?terraform/lifecycle_ignore_changes",
+			trig = "----terraform/lifecycle_ignore_changes",
 			dscr = "Template for ignoring changes",
 		},
 		fmta(

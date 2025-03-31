@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?lsp/css/init", dscr = "Template for css lsp" },
+		{ trig = "----lsp/css/init", dscr = "Template for css lsp" },
 		fmta(
 			[[
 	require("lspconfig").cssls.setup(require("config.lsp").default_setup.cssls)
@@ -16,7 +16,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?lsp/docker/init", dscr = "Template for docker lsp" },
+		{ trig = "----lsp/docker/init", dscr = "Template for docker lsp" },
 		fmta(
 			[[
 	require("lspconfig").dockerls.setup(require("config.lsp").default_setup.dockerls)
@@ -29,7 +29,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?lsp/html/init", dscr = "Template for html lsp" },
+		{ trig = "----lsp/html/init", dscr = "Template for html lsp" },
 		fmta(
 			[[
 	require("lspconfig").html.setup(require("config.lsp").default_setup.html)
@@ -42,7 +42,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?lsp/java/init", dscr = "Template for java lsp" },
+		{ trig = "----lsp/java/init", dscr = "Template for java lsp" },
 		fmta(
 			[[
 	require("lspconfig").jdtls.setup(require("config.lsp").default_setup.jdtls)
@@ -55,7 +55,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?lsp/javascript/init", dscr = "Template for javascript lsp" },
+		{ trig = "----lsp/javascript/init", dscr = "Template for javascript lsp" },
 		fmta(
 			[[
 	require("lspconfig").cssmodules_ls.setup(require("config.lsp").default_setup.cssmodules_ls)
@@ -70,7 +70,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?lsp/json/init", dscr = "Template for json lsp" },
+		{ trig = "----lsp/json/init", dscr = "Template for json lsp" },
 		fmta(
 			[[
 	require("lspconfig").jsonls.setup(require("config.lsp").default_setup.jsonls)
@@ -83,7 +83,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?lsp/lua/init", dscr = "Template for lua lsp" },
+		{ trig = "----lsp/lua/init", dscr = "Template for lua lsp" },
 		fmta(
 			[[
 	require("neodev").setup()
@@ -100,7 +100,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?lsp/markdown/init", dscr = "Template for markdown lsp" },
+		{ trig = "----lsp/markdown/init", dscr = "Template for markdown lsp" },
 		fmta(
 			[[
 	require("lspconfig").ltex.setup(require("config.lsp").default_setup.ltex)
@@ -118,7 +118,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?lsp/python/init", dscr = "Template for python lsp" },
+		{ trig = "----lsp/python/init", dscr = "Template for python lsp" },
 		fmta(
 			[[
 	require("lspconfig").pyright.setup(require("config.lsp").default_setup.pyright)
@@ -143,7 +143,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?lsp/rust/init", dscr = "Template for rust lsp" },
+		{ trig = "----lsp/rust/init", dscr = "Template for rust lsp" },
 		fmta(
 			[[
 	require("lspconfig").rust_analyzer.setup(vim.tbl_extend("keep", {
@@ -182,7 +182,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?lsp/tailwindcss/init", dscr = "Template for tailwindcss lsp" },
+		{ trig = "----lsp/tailwindcss/init", dscr = "Template for tailwindcss lsp" },
 		fmta(
 			[[
 	require("lspconfig").tailwindcss.setup(

@@ -229,6 +229,7 @@ require("lazy").setup({
 			"stevearc/aerial.nvim",
 			{ dir = personal_project .. "nvim-dap-kitty-launcher" },
 			"zapling/mason-lock.nvim",
+			"Saghen/blink.cmp",
 		},
 		config = function()
 			require("config.lsp").setup()
@@ -255,30 +256,120 @@ require("lazy").setup({
 		end,
 	},
 	{
-		-- https://github.com/hrsh7th/nvim-cmp
-		-- https://github.com/hrsh7th/cmp-buffer
-		-- https://github.com/hrsh7th/cmp-path
-		-- https://github.com/hrsh7th/cmp-nvim-lsp
+		-- https://github.com/Saghen/blink.cmp
 		-- https://github.com/kristijanhusak/vim-dadbod-completion
-		-- https://github.com/roobert/tailwindcss-colorizer-cmp.nvim
-		-- https://github.com/williamboman/mason.nvim
-		-- https://github.com/tpope/vim-dadbod
-		-- https://github.com/saadparwaiz1/cmp_luasnip
-		-- https://github.com/L3MON4D3/LuaSnip
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-nvim-lsp",
-			"kristijanhusak/vim-dadbod-completion",
-			"roobert/tailwindcss-colorizer-cmp.nvim",
-			"williamboman/mason.nvim",
-			"tpope/vim-dadbod",
-			{ "saadparwaiz1/cmp_luasnip", dependencies = { "L3MON4D3/LuaSnip" } },
-		},
+		"Saghen/blink.cmp",
+		version = "0.*",
 		config = function()
-			require("config.nvim-cmp").setup()
+			local blink = require("blink-cmp")
+			local tailwind_color_icon = " "
+			blink.setup({
+				keymap = {
+					preset = "none",
+					["<tab>"] = {
+						"snippet_forward",
+						"accept",
+						"fallback_to_mappings",
+					},
+					["<c-n>"] = {
+						"select_next",
+						"fallback_to_mappings",
+					},
+					["<c-p>"] = {
+						"select_prev",
+						"fallback_to_mappings",
+					},
+					["<bs>"] = {
+						function(cmp)
+							cmp.show()
+						end,
+						"fallback_to_mappings",
+					},
+					["<c-;>"] = {
+						function(cmp)
+							cmp.show({ providers = { "snippets" } })
+						end,
+						"fallback_to_mappings",
+					},
+				},
+				cmdline = {
+					keymap = {
+						preset = "none",
+						["<tab>"] = {
+							function(cmp)
+								if cmp.is_ghost_text_visible() and not cmp.is_menu_visible() then
+									return cmp.accept()
+								end
+							end,
+							"show_and_insert",
+							"select_next",
+						},
+						["<c-n>"] = { "select_next", "fallback" },
+						["<c-p>"] = { "select_prev", "fallback" },
+						["<c-e>"] = {
+							function()
+								-- On version 1.0.0, without remapping to <end>, the cursor doesn't shift properly. This
+								-- block of code fixes that problem
+								vim.fn.eval('feedkeys("\\<end>")')
+							end,
+						},
+					},
+				},
+				snippets = { preset = "luasnip" },
+				sources = {
+					default = { "snippets", "lsp", "path", "buffer" },
+					per_filetype = {
+						sql = { "snippets", "dadbod", "buffer" },
+					},
+					providers = {
+						dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+						lsp = {
+							opts = {
+								tailwind_color_icon = tailwind_color_icon,
+							},
+						},
+					},
+				},
+				completion = {
+					menu = {
+						auto_show = true,
+						draw = {
+							columns = {
+								{ "label", "label_description", gap = 1 },
+								{ "kind_icon" },
+							},
+							components = {
+								kind_icon = {
+									text = function(ctx)
+										local kind_icons = require("common-utils").kind_icons
+										if ctx.kind_icon == tailwind_color_icon then
+											return ctx.kind_icon
+										else
+											return kind_icons[ctx.kind] or kind_icons["Text"]
+										end
+									end,
+								},
+							},
+						},
+					},
+				},
+			})
+			local group_name = "lBlinkInsert"
+			vim.api.nvim_create_augroup(group_name, { clear = true })
+			vim.api.nvim_create_autocmd("InsertEnter", {
+				pattern = "*",
+				callback = function()
+					blink.show()
+				end,
+				group = group_name,
+			})
+
+			local theme = require("common-theme")
+			theme.set_hl("BlinkCmpLabelMatch", { fg = 12 })
+			theme.set_hl("BlinkCmpLabelDeprecated", { strikethrough = true, fg = theme.blender.fg_darker_3 })
+			theme.set_hl("BlinkCmpKind", { fg = 12 })
 		end,
+		dependencies = { "kristijanhusak/vim-dadbod-completion" },
 	},
 	{
 		-- https://github.com/L3MON4D3/LuaSnip
@@ -301,9 +392,11 @@ require("lazy").setup({
 		config = function()
 			local utils = require("common-utils")
 			local ls = require("luasnip")
+			local blink = require("blink-cmp")
 
 			utils.keymap({ "i", "s" }, "<cr>", function()
 				if ls.jumpable(1) then
+					blink.hide()
 					ls.jump(1)
 				else
 					local is_end_of_line = #vim.api.nvim_get_current_line() == vim.api.nvim_win_get_cursor(0)[2]
@@ -319,6 +412,7 @@ require("lazy").setup({
 			"windwp/nvim-autopairs",
 			"L3MON4D3/LuaSnip",
 			"dkarter/bullets.vim",
+			"Saghen/blink.cmp",
 		},
 	},
 	{
@@ -383,6 +477,7 @@ require("lazy").setup({
 	{
 		-- https://github.com/petertriho/nvim-scrollbar
 		"petertriho/nvim-scrollbar",
+		dependencies = { "Saghen/blink.cmp" },
 		config = function()
 			require("config.nvim-scrollbar").setup()
 		end,
@@ -676,7 +771,6 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
-			"hrsh7th/nvim-cmp",
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()

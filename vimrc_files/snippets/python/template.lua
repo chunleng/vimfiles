@@ -13,13 +13,13 @@ local function s_if_main(trig)
 	)
 end
 
-table.insert(M, s_if_main("?main"))
+table.insert(M, s_if_main("----main"))
 
 table.insert(
 	M,
 	s(
 		{
-			trig = "?googlestyle_module_docstring",
+			trig = "----googlestyle_module_docstring",
 			dscr = "Template for Google style module docstring",
 		},
 		fmta(
@@ -46,7 +46,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?googlestyle_class_docstring",
+			trig = "----googlestyle_class_docstring",
 			dscr = "Template for Google style function docstring",
 		},
 		fmta(
@@ -70,7 +70,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?googlestyle_function_docstring",
+			trig = "----googlestyle_function_docstring",
 			dscr = "Template for Google style function docstring",
 		},
 		fmta(
@@ -108,7 +108,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?python/open",
+			trig = "----python/open",
 			dscr = "Template for opening a file pointer",
 		},
 		fmta(
@@ -125,7 +125,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?python/argparse",
+			trig = "----python/argparse",
 			dscr = "Basic argparse template for python",
 		},
 		fmta(

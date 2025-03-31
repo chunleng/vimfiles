@@ -7,7 +7,7 @@ end
 table.insert(
 	M,
 	s(
-		{ trig = "?react/module", dscr = "Template for new React module" },
+		{ trig = "----react/module", dscr = "Template for new React module" },
 		fmta(
 			[[
 	import { ReactNode } from "react";
@@ -34,7 +34,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?react/function",
+			trig = "----react/function",
 			dscr = "Template for new React function",
 		},
 		fmta(
@@ -53,7 +53,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?react/useState", dscr = "Template for React useState" },
+		{ trig = "----react/useState", dscr = "Template for React useState" },
 		fmta(
 			[[
 	const [<>, set<>] = useState<<<>>>(<>)
@@ -67,7 +67,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?react/useEffect",
+			trig = "----react/useEffect",
 			dscr = "Template for React useEffect",
 		},
 		fmta(

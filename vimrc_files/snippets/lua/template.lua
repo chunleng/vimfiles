@@ -4,7 +4,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?lua/autocommand_new",
+			trig = "----lua/autocommand_new",
 			dscr = "Template for autocommand",
 		},
 		fmta(
@@ -26,7 +26,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?lua/module", dscr = "Template for Lua Module" },
+		{ trig = "----lua/module", dscr = "Template for Lua Module" },
 		fmta(
 			[[
 	local M = {}

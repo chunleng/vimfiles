@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?date", dscr = "Insert current date" },
+		{ trig = "----date", dscr = "Insert current date" },
 		fmta(
 			[[
 	<>
@@ -18,7 +18,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?time", dscr = "Insert current time" },
+		{ trig = "----time", dscr = "Insert current time" },
 		fmta(
 			[[
 	<>
@@ -33,7 +33,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?time/unix", dscr = "Insert current time in Unix Timestamp" },
+		{ trig = "----time/unix", dscr = "Insert current time in Unix Timestamp" },
 		fmta(
 			[[
 	<>
@@ -48,7 +48,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?time/unix_nano", dscr = "Insert current time in Unix Timestamp with 0-padded nanoseconds" },
+		{ trig = "----time/unix_nano", dscr = "Insert current time in Unix Timestamp with 0-padded nanoseconds" },
 		fmta(
 			[[
 	<>
@@ -63,7 +63,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?datetime", dscr = "Insert current datetime" },
+		{ trig = "----datetime", dscr = "Insert current datetime" },
 		fmta(
 			[[
 	<>
@@ -79,7 +79,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?folder_tree",
+			trig = "----folder_tree",
 			dscr = "Create a starter for folder tree",
 		},
 		fmta(
@@ -109,7 +109,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?comment_box",
+			trig = "----comment_box",
 			dscr = "Create a nice box with the current comment symbol",
 		},
 		fmta(
@@ -137,7 +137,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?comment_box_full",
+			trig = "----comment_box_full",
 			dscr = "Create a nice box with fix width",
 		},
 		fmta(

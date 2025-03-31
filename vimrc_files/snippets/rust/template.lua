@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?main", dscr = "Template for main function" },
+		{ trig = "----main", dscr = "Template for main function" },
 		fmta(
 			[[
 	<><>
@@ -35,7 +35,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?test/init",
+			trig = "----test/init",
 			dscr = "Template for starting unit testing",
 		},
 		fmta(
@@ -53,7 +53,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?test", dscr = "Template for creating a new test" },
+		{ trig = "----test", dscr = "Template for creating a new test" },
 		c(1, {
 			fmta(
 				[[
@@ -80,7 +80,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?benchmark", dscr = "" },
+		{ trig = "----benchmark", dscr = "" },
 		fmta(
 			[[
 let start = Instant::now();

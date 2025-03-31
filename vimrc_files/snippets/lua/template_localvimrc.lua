@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?lua/localvimrc_init", dscr = "Init for localvimrc" },
+		{ trig = "----lua/localvimrc_init", dscr = "Init for localvimrc" },
 		fmta(
 			[[
 	------------------------------
@@ -39,7 +39,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?dadbod/db_setup",
+			trig = "----dadbod/db_setup",
 			dscr = "Template for Vim Dadbod Setup",
 		},
 		fmta(
@@ -58,7 +58,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?dap/python", dscr = "Template for DAP Python" },
+		{ trig = "----dap/python", dscr = "Template for DAP Python" },
 		fmta(
 			[[
 	-- For reference to the debugpy settings:
@@ -91,7 +91,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?projectionist/project_setup",
+			trig = "----projectionist/project_setup",
 			dscr = "Template for the projectionist setup",
 		},
 		fmta(
@@ -119,7 +119,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?vim-test",
+			trig = "----vim-test",
 			dscr = "Template for setting up vimtest",
 		},
 		fmta(

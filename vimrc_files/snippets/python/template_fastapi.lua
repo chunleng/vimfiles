@@ -8,7 +8,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?fastapi/init",
+			trig = "----fastapi/init",
 			dscr = "Template for FastAPI init",
 		},
 		fmta(
@@ -30,7 +30,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?fastapi/function",
+			trig = "----fastapi/function",
 			dscr = "Template for FastAPI",
 		},
 		fmta(
@@ -61,7 +61,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?fastapi/model",
+			trig = "----fastapi/model",
 			dscr = "Template for FastAPI model",
 		},
 		fmta(

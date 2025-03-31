@@ -4,7 +4,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?javascript/array_object_to_dictionary",
+			trig = "----javascript/array_object_to_dictionary",
 			dscr = "Template to convert an array of objects into dictonary",
 		},
 		fmta(

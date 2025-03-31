@@ -19,13 +19,13 @@ local function s_details(trig)
 	)
 end
 table.insert(M, s_details("<details>"))
-table.insert(M, s_details("?details"))
+table.insert(M, s_details("----details"))
 
 table.insert(
 	M,
 	s(
 		{
-			trig = "?user_story",
+			trig = "----user_story",
 			dscr = "Template for writing a user story",
 		},
 		fmta(

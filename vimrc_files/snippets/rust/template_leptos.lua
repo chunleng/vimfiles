@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?leptos/init", dscr = "Template for Leptos Init" },
+		{ trig = "----leptos/init", dscr = "Template for Leptos Init" },
 		fmta(
 			[[
 	use leptos::prelude::*;
@@ -21,7 +21,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?leptos/component",
+			trig = "----leptos/component",
 			dscr = "Template for Leptos component",
 		},
 		fmta(
@@ -40,7 +40,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?leptos/signal",
+			trig = "----leptos/signal",
 			dscr = "Template for creating Leptos signal",
 		},
 		fmta(
@@ -55,7 +55,7 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "?leptos/effect", dscr = "Template for creating Leptos effect" },
+		{ trig = "----leptos/effect", dscr = "Template for creating Leptos effect" },
 		fmta(
 			[[
 	Effect::new(move |_| {
@@ -71,7 +71,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?leptos/action",
+			trig = "----leptos/action",
 			dscr = "Template for creating Leptos action",
 		},
 		fmta(

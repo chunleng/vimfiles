@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?clap/init", dscr = "Template for Clap Init" },
+		{ trig = "----clap/init", dscr = "Template for Clap Init" },
 		fmta(
 			[[
 	use clap::{Parser, Subcommand};

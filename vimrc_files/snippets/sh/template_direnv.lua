@@ -4,7 +4,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?direnv/virtualenv",
+			trig = "----direnv/virtualenv",
 			dscr = "Template for virtualenv setup",
 		},
 		fmta(
@@ -24,7 +24,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?direnv/dockerenv_setting",
+			trig = "----direnv/dockerenv_setting",
 			dscr = "Template for program where docker host is read instead of docker context (Like scaffold)",
 		},
 		fmta(
@@ -40,7 +40,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?vim/docstring_convention",
+			trig = "----vim/docstring_convention",
 			dscr = "Template for the docstring convention to use",
 		},
 		fmta(
@@ -57,7 +57,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?direnv/add_path",
+			trig = "----direnv/add_path",
 			dscr = "Add path for direnv, useful as a replacement for script to run alias",
 		},
 		fmta(

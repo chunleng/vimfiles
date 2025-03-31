@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?ratatui/init", dscr = "Template for ratatui init" },
+		{ trig = "----ratatui/init", dscr = "Template for ratatui init" },
 		fmta(
 			[[
 	use std::error::Error;

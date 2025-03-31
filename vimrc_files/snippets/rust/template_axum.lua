@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?axum/init", dscr = "Template for Axum Init" },
+		{ trig = "----axum/init", dscr = "Template for Axum Init" },
 		fmta(
 			[[
 	use std::error::Error;

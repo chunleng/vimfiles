@@ -4,7 +4,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?rust/cargo_init_workspace",
+			trig = "----rust/cargo_init_workspace",
 			dscr = "Template for Cargo workspace",
 		},
 		fmta(

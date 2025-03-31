@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s(
-		{ trig = "?http/grpc", dscr = "Template for using gRPC" },
+		{ trig = "----http/grpc", dscr = "Template for using gRPC" },
 		fmta(
 			[[
 	# @grpc-global-import-path ../protos

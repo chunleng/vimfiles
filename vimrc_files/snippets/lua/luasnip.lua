@@ -19,7 +19,7 @@ table.insert(
 	M,
 	s(
 		{
-			trig = "?luasnip/module",
+			trig = "----luasnip/module",
 			dscr = "Template for luasnip module",
 		},
 		fmta(
