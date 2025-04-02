@@ -225,6 +225,16 @@ local function configure_autogroup()
 		end,
 		group = awsconfig,
 	})
+
+	local centralize_insert = "lCentralizeInsert"
+	vim.api.nvim_create_augroup(centralize_insert, { clear = true })
+	vim.api.nvim_create_autocmd("InsertEnter", {
+		pattern = "*",
+		callback = function()
+			vim.cmd("normal! zz")
+		end,
+		group = centralize_insert,
+	})
 end
 
 local function configure_vim_diagnostics()
