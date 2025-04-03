@@ -359,7 +359,14 @@ require("lazy").setup({
 			vim.api.nvim_create_autocmd("InsertEnter", {
 				pattern = "*",
 				callback = function()
-					blink.show()
+					-- Show completion menu if characters up to cursor consist of non-whitespace characters
+					local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+					if col > 0 then
+						local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
+						if not before_cursor:match("^%s*$") then -- Check if all before-cursor chars are whitespace
+							blink.show()
+						end
+					end
 				end,
 				group = group_name,
 			})
