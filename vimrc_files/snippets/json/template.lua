@@ -105,7 +105,7 @@ table.insert(
 		"var_foo": "bar"
 	},
 	"dev": {
-		"URL": "https://localhost:3000"
+		"URL": "http://localhost:3000"
 	}
 }
 ]],
