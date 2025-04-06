@@ -194,5 +194,18 @@ table.insert(
 	)
 )
 
+table.insert(
+	M,
+	s(
+		{ trig = "----lsp/yaml/init", dscr = "Template for yaml lsp" },
+		fmta(
+			[[
+	require("lspconfig").yamlls.setup(require("config.lsp").default_setup.yamlls)
+]],
+			{}
+		)
+	)
+)
+
 return M
 -- vim: noet
