@@ -267,7 +267,15 @@ require("lazy").setup({
 				keymap = {
 					preset = "none",
 					["<tab>"] = {
-						"snippet_forward",
+						function(_)
+							local ls = require("luasnip")
+							if ls.expandable() then
+								vim.schedule(function()
+									ls.expand()
+								end)
+								return true
+							end
+						end,
 						"accept",
 						"fallback_to_mappings",
 					},
@@ -376,7 +384,7 @@ require("lazy").setup({
 			theme.set_hl("BlinkCmpLabelDeprecated", { strikethrough = true, fg = theme.blender.fg_darker_3 })
 			theme.set_hl("BlinkCmpKind", { fg = 12 })
 		end,
-		dependencies = { "kristijanhusak/vim-dadbod-completion" },
+		dependencies = { "kristijanhusak/vim-dadbod-completion", "L3MON4D3/LuaSnip" },
 	},
 	{
 		-- https://github.com/L3MON4D3/LuaSnip
