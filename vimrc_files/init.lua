@@ -279,6 +279,12 @@ require("lazy").setup({
 						"accept",
 						"fallback_to_mappings",
 					},
+					["<c-h>"] = {
+						function(cmp)
+							cmp.hide()
+							vim.lsp.buf.signature_help()
+						end,
+					},
 					["<c-n>"] = {
 						"select_next",
 						"fallback_to_mappings",
