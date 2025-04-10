@@ -685,8 +685,10 @@ require("lazy").setup({
 					{
 						choice = "Today's Journal",
 						func = function()
-							local folder = os.date("./journal/%Y/%m")
-							local file = folder .. "/" .. os.date("%Y%m%d.md")
+							-- Get timestamp 6 hours ago (6 * 60 * 60 = 21600 seconds)
+							local time_6h_ago = os.time() - 21600
+							local folder = os.date("./journal/%Y/%m", time_6h_ago)
+							local file = folder .. "/" .. os.date("%Y%m%d.md", time_6h_ago)
 							os.execute("mkdir -p " .. folder)
 							os.execute("touch " .. file)
 							vim.cmd("e " .. file)
