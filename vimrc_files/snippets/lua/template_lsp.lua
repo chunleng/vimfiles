@@ -123,6 +123,7 @@ table.insert(
 			[[
 	require("lspconfig").pyright.setup(require("config.lsp").default_setup.pyright)
 	require("null-ls").setup({
+		root_dir = function() vim.fn.getcwd() end,
 		sources = {
 			-- require("null-ls").builtins.formatting.yapf,
 			-- require("null-ls").builtins.formatting.black,
@@ -163,6 +164,7 @@ table.insert(
 	}, require("config.lsp").default_setup.rust_analyzer))
 
 	require("null-ls").setup({
+		root_dir = function() vim.fn.getcwd() end,
 		sources = {
 			-- Activate when necessary
 			-- require("null-ls").builtins.formatting.leptosfmt
