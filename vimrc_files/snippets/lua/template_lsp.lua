@@ -161,17 +161,13 @@ table.insert(
 			},
 		},
 	}, require("config.lsp").default_setup.rust_analyzer))
+
 	require("null-ls").setup({
 		sources = {
-			method = require("null-ls").methods.FORMATTING,
-			filetypes = { "rust" },
-			generator = require("null-ls").formatter({
-				async = false,
-				command = "leptosfmt",
-				to_stdin = true,
-				args = { "-s" },
-			}),
-		},
+			-- Activate when necessary
+			-- require("null-ls").builtins.formatting.leptosfmt
+			-- require("null-ls").builtins.formatting.dxfmt
+		}
 	})
 ]],
 			{}
