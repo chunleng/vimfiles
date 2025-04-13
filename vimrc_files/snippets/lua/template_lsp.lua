@@ -186,7 +186,17 @@ table.insert(
 		fmta(
 			[[
 	require("lspconfig").tailwindcss.setup(
-		vim.tbl_extend("keep", { filetypes = { "<>" } }, require("config.lsp").default_setup.tailwindcss)
+		vim.tbl_extend("keep", {
+			filetypes = { "<>" },
+			settings = {
+				tailwindCSS = {
+					-- Dioxus setting
+					-- experimental = {
+					-- 	classRegex = {"class: \"(.*)\""}
+					-- }
+				}
+			}
+		}, require("config.lsp").default_setup.tailwindcss)
 	)
 ]],
 			{ i(1, "html") }
