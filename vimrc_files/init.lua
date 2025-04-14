@@ -408,7 +408,7 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"chunleng/nvim-null",
+		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_cr/",
 		name = "resolve_cr",
 		config = function()
 			local utils = require("common-utils")
@@ -439,7 +439,7 @@ require("lazy").setup({
 	{
 		-- https://github.com/L3MON4D3/LuaSnip
 		-- https://github.com/embear/vim-localvimrc
-		"chunleng/nvim-null",
+		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_rc_menu/",
 		name = "resolve_rc_menu",
 		dependencies = { "L3MON4D3/LuaSnip", "embear/vim-localvimrc" },
 		config = function()
@@ -575,7 +575,7 @@ require("lazy").setup({
 	},
 	{
 		-- https://github.com/nvim-treesitter/nvim-treesitter
-		"chunleng/nvim-null",
+		dir = vim.fn.stdpath("config") .. "/lua/lazy/stop_conceal/",
 		name = "stop_conceal",
 		config = function()
 			-- Using this because there are some problems with control over conceals
@@ -601,7 +601,7 @@ require("lazy").setup({
 	},
 	{
 		-- https://github.com/ibhagwan/fzf-lua
-		"chunleng/nvim-null",
+		dir = vim.fn.stdpath("config") .. "/lua/lazy/quick_replace/",
 		name = "quick_replace",
 		dependencies = { "ibhagwan/fzf-lua" },
 		config = function()
@@ -640,7 +640,7 @@ require("lazy").setup({
 	{
 		-- A more sane gf
 		-- https://github.com/nvim-tree/nvim-tree.lua
-		"chunleng/nvim-null",
+		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_gf/",
 		name = "resolve_gf",
 		dependencies = { "nvim-tree/nvim-tree.lua" },
 		config = function()
@@ -774,7 +774,7 @@ require("lazy").setup({
 		-- https://github.com/Robitx/gp.nvim
 		-- https://github.com/danymat/neogen
 		-- https://github.com/mickael-menu/zk-nvim
-		"chunleng/nvim-null",
+		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_c_space/",
 		name = "resolve_c_space",
 		dependencies = { "Robitx/gp.nvim", "danymat/neogen", "mickael-menu/zk-nvim", "yetone/avante.nvim" },
 		config = function()

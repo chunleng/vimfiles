@@ -4,7 +4,6 @@ set eu
 
 APP_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}"  )" && pwd  )"
 LAZY_INSTALL_DIR="${HOME}/.local/share/nvim/lazy/lazy.nvim"
-LAZY_GIT_TAG="v11.17.1"
 
 # install vimrc
 mkdir -p $HOME/.config/nvim
@@ -15,6 +14,5 @@ ln -sfn ${APP_PATH}/vimrc_files/UltiSnips $HOME/.config/nvim/UltiSnips
 ln -sfn ${APP_PATH}/vimrc_files/snippets $HOME/.config/nvim/snippets
 ln -sfn ${APP_PATH}/mason-lock.json $HOME/.config/nvim/
 
-test -d ${LAZY_INSTALL_DIR} && \
-    git -C ${LAZY_INSTALL_DIR} checkout tags/${LAZY_GIT_TAG} || \
+test -d ${LAZY_INSTALL_DIR} || \
     git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=${LAZY_GIT_TAG} ${LAZY_INSTALL_DIR}
