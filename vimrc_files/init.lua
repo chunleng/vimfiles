@@ -261,6 +261,16 @@ require("lazy").setup({
 		"Saghen/blink.cmp",
 		version = "1.*",
 		config = function()
+			local function show_if_not_first_character(blink)
+				-- Show completion menu if characters up to cursor consist of non-whitespace characters
+				local _, col = unpack(vim.api.nvim_win_get_cursor(0))
+				if col > 0 then
+					local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
+					if not before_cursor:match("^%s*$") then -- Check if all before-cursor chars are whitespace
+						blink.show()
+					end
+				end
+			end
 			local blink = require("blink-cmp")
 			local tailwind_color_icon = " "
 			blink.setup({
@@ -294,9 +304,7 @@ require("lazy").setup({
 						"fallback_to_mappings",
 					},
 					["<bs>"] = {
-						function(cmp)
-							cmp.show()
-						end,
+						show_if_not_first_character,
 						"fallback_to_mappings",
 					},
 					["<c-;>"] = {
@@ -373,14 +381,7 @@ require("lazy").setup({
 			vim.api.nvim_create_autocmd("InsertEnter", {
 				pattern = "*",
 				callback = function()
-					-- Show completion menu if characters up to cursor consist of non-whitespace characters
-					local _, col = unpack(vim.api.nvim_win_get_cursor(0))
-					if col > 0 then
-						local before_cursor = vim.api.nvim_get_current_line():sub(1, col)
-						if not before_cursor:match("^%s*$") then -- Check if all before-cursor chars are whitespace
-							blink.show()
-						end
-					end
+					show_if_not_first_character(blink)
 				end,
 				group = group_name,
 			})
