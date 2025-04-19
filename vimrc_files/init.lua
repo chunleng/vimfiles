@@ -259,7 +259,7 @@ require("lazy").setup({
 		-- https://github.com/Saghen/blink.cmp
 		-- https://github.com/kristijanhusak/vim-dadbod-completion
 		"Saghen/blink.cmp",
-		version = "0.*",
+		version = "1.*",
 		config = function()
 			local blink = require("blink-cmp")
 			local tailwind_color_icon = " "
