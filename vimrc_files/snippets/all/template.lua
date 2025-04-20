@@ -118,13 +118,13 @@ table.insert(
 ]],
 			{
 				d(2, function(args)
-					local c = comment_single_char_or_none()
+					local c = comment_single_char_or_none() or "-"
 					local text = args[1][1] or ""
 					return sn(nil, c and t({ string.rep(c, #text + 4), c .. " " }) or {})
 				end, { 1 }),
 				v(1),
 				d(3, function(args)
-					local c = comment_single_char_or_none()
+					local c = comment_single_char_or_none() or "-"
 					local text = args[1][1] or ""
 					return sn(nil, c and t({ " " .. c, string.rep(c, #text + 4) }) or {})
 				end, { 1 }),
@@ -147,13 +147,13 @@ table.insert(
 			{
 				-- TODO Make fix width
 				d(2, function(args)
-					local c = comment_single_char_or_none()
+					local c = comment_single_char_or_none() or "-"
 					local text = args[1][1] or ""
 					return sn(nil, t({ string.rep(c, #text + 4), c .. " " }))
 				end, { 1 }),
 				v(1),
 				d(3, function(args)
-					local c = comment_single_char_or_none()
+					local c = comment_single_char_or_none() or "-"
 					local text = args[1][1] or ""
 					return sn(nil, t({ " " .. c, string.rep(c, #text + 4) }))
 				end, { 1 }),

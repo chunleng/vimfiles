@@ -32,6 +32,9 @@ table.insert(
 		{ trig = "|(%d+)x(%d+)", dscr = "Table", regTrig = true },
 		f(function(_, snip)
 			local w, h = unpack(snip.captures)
+			if not tonumber(w) or not tonumber(h) then
+				return
+			end
 			local res = {}
 
 			-- Template
