@@ -339,9 +339,9 @@ function M.setup()
 	-- similar to lf file manager
 	M.set_hl("Directory", { fg = 4, bold = true })
 
-	M.set_hl("DiffAdd", {})
-	M.set_hl("DiffDelete", { fg = M.blender.bg_darker_1, bg = M.blender.bg_darker_1 })
-	M.set_hl("DiffText", { underdashed = true, bg = M.blender.bg_lighter_1 })
+	M.set_hl("DiffAdd", { bg = M.blender.bg_lighter_1 })
+	M.set_hl("DiffDelete", { fg = 52, bg = 52 })
+	M.set_hl("DiffText", { underdashed = true, sp = 34 })
 	M.set_hl("DiffChange", {})
 
 	M.set_hl("ErrorMsg", { fg = M.blender.error })
