@@ -157,8 +157,13 @@ table.insert(
 						"--quiet",
 						"--message-format=json",
 						-- "-p=ui",
+						-- "--target=wasm32-unknown-unknown",
 					},
 				},
+				-- This is useful to switch for #[cfg(target_family="wasm")]
+				-- cargo = {
+				-- 	target = "wasm32-unknown-unknown"
+				-- }
 			},
 		},
 	}, require("config.lsp").default_setup.rust_analyzer))
