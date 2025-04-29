@@ -5,7 +5,7 @@
   "dockerfile-language-server": "0.10.2",
   "eslint-lsp": "4.7.0",
   "html-lsp": "4.7.0",
-  "jdtls": "v1.41.0",
+  "jdtls": "v1.46.0",
   "json-lsp": "4.7.0",
   "ltex-ls": "16.0.0",
   "lua-language-server": "3.13.2",
