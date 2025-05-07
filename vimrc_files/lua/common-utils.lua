@@ -45,6 +45,15 @@ end
 local function configure_preferred_mappings()
 	M.keymap("n", "<esc>", "<cmd>nohl<cr><cmd>GpStop<cr>")
 
+	vim.diagnostic.config({ virtual_lines = { current_line = true } })
+	M.keymap("n", "<leader>td", function()
+		local toggled_config = vim.diagnostic.config()["virtual_lines"]
+		if toggled_config then
+			vim.diagnostic.config({ virtual_lines = false })
+		else
+			vim.diagnostic.config({ virtual_lines = { current_line = true } })
+		end
+	end)
 	M.keymap("n", "<leader>tu", "<cmd>set termguicolors!<cr>")
 	M.keymap("n", "<leader>tl", "<cmd>set list!<cr>")
 	M.keymap("n", "<leader>tp", "<cmd>set paste!<cr>")
