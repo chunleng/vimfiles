@@ -45,7 +45,6 @@ end
 local function configure_preferred_mappings()
 	M.keymap("n", "<esc>", "<cmd>nohl<cr><cmd>GpStop<cr>")
 
-	vim.diagnostic.config({ virtual_lines = { current_line = true } })
 	M.keymap("n", "<leader>td", function()
 		local toggled_config = vim.diagnostic.config()["virtual_lines"]
 		if toggled_config then
