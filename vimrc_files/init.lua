@@ -897,4 +897,8 @@ require("lazy").setup({
 			require("tree-sitter-rstml").setup()
 		end,
 	},
+	{
+		"tiagovla/scope.nvim",
+		config = true,
+	},
 })
