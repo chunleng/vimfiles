@@ -30,7 +30,7 @@ local function setup_mason_sync_command()
 			{ name = "ltex-ls", version = "16.0.0" },
 			{ name = "lua-language-server", version = "3.13.2" },
 			{ name = "pyright", version = "1.1.322" },
-			{ name = "rust-analyzer", version = "2025-03-24" },
+			{ name = "rust-analyzer", version = "2025-06-30" },
 			{ name = "tailwindcss-language-server", version = "0.14.12" },
 			{ name = "terraform-ls", version = "v0.36.3" },
 			{ name = "typescript-language-server", version = "4.3.3" },
