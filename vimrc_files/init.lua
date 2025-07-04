@@ -729,8 +729,7 @@ require("lazy").setup({
 	{
 		-- https://github.com/mistweaverco/kulala.nvim/
 		"mistweaverco/kulala.nvim",
-		-- TODO turn this back on after gRPC is included in the
-		-- version = "*",
+		version = "*",
 		config = function()
 			local utils = require("common-utils")
 			local kulala = require("kulala")
@@ -813,24 +812,15 @@ require("lazy").setup({
 				hints = { enabled = false },
 				provider = "claude",
 				auto_suggestions_provider = "claude_fast",
-				claude = {
-					endpoint = "https://api.anthropic.com",
-					model = "claude-3-7-sonnet-latest",
-					timeout = 30000, -- Timeout in milliseconds
-					temperature = 0,
-					max_tokens = 4096,
-				},
-				openai = {
-					endpoint = "https://api.openai.com/v1",
-					model = "gpt-4o",
-					timeout = 30000, -- Timeout in milliseconds
-					temperature = 0,
-					max_tokens = 4096,
-				},
-				vendors = {
-					openai_mini = {
-						__inherited_from = "openai",
-						model = "gpt-4o-mini",
+				providers = {
+					claude = {
+						endpoint = "https://api.anthropic.com",
+						model = "claude-3-7-sonnet-latest",
+						timeout = 30000, -- Timeout in milliseconds
+						extra_request_body = {
+							temperature = 0,
+							max_tokens = 4096,
+						},
 					},
 					claude_fast = {
 						__inherited_from = "claude",
