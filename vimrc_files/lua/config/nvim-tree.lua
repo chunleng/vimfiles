@@ -45,15 +45,16 @@ function M.setup()
 			icons = {
 				glyphs = {
 					git = {
-						unstaged = "",
+						unstaged = "● ",
 						deleted = "✖ ",
 						staged = " ",
 						unmerged = " ",
-						renamed = " ",
+						renamed = " ",
 						untracked = " ",
 						ignored = "◌ ",
 					},
 				},
+				git_placement = "signcolumn",
 			},
 		},
 		on_attach = function(bufnr)
