@@ -14,6 +14,7 @@ function M.setup()
 			},
 			fzf = { ["enter"] = "select+accept" },
 		},
+		files = { git_icons = false },
 		actions = { files = { ["default"] = actions.file_edit } },
 		dap = {
 			variables = {
