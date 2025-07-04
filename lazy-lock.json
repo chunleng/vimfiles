@@ -21,7 +21,6 @@
   "lsp": { "branch": "main", "commit": "0950b15060067f752fde13a779a994f59516ce3d" },
   "ltex_extra.nvim": { "branch": "master", "commit": "24acd044ce7a26b3cdb537cbd094de37c3e1ac45" },
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
-  "mason-lock.nvim": { "branch": "main", "commit": "b75e2de585637a61b2fb818dc33dad7863b7b0c4" },
   "mason-nvim-dap.nvim": { "branch": "main", "commit": "4c2cdc69d69fe00c15ae8648f7e954d99e5de3ea" },
   "mason.nvim": { "branch": "main", "commit": "fc98833b6da5de5a9c5b1446ac541577059555be" },
   "neodev.nvim": { "branch": "main", "commit": "02893eeb9d6e8503817bd52385e111cba9a90500" },

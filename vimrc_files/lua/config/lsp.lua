@@ -2,6 +2,51 @@ local M = {}
 
 local utils = require("common-utils")
 
+local function setup_mason_sync_command()
+	vim.api.nvim_create_user_command("MasonSync", function()
+		local reg = require("mason-registry")
+		local packages = reg.get_installed_packages()
+		local version_lookup = {}
+
+		for _, package in ipairs(packages) do
+			local source_id = package:get_receipt()._value.primary_source.id
+			local last_part = source_id
+			if source_id:find("@") then
+				local parts = vim.split(source_id, "@")
+				last_part = parts[#parts]
+			end
+			version_lookup[package.spec.name] = last_part
+		end
+
+		local install_list = {
+			{ name = "css-lsp", version = "4.8.0" },
+			{ name = "cssmodules-language-server", version = "1.3.1" },
+			{ name = "debugpy", version = "1.6.7" },
+			{ name = "dockerfile-language-server", version = "0.10.2" },
+			{ name = "eslint-lsp", version = "4.7.0" },
+			{ name = "html-lsp", version = "4.7.0" },
+			{ name = "jdtls", version = "v1.46.0" },
+			{ name = "json-lsp", version = "4.7.0" },
+			{ name = "ltex-ls", version = "16.0.0" },
+			{ name = "lua-language-server", version = "3.13.2" },
+			{ name = "pyright", version = "1.1.322" },
+			{ name = "rust-analyzer", version = "2025-03-24" },
+			{ name = "tailwindcss-language-server", version = "0.14.12" },
+			{ name = "terraform-ls", version = "v0.36.3" },
+			{ name = "typescript-language-server", version = "4.3.3" },
+			{ name = "vim-language-server", version = "2.3.1" },
+			{ name = "yaml-language-server", version = "1.13.0" },
+			{ name = "zk", version = "v0.14.0" },
+		}
+		for _, item in ipairs(install_list) do
+			local installed_version = version_lookup[item.name]
+			if installed_version == nil or installed_version ~= item.version then
+				vim.cmd("MasonInstall --force " .. item.name .. "@" .. item.version)
+			end
+		end
+	end, { desc = "Sync Mason version to lock version" })
+end
+
 local function setup_lsp_mappings()
 	utils.keymap("n", "<leader>cf", function()
 		local first = true
@@ -151,9 +196,14 @@ local function setup_dap()
 end
 
 function M.setup()
-	require("mason").setup()
-	require("mason-lock").setup()
+	require("mason").setup({
+		registries = {
+			"github:mason-org/mason-registry@2025-04-01-witty-ice",
+		},
+	})
 	require("kitty-launcher").setup()
+
+	setup_mason_sync_command()
 	setup_lsp_mappings()
 	setup_dap()
 end

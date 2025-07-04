@@ -22,9 +22,8 @@ require("lazy").setup({
 	{
 		-- https://github.com/glepnir/galaxyline.nvim
 		-- https://github.com/SmiteshP/nvim-navic
-		-- https://github.com/williamboman/mason.nvim
 		"glepnir/galaxyline.nvim",
-		dependencies = { "SmiteshP/nvim-navic", "williamboman/mason.nvim" },
+		dependencies = { "SmiteshP/nvim-navic", "lsp" },
 		config = function()
 			require("config.cursorline").setup()
 		end,
@@ -197,7 +196,6 @@ require("lazy").setup({
 	},
 	{
 		-- https://github.com/williamboman/mason.nvim
-		-- https://github.com/williamboman/mason-lspconfig
 		-- https://github.com/neovim/nvim-lspconfig
 		-- https://github.com/folke/neodev.nvim
 		-- https://github.com/b0o/schemastore.nvim
@@ -211,7 +209,6 @@ require("lazy").setup({
 		-- https://github.com/nvimtools/none-ls-extras.nvim
 		-- https://github.com/barreiroleo/ltex_extra.nvim
 		-- https://github.com/stevearc/aerial.nvim
-		-- https://github.com/zapling/mason-lock.nvim
 		"williamboman/mason.nvim",
 		name = "lsp",
 		version = "*",
@@ -228,7 +225,6 @@ require("lazy").setup({
 			"barreiroleo/ltex_extra.nvim",
 			"stevearc/aerial.nvim",
 			{ dir = personal_project .. "nvim-dap-kitty-launcher" },
-			"zapling/mason-lock.nvim",
 			"Saghen/blink.cmp",
 		},
 		config = function()
