@@ -1,7 +1,7 @@
 local M = {}
 
 function M.snake_to_upper_camel(str)
-	local words = vim.split(str, "_", { plain = true })
+	local words = vim.split(str or "", "_", { plain = true })
 	return table.concat(M.title_case(words), "")
 end
 
