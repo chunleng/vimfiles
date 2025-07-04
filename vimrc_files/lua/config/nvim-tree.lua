@@ -14,7 +14,10 @@ function M.setup()
 			icons = { hint = "", info = "", warning = "", error = "" },
 		},
 		view = { width = 30 },
-		filters = { custom = { "__pycache__" } },
+		filters = {
+			custom = { "^\\.git$", "__pycache__" },
+			git_ignored = true,
+		},
 		actions = {
 			open_file = {
 				quit_on_open = true,
@@ -87,7 +90,10 @@ function M.setup()
 			utils.buf_keymap(bufnr, "n", "r", api.fs.rename)
 			utils.buf_keymap(bufnr, "n", "R", api.tree.reload)
 			utils.buf_keymap(bufnr, "n", { "q", "<c-s-enter>" }, api.tree.close)
-			utils.buf_keymap(bufnr, "n", "zh", api.tree.toggle_gitignore_filter)
+			utils.buf_keymap(bufnr, "n", "zh", function()
+				api.tree.toggle_gitignore_filter()
+				api.tree.toggle_custom_filter()
+			end)
 			utils.buf_keymap(bufnr, "n", "gp", api.node.navigate.parent)
 			utils.buf_keymap(bufnr, "n", ">>", "10<c-w>>")
 			utils.buf_keymap(bufnr, "n", "<<", "10<c-w><")
