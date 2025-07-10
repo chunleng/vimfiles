@@ -8,6 +8,17 @@ local function setup_mason_sync_command()
 		local packages = reg.get_installed_packages()
 		local version_lookup = {}
 
+		for _, new_path in ipairs({
+			vim.fn.getenv("HOME") .. "/.asdf/installs/nodejs/18.16.1/bin",
+			vim.fn.getenv("HOME") .. "/.asdf/installs/python/3.12.11/bin",
+		}) do
+			vim.fn.setenv("PATH", new_path .. ":" .. vim.fn.getenv("PATH"))
+		end
+		vim.notify(
+			"PATH environment has been altered for :MasonInstall to work, this causes some changes in binary priority",
+			vim.log.levels.WARN
+		)
+
 		for _, package in ipairs(packages) do
 			local source_id = package:get_receipt()._value.primary_source.id
 			local last_part = source_id
