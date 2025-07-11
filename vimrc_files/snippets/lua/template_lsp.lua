@@ -198,7 +198,8 @@ table.insert(
 					-- 	classRegex = {"class: \"(.*)\""}
 					-- }
 				}
-			}
+			},
+			workspace_required = false
 		}, require("config.lsp").default_setup.tailwindcss)
 	)
 ]],
