@@ -43,6 +43,7 @@ local function setup_mason_sync_command()
 			{ name = "pyright", version = "1.1.322" },
 			{ name = "rust-analyzer", version = "2025-06-30" },
 			{ name = "tailwindcss-language-server", version = "0.14.12" },
+			{ name = "taplo", version = "0.9.3" },
 			{ name = "terraform-ls", version = "v0.36.3" },
 			{ name = "typescript-language-server", version = "4.3.3" },
 			{ name = "vim-language-server", version = "2.3.1" },
@@ -325,6 +326,9 @@ M.default_setup = {
 	tailwindcss = {
 		on_attach = M.common_on_attach,
 		settings = { tailwindCSS = { emmetCompletions = true } },
+	},
+	taplo = {
+		on_attach = M.common_on_attach,
 	},
 	ts_ls = {
 		on_attach = function(client, bufnr)

@@ -135,6 +135,9 @@ table.insert(
 			-- require("none-ls.diagnostics.ruff"),
 		}
 	})
+
+	-- For pyproject.toml
+	require("lspconfig").taplo.setup(require("config.lsp").default_setup.taplo)
 ]],
 			{}
 		)
@@ -176,6 +179,9 @@ table.insert(
 			-- require("null-ls").builtins.formatting.dxfmt
 		}
 	})
+
+	-- For Cargo.toml
+	require("lspconfig").taplo.setup(require("config.lsp").default_setup.taplo)
 ]],
 			{}
 		)
@@ -215,6 +221,19 @@ table.insert(
 		fmta(
 			[[
 	require("lspconfig").yamlls.setup(require("config.lsp").default_setup.yamlls)
+]],
+			{}
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
+		{ trig = "----lsp/toml/init", dscr = "Template for toml lsp" },
+		fmta(
+			[[
+	require("lspconfig").taplo.setup(require("config.lsp").default_setup.taplo)
 ]],
 			{}
 		)
