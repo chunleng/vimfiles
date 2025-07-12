@@ -34,6 +34,7 @@ function M.setup()
 			"make",
 			"markdown",
 			"markdown_inline",
+			"proto",
 			"python",
 			"regex",
 			"ruby",

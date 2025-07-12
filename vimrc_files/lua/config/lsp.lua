@@ -11,6 +11,7 @@ local function setup_mason_sync_command()
 		for _, new_path in ipairs({
 			vim.fn.getenv("HOME") .. "/.asdf/installs/nodejs/18.16.1/bin",
 			vim.fn.getenv("HOME") .. "/.asdf/installs/python/3.12.11/bin",
+			vim.fn.getenv("HOME") .. "/.asdf/installs/rust/1.88.0/toolchains/1.88.0-aarch64-apple-darwin/bin",
 		}) do
 			vim.fn.setenv("PATH", new_path .. ":" .. vim.fn.getenv("PATH"))
 		end
@@ -40,6 +41,7 @@ local function setup_mason_sync_command()
 			{ name = "json-lsp", version = "4.7.0" },
 			{ name = "ltex-ls", version = "16.0.0" },
 			{ name = "lua-language-server", version = "3.13.2" },
+			{ name = "protols", version = "0.12.7" },
 			{ name = "pyright", version = "1.1.322" },
 			{ name = "rust-analyzer", version = "2025-06-30" },
 			{ name = "tailwindcss-language-server", version = "0.14.12" },
@@ -313,6 +315,9 @@ M.default_setup = {
 				workspace = { checkThirdParty = false },
 			},
 		},
+	},
+	protols = {
+		on_attach = M.common_on_attach,
 	},
 	pyright = {
 		on_attach = M.common_on_attach,

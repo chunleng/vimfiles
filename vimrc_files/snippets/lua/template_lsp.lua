@@ -240,5 +240,18 @@ table.insert(
 	)
 )
 
+table.insert(
+	M,
+	s(
+		{ trig = "----lsp/protobuf/init", dscr = "Template for protobuf lsp" },
+		fmta(
+			[[
+	require("lspconfig").protols.setup(require("config.lsp").default_setup.protols)
+]],
+			{}
+		)
+	)
+)
+
 return M
 -- vim: noet
