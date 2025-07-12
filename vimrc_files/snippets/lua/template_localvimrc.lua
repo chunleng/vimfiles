@@ -26,7 +26,12 @@ table.insert(
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		pattern = "*",
 		callback = function()
+			local filename = args.file or ""
+			-- Uncomment following to exclude filetype
+			-- if not filename:match("%.ext$") then
 			vim.cmd("silent! lua vim.lsp.buf.format({ timeout_ms = 5000 })")
+			-- end
+
 		end,
 	})
 ]],
