@@ -114,7 +114,9 @@ local function setup_dap()
 
 	utils.keymap("n", "<leader>db", "<cmd>DapToggleBreakpoint<cr>")
 	utils.keymap("n", "<leader>dc", "<cmd>DapContinue<cr>")
-	utils.keymap("n", "<leader>dd", '<cmd>lua require("dap").run_last()<cr>')
+	utils.keymap("n", "<leader>dd", function()
+		dap.run_last()
+	end)
 	utils.keymap("n", { "<leader>dl", "<right>" }, "<cmd>DapStepOver<cr>")
 	utils.keymap("n", { "<leader>dj", "<down>" }, "<cmd>DapStepInto<cr>")
 	utils.keymap("n", { "<leader>dk", "<up>" }, "<cmd>DapStepOut<cr>")
@@ -226,8 +228,20 @@ end
 function M.common_on_attach(_, bufnr)
 	-- Insert keymap that might override default ones
 	utils.buf_keymap(bufnr, "n", "gd", "<cmd>FzfLua lsp_definitions<cr>")
-	utils.buf_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
-	utils.buf_keymap(bufnr, "v", "=", ":'<,'>lua vim.lsp.buf.range_formatting()<cr>")
+	utils.buf_keymap(bufnr, "n", "K", function()
+		vim.lsp.buf.hover()
+	end)
+	utils.buf_keymap(bufnr, "v", "=", function()
+		local start_pos = vim.fn.getpos("'<")
+		local end_pos = vim.fn.getpos("'>")
+
+		vim.lsp.buf.format({
+			range = {
+				["start"] = { start_pos[2] - 1, start_pos[3] },
+				["end"] = { end_pos[2] - 1, end_pos[3] },
+			},
+		})
+	end)
 end
 
 local jdtls_workspace = os.getenv("HOME") .. "/.java-workspace"
