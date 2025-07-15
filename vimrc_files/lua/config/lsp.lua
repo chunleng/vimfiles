@@ -330,6 +330,10 @@ M.default_setup = {
 	},
 	pyright = {
 		on_attach = M.common_on_attach,
+		cmd = { "pyright-langserver", "--stdio" },
+		cmd_env = {
+			PATH = vim.env.HOME .. "/.asdf/installs/nodejs/18.16.1/bin/:" .. vim.env.PATH,
+		},
 	},
 	rust_analyzer = {
 		on_attach = M.common_on_attach,
