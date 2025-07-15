@@ -597,7 +597,8 @@ require("lazy").setup({
 				local queries = {}
 				for _, file in ipairs(require("vim.treesitter.query").get_files(lang, "highlights")) do
 					for _, line in ipairs(vim.fn.readfile(file)) do
-						local line_sub = line:gsub([[%(#set! conceal ""%)]], "")
+						local line_sub = line:gsub([[%(#set! conceal_lines ""%)]], "")
+						line_sub = line_sub:gsub([[%(#set! conceal ""%)]], "")
 						table.insert(queries, line_sub)
 					end
 				end
