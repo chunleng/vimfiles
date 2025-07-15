@@ -462,9 +462,10 @@ require("lazy").setup({
 						choice = "Vim Local RC",
 						func = function()
 							vim.cmd([[
-                            silent !mkdir -p .vim
-                            edit .vim/local.lua
-                        ]])
+							silent !mkdir -p .vim
+							silent !pushd .vim && asdf set stylua 2.1.0 && popd
+							edit .vim/local.lua
+						]])
 						end,
 					},
 					{
