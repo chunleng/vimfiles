@@ -103,7 +103,7 @@ table.insert(
 		{ trig = "----lsp/markdown/init", dscr = "Template for markdown lsp" },
 		fmta(
 			[[
-	require("lspconfig").ltex.setup(require("config.lsp").default_setup.ltex)
+	require("lspconfig").ltex_plus.setup(require("config.lsp").default_setup.ltex)
 	require("null-ls").setup({
 		sources = {
 			require("null-ls").builtins.diagnostics.markdownlint

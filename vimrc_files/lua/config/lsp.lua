@@ -34,7 +34,7 @@ local function setup_mason_sync_command()
 			{ name = "html-lsp", version = "4.10.0" },
 			{ name = "jdtls", version = "v1.46.1" },
 			{ name = "json-lsp", version = "4.10.0" },
-			{ name = "ltex-ls", version = "16.0.0" },
+			{ name = "ltex-ls-plus", version = "18.5.1" },
 			{ name = "lua-language-server", version = "3.15.0" },
 			{ name = "protols", version = "0.12.7" },
 			{ name = "pyright", version = "1.1.403" },
@@ -308,6 +308,9 @@ M.default_setup = {
 			root_dir = function()
 				return vim.fn.getcwd()
 			end,
+			cmd_env = {
+				JAVA_HOME = vim.env.HOME .. "/.asdf/installs/java/adoptopenjdk-21.0.0+35.0.LTS",
+			},
 		}
 	end)(),
 	lua_ls = {
