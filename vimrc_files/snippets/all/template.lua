@@ -61,7 +61,7 @@ table.insert(
 	<>
 ]],
 			{ f(function()
-				return os.time()
+				return tostring(os.time())
 			end) }
 		)
 	)
