@@ -18,6 +18,28 @@ table.insert(
 table.insert(
 	M,
 	s(
+		{ trig = "----uuid", dscr = "Insert randomly generated UUID" },
+		fmta(
+			[[
+	<>
+]],
+			{
+				f(function()
+					local random = math.random
+					local template = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx"
+					return string.gsub(template, "[xy]", function(c)
+						local v = (c == "x") and random(0, 15) or random(8, 11)
+						return string.format("%x", v)
+					end)
+				end),
+			}
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
 		{ trig = "----time", dscr = "Insert current time" },
 		fmta(
 			[[
