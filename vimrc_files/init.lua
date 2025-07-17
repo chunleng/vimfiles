@@ -92,6 +92,7 @@ require("lazy").setup({
 		-- https://github.com/nvim-lua/plenary.nvim
 		"lewis6991/gitsigns.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		version = "*",
 		config = function()
 			require("config.gitsigns").setup()
 		end,
