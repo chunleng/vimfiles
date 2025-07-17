@@ -333,9 +333,12 @@ M.default_setup = {
 	},
 	pyright = {
 		on_attach = M.common_on_attach,
-		cmd = { "pyright-langserver", "--stdio" },
 		cmd_env = {
-			PATH = vim.env.HOME .. "/.asdf/installs/nodejs/18.16.1/bin/:" .. vim.env.PATH,
+			PATH = vim.env.HOME
+				.. "/.asdf/installs/nodejs/18.16.1/bin/:"
+				.. vim.env.HOME
+				.. "/.local/share/nvim/mason/bin:"
+				.. vim.env.PATH,
 		},
 	},
 	rust_analyzer = {
@@ -363,6 +366,13 @@ M.default_setup = {
 	yamlls = {
 		on_attach = M.common_on_attach,
 		settings = { yaml = { format = { enable = true } } },
+		cmd_env = {
+			PATH = vim.env.HOME
+				.. "/.asdf/installs/nodejs/18.16.1/bin/:"
+				.. vim.env.HOME
+				.. "/.local/share/nvim/mason/bin:"
+				.. vim.env.PATH,
+		},
 	},
 }
 
