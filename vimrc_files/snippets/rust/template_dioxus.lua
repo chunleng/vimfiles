@@ -40,9 +40,24 @@ table.insert(
 		{ trig = "----dioxus/signal", dscr = "Template for dioxus signal" },
 		fmta(
 			[[
-	let <> = use_signal(|| <>);<>
+	let mut <> = use_signal(|| <>);<>
 ]],
 			{ i(1, "loading"), i(2, "false"), i(0) }
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
+		{ trig = "----dioxus/use_effect", dscr = "Template for dioxus effect" },
+		fmta(
+			[[
+	use_effect(|| {
+		<>
+	});
+]],
+			{ i(0) }
 		)
 	)
 )
