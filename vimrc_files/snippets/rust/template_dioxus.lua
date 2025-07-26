@@ -62,5 +62,18 @@ table.insert(
 	)
 )
 
+table.insert(
+	M,
+	s(
+		{ trig = "&nbsp;", dscr = "Insert a non-breaking space in Dioxus" },
+		fmta(
+			[[
+	\u{00A0}
+]],
+			{}
+		)
+	)
+)
+
 return M
 -- vim: noet

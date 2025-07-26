@@ -192,11 +192,11 @@ table.insert(
 		fmta(
 			[[
 	match <> {
-		<> =>> {},
-		_ =>> {}
+		Ok(x) =>> {},
+		Err(e) =>> {}
 	}
 ]],
-			{ v(1, "var_a"), i(0, "var_b") }
+			{ v(0, "var_a") }
 		)
 	)
 )
