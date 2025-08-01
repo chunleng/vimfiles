@@ -196,7 +196,7 @@ table.insert(
 		Err(e) =>> {}
 	}
 ]],
-			{ v(0, "var_a") }
+			{ v(1, "var_a") }
 		)
 	)
 )
