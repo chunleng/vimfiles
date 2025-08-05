@@ -15,4 +15,4 @@ ln -sfn ${APP_PATH}/vimrc_files/snippets $HOME/.config/nvim/snippets
 ln -sfn ${APP_PATH}/mason-lock.json $HOME/.config/nvim/
 
 test -d ${LAZY_INSTALL_DIR} || \
-    git clone --filter=blob:none https://github.com/folke/lazy.nvim.git --branch=${LAZY_GIT_TAG} ${LAZY_INSTALL_DIR}
+    git clone --filter=blob:none https://github.com/folke/lazy.nvim.git ${LAZY_INSTALL_DIR}
