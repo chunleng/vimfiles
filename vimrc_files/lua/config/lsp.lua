@@ -289,6 +289,13 @@ M.default_setup = {
 			{ textDocument = { completion = { completionItem = { snippetSupport = true } } } },
 			vim.lsp.protocol.make_client_capabilities()
 		),
+		cmd_env = {
+			PATH = vim.env.HOME
+				.. "/.asdf/installs/nodejs/18.16.1/bin/:"
+				.. vim.env.HOME
+				.. "/.local/share/nvim/mason/bin:"
+				.. vim.env.PATH,
+		},
 	},
 	ltex = (function()
 		local dict_path = vim.fn.getcwd() .. "/.vim/ltex.dictionary.en-US.txt"
