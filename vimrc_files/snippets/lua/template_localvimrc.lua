@@ -25,7 +25,7 @@ table.insert(
 	--------------------------------
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		pattern = "*",
-		callback = function()
+		callback = function(args)
 			local filename = args.file or ""
 			-- Uncomment following to exclude filetype
 			-- if not filename:match("%.ext$") then
