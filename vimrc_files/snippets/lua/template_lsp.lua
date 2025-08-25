@@ -220,7 +220,13 @@ table.insert(
 		{ trig = "----lsp/yaml/init", dscr = "Template for yaml lsp" },
 		fmta(
 			[[
-	require("lspconfig").yamlls.setup(require("config.lsp").default_setup.yamlls)
+	local yaml_config = require("config.lsp").default_setup.yamlls
+	yaml_config.settings.yaml.schemas = {
+		-- https://www.schemastore.org/
+		-- ["https://www.schemastore.org/..."] = "**/*.{yml,yaml}"
+	}
+	require("lspconfig").yamlls.setup(yaml_config)
+
 ]],
 			{}
 		)
