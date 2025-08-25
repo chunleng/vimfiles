@@ -1,6 +1,7 @@
 local M = {}
 
 local utils = require("common-utils")
+local constant = require("constant")
 
 local function setup_mason_sync_command()
 	vim.api.nvim_create_user_command("MasonSync", function()
@@ -9,9 +10,9 @@ local function setup_mason_sync_command()
 		local version_lookup = {}
 
 		for _, new_path in ipairs({
-			vim.fn.getenv("HOME") .. "/.asdf/installs/nodejs/18.16.1/bin",
-			vim.fn.getenv("HOME") .. "/.asdf/installs/python/3.12.11/bin",
-			vim.fn.getenv("HOME") .. "/.asdf/installs/rust/1.88.0/toolchains/1.88.0-aarch64-apple-darwin/bin",
+			constant.NODEJS_PATH,
+			constant.PYTHON_PATH,
+			constant.RUST_PATH,
 		}) do
 			vim.fn.setenv("PATH", new_path .. ":" .. vim.fn.getenv("PATH"))
 		end
@@ -206,6 +207,11 @@ local function setup_dap()
 	end
 end
 
+local function get_mason_path_with_nodejs()
+	local mason_path = vim.env.HOME .. "/.local/share/nvim/mason/bin"
+	return constant.NODEJS_PATH .. ":" .. mason_path .. ":" .. vim.env.PATH
+end
+
 function M.setup()
 	require("mason").setup({
 		registries = {
@@ -238,8 +244,6 @@ function M.common_on_attach(_, bufnr)
 		})
 	end)
 end
-
-local jdtls_workspace = os.getenv("HOME") .. "/.java-workspace"
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 M.default_setup = {
@@ -290,11 +294,7 @@ M.default_setup = {
 			vim.lsp.protocol.make_client_capabilities()
 		),
 		cmd_env = {
-			PATH = vim.env.HOME
-				.. "/.asdf/installs/nodejs/18.16.1/bin/:"
-				.. vim.env.HOME
-				.. "/.local/share/nvim/mason/bin:"
-				.. vim.env.PATH,
+			PATH = get_mason_path_with_nodejs(),
 		},
 	},
 	ltex = (function()
@@ -316,7 +316,7 @@ M.default_setup = {
 				return vim.fn.getcwd()
 			end,
 			cmd_env = {
-				JAVA_HOME = vim.env.HOME .. "/.asdf/installs/java/adoptopenjdk-21.0.0+35.0.LTS",
+				JAVA_HOME = constant.JAVA_HOME,
 			},
 		}
 	end)(),
@@ -341,11 +341,7 @@ M.default_setup = {
 	pyright = {
 		on_attach = M.common_on_attach,
 		cmd_env = {
-			PATH = vim.env.HOME
-				.. "/.asdf/installs/nodejs/18.16.1/bin/:"
-				.. vim.env.HOME
-				.. "/.local/share/nvim/mason/bin:"
-				.. vim.env.PATH,
+			PATH = get_mason_path_with_nodejs(),
 		},
 	},
 	rust_analyzer = {
@@ -374,11 +370,7 @@ M.default_setup = {
 		on_attach = M.common_on_attach,
 		settings = { yaml = { format = { enable = true } } },
 		cmd_env = {
-			PATH = vim.env.HOME
-				.. "/.asdf/installs/nodejs/18.16.1/bin/:"
-				.. vim.env.HOME
-				.. "/.local/share/nvim/mason/bin:"
-				.. vim.env.PATH,
+			PATH = get_mason_path_with_nodejs(),
 		},
 	},
 }
