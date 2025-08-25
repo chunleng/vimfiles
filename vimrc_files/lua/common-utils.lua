@@ -1,22 +1,5 @@
 local M = {}
 
-local function configure_provider()
-	local homedir = os.getenv("HOME")
-
-	if vim.fn.filereadable(homedir .. "/.asdf/installs/python/3.11.4/bin/python3") == 1 then
-		-- Allow running of correct version even if using virtualenv
-		vim.g.python3_host_prog = 'zsh --login --interactive -c "asdf shell python 3.11.4 && python"'
-	end
-
-	if vim.fn.filereadable(homedir .. "/.asdf/installs/nodejs/18.16.1/bin/neovim-node-host") == 1 then
-		vim.g.node_host_prog = homedir .. "/.asdf/installs/nodejs/18.16.1/bin/neovim-node-host"
-	end
-
-	if vim.fn.filereadable(homedir .. "/.gem/bin/neovim-ruby-host") == 1 then
-		vim.g.neovim_host_prog = homedir .. "/.gem/bin/neovim-ruby-host"
-	end
-end
-
 local function configure_preferred_settings()
 	vim.o.number = true
 	vim.o.relativenumber = true
@@ -264,7 +247,6 @@ local function configure_vim_diagnostics()
 end
 
 function M.setup()
-	configure_provider()
 	configure_preferred_settings()
 	configure_preferred_mappings()
 	configure_autogroup()
