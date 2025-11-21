@@ -39,7 +39,7 @@ local function setup_mason_sync_command()
 			{ name = "lua-language-server", version = "3.15.0" },
 			{ name = "protols", version = "0.12.7" },
 			{ name = "pyright", version = "1.1.403" },
-			{ name = "rust-analyzer", version = "2025-07-14" },
+			{ name = "rust-analyzer", version = "2025-11-17" },
 			{ name = "tailwindcss-language-server", version = "0.14.25" },
 			{ name = "taplo", version = "0.10.0" },
 			{ name = "terraform-ls", version = "v0.36.5" },
