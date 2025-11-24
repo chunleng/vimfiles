@@ -797,7 +797,6 @@ require("lazy").setup({
 		-- https://github.com/hrsh7th/cmp-nvim-lsp
 		-- https://github.com/nvim-tree/nvim-web-devicons
 		"yetone/avante.nvim",
-		version = "*",
 		event = "VeryLazy",
 		build = "make",
 		dependencies = {
@@ -815,7 +814,7 @@ require("lazy").setup({
 				providers = {
 					claude = {
 						endpoint = "https://api.anthropic.com",
-						model = "claude-3-7-sonnet-latest",
+						model = "claude-sonnet-4-5",
 						timeout = 30000, -- Timeout in milliseconds
 						extra_request_body = {
 							temperature = 0,
@@ -824,7 +823,7 @@ require("lazy").setup({
 					},
 					claude_fast = {
 						__inherited_from = "claude",
-						model = "claude-3-haiku-20240307",
+						model = "claude-3-haiku-20241022",
 					},
 				},
 				-- Enable default mapping for now as visual selection does not work properly
