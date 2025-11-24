@@ -1,17 +1,53 @@
 local M = {}
 
 local utils = require("common-utils")
-local ai = require("config.ai")
-local gp = require("gp")
+local avante = require("avante.api")
 local neogen = require("neogen")
+
+local function avante_edit(request)
+	request = request or ""
+	local start_line, end_line
+	local mode = vim.fn.mode()
+
+	if mode == "v" or mode == "V" or mode == "\22" then
+		-- Visual mode: get visual selection range
+		start_line = vim.fn.line("'<")
+		end_line = vim.fn.line("'>")
+	else
+		-- Fallback for other modes
+		start_line = vim.fn.line(".")
+		end_line = vim.fn.line(".")
+	end
+
+	avante.edit(request, start_line, end_line)
+end
+
+local function avante_ask_about_selection(question)
+	local start_line = vim.fn.line("'<")
+	local end_line = vim.fn.line("'>")
+	avante.ask({
+		question = string.format("Using only line %d to %d of the selected file. %s", start_line, end_line, question),
+		new_chat = true,
+	})
+end
 
 local function insertion_actions()
 	utils.keymap({ "n", "i" }, "<c-space>", function()
 		utils.action_menu({
 			{
-				choice = "Avante",
+				choice = "AI: Complete code",
 				func = function()
-					vim.cmd("AvanteAsk")
+					avante_edit(
+						"Complete code, replacing only the current line with valid code. "
+							.. "Please do not attempt to correct code on other lines"
+					)
+				end,
+				ft = utils.prog_and_cfg_lang,
+			},
+			{
+				choice = "AI: Edit line",
+				func = function()
+					avante_edit()
 				end,
 			},
 			{
@@ -42,27 +78,6 @@ local function insertion_actions()
 				end,
 				ft = { "markdown" },
 			},
-			{
-				choice = "Programmer: Complete Code",
-				func = function()
-					ai.send(ai.agent.programmer_code, { range_type = ai.RangeType.ALL_BEFORE })
-				end,
-				ft = utils.prog_and_cfg_lang,
-			},
-			{
-				choice = "Casual Writer: Write Article",
-				func = function()
-					ai.send(ai.agent.casual_writer, { range_type = ai.RangeType.ALL_BEFORE })
-				end,
-				ft = utils.text_languages,
-			},
-			{
-				choice = "Technical Writer: Write technical documents",
-				func = function()
-					ai.send(ai.agent.technical_writer, { range_type = ai.RangeType.ALL_BEFORE })
-				end,
-				ft = utils.text_languages,
-			},
 		})
 	end, { silent = false })
 end
@@ -71,78 +86,43 @@ local function selection_actions()
 	utils.keymap("v", "<c-space>", function()
 		utils.action_menu({
 			{
-				choice = "Avante",
+				choice = "AI: Edit selected line(s)",
 				func = function()
-					vim.cmd("AvanteAsk")
+					avante_edit()
 				end,
 			},
 			{
-				choice = "Add ZK link at selection",
+				choice = "ZK: Add ZK link at selection",
 				func = function()
 					vim.cmd("'<,'>ZkInsertLinkAtSelection")
 				end,
 				ft = { "markdown" },
 			},
 			{
-				choice = "Programmer: Refine Code",
+				choice = "AI: Summarize Code",
 				func = function()
-					ai.send(ai.agent.programmer_code, { target = gp.Target.rewrite })
-				end,
-				ft = utils.prog_and_cfg_lang,
-			},
-			{
-				choice = "Programmer: Ask",
-				func = function()
-					ai.send(ai.agent.programmer_chat, { target = gp.Target.vnew("markdown") })
-				end,
-				ft = utils.prog_and_cfg_lang,
-			},
-			{
-				choice = "Programmer: Summarize Code",
-				func = function()
-					ai.send(ai.agent.programmer_chat, {
-						template = "Please understand what the code is trying to do and respond with a summary the "
-							.. "core logic in steps. Please remove unnecessary comments that are not useful for "
-							.. "understanding the big picture of what the code is doing, e.g. import or printing",
-						target = gp.Target.vnew("markdown"),
-					})
-				end,
-				ft = utils.prog_and_cfg_lang,
-			},
-			{
-				choice = "Programmer: Code Review",
-				func = function()
-					ai.send(ai.agent.programmer_chat, {
-						template = "Please analyze for code smells and suggest improvements that can make code "
-							.. "easier to read.",
-						target = gp.Target.vnew("markdown"),
-					})
-				end,
-				ft = utils.prog_and_cfg_lang,
-			},
-			{
-				choice = "Programmer: Write Unit Test",
-				func = function()
-					ai.send(ai.agent.programmer_code, {
-						template = "Please implement the unit test for the selected code. Give me only the code snippet",
-						target = gp.Target.enew,
-					})
+					avante_ask_about_selection(
+						"Please try and understand what the code is trying to do and respond with the core logic in steps. "
+							.. "Please do not include code or comments that are not useful for the understanding, such as import or printing"
+					)
 				end,
 				ft = utils.programming_languages,
 			},
 			{
-				choice = "Casual Writer: Refine Writing",
+				choice = "AI: Write Unit Test",
 				func = function()
-					ai.send(ai.agent.casual_writer, { target = gp.Target.rewrite })
+					avante_ask_about_selection("Please implement the unit test for the selected code")
 				end,
-				ft = utils.text_languages,
+				ft = utils.programming_languages,
 			},
 			{
-				choice = "Technical Writer: Refine Writing",
+				choice = "AI: Review Code",
 				func = function()
-					ai.send(ai.agent.technical_writer, { target = gp.Target.rewrite })
+					avante_ask_about_selection(
+						"Please analyze for code smells and suggest improvements that can make code easier to read"
+					)
 				end,
-				ft = utils.text_languages,
+				ft = utils.programming_languages,
 			},
 		})
 	end)

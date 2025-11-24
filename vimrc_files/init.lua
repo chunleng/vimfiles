@@ -582,13 +582,6 @@ require("lazy").setup({
 		end,
 	},
 	{
-		-- https://github.com/Robitx/gp.nvim
-		"Robitx/gp.nvim",
-		config = function()
-			require("config.ai").setup()
-		end,
-	},
-	{
 		-- https://github.com/tpope/vim-projectionist
 		"tpope/vim-projectionist",
 		config = function()
@@ -793,12 +786,11 @@ require("lazy").setup({
 	{
 		-- Autocompletion menu
 		-- https://github.com/yetone/avante.nvim
-		-- https://github.com/Robitx/gp.nvim
 		-- https://github.com/danymat/neogen
 		-- https://github.com/mickael-menu/zk-nvim
 		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_c_space/",
 		name = "resolve_c_space",
-		dependencies = { "Robitx/gp.nvim", "danymat/neogen", "mickael-menu/zk-nvim", "yetone/avante.nvim" },
+		dependencies = { "danymat/neogen", "mickael-menu/zk-nvim", "yetone/avante.nvim" },
 		config = function()
 			require("config.c-space-completion").setup()
 		end,

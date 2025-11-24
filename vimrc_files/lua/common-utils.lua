@@ -26,7 +26,7 @@ local function configure_preferred_settings()
 end
 
 local function configure_preferred_mappings()
-	M.keymap("n", "<esc>", "<cmd>nohl<cr><cmd>GpStop<cr>")
+	M.keymap("n", "<esc>", "<cmd>nohl<cr><cmd>AvanteStop<cr>")
 
 	M.keymap("n", "<leader>td", function()
 		local toggled_config = vim.diagnostic.config()["virtual_lines"]
