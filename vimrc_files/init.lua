@@ -813,6 +813,7 @@ require("lazy").setup({
 		config = function()
 			local utils = require("common-utils")
 			local avante = require("avante")
+			local avante_api = require("avante.api")
 			avante.setup({
 				-- TODO update the config to use .vim folder when the setting bug is fixed. Currently it does not
 				-- reflect the settings properly
@@ -865,6 +866,13 @@ require("lazy").setup({
 				callback = function(opt)
 					utils.buf_keymap(opt.buf, "n", "q", function()
 						avante.toggle_sidebar()
+					end)
+					utils.buf_keymap(opt.buf, "n", "<c-s-h>", function()
+						avante_api.select_history()
+					end)
+					utils.buf_keymap(opt.buf, "n", "<cr>", function()
+						local sidebar = avante.get()
+						sidebar.file_selector:show_selector_ui()
 					end)
 				end,
 				group = group_name,
