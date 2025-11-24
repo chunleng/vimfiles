@@ -256,6 +256,8 @@ require("lazy").setup({
 	{
 		-- https://github.com/Saghen/blink.cmp
 		-- https://github.com/kristijanhusak/vim-dadbod-completion
+		-- https://github.com/L3MON4D3/LuaSnip
+		-- https://github.com/Kaiser-Yang/blink-cmp-avante
 		"Saghen/blink.cmp",
 		version = "1.*",
 		config = function()
@@ -346,7 +348,7 @@ require("lazy").setup({
 				},
 				snippets = { preset = "luasnip" },
 				sources = {
-					default = { "snippets", "lsp", "path", "buffer" },
+					default = { "avante", "snippets", "lsp", "path", "buffer" },
 					per_filetype = {
 						sql = { "snippets", "dadbod", "buffer" },
 					},
@@ -357,6 +359,7 @@ require("lazy").setup({
 								tailwind_color_icon = tailwind_color_icon,
 							},
 						},
+						avante = { name = "Avante", module = "blink-cmp-avante" },
 					},
 				},
 				completion = {
@@ -398,7 +401,7 @@ require("lazy").setup({
 			theme.set_hl("BlinkCmpLabelDeprecated", { strikethrough = true, fg = theme.blender.fg_darker_3 })
 			theme.set_hl("BlinkCmpKind", { fg = 12 })
 		end,
-		dependencies = { "kristijanhusak/vim-dadbod-completion", "L3MON4D3/LuaSnip" },
+		dependencies = { "kristijanhusak/vim-dadbod-completion", "L3MON4D3/LuaSnip", "Kaiser-Yang/blink-cmp-avante" },
 	},
 	{
 		-- https://github.com/L3MON4D3/LuaSnip
