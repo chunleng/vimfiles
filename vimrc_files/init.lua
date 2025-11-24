@@ -794,8 +794,8 @@ require("lazy").setup({
 		-- https://github.com/yetone/avante.nvim
 		-- https://github.com/nvim-lua/plenary.nvim
 		-- https://github.com/MunifTanjim/nui.nvim
-		-- https://github.com/hrsh7th/cmp-nvim-lsp
 		-- https://github.com/nvim-tree/nvim-web-devicons
+		-- https://github.com/stevearc/dressing.nvim
 		"yetone/avante.nvim",
 		event = "VeryLazy",
 		build = "make",
@@ -803,12 +803,12 @@ require("lazy").setup({
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 			"nvim-tree/nvim-web-devicons",
+			"stevearc/dressing.nvim",
 		},
 		config = function()
 			local utils = require("common-utils")
 			local avante = require("avante")
 			avante.setup({
-				hints = { enabled = false },
 				provider = "claude",
 				auto_suggestions_provider = "claude_fast",
 				providers = {
@@ -826,40 +826,21 @@ require("lazy").setup({
 						model = "claude-3-haiku-20241022",
 					},
 				},
-				-- Enable default mapping for now as visual selection does not work properly
-				-- behaviour = {
-				-- 	auto_set_keymaps = false,
-				-- },
+				selection = {
+					enabled = false,
+				},
 				mappings = {
-					-- Using U+2800 (braille pattern blank) to void keys
-					diff = {
-						ours = "⠀",
-						theirs = "⠀",
-						all_theirs = "⠀",
-						both = "⠀",
-						cursor = "<c-->",
-						next = "<c-.>s",
-						prev = "<c-,>s",
-					},
-					suggestion = {
-						accept = "⠀",
-						next = "⠀",
-						prev = "⠀",
-						dismiss = "⠀",
-					},
-					jump = {
-						next = "<c-.>s",
-						prev = "<c-,>s",
-					},
 					submit = {
 						normal = "<c-cr>",
 						insert = "<c-cr>",
 					},
 					sidebar = {
-						apply_all = "⠀",
-						apply_cursor = "<c-->",
-						switch_windows = "⠀",
-						reverse_switch_windows = "⠀",
+						apply_all = "<c-cr>",
+						apply_cursor = "<cr>",
+						switch_windows = "<tab>",
+						reverse_switch_windows = "<s-tab>",
+						remove_file = "x",
+						add_file = "a",
 					},
 				},
 			})
