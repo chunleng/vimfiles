@@ -837,6 +837,12 @@ require("lazy").setup({
 				selection = {
 					enabled = false,
 				},
+				windows = {
+					width = 50,
+					input = {
+						prefix = "▶ ",
+					},
+				},
 				mappings = {
 					submit = {
 						normal = "<c-cr>",
