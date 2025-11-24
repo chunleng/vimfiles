@@ -447,9 +447,10 @@ require("lazy").setup({
 	{
 		-- https://github.com/L3MON4D3/LuaSnip
 		-- https://github.com/embear/vim-localvimrc
+		-- https://github.com/yetone/avante.nvim
 		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_rc_menu/",
 		name = "resolve_rc_menu",
-		dependencies = { "L3MON4D3/LuaSnip", "embear/vim-localvimrc" },
+		dependencies = { "L3MON4D3/LuaSnip", "embear/vim-localvimrc", "yetone/avante.nvim" },
 		config = function()
 			local utils = require("common-utils")
 			utils.keymap("n", "<c-s-r>", function()
@@ -470,6 +471,18 @@ require("lazy").setup({
 						]])
 						end,
 					},
+					{
+						choice = "Avante.md",
+						func = function()
+							vim.cmd([[
+							silent !mkdir -p .vim
+							silent !touch .vim/avante.md
+							silent !ln -sfn .vim/avante.md avante.md
+							edit ./avante.md
+						]])
+						end,
+					},
+
 					{
 						choice = "Direnvrc",
 						func = function()
@@ -809,6 +822,9 @@ require("lazy").setup({
 			local utils = require("common-utils")
 			local avante = require("avante")
 			avante.setup({
+				-- TODO update the config to use .vim folder when the setting bug is fixed. Currently it does not
+				-- reflect the settings properly
+				-- instructions_file = "./.vim/avante.md",
 				provider = "claude",
 				auto_suggestions_provider = "claude_fast",
 				providers = {
