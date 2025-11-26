@@ -480,7 +480,8 @@ require("lazy").setup({
 							vim.cmd([[
 							silent !mkdir -p .vim
 							silent !touch .vim/avante.md
-							silent !ln -sfn .vim/avante.md avante.md
+							silent !ln -sn .vim/avante.md avante.md
+							silent !ln -sn .vim/avante.md CLAUDE.local.md
 							edit ./avante.md
 						]])
 						end,
@@ -817,11 +818,12 @@ require("lazy").setup({
 			local utils = require("common-utils")
 			local avante = require("avante")
 			local avante_api = require("avante.api")
+			local constant = require("constant")
 			avante.setup({
 				-- TODO update the config to use .vim folder when the setting bug is fixed. Currently it does not
 				-- reflect the settings properly
 				-- instructions_file = "./.vim/avante.md",
-				provider = "claude",
+				provider = "claude-code",
 				providers = {
 					claude = {
 						endpoint = "https://api.anthropic.com",
@@ -830,6 +832,18 @@ require("lazy").setup({
 						extra_request_body = {
 							temperature = 0,
 							max_tokens = 4096,
+						},
+					},
+				},
+				acp_providers = {
+					["claude-code"] = {
+						command = constant.NODEJS_PATH .. "/node",
+						args = {
+							constant.NODEJS_MODULES .. "/@zed-industries/claude-code-acp/dist/index.js",
+						},
+						env = {
+							NODE_NO_WARNINGS = "1",
+							ANTHROPIC_API_KEY = "", -- Ensure no accidental use of API key
 						},
 					},
 				},
