@@ -822,7 +822,6 @@ require("lazy").setup({
 				-- reflect the settings properly
 				-- instructions_file = "./.vim/avante.md",
 				provider = "claude",
-				auto_suggestions_provider = "claude_fast",
 				providers = {
 					claude = {
 						endpoint = "https://api.anthropic.com",
@@ -832,10 +831,6 @@ require("lazy").setup({
 							temperature = 0,
 							max_tokens = 4096,
 						},
-					},
-					claude_fast = {
-						__inherited_from = "claude",
-						model = "claude-3-haiku-20241022",
 					},
 				},
 				selection = {
