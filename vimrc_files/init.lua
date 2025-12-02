@@ -693,48 +693,6 @@ require("lazy").setup({
 	{
 		-- https://github.com/mickael-menu/zk-nvim
 		"mickael-menu/zk-nvim",
-		config = function()
-			require("zk").setup()
-			local utils = require("common-utils")
-			-- Check if folder is ZK Enabled
-			if vim.fn.filereadable(".zk/notebook.db") == 0 then
-				return
-			end
-			utils.keymap({ "n" }, "<c-s-n>", function()
-				utils.action_menu({
-					{
-						choice = "Today's Journal",
-						func = function()
-							-- Get timestamp 6 hours ago (6 * 60 * 60 = 21600 seconds)
-							local time_6h_ago = os.time() - 21600
-							local folder = os.date("./journal/%Y/%m", time_6h_ago)
-							local file = folder .. "/" .. os.date("%Y%m%d.md", time_6h_ago)
-							os.execute("mkdir -p " .. folder)
-							os.execute("touch " .. file)
-							vim.cmd("e " .. file)
-						end,
-					},
-					{
-						choice = "Tags",
-						func = function()
-							vim.cmd("ZkTags")
-						end,
-					},
-					{
-						choice = "Links",
-						func = function()
-							vim.cmd("ZkLinks")
-						end,
-					},
-					{
-						choice = "Back Links",
-						func = function()
-							vim.cmd("ZkBacklinks")
-						end,
-					},
-				})
-			end)
-		end,
 	},
 	{
 		-- https://github.com/mistweaverco/kulala.nvim/
