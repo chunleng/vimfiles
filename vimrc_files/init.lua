@@ -847,7 +847,7 @@ require("lazy").setup({
 				end,
 				group = group_name,
 			})
-			utils.keymap("n", "<c-s-a>", "<cmd>AvanteChat<cr>")
+			utils.keymap({ "n", "i" }, "<c-s-a>", "<cmd>AvanteChat<cr>")
 		end,
 	},
 	{
