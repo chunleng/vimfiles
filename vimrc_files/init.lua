@@ -702,10 +702,12 @@ require("lazy").setup({
 			local utils = require("common-utils")
 			local kulala = require("kulala")
 			kulala.setup({
-				default_view = "headers_body",
-				default_winbar_panes = { "body", "headers_body", "stats" },
-				winbar = true,
-				show_icons = nil,
+				ui = {
+					default_view = "headers_body",
+					default_winbar_panes = { "body", "headers_body", "stats" },
+					winbar = true,
+					show_icons = nil,
+				},
 			})
 			local group_name = "lKulala"
 			vim.api.nvim_create_augroup(group_name, { clear = true })
@@ -713,11 +715,9 @@ require("lazy").setup({
 				pattern = "http",
 				callback = function(opt)
 					utils.buf_keymap(opt.buf, { "n", "i" }, "<c-enter>", function()
-						for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-							if vim.api.nvim_buf_get_name(buf):match("^kulala://ui$") then
-								vim.api.nvim_buf_delete(buf, {})
-							end
-						end
+						kulala.run()
+					end)
+					utils.buf_keymap(opt.buf, { "n", "i" }, "<s-enter>", function()
 						kulala.run_all()
 					end)
 				end,
