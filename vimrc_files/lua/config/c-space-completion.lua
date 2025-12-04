@@ -4,19 +4,19 @@ local utils = require("common-utils")
 local avante = require("avante.api")
 local neogen = require("neogen")
 
-local function avante_edit(request)
+local function avante_edit(request, mode)
 	request = request or ""
+	mode = mode or "normal"
 	local start_line, end_line
-	local mode = vim.fn.mode()
 
-	if mode == "v" or mode == "V" or mode == "\22" then
-		-- Visual mode: get visual selection range
-		start_line = vim.fn.line("'<")
-		end_line = vim.fn.line("'>")
-	else
+	if mode == "normal" then
 		-- Fallback for other modes
 		start_line = vim.fn.line(".")
 		end_line = vim.fn.line(".")
+	else
+		-- Visual mode: get visual selection range
+		start_line = vim.fn.line("'<")
+		end_line = vim.fn.line("'>")
 	end
 
 	avante.edit(request, start_line, end_line)
@@ -88,7 +88,7 @@ local function selection_actions()
 			{
 				choice = "AI: Edit selected line(s)",
 				func = function()
-					avante_edit()
+					avante_edit(nil, "visual")
 				end,
 			},
 			{
