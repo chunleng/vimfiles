@@ -254,18 +254,7 @@ table.insert(M, s({ trig = "F", dscr = "False" }, t("false")))
 table.insert(M, s({ trig = "T", dscr = "True" }, t("true")))
 table.insert(M, s({ trig = "N", dscr = "Null" }, t("None")))
 
-table.insert(
-	M,
-	s(
-		{ trig = "p", dscr = "Print (debug)" },
-		fmta(
-			[[
-	println!("{:?}", <>);<>
-]],
-			{ v(1, "1"), i(0) }
-		)
-	)
-)
+table.insert(M, s({ trig = "p", dscr = "Print (debug)" }, fmta("dbg!(<>);<>", { v(1, "x"), i(0) })))
 
 table.insert(
 	M,
@@ -320,6 +309,20 @@ table.insert(
 ]],
 			{ i(1, "derive(Debug, Clone)") }
 		)
+	)
+)
+
+table.insert(
+	M,
+	s(
+		{ trig = "sl", dscr = "Sleep" },
+		fmta([[<>;<>]], {
+			c(1, {
+				fmta([[std::thread::sleep(std::time::Duration::from_secs(<>));]], i(1, "5")),
+				fmta([[tokio::time::sleep(std::time::Duration::from_secs(<>)).await;]], i(1, "5")),
+			}),
+			i(0),
+		})
 	)
 )
 
