@@ -1,5 +1,6 @@
 local nodejs_version = "24.10.0"
 return {
+	NODEJS_VERSION = nodejs_version,
 	NODEJS_PATH = vim.env.HOME .. "/.asdf/installs/nodejs/" .. nodejs_version .. "/bin",
 	NODEJS_MODULES = vim.env.HOME .. "/.asdf/installs/nodejs/" .. nodejs_version .. "/lib/node_modules",
 	PYTHON_PATH = vim.env.HOME .. "/.asdf/installs/python/3.12.11/bin",
