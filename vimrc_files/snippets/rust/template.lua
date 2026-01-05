@@ -1,5 +1,12 @@
 local M = {}
 
+local function get_file_upper_camel(_, snip)
+	snip = snip.snippet or snip
+	return sn(nil, {
+		i(1, require("utils").snake_to_upper_camel(snip.env.TM_FILENAME:match("^(.+)%..+$"))),
+	})
+end
+
 table.insert(
 	M,
 	s(
@@ -88,6 +95,27 @@ println!("Parallel sum: {}", <>);
 println!("Time elapsed for <> is: {:?}", start.elapsed());
 ]],
 			{ v(1, "func()"), l(l._1, 1) }
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
+		{ trig = "----error", dscr = "Template for error struct" },
+		fmta(
+			[[
+	#[derive(Error, Debug)]
+	pub enum <> {
+		#[error("Unknown error: {message}\n{source}")]
+		Unhandled {
+			message: String,
+			#[source]
+			source: Box<<dyn std::error::Error>>,
+		},
+	}
+]],
+			{ d(1, get_file_upper_camel, {}) }
 		)
 	)
 )
