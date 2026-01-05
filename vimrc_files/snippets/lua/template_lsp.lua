@@ -161,11 +161,14 @@ table.insert(
 						"--message-format=json",
 						-- "-p=ui",
 						-- "--target=wasm32-unknown-unknown",
+						-- "--features=backend",
 					},
+					-- features = { "backend" }
 				},
 				-- This is useful to switch for #[cfg(target_family="wasm")]
 				-- cargo = {
-				-- 	target = "wasm32-unknown-unknown"
+				-- 	   target = "wasm32-unknown-unknown"
+				--     features = { "backend" }
 				-- }
 			},
 		},
