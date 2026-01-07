@@ -256,7 +256,12 @@ M.default_setup = {
 		),
 	},
 	cssmodules_ls = { on_attach = M.common_on_attach },
-	dockerls = { on_attach = M.common_on_attach },
+	dockerls = {
+		on_attach = M.common_on_attach,
+		cmd_env = {
+			PATH = get_mason_path_with_nodejs(),
+		},
+	},
 	eslint = {
 		on_attach = function(client, bufnr)
 			client.server_capabilities.documentFormattingProvider = true
