@@ -31,14 +31,13 @@ RUN apk add --no-cache <>
 table.insert(
 	M,
 	s(
-		{ trig = "----poetry/install", dscr = "Poetry install" },
+		{ trig = "----pip/install", dscr = "Pip install" },
 		fmta(
 			[[
-RUN pip install poetry && \
-    poetry install && \
+RUN pip install --no-cache-dir <> && \
     rm -rf ~/.cache
 ]],
-			{}
+			{ i(0, "package==1.0.0") }
 		)
 	)
 )
