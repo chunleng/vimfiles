@@ -41,11 +41,20 @@ table.insert(
 		{ trig = "c", dscr = "Class" },
 		fmta(
 			[[
-	struct <> {
-		<>
-	}
+	struct <>
 	]],
-			{ d(1, get_file_upper_camel, {}), i(0, "attr_a: String") }
+			{
+				c(1, {
+					fmta(
+						[[<> {
+	<>
+}]],
+						{ d(1, get_file_upper_camel, {}), i(2, "attr_a: String") }
+					),
+					fmta([[<>(<>);]], { d(1, get_file_upper_camel, {}), i(2, "string") }),
+					fmta([[<>;]], { d(1, get_file_upper_camel, {}) }),
+				}),
+			}
 		)
 	)
 )
