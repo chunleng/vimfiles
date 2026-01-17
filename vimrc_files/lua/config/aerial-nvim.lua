@@ -2,6 +2,17 @@ local M = {}
 
 function M.setup()
 	local kind_icons = require("common-utils").kind_icons
+	local rust_kind = {
+		"Class",
+		"Constructor",
+		"Enum",
+		"Function",
+		"Interface",
+		"Module",
+		"Method",
+		"Struct",
+		"Object",
+	}
 	local js_kind = {
 		"Class",
 		"Constructor",
@@ -43,6 +54,7 @@ function M.setup()
 			javascriptreact = js_kind,
 			typescript = js_kind,
 			javascript = js_kind,
+			rust = rust_kind,
 			json = data_kind,
 			yaml = data_kind,
 		},
