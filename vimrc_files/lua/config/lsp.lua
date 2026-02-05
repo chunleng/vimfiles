@@ -35,7 +35,7 @@ local function setup_mason_sync_command()
 			{ name = "html-lsp", version = "4.10.0" },
 			{ name = "jdtls", version = "v1.46.1" },
 			{ name = "json-lsp", version = "4.10.0" },
-			{ name = "ltex-ls-plus", version = "18.5.1" },
+			{ name = "ltex-ls-plus", version = "18.6.1" },
 			{ name = "lua-language-server", version = "3.15.0" },
 			{ name = "protols", version = "0.12.7" },
 			{ name = "pyright", version = "1.1.403" },
