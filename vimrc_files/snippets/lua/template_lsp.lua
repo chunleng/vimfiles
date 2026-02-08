@@ -150,26 +150,30 @@ table.insert(
 		{ trig = "----lsp/rust/init", dscr = "Template for rust lsp" },
 		fmta(
 			[[
+	local overrideCommand = {
+		"cargo",
+		"check",
+		"--quiet",
+		"--message-format=json",
+		-- "-p=ui",
+		-- "--target=wasm32-unknown-unknown",
+		-- "--features=backend",
+	}
+
 	require("lspconfig").rust_analyzer.setup(vim.tbl_extend("keep", {
 		settings = {
 			["rust-analyzer"] = {
 				check = {
-					overrideCommand = {
-						"cargo",
-						"check",
-						"--quiet",
-						"--message-format=json",
-						-- "-p=ui",
-						-- "--target=wasm32-unknown-unknown",
-						-- "--features=backend",
-					},
-					-- features = { "backend" }
+					overrideCommand = overrideCommand
 				},
-				-- This is useful to switch for #[cfg(target_family="wasm")]
-				-- cargo = {
-				-- 	   target = "wasm32-unknown-unknown"
-				--     features = { "backend" }
-				-- }
+				cargo = {
+					buildScripts = {
+						overrideCommand = overrideCommand
+					}
+					-- Below needs to be adjusted to choose active cfg
+					-- features = { "backend" }
+					-- target = "wasm32-unknown-unknown"
+				}
 			},
 		},
 	}, require("config.lsp").default_setup.rust_analyzer))
