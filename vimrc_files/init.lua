@@ -215,7 +215,7 @@ require("lazy").setup({
 		name = "lsp",
 		version = "*",
 		dependencies = {
-			"neovim/nvim-lspconfig",
+			{ "neovim/nvim-lspconfig", version = "*" },
 			"folke/neodev.nvim",
 			"b0o/schemastore.nvim",
 			"ibhagwan/fzf-lua",
