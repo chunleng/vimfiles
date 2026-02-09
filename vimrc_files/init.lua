@@ -691,8 +691,8 @@ require("lazy").setup({
 		end,
 	},
 	{
-		-- https://github.com/mickael-menu/zk-nvim
-		"mickael-menu/zk-nvim",
+		-- https://github.com/zk-org/zk-nvim
+		"zk-org/zk-nvim",
 	},
 	{
 		-- https://github.com/mistweaverco/kulala.nvim/
@@ -749,10 +749,10 @@ require("lazy").setup({
 		-- Autocompletion menu
 		-- https://github.com/yetone/avante.nvim
 		-- https://github.com/danymat/neogen
-		-- https://github.com/mickael-menu/zk-nvim
+		-- https://github.com/zk-org/zk-nvim
 		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_c_space/",
 		name = "resolve_c_space",
-		dependencies = { "danymat/neogen", "mickael-menu/zk-nvim", "yetone/avante.nvim" },
+		dependencies = { "danymat/neogen", "zk-org/zk-nvim", "yetone/avante.nvim" },
 		config = function()
 			require("config.c-space-completion").setup()
 		end,
