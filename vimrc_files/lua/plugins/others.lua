@@ -2,15 +2,6 @@ local personal_project = "~/workspace-bootstrap/git/chunleng/"
 
 return {
 	{
-		-- https://github.com/glepnir/galaxyline.nvim
-		-- https://github.com/SmiteshP/nvim-navic
-		"glepnir/galaxyline.nvim",
-		dependencies = { "SmiteshP/nvim-navic", "lsp" },
-		config = function()
-			require("config.cursorline").setup()
-		end,
-	},
-	{
 		-- https://github.com/akinsho/bufferline.nvim
 		-- https://github.com/famiu/bufdelete.nvim
 		"akinsho/bufferline.nvim",
