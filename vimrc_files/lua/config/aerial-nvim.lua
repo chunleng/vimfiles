@@ -26,7 +26,7 @@ function M.setup()
 		"Variable",
 		"Field",
 	}
-	local data_kind = { "Module", "Number", "Array", "Boolean", "String" }
+	local data_kind = { "Module", "Array" }
 
 	require("aerial").setup({
 		attach_mode = "global",
