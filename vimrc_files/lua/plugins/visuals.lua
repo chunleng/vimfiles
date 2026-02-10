@@ -1,11 +1,5 @@
-local M = {}
-
-function M.setup()
-	local utils = require("common-utils")
+local function setup_nvim_tree()
 	local api = require("nvim-tree.api")
-
-	utils.keymap("n", "<c-s-enter>", "<cmd>NvimTreeFindFile|NvimTreeOpen<cr>")
-
 	require("nvim-tree").setup({
 		disable_netrw = false,
 		hijack_cursor = true,
@@ -58,6 +52,7 @@ function M.setup()
 			},
 		},
 		on_attach = function(bufnr)
+			local utils = require("common-utils")
 			utils.buf_keymap(bufnr, "n", "a", api.fs.create)
 			utils.buf_keymap(bufnr, "n", { "<cr>", "e" }, api.node.open.edit)
 			-- TODO handle node.type == 'link'
@@ -120,4 +115,20 @@ function M.setup()
 	end)
 end
 
-return M
+return {
+	{
+		-- https://github.com/nvim-tree/nvim-tree.lua
+		-- https://github.com/nvim-tree/nvim-web-devicons
+		-- https://github.com/nvim-treesitter/nvim-treesitter
+		"nvim-tree/nvim-tree.lua",
+		version = "*",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = setup_nvim_tree,
+		keys = {
+			{ "<c-s-enter>", "<cmd>NvimTreeFindFile|NvimTreeOpen<cr>", mode = "n" },
+		},
+	},
+}

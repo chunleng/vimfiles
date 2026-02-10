@@ -2,20 +2,6 @@ local personal_project = "~/workspace-bootstrap/git/chunleng/"
 
 return {
 	{
-		-- https://github.com/nvim-tree/nvim-tree.lua
-		-- https://github.com/nvim-tree/nvim-web-devicons
-		-- https://github.com/nvim-treesitter/nvim-treesitter
-		"nvim-tree/nvim-tree.lua",
-		version = "*",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		config = function()
-			require("config.nvim-tree").setup()
-		end,
-	},
-	{
 		-- https://github.com/glepnir/galaxyline.nvim
 		-- https://github.com/SmiteshP/nvim-navic
 		"glepnir/galaxyline.nvim",
