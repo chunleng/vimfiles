@@ -1,7 +1,6 @@
 local personal_project = "~/workspace-bootstrap/git/chunleng/"
 
 return {
-	{ import = "common", priority = 99 },
 	{
 		-- https://github.com/nvim-tree/nvim-tree.lua
 		-- https://github.com/nvim-tree/nvim-web-devicons
