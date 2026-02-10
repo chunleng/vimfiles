@@ -119,12 +119,10 @@ return {
 	{
 		-- https://github.com/nvim-tree/nvim-tree.lua
 		-- https://github.com/nvim-tree/nvim-web-devicons
-		-- https://github.com/nvim-treesitter/nvim-treesitter
 		"nvim-tree/nvim-tree.lua",
 		version = "*",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
-			"nvim-treesitter/nvim-treesitter",
 		},
 		config = setup,
 		keys = {
