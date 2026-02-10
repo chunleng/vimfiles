@@ -1,6 +1,4 @@
-local M = {}
-
-function M.setup()
+local function setup()
 	vim.g.localvimrc_name = { ".vim/local.vim", ".vim/local.lua" }
 	vim.g.localvimrc_file_directory_only = 0
 
@@ -13,4 +11,10 @@ function M.setup()
 	vim.g.localvimrc_persistent = 2
 end
 
-return M
+return {
+	{
+		-- https://github.com/embear/vim-localvimrc
+		"embear/vim-localvimrc",
+		init = setup,
+	},
+}

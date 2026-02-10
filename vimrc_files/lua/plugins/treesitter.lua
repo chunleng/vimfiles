@@ -1,6 +1,4 @@
-local M = {}
-
-function M.setup()
+local function setup()
 	require("nvim-treesitter.configs").setup({
 		ensure_installed = {
 			"bash",
@@ -57,4 +55,13 @@ function M.setup()
 	})
 end
 
-return M
+return {
+	{
+		dir = vim.fn.stdpath("config") .. "/lua/plugins/treesitter",
+		dependencies = {
+			{ import = "plugins.treesitter.treesitter" },
+			{ import = "plugins.treesitter.autopairs" },
+		},
+		config = setup,
+	},
+}

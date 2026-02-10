@@ -1,6 +1,4 @@
-local M = {}
-
-function M.setup()
+local function setup()
 	local utils = require("common-utils")
 	utils.keymap("n", "<c-s-g>", function()
 		utils.action_menu({
@@ -40,4 +38,14 @@ function M.setup()
 	theme.set_hl("diffLine", { fg = 6, underline = true })
 end
 
-return M
+return {
+	{
+		-- https://github.com/tpope/vim-fugitive
+		-- https://github.com/tpope/vim-rhubarb
+		"tpope/vim-fugitive",
+		dependencies = {
+			"tpope/vim-rhubarb", -- for GBrowse
+		},
+		config = setup,
+	},
+}

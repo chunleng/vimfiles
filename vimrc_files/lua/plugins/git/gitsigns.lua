@@ -1,6 +1,4 @@
-local M = {}
-
-function M.setup()
+local function setup()
 	require("gitsigns").setup({
 		signs = {
 			add = { text = "" },
@@ -60,4 +58,13 @@ function M.setup()
 	theme.set_hl("GitSignsCurrentLineBlameAccent", { fg = 4 })
 end
 
-return M
+return {
+	{
+		-- https://github.com/lewis6991/gitsigns.nvim
+		-- https://github.com/nvim-lua/plenary.nvim
+		"lewis6991/gitsigns.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		version = "*",
+		config = setup,
+	},
+}

@@ -2,128 +2,11 @@ local personal_project = "~/workspace-bootstrap/git/chunleng/"
 
 return {
 	{
-		-- https://github.com/jiaoshijie/undotree
-		"jiaoshijie/undotree",
-		dependencies = "nvim-lua/plenary.nvim",
-		config = true,
-		opts = {
-			window = { winblend = 10 },
-		},
-		keys = {
-			{ "<c-s-u>", "<cmd>lua require('undotree').toggle()<cr>", mode = { "n" } },
-		},
-	},
-	{
-		-- https://github.com/AndrewRadev/linediff.vim
-		"AndrewRadev/linediff.vim",
-		keys = {
-			{ "<leader>d", ":Linediff<cr>", mode = { "x" } },
-		},
-	},
-	{
-		-- https://github.com/tpope/vim-fugitive
-		-- https://github.com/tpope/vim-rhubarb
-		"tpope/vim-fugitive",
-		dependencies = {
-			"tpope/vim-rhubarb", -- for GBrowse
-		},
-		config = function()
-			require("config.fugitive").setup()
-		end,
-	},
-	{
-		-- https://github.com/linrongbin16/gitlinker.nvim
-		"linrongbin16/gitlinker.nvim",
-		cmd = "GitLink",
-		version = "*",
-		config = function()
-			require("gitlinker").setup({
-				router = {
-					browse = {
-						[".*"] = require("gitlinker.routers").github_browse,
-					},
-					blame = {
-						[".*"] = require("gitlinker.routers").github_blame,
-					},
-				},
-			})
-		end,
-		keys = {
-			{ "<leader>gf", "<cmd>GitLink<cr>", mode = { "n", "v" }, desc = "Open git link" },
-		},
-	},
-	{
-		-- https://github.com/lewis6991/gitsigns.nvim
-		-- https://github.com/nvim-lua/plenary.nvim
-		"lewis6991/gitsigns.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		version = "*",
-		config = function()
-			require("config.gitsigns").setup()
-		end,
-	},
-	{
-		-- https://github.com/embear/vim-localvimrc
-		"embear/vim-localvimrc",
-		init = function()
-			require("config.localvimrc").setup()
-		end,
-	},
-	{
 		-- https://github.com/vim-test/vim-test
 		"vim-test/vim-test",
 		config = function()
 			require("config.test").setup()
 		end,
-	},
-	{
-		-- https://github.com/iamcco/markdown-preview.nvim
-		"iamcco/markdown-preview.nvim",
-		build = function()
-			vim.fn["mkdp#util#install"]()
-		end,
-		config = function()
-			require("config.markdown-preview").setup()
-		end,
-		ft = { "markdown" },
-	},
-	{
-		-- https://github.com/amiorin/vim-fenced-code-blocks
-		-- https://github.com/nvim-treesitter/nvim-treesitter
-		"amiorin/vim-fenced-code-blocks",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		config = function()
-			require("config.fenced-code-blocks").setup()
-		end,
-		ft = { "markdown" },
-	},
-	{
-		-- https://github.com/nvim-treesitter/nvim-treesitter
-		"nvim-treesitter/nvim-treesitter",
-		version = "*",
-		config = function()
-			require("config.treesitter").setup()
-		end,
-	},
-	{
-		-- https://github.com/windwp/nvim-autopairs
-		-- https://github.com/nvim-treesitter/nvim-treesitter
-		"windwp/nvim-autopairs",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		opts = {
-			disable_in_macro = true,
-			disable_in_visualblock = true,
-			enable_afterquote = false,
-			map_c_w = true,
-			map_cr = false,
-			check_ts = true,
-		},
-	},
-	{
-		-- https://github.com/RRethy/nvim-treesitter-endwise
-		-- https://github.com/nvim-treesitter/nvim-treesitter
-		"RRethy/nvim-treesitter-endwise",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
 	{
 		-- https://github.com/windwp/nvim-ts-autotag
@@ -533,13 +416,6 @@ return {
 		"stevearc/dressing.nvim",
 		config = function()
 			require("config.dressing").setup()
-		end,
-	},
-	{
-		-- https://github.com/dkarter/bullets.vim
-		"dkarter/bullets.vim",
-		init = function()
-			require("config.bullets").setup()
 		end,
 	},
 	{
