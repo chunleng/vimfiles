@@ -2,15 +2,6 @@ local personal_project = "~/workspace-bootstrap/git/chunleng/"
 
 return {
 	{
-		-- https://github.com/akinsho/bufferline.nvim
-		-- https://github.com/famiu/bufdelete.nvim
-		"akinsho/bufferline.nvim",
-		dependencies = { "famiu/bufdelete.nvim" },
-		config = function()
-			require("config.bufferline").setup()
-		end,
-	},
-	{
 		-- https://github.com/jiaoshijie/undotree
 		"jiaoshijie/undotree",
 		dependencies = "nvim-lua/plenary.nvim",

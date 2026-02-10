@@ -1,16 +1,14 @@
-local M = { pinned = {} }
-
-local bufdelete = require("bufdelete")
-local bufferline = require("bufferline")
-
-local function close_buffer(bufnr)
-	bufnr = bufnr and bufnr or vim.api.nvim_get_current_buf()
-	if not vim.tbl_get(M.pinned, bufnr) then
-		bufdelete.bufdelete(bufnr, false)
+local function setup()
+	local bufdelete = require("bufdelete")
+	local bufferline = require("bufferline")
+	local pinned = {}
+	local close_buffer = function(bufnr)
+		bufnr = bufnr and bufnr or vim.api.nvim_get_current_buf()
+		if not vim.tbl_get(pinned, bufnr) then
+			bufdelete.bufdelete(bufnr, false)
+		end
 	end
-end
 
-function M.setup()
 	bufferline.setup({
 		options = {
 			close_command = close_buffer,
@@ -44,8 +42,8 @@ function M.setup()
 	utils.keymap({ "n", "x" }, "<c-s-.>", "<cmd>BufferLineMoveNext<cr>", { silent = false })
 	utils.keymap({ "n", "x" }, "gp", function()
 		local bufnr = vim.api.nvim_get_current_buf()
-		local is_pinned = vim.tbl_get(M.pinned, bufnr) or false
-		M.pinned[bufnr] = not is_pinned
+		local is_pinned = vim.tbl_get(pinned, bufnr) or false
+		pinned[bufnr] = not is_pinned
 		bufferline.groups.toggle_pin()
 	end)
 	utils.keymap({ "n", "x" }, "<leader>bh", "<cmd>confirm BufferLineCloseLeft<cr>")
@@ -124,4 +122,12 @@ function M.setup()
 	theme.set_hl("BufferLineTruncMarker", { fg = theme.blender.bg_lighter_2, bg = bgcolor, bold = true })
 end
 
-return M
+return {
+	{
+		-- https://github.com/akinsho/bufferline.nvim
+		-- https://github.com/famiu/bufdelete.nvim
+		"akinsho/bufferline.nvim",
+		dependencies = { "famiu/bufdelete.nvim" },
+		config = setup,
+	},
+}
