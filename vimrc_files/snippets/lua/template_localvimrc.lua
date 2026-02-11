@@ -63,38 +63,6 @@ table.insert(
 table.insert(
 	M,
 	s(
-		{ trig = "----dap/python", dscr = "Template for DAP Python" },
-		fmta(
-			[[
-	-- For reference to the debugpy settings:
-	-- https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings
-	local function dap_python(config)
-		return vim.tbl_extend('force', {
-			type = 'python',
-			request = 'launch',
-			console = 'externalTerminal',
-			pythonPath = os.getenv('VIRTUAL_ENV') .. '/bin/python',
-			cwd = vim.fn.getcwd()
-		}, config)
-	end
-	require('dap').configurations.python = {
-		dap_python({
-			name = 'Launch current',
-			program = '${file}' -- current file
-		}), dap_python({
-			name = 'Test current',
-			code = 'import pytest; pytest.main(["${file}"])'
-		})
-	}
-]],
-			{}
-		)
-	)
-)
-
-table.insert(
-	M,
-	s(
 		{
 			trig = "----projectionist/project_setup",
 			dscr = "Template for the projectionist setup",

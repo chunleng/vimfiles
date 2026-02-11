@@ -5,6 +5,7 @@ return {
 			{ import = "plugins.markdown.bullets" },
 			{ import = "plugins.markdown.markdown_preview" },
 			{ import = "plugins.markdown.fenced_code_block" },
+			{ import = "plugins.markdown.zk" },
 		},
 	},
 }

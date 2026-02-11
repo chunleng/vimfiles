@@ -61,6 +61,9 @@ return {
 		dependencies = {
 			{ import = "plugins.treesitter.treesitter" },
 			{ import = "plugins.treesitter.autopairs" },
+			{ import = "plugins.treesitter.tree_sitter_rstml" },
+			{ import = "plugins.treesitter.playground" },
+			{ import = "plugins.treesitter.ts_context_commentstring" },
 		},
 		config = setup,
 	},

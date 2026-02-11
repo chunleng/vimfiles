@@ -1,6 +1,4 @@
-local M = {}
-
-function M.setup()
+local function setup()
 	require("dressing").setup({
 		input = {
 			win_options = { winblend = 15 },
@@ -19,4 +17,10 @@ function M.setup()
     ]])
 end
 
-return M
+return {
+	{
+		-- https://github.com/stevearc/dressing.nvim
+		"stevearc/dressing.nvim",
+		config = setup,
+	},
+}

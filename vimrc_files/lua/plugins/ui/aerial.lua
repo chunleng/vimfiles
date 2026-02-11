@@ -1,6 +1,4 @@
-local M = {}
-
-function M.setup()
+local function setup()
 	local kind_icons = require("common-utils").kind_icons
 	local rust_kind = {
 		"Class",
@@ -27,6 +25,7 @@ function M.setup()
 		"Field",
 	}
 	local data_kind = { "Module", "Array" }
+	local opened = nil
 
 	require("aerial").setup({
 		attach_mode = "global",
@@ -69,9 +68,9 @@ function M.setup()
 			end,
 		},
 		on_attach = function(bufnr)
-			if os.getenv("NOAERIAL") ~= "1" and M.opened ~= 1 then
+			if os.getenv("NOAERIAL") ~= "1" and opened ~= 1 then
 				require("aerial").open({ focus = false })
-				M.opened = 1
+				opened = 1
 			end
 		end,
 	})
@@ -87,4 +86,11 @@ function M.setup()
 	})
 end
 
-return M
+return {
+	{
+		-- https://github.com/stevearc/aerial.nvim
+		"stevearc/aerial.nvim",
+		version = "*",
+		config = setup,
+	},
+}

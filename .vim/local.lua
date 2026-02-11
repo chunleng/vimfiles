@@ -22,8 +22,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 	end,
 })
 
-require("neodev").setup()
-require("lspconfig").lua_ls.setup(require("config.lsp").default_setup.lua_ls)
+vim.lsp.config("lua_ls", require("mod.lsp_config").lua_ls)
+vim.lsp.enable("lua_ls")
 require("null-ls").setup({ sources = {
 	require("null-ls").builtins.formatting.stylua,
 } })

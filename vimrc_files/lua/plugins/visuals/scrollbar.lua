@@ -1,6 +1,4 @@
-local M = {}
-
-function M.setup()
+local function setup()
 	require("scrollbar").setup({
 		set_highlights = false,
 		excluded_filetypes = { "blink-cmp-menu", "blink-cmp-documentation" },
@@ -26,4 +24,10 @@ function M.setup()
 	theme.set_hl("ScrollbarWarnHandle", { bg = theme.blender.scrollbar })
 end
 
-return M
+return {
+	{
+		-- https://github.com/petertriho/nvim-scrollbar
+		"petertriho/nvim-scrollbar",
+		config = setup,
+	},
+}

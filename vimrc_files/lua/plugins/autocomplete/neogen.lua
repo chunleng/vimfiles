@@ -1,8 +1,5 @@
-local M = {}
-
-local neogen = require("neogen")
-
-function M.setup()
+local function setup()
+	local neogen = require("neogen")
 	local languages_supported = { "python", "lua", "rust" }
 	local convention = {}
 
@@ -33,5 +30,11 @@ function M.setup()
 		languages = convention,
 	})
 end
-
-return M
+return {
+	{
+		-- https://github.com/danymat/neogen
+		"danymat/neogen",
+		dependencies = { "L3MON4D3/LuaSnip" },
+		config = setup,
+	},
+}

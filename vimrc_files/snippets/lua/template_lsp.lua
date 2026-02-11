@@ -6,7 +6,8 @@ table.insert(
 		{ trig = "----lsp/css/init", dscr = "Template for css lsp" },
 		fmta(
 			[[
-	require("lspconfig").cssls.setup(require("config.lsp").default_setup.cssls)
+	vim.lsp.config("cssls", require("mod.lsp_config").cssls)
+	vim.lsp.enable("cssls")
 ]],
 			{}
 		)
@@ -19,7 +20,8 @@ table.insert(
 		{ trig = "----lsp/docker/init", dscr = "Template for docker lsp" },
 		fmta(
 			[[
-	require("lspconfig").dockerls.setup(require("config.lsp").default_setup.dockerls)
+	vim.lsp.config("dockerls", require("mod.lsp_config").dockerls)
+	vim.lsp.enable("dockerls")
 ]],
 			{}
 		)
@@ -32,7 +34,8 @@ table.insert(
 		{ trig = "----lsp/html/init", dscr = "Template for html lsp" },
 		fmta(
 			[[
-	require("lspconfig").html.setup(require("config.lsp").default_setup.html)
+	vim.lsp.config("html", require("mod.lsp_config").html)
+	vim.lsp.enable("html")
 ]],
 			{}
 		)
@@ -45,7 +48,8 @@ table.insert(
 		{ trig = "----lsp/java/init", dscr = "Template for java lsp" },
 		fmta(
 			[[
-	require("lspconfig").jdtls.setup(require("config.lsp").default_setup.jdtls)
+	vim.lsp.config("jdtls", require("mod.lsp_config").jdtls)
+	vim.lsp.enable("jdtls")
 ]],
 			{}
 		)
@@ -58,9 +62,10 @@ table.insert(
 		{ trig = "----lsp/javascript/init", dscr = "Template for javascript lsp" },
 		fmta(
 			[[
-	require("lspconfig").cssmodules_ls.setup(require("config.lsp").default_setup.cssmodules_ls)
-	require("lspconfig").eslint.setup(require("config.lsp").default_setup.eslint)
-	require("lspconfig").ts_ls.setup(require("config.lsp").default_setup.ts_ls)
+	vim.lsp.config("cssmodules_ls", require("mod.lsp_config").cssmodules_ls)
+	vim.lsp.config("eslint", require("mod.lsp_config").eslint)
+	vim.lsp.config("ts_ls", require("mod.lsp_config").ts_ls)
+	vim.lsp.enable({"cssmodules_ls", "eslint", "ts_ls"})
 ]],
 			{}
 		)
@@ -73,7 +78,8 @@ table.insert(
 		{ trig = "----lsp/json/init", dscr = "Template for json lsp" },
 		fmta(
 			[[
-	require("lspconfig").jsonls.setup(require("config.lsp").default_setup.jsonls)
+	vim.lsp.config("jsonls", require("mod.lsp_config").jsonls)
+	vim.lsp.enable("jsonls")
 ]],
 			{}
 		)
@@ -86,8 +92,8 @@ table.insert(
 		{ trig = "----lsp/lua/init", dscr = "Template for lua lsp" },
 		fmta(
 			[[
-	require("neodev").setup()
-	require("lspconfig").lua_ls.setup(require("config.lsp").default_setup.lua_ls)
+	vim.lsp.config("lua_ls", require("mod.lsp_config").lua_ls)
+	vim.lsp.enable("lua_ls")
 	require("null-ls").setup({ sources = {
 		require("null-ls").builtins.formatting.stylua,
 	} })
@@ -103,7 +109,8 @@ table.insert(
 		{ trig = "----lsp/markdown/init", dscr = "Template for markdown lsp" },
 		fmta(
 			[[
-	require("lspconfig").ltex_plus.setup(require("config.lsp").default_setup.ltex)
+	vim.lsp.config("ltex_plus", require("mod.lsp_config").ltex_plus)
+	vim.lsp.enable("ltex_plus")
 	require("null-ls").setup({
 		sources = {
 			require("null-ls").builtins.diagnostics.markdownlint
@@ -121,7 +128,10 @@ table.insert(
 		{ trig = "----lsp/python/init", dscr = "Template for python lsp" },
 		fmta(
 			[[
-	require("lspconfig").pyright.setup(require("config.lsp").default_setup.pyright)
+	vim.lsp.config("pyright", require("mod.lsp_config").pyright)
+	vim.lsp.config("taplo", require("mod.lsp_config").taplo)
+	vim.lsp.enable({"pyright", "taplo"})
+
 	require("null-ls").setup({
 		root_dir = function() vim.fn.getcwd() end,
 		sources = {
@@ -135,9 +145,6 @@ table.insert(
 			-- require("none-ls.diagnostics.ruff"),
 		}
 	})
-
-	-- For pyproject.toml
-	require("lspconfig").taplo.setup(require("config.lsp").default_setup.taplo)
 ]],
 			{}
 		)
@@ -160,7 +167,7 @@ table.insert(
 		-- "--features=backend",
 	}
 
-	require("lspconfig").rust_analyzer.setup(vim.tbl_extend("keep", {
+	vim.lsp.config("rust_analyzer", vim.tbl_extend("keep", {
 		settings = {
 			["rust-analyzer"] = {
 				check = {
@@ -176,7 +183,9 @@ table.insert(
 				}
 			},
 		},
-	}, require("config.lsp").default_setup.rust_analyzer))
+	}, require("mod.lsp_config").rust_analyzer))
+	vim.lsp.config("taplo", require("mod.lsp_config").taplo)
+	vim.lsp.enable({"rust_analyzer", "taplo"})
 
 	require("null-ls").setup({
 		root_dir = function() vim.fn.getcwd() end,
@@ -186,9 +195,6 @@ table.insert(
 			-- require("null-ls").builtins.formatting.dxfmt
 		}
 	})
-
-	-- For Cargo.toml
-	require("lspconfig").taplo.setup(require("config.lsp").default_setup.taplo)
 ]],
 			{}
 		)
@@ -201,9 +207,10 @@ table.insert(
 		{ trig = "----lsp/tailwindcss/init", dscr = "Template for tailwindcss lsp" },
 		fmta(
 			[[
-	require("lspconfig").tailwindcss.setup(
+	vim.lsp.config(
+		"tailwindcss",
 		vim.tbl_extend("keep", {
-			filetypes = { "<>" },
+			-- filetypes = { "rust" },
 			settings = {
 				tailwindCSS = {
 					-- Dioxus setting
@@ -212,11 +219,11 @@ table.insert(
 					-- }
 				}
 			},
-			workspace_required = false
-		}, require("config.lsp").default_setup.tailwindcss)
+		}, require("mod.lsp_config").tailwindcss)
 	)
+	vim.lsp.enable("tailwindcss")
 ]],
-			{ i(1, "html") }
+			{}
 		)
 	)
 )
@@ -227,12 +234,19 @@ table.insert(
 		{ trig = "----lsp/yaml/init", dscr = "Template for yaml lsp" },
 		fmta(
 			[[
-	local yaml_config = require("config.lsp").default_setup.yamlls
-	yaml_config.settings.yaml.schemas = {
-		-- https://www.schemastore.org/
-		-- ["https://www.schemastore.org/..."] = "**/*.{yml,yaml}"
-	}
-	require("lspconfig").yamlls.setup(yaml_config)
+	vim.lsp.config(
+		"yamlls",
+		vim.tbl_extend("keep", {
+			settings = {
+				yaml = {
+					schemas = {
+						-- ["https://www.schemastore.org/..."] = "**/*.{yml,yaml}"
+					}
+				}
+			},
+		}, require("mod.lsp_config").yamlls)
+	)
+	vim.lsp.enable("yamlls")
 
 ]],
 			{}

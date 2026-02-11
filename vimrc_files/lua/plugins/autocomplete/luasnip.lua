@@ -1,26 +1,24 @@
-local M = {}
-
-local ls = require("luasnip")
-local types = require("luasnip.util.types")
-
-local s = require("luasnip.nodes.snippet").S
-local sn = require("luasnip.nodes.snippet").SN
-local isn = require("luasnip.nodes.snippet").ISN
-local t = require("luasnip.nodes.textNode").T
-local i = require("luasnip.nodes.insertNode").I
-local f = require("luasnip.nodes.functionNode").F
-local c = require("luasnip.nodes.choiceNode").C
-local d = require("luasnip.nodes.dynamicNode").D
-local r = require("luasnip.nodes.restoreNode").R
-local l = require("luasnip.extras").lambda
-local fmt = require("luasnip.extras.fmt").fmt
-local fmta = require("luasnip.extras.fmt").fmta
-local parse = require("luasnip.util.parser").parse_snippet
-
 local theme = require("common-theme")
 local utils = require("common-utils")
 
-function M.setup()
+local function setup()
+	local ls = require("luasnip")
+	local types = require("luasnip.util.types")
+
+	local s = require("luasnip.nodes.snippet").S
+	local sn = require("luasnip.nodes.snippet").SN
+	local isn = require("luasnip.nodes.snippet").ISN
+	local t = require("luasnip.nodes.textNode").T
+	local i = require("luasnip.nodes.insertNode").I
+	local f = require("luasnip.nodes.functionNode").F
+	local c = require("luasnip.nodes.choiceNode").C
+	local d = require("luasnip.nodes.dynamicNode").D
+	local r = require("luasnip.nodes.restoreNode").R
+	local l = require("luasnip.extras").lambda
+	local fmt = require("luasnip.extras.fmt").fmt
+	local fmta = require("luasnip.extras.fmt").fmta
+	local parse = require("luasnip.util.parser").parse_snippet
+
 	theme.set_hl("LuaSnipSnippetPassive", { fg = 15 })
 	theme.set_hl("LuaSnipInsertNodeActiveVirtual", { bold = true, fg = 0, bg = 11 })
 	theme.set_hl("LuaSnipInsertNodePassive", { fg = 3, underdotted = true })
@@ -110,4 +108,10 @@ function M.setup()
 	utils.keymap({ "s" }, "<bs>", "<bs>i")
 end
 
-return M
+return {
+	{
+		-- https://github.com/L3MON4D3/LuaSnip
+		"L3MON4D3/LuaSnip",
+		config = setup,
+	},
+}

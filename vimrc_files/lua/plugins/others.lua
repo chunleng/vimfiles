@@ -9,86 +9,6 @@ return {
 		end,
 	},
 	{
-		-- https://github.com/windwp/nvim-ts-autotag
-		-- https://github.com/nvim-treesitter/nvim-treesitter
-		"windwp/nvim-ts-autotag",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		opts = {},
-	},
-	{
-		-- https://github.com/numToStr/Comment.nvim
-		"numToStr/Comment.nvim",
-		config = function()
-			require("config.comment").setup()
-		end,
-	},
-	{
-		-- https://github.com/bronson/vim-trailing-whitespace
-		"bronson/vim-trailing-whitespace",
-		config = function()
-			require("config.trailing-whitespace").setup()
-		end,
-	},
-	{
-		-- https://github.com/tpope/vim-surround
-		"tpope/vim-surround",
-	},
-	{
-		-- https://github.com/ibhagwan/fzf-lua
-		-- https://github.com/nvim-tree/nvim-web-devicons
-		-- https://github.com/nvim-treesitter/nvim-treesitter-context
-		"ibhagwan/fzf-lua",
-		dependencies = { "nvim-tree/nvim-web-devicons", "nvim-treesitter/nvim-treesitter-context", "lsp" },
-		config = function()
-			require("config.fzf").setup()
-		end,
-	},
-	{
-		-- https://github.com/williamboman/mason.nvim
-		-- https://github.com/neovim/nvim-lspconfig
-		-- https://github.com/folke/neodev.nvim
-		-- https://github.com/b0o/schemastore.nvim
-		-- https://github.com/ibhagwan/fzf-lua
-		-- https://github.com/jayp0521/mason-nvim-dap.nvim
-		-- https://github.com/mfussenegger/nvim-dap
-		-- https://github.com/rcarriga/nvim-dap-ui
-		-- https://github.com/nvim-neotest/nvim-nio
-		-- https://github.com/ofirgall/goto-breakpoints.nvim
-		-- https://github.com/nvimtools/none-ls.nvim
-		-- https://github.com/nvimtools/none-ls-extras.nvim
-		-- https://github.com/barreiroleo/ltex_extra.nvim
-		-- https://github.com/stevearc/aerial.nvim
-		"williamboman/mason.nvim",
-		name = "lsp",
-		version = "*",
-		dependencies = {
-			{ "neovim/nvim-lspconfig", version = "*" },
-			"folke/neodev.nvim",
-			"b0o/schemastore.nvim",
-			"ibhagwan/fzf-lua",
-			"jayp0521/mason-nvim-dap.nvim",
-			"mfussenegger/nvim-dap",
-			{ "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
-			"ofirgall/goto-breakpoints.nvim",
-			{ "nvimtools/none-ls.nvim", dependencies = { "nvimtools/none-ls-extras.nvim" } },
-			"barreiroleo/ltex_extra.nvim",
-			"stevearc/aerial.nvim",
-			{ dir = personal_project .. "nvim-dap-kitty-launcher" },
-			"Saghen/blink.cmp",
-		},
-		config = function()
-			require("config.lsp").setup()
-		end,
-	},
-	{
-		-- https://github.com/stevearc/aerial.nvim
-		"stevearc/aerial.nvim",
-		version = "*",
-		config = function()
-			require("config.aerial-nvim").setup()
-		end,
-	},
-	{
 		-- https://github.com/kristijanhusak/vim-dadbod-ui
 		-- https://github.com/tpope/vim-dadbod
 		"kristijanhusak/vim-dadbod-ui",
@@ -251,21 +171,6 @@ return {
 		dependencies = { "kristijanhusak/vim-dadbod-completion", "L3MON4D3/LuaSnip", "Kaiser-Yang/blink-cmp-avante" },
 	},
 	{
-		-- https://github.com/L3MON4D3/LuaSnip
-		"L3MON4D3/LuaSnip",
-		config = function()
-			require("config.snippets").setup()
-		end,
-	},
-	{
-		-- https://github.com/danymat/neogen
-		"danymat/neogen",
-		dependencies = { "L3MON4D3/LuaSnip" },
-		config = function()
-			require("config.neogen").setup()
-		end,
-	},
-	{
 		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_cr/",
 		name = "resolve_cr",
 		config = function()
@@ -369,56 +274,6 @@ return {
 		end,
 	},
 	{
-		-- https://github.com/petertriho/nvim-scrollbar
-		"petertriho/nvim-scrollbar",
-		dependencies = { "Saghen/blink.cmp" },
-		config = function()
-			require("config.nvim-scrollbar").setup()
-		end,
-	},
-	{
-		-- https://github.com/nvim-treesitter/playground
-		-- https://github.com/nvim-treesitter/nvim-treesitter
-		"nvim-treesitter/playground",
-		cmd = "TSPlaygroundToggle",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-	},
-	{
-		-- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
-		-- https://github.com/nvim-treesitter/nvim-treesitter
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		opts = {},
-	},
-	{
-		-- https://github.com/tpope/vim-sleuth
-		-- https://github.com/Yggdroot/indentLine
-		"Yggdroot/indentLine",
-		dependencies = { "tpope/vim-sleuth" },
-		config = function()
-			require("config.indent").setup()
-		end,
-	},
-	{
-		-- https://github.com/aklt/plantuml-syntax
-		"aklt/plantuml-syntax",
-		ft = { "plantuml" },
-	},
-	{
-		-- https://github.com/NvChad/nvim-colorizer.lua
-		"NvChad/nvim-colorizer.lua",
-		config = function()
-			require("config.colorizer").setup()
-		end,
-	},
-	{
-		-- https://github.com/stevearc/dressing.nvim
-		"stevearc/dressing.nvim",
-		config = function()
-			require("config.dressing").setup()
-		end,
-	},
-	{
 		-- https://github.com/nvim-treesitter/nvim-treesitter-context
 		"nvim-treesitter/nvim-treesitter-context",
 		config = function()
@@ -486,18 +341,6 @@ return {
 		end,
 	},
 	{
-		"mg979/vim-visual-multi",
-		init = function()
-			vim.g.VM_default_mappings = 0
-			vim.g.VM_mouse_mappings = 0
-			vim.g.VM_maps = {
-				["Find Under"] = "\\",
-				["Find Subword Under"] = "\\",
-				["Select All"] = "g\\",
-			}
-		end,
-	},
-	{
 		-- A more sane gf
 		-- https://github.com/nvim-tree/nvim-tree.lua
 		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_gf/",
@@ -529,10 +372,6 @@ return {
 			end)
 			-- utils.keymap("x", "gf", "<cmd>e %:h/<cword><cr>")
 		end,
-	},
-	{
-		-- https://github.com/zk-org/zk-nvim
-		"zk-org/zk-nvim",
 	},
 	{
 		-- https://github.com/mistweaverco/kulala.nvim/
@@ -595,88 +434,6 @@ return {
 		dependencies = { "danymat/neogen", "zk-org/zk-nvim", "yetone/avante.nvim" },
 		config = function()
 			require("config.c-space-completion").setup()
-		end,
-	},
-	{
-		-- https://github.com/yetone/avante.nvim
-		-- https://github.com/nvim-lua/plenary.nvim
-		-- https://github.com/MunifTanjim/nui.nvim
-		-- https://github.com/nvim-tree/nvim-web-devicons
-		-- https://github.com/stevearc/dressing.nvim
-		"yetone/avante.nvim",
-		event = "VeryLazy",
-		build = "make",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"stevearc/dressing.nvim",
-		},
-		config = function()
-			require("config.avante").setup()
-		end,
-	},
-	{
-		-- https://github.com/ravitemer/mcphub.nvim
-		-- https://github.com/nvim-lua/plenary.nvim
-		{
-			"ravitemer/mcphub.nvim",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-			},
-			version = "*",
-			build = function(plugin)
-				local orig_nodejs_version = os.getenv("ASDF_NODEJS_VERSION")
-				vim.env.ASDF_NODEJS_VERSION = require("constant").NODEJS_VERSION
-				-- Replacing the recommended command with following
-				--     dofile(plugin.dir .. "/bundled_build.lua")
-				-- This is due to issue with version mismatch: https://github.com/ravitemer/mcphub.nvim/issues/239
-				-- And it's better to control the version of package install instead of using the latest
-				local bundled = plugin.dir .. "/bundled/mcp-hub"
-				vim.fn.mkdir(bundled, "p")
-				vim.system({ "npm", "init", "-y" }, { cwd = bundled, text = true })
-				vim.system({ "npm", "install", "mcp-hub@4.2.0" }, { cwd = bundled, text = true })
-				vim.env.ASDF_NODEJS_VERSION = orig_nodejs_version
-			end,
-			config = function(plugin)
-				local constant = require("constant")
-				require("mcphub").setup({
-					cmd = constant.NODEJS_PATH .. "/node",
-					cmdArgs = { plugin.dir .. "/bundled/mcp-hub/node_modules/mcp-hub/dist/cli.js" },
-					workspace = {
-						enabled = true,
-						look_for = { ".mcp.json" },
-					},
-				})
-			end,
-		},
-	},
-	{
-		-- https://github.com/rayliwell/tree-sitter-rstml
-		"rayliwell/tree-sitter-rstml",
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		version = "*",
-		build = ":TSInstall rust_with_rstml",
-		config = function()
-			require("tree-sitter-rstml").setup()
-		end,
-	},
-	{
-		-- https://github.com/tiagovla/scope.nvim
-		"tiagovla/scope.nvim",
-		config = true,
-	},
-	{
-		-- Handle folding
-		-- https://github.com/kevinhwang91/nvim-ufo.git
-		"kevinhwang91/nvim-ufo",
-		dependencies = {
-			"kevinhwang91/promise-async",
-		},
-		config = function()
-			vim.o.foldlevel = 99
-			vim.o.foldlevelstart = 99
-			require("ufo").setup()
 		end,
 	},
 }

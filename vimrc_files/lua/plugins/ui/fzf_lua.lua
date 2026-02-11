@@ -1,6 +1,4 @@
-local M = {}
-
-function M.setup()
+local function setup()
 	local actions = require("fzf-lua.actions")
 	local fzf = require("fzf-lua")
 	fzf.setup({
@@ -51,34 +49,6 @@ function M.setup()
 	local utils = require("common-utils")
 	utils.keymap("n", "<enter>", ":FzfLua files<cr>")
 	utils.keymap("n", "<c-s-b>", "<cmd>FzfLua buffers<cr>")
-	utils.keymap("n", "<c-s-d>", function()
-		utils.action_menu({
-			{
-				choice = "Breakpoints",
-				func = function()
-					vim.cmd("FzfLua dap_breakpoints")
-				end,
-			},
-			{
-				choice = "Variables",
-				func = function()
-					vim.cmd("FzfLua dap_variables")
-				end,
-			},
-			{
-				choice = "Toggle REPL",
-				func = function()
-					require("dap").repl.toggle()
-				end,
-			},
-			{
-				choice = "Toggle DAP UI",
-				func = function()
-					require("dapui").toggle()
-				end,
-			},
-		})
-	end)
 	utils.keymap("n", "<c-s-/>", ":FzfLua resume<cr>")
 	utils.keymap("n", "g/", ":FzfLuaSearch<cr>")
 	utils.keymap("x", "g/", ":<c-u>FzfLua grep_visual<cr>")
@@ -100,4 +70,12 @@ function M.setup()
 	fzf.register_ui_select()
 end
 
-return M
+return {
+	{
+		-- https://github.com/ibhagwan/fzf-lua
+		-- https://github.com/nvim-tree/nvim-web-devicons
+		"ibhagwan/fzf-lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = setup,
+	},
+}
