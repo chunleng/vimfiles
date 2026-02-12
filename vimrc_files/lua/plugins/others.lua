@@ -1,5 +1,3 @@
-local personal_project = "~/workspace-bootstrap/git/chunleng/"
-
 return {
 	{
 		-- https://github.com/vim-test/vim-test
@@ -24,7 +22,6 @@ return {
 		-- https://github.com/Saghen/blink.cmp
 		-- https://github.com/kristijanhusak/vim-dadbod-completion
 		-- https://github.com/L3MON4D3/LuaSnip
-		-- https://github.com/Kaiser-Yang/blink-cmp-avante
 		"Saghen/blink.cmp",
 		version = "1.*",
 		config = function()
@@ -115,7 +112,7 @@ return {
 				},
 				snippets = { preset = "luasnip" },
 				sources = {
-					default = { "avante", "snippets", "lsp", "path", "buffer" },
+					default = { "snippets", "lsp", "path", "buffer" },
 					per_filetype = {
 						sql = { "snippets", "dadbod", "buffer" },
 					},
@@ -126,7 +123,6 @@ return {
 								tailwind_color_icon = tailwind_color_icon,
 							},
 						},
-						avante = { name = "Avante", module = "blink-cmp-avante" },
 					},
 				},
 				completion = {
@@ -168,7 +164,7 @@ return {
 			theme.set_hl("BlinkCmpLabelDeprecated", { strikethrough = true, fg = theme.blender.fg_darker_3 })
 			theme.set_hl("BlinkCmpKind", { fg = 12 })
 		end,
-		dependencies = { "kristijanhusak/vim-dadbod-completion", "L3MON4D3/LuaSnip", "Kaiser-Yang/blink-cmp-avante" },
+		dependencies = { "kristijanhusak/vim-dadbod-completion", "L3MON4D3/LuaSnip" },
 	},
 	{
 		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_cr/",
@@ -202,10 +198,9 @@ return {
 	{
 		-- https://github.com/L3MON4D3/LuaSnip
 		-- https://github.com/embear/vim-localvimrc
-		-- https://github.com/yetone/avante.nvim
 		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_rc_menu/",
 		name = "resolve_rc_menu",
-		dependencies = { "L3MON4D3/LuaSnip", "embear/vim-localvimrc", "yetone/avante.nvim" },
+		dependencies = { "L3MON4D3/LuaSnip", "embear/vim-localvimrc" },
 		config = function()
 			local utils = require("common-utils")
 			utils.keymap("n", "<c-s-r>", function()
@@ -226,19 +221,6 @@ return {
 						]])
 						end,
 					},
-					{
-						choice = "Avante.md",
-						func = function()
-							vim.cmd([[
-							silent !mkdir -p .vim
-							silent !touch .vim/avante.md
-							silent !ln -sn .vim/avante.md avante.md
-							silent !ln -sn .vim/avante.md CLAUDE.local.md
-							edit ./avante.md
-						]])
-						end,
-					},
-
 					{
 						choice = "Direnvrc",
 						func = function()
@@ -426,12 +408,11 @@ return {
 	},
 	{
 		-- Autocompletion menu
-		-- https://github.com/yetone/avante.nvim
 		-- https://github.com/danymat/neogen
 		-- https://github.com/zk-org/zk-nvim
 		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_c_space/",
 		name = "resolve_c_space",
-		dependencies = { "danymat/neogen", "zk-org/zk-nvim", "yetone/avante.nvim" },
+		dependencies = { "danymat/neogen", "zk-org/zk-nvim" },
 		config = function()
 			require("config.c-space-completion").setup()
 		end,
