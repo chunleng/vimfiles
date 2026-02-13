@@ -227,6 +227,12 @@ return {
 						end,
 					},
 					{
+						choice = "MCPHub",
+						func = function()
+							vim.cmd("MCPHub")
+						end,
+					},
+					{
 						choice = "Direnv RC",
 						func = function()
 							vim.cmd("edit .envrc")
