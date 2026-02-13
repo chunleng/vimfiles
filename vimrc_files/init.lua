@@ -4,6 +4,7 @@ vim.opt.rtp:prepend(lazypath)
 require("common-utils").setup()
 require("common-theme").setup()
 require("lazy").setup({
+	change_detection = { enabled = false },
 	spec = {
 		{ import = "plugins" },
 	},
