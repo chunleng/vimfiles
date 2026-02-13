@@ -206,12 +206,6 @@ return {
 			utils.keymap("n", "<c-s-r>", function()
 				utils.action_menu({
 					{
-						choice = "Vim RC",
-						func = function()
-							vim.cmd("edit ~/.config/nvim/init.lua")
-						end,
-					},
-					{
 						choice = "Vim Local RC",
 						func = function()
 							vim.cmd([[
@@ -222,7 +216,18 @@ return {
 						end,
 					},
 					{
-						choice = "Direnvrc",
+						choice = "MCP Setup",
+						func = function()
+							vim.cmd([[
+							silent !mkdir -p .vim
+							silent !touch .vim/mcp.json
+							silent !ln -sn .vim/mcp.json .mcp.json
+							edit .vim/mcp.json
+						]])
+						end,
+					},
+					{
+						choice = "Direnv RC",
 						func = function()
 							vim.cmd("edit .envrc")
 						end,
@@ -231,24 +236,6 @@ return {
 						choice = "LuaSnip",
 						func = function()
 							require("luasnip.loaders").edit_snippet_files()
-						end,
-					},
-					{
-						choice = "Zsh",
-						func = function()
-							vim.cmd("edit ~/.zshrc")
-						end,
-					},
-					{
-						choice = "Hammerspoon",
-						func = function()
-							vim.cmd("edit ~/.hammerspoon/init.lua")
-						end,
-					},
-					{
-						choice = "Kitty",
-						func = function()
-							vim.cmd("edit ~/.config/kitty/kitty.conf")
 						end,
 					},
 				})
