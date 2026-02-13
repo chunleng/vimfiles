@@ -37,6 +37,17 @@ local function setup()
 				},
 			},
 		},
+		adapters = {
+			http = {
+				tavily = function()
+					return require("codecompanion.adapters").extend("tavily", {
+						env = {
+							api_key = vim.fn.getenv("TAVILY_API_KEY"),
+						},
+					})
+				end,
+			},
+		},
 		rules = {
 			default = {
 				description = "Collection of common files for all projects",
