@@ -54,6 +54,13 @@ local function setup()
 					system_prompt = "",
 				},
 			},
+			inline = {
+				keymaps = {
+					accept_change = { modes = { n = "<cr>" } },
+					reject_change = { modes = { n = "<esc>" } },
+					always_accept = { modes = { n = "<c-cr>" } },
+				},
+			},
 		},
 		extensions = {
 			mcphub = {
