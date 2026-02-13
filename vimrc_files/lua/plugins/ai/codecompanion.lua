@@ -18,6 +18,38 @@ local function setup()
 					send = { modes = { n = "<c-cr>", i = "<c-cr>" } },
 					stop = { modes = { n = "<c-c>", i = "<c-c>" } },
 				},
+				tools = {
+					memory = { opts = { require_approval_before = false } },
+					file_search = {
+						callback = require("mod.codecompanion.fd_search"),
+					},
+					grep_search = { opts = { require_approval_before = false } },
+					read_file = {
+						callback = require("mod.codecompanion.read_file"),
+						opts = {
+							validate_cwd = true,
+							require_approval_before = false,
+						},
+					},
+					groups = {
+						read_only = {
+							description = "Tools related to reading files",
+							prompt = "I'm giving you access to ${tools} to help you perform read-only file operations",
+							tools = { "file_search", "get_changed_files", "grep_search", "read_file" },
+						},
+						web = {
+							description = "Tools related to web access",
+							prompt = "I'm giving you access to ${tools} to help you perform operations on the web",
+							tools = { "web_search", "fetch_webpage" },
+						},
+					},
+					opts = {
+						default_tools = { "read_only", "memory" },
+						system_prompt = {
+							enabled = false,
+						},
+					},
+				},
 				opts = {
 					system_prompt = "",
 				},
