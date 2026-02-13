@@ -1,5 +1,5 @@
 local utils = require("common-utils")
-
+local tool_execution_precheck = require("mod.codecompanion.tool_execution_precheck")
 local function setup()
 	local codecompanion = require("codecompanion")
 	codecompanion.setup({
@@ -25,9 +25,39 @@ local function setup()
 					},
 					grep_search = { opts = { require_approval_before = false } },
 					read_file = {
-						callback = require("mod.codecompanion.read_file"),
+						callback = tool_execution_precheck.wrap(
+							require("codecompanion.interactions.chat.tools.builtin.read_file"),
+							function(_, args, _)
+								return tool_execution_precheck.validate_in_cwd(args.filepath)
+							end
+						),
 						opts = {
-							validate_cwd = true,
+							require_approval_before = false,
+						},
+					},
+					insert_edit_into_file = {
+						callback = tool_execution_precheck.wrap(
+							require("codecompanion.interactions.chat.tools.builtin.insert_edit_into_file"),
+							function(_, args, _)
+								return tool_execution_precheck.validate_in_cwd(args.filepath)
+							end
+						),
+						opts = {
+							require_confirmation_after = false,
+						},
+					},
+					create_file = {
+						-- Not too different with insert_edit_into_file, so diasbling it
+						enabled = false,
+					},
+					delete_file = {
+						callback = tool_execution_precheck.wrap(
+							require("codecompanion.interactions.chat.tools.builtin.delete_file"),
+							function(_, args, _)
+								return tool_execution_precheck.validate_in_cwd(args.filepath)
+							end
+						),
+						opts = {
 							require_approval_before = false,
 						},
 					},
@@ -41,6 +71,16 @@ local function setup()
 							description = "Tools related to web access",
 							prompt = "I'm giving you access to ${tools} to help you perform operations on the web",
 							tools = { "web_search", "fetch_webpage" },
+						},
+						files = {
+							tools = {
+								"insert_edit_into_file",
+								"delete_file",
+								"file_search",
+								"get_changed_files",
+								"grep_search",
+								"read_file",
+							},
 						},
 					},
 					opts = {
