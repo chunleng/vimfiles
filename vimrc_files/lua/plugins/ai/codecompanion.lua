@@ -44,7 +44,7 @@ local function setup()
 						},
 					},
 					opts = {
-						default_tools = { "read_only", "memory" },
+						default_tools = { "read_only" },
 						system_prompt = {
 							enabled = false,
 						},
