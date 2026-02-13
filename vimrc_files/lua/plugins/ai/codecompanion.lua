@@ -10,7 +10,10 @@ local function setup()
 		},
 		interactions = {
 			chat = {
-				adapter = "claude_code",
+				adapter = {
+					name = "copilot",
+					model = "gpt-4.1",
+				},
 				keymaps = {
 					send = { modes = { n = "<c-cr>", i = "<c-cr>" } },
 					stop = { modes = { n = "<c-c>", i = "<c-c>" } },
@@ -32,17 +35,6 @@ local function setup()
 					make_vars = true, -- Convert MCP resources to #variables for prompts
 					make_slash_commands = true, -- Add MCP prompts as /slash commands
 				},
-			},
-		},
-		adapters = {
-			acp = {
-				claude_code = function()
-					return require("codecompanion.adapters").extend("claude_code", {
-						env = {
-							ANTHROPIC_API_KEY = "", -- Ensure no accidental use of API key
-						},
-					})
-				end,
 			},
 		},
 		rules = {

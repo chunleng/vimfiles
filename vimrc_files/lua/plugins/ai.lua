@@ -4,6 +4,7 @@ return {
 		dependencies = {
 			{ import = "plugins.ai.codecompanion" },
 			{ import = "plugins.ai.mcphub" },
+			{ import = "plugins.ai.copilot" },
 		},
 	},
 }
