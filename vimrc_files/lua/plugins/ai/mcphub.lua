@@ -1,4 +1,5 @@
 local constant = require("constant")
+local utils = require("common-utils")
 
 local function build(plugin)
 	local orig_nodejs_version = os.getenv("ASDF_NODEJS_VERSION")
@@ -18,6 +19,7 @@ local function setup(plugin)
 	require("mcphub").setup({
 		cmd = constant.NODEJS_PATH .. "/node",
 		cmdArgs = { plugin.dir .. "/bundled/mcp-hub/node_modules/mcp-hub/dist/cli.js" },
+		config = vim.fn.expand("~/.mcp.json"),
 		workspace = {
 			enabled = true,
 			look_for = { ".mcp.json" },
