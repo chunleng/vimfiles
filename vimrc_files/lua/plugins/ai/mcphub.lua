@@ -10,7 +10,7 @@ local function build(plugin)
 	local bundled = plugin.dir .. "/bundled/mcp-hub"
 	vim.fn.mkdir(bundled, "p")
 	vim.system({ "npm", "init", "-y" }, { cwd = bundled, text = true })
-	vim.system({ "npm", "install", "mcp-hub@4.2.0" }, { cwd = bundled, text = true })
+	vim.system({ "npm", "install", "mcp-hub@4.2.1" }, { cwd = bundled, text = true })
 	vim.env.ASDF_NODEJS_VERSION = orig_nodejs_version
 end
 
@@ -33,7 +33,6 @@ return {
 			dependencies = {
 				"nvim-lua/plenary.nvim",
 			},
-			version = "*",
 			build = build,
 			config = setup,
 		},
