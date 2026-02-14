@@ -5,6 +5,8 @@ local function setup()
 	local gls = gl.section
 	local theme = require("common-theme")
 	local utils = require("common-utils")
+	local codecompanion = require("codecompanion")
+
 	local count_diagnostic = function(type)
 		return #vim.diagnostic.get(nil, { severity = vim.diagnostic.severity[type] })
 	end
@@ -60,6 +62,20 @@ local function setup()
 				separator_highlight = "StatusLine",
 				condition = function()
 					return count_diagnostic("WARN") > 0
+				end,
+			},
+		},
+		{
+			CodeCompanionChatTitle = {
+				provider = function()
+					if vim.o.ft ~= "codecompanion" then
+						return ""
+					end
+
+					local current_chat = vim.tbl_filter(function(x)
+						return x.chat.bufnr == vim.api.nvim_get_current_buf()
+					end, codecompanion.buf_get_chat())[1]
+					return current_chat and "󰭻 " .. current_chat.description or ""
 				end,
 			},
 		},
@@ -140,8 +156,9 @@ return {
 	{
 		-- https://github.com/glepnir/galaxyline.nvim
 		-- https://github.com/SmiteshP/nvim-navic
+		-- https://github.com/olimorris/codecompanion.nvim
 		"glepnir/galaxyline.nvim",
-		dependencies = { "SmiteshP/nvim-navic" },
+		dependencies = { "SmiteshP/nvim-navic", "olimorris/codecompanion.nvim" },
 		config = setup,
 	},
 }

@@ -36,6 +36,23 @@ local function setup()
 			},
 			{
 				name = function()
+					return "Rename chat title"
+				end,
+				interaction = "chat",
+				description = "Rename the current chat title",
+				condition = function(context)
+					return context.filetype == "codecompanion"
+				end,
+				prompts = {
+					n = function()
+						vim.ui.input({ prompt = "Rename chat title:" }, function(x)
+							codecompanion.buf_get_chat(vim.api.nvim_get_current_buf()):set_title(x)
+						end)
+					end,
+				},
+			},
+			{
+				name = function()
 					return "Open chats ..."
 				end,
 				interaction = " ",
@@ -100,6 +117,23 @@ local function setup()
 			},
 		},
 		interactions = {
+			background = {
+				chat = {
+					callbacks = {
+						["on_ready"] = {
+							actions = {
+								"interactions.background.builtin.chat_make_title",
+							},
+							-- Enable "on_ready" callback which contains the title generation action
+							enabled = true,
+						},
+					},
+					opts = {
+						-- Enable background interactions generally
+						enabled = true,
+					},
+				},
+			},
 			chat = {
 				adapter = {
 					name = "copilot",
