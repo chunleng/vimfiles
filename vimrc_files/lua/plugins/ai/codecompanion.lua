@@ -300,10 +300,12 @@ local function setup()
 end
 
 return {
+	-- https://github.com/olimorris/codecompanion.nvim
+	-- https://github.com/nvim-lua/plenary.nvim
+	-- https://github.com/ravitemer/mcphub.nvim
 	"olimorris/codecompanion.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-treesitter/nvim-treesitter",
 		"ravitemer/mcphub.nvim",
 	},
 	version = "*",
