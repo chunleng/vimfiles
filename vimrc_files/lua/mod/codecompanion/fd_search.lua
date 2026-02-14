@@ -67,7 +67,7 @@ return {
 		type = "function",
 		["function"] = {
 			name = "file_search",
-			description = "Search for files in the workspace. This only returns the paths of matching files, less gitignored files. Use this tool when you know the filename pattern of the files you're searching for. Glob patterns match from the root of the workspace folder. Examples:\n- **/*.{js,ts} to match all js/ts files in the workspace.\n- src/** to match all files under the top-level src folder.\n- **/foo/**/*.js to match all js files under any foo folder in the workspace.",
+			description = "Search for files in the workspace. This only returns the paths of matching files, less gitignored files. Use this tool when you know the filename pattern of the files you're searching for. Glob patterns match from the root of the workspace folder. Examples:\n- **/* to match all files in the workspace.\n- src/** to match all files under the top-level src folder.\n- **/foo/**/*.js to match all js files under any foo folder in the workspace.",
 			parameters = {
 				type = "object",
 				properties = {
