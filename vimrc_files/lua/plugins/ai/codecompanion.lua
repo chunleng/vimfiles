@@ -1,5 +1,27 @@
 local utils = require("common-utils")
 local tool_execution_precheck = require("mod.codecompanion.tool_execution_precheck")
+
+local function get_open_chats()
+	local codecompanion = require("codecompanion")
+	local loaded_chats = codecompanion.buf_get_chat()
+	local open_chats = {}
+
+	for _, data in ipairs(loaded_chats) do
+		table.insert(open_chats, {
+			name = data.name,
+			interaction = "chat",
+			description = data.description,
+			bufnr = data.chat.bufnr,
+			callback = function()
+				codecompanion.close_last_chat()
+				data.chat.ui:open()
+			end,
+		})
+	end
+
+	return open_chats
+end
+
 local function setup()
 	local codecompanion = require("codecompanion")
 	codecompanion.setup({
@@ -70,23 +92,7 @@ local function setup()
 					prompt = "Select a chat",
 					columns = { "bufnr", "description" },
 					items = function()
-						local loaded_chats = codecompanion.buf_get_chat()
-						local open_chats = {}
-
-						for _, data in ipairs(loaded_chats) do
-							table.insert(open_chats, {
-								name = data.name,
-								interaction = "chat",
-								description = data.description,
-								bufnr = data.chat.bufnr,
-								callback = function()
-									codecompanion.close_last_chat()
-									data.chat.ui:open()
-								end,
-							})
-						end
-
-						return open_chats
+						return get_open_chats()
 					end,
 				},
 			},
@@ -145,6 +151,8 @@ local function setup()
 					model = "gpt-4.1",
 				},
 				keymaps = {
+					next_chat = { modes = { n = "<c-n>" } },
+					previous_chat = { modes = { n = "<c-p>" } },
 					send = { modes = { n = "<c-cr>", i = "<c-cr>" } },
 					stop = { modes = { n = "<c-c>", i = "<c-c>" } },
 				},
@@ -298,6 +306,12 @@ local function setup()
 		callback = function(opt)
 			utils.buf_keymap(opt.buf, "n", "q", function()
 				codecompanion.toggle()
+			end)
+			utils.buf_keymap(opt.buf, "n", "<cr>", function()
+				local chats = get_open_chats()
+				require("codecompanion.providers.actions.default"):picker(chats, {
+					columns = { "bufnr", "description" },
+				})
 			end)
 		end,
 		group = group_name,
