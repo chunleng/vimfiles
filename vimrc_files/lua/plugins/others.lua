@@ -233,6 +233,16 @@ return {
 						end,
 					},
 					{
+						choice = "AGENTS.md Local",
+						func = function()
+							vim.cmd([[
+							silent !mkdir -p .vim
+							silent !touch .vim/AGENTS.md
+							edit .vim/AGENTS.md
+						]])
+						end,
+					},
+					{
 						choice = "Direnv RC",
 						func = function()
 							vim.cmd("edit .envrc")
