@@ -4,6 +4,9 @@ local function setup()
 	local codecompanion = require("codecompanion")
 	codecompanion.setup({
 		display = {
+			diff = {
+				enabled = false,
+			},
 			action_palette = {
 				provider = "default",
 			},
@@ -37,7 +40,9 @@ local function setup()
 					},
 					insert_edit_into_file = {
 						callback = tool_execution_precheck.wrap(
-							require("codecompanion.interactions.chat.tools.builtin.insert_edit_into_file"),
+							-- TODO Sending a PR for error where buffer is not saved when diff is off
+							-- require("codecompanion.interactions.chat.tools.builtin.insert_edit_into_file"),
+							require("mod.codecompanion.insert_edit_into_file"),
 							function(_, args, _)
 								return tool_execution_precheck.validate_in_cwd(args.filepath)
 							end
@@ -92,13 +97,6 @@ local function setup()
 				},
 				opts = {
 					system_prompt = "",
-				},
-			},
-			inline = {
-				keymaps = {
-					accept_change = { modes = { n = "<cr>" } },
-					reject_change = { modes = { n = "<esc>" } },
-					always_accept = { modes = { n = "<c-cr>" } },
 				},
 			},
 		},
