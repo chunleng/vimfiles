@@ -103,26 +103,23 @@ local function setup()
 				interaction = "chat",
 				description = "Help user to get something done",
 				opts = {
-					index = 99,
 					rules = "default",
 					intro_message = "This chat is now preset to help you complete task.",
 				},
 				prompts = {
 					{
 						role = "system",
-						content = [[ Use deep logical thinking to aid the user on the task he is on. Investigate the current working directory or go online to learn more about the situation. Be short in your reply and keep using this mode until user dismiss the agent
-
-## Guidelines
-
+						content = [[Use deep logical thinking to aid the user on the task he is on. Investigate the current working directory or go online to learn more about the situation. Be short in your reply and keep using this mode until user dismiss the agent
+<guidelines>
 - Use @{get_changed_files} to understand what is changed
 - The next step is the first task on the list that is not checked off
 - If ./wip.md exists, check off the task once you completed it
 - If you are ensure of what is required for the next step, you can confirm with the user first
-]],
+</guidelines>]],
 					},
 					{
 						role = "user",
-						content = "@{full_stack_dev} @{web} Execute the next step in ./wip.md",
+						content = "@{full_stack_dev} @{web}\nExecute the next step in ./wip.md",
 					},
 				},
 			},
