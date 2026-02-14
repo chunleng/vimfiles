@@ -9,6 +9,94 @@ local function setup()
 			},
 			action_palette = {
 				provider = "default",
+				opts = {
+					show_preset_actions = false, -- Show the preset actions in the action palette?
+					show_preset_prompts = false, -- Show the preset prompts in the action palette?
+					show_preset_rules = false, -- Show the preset rules in the action palette?
+				},
+			},
+		},
+		-- Using array-table instead of named-table so that order is more predictable. However, it seems that name gets
+		-- used only if it's a function
+		prompt_library = {
+			{
+				name = function()
+					return "New chat"
+				end,
+				interaction = "chat",
+				description = "Create a new chat buffer to converse with an LLM",
+				prompts = {
+					n = function()
+						return codecompanion.chat()
+					end,
+					v = {
+						{ role = "user" },
+					},
+				},
+			},
+			{
+				name = function()
+					return "Open chats ..."
+				end,
+				interaction = " ",
+				description = "Your currently open chats",
+				opts = { stop_context_insertion = true },
+				condition = function()
+					return #codecompanion.buf_get_chat() > 0
+				end,
+				picker = {
+					prompt = "Select a chat",
+					columns = { "bufnr", "description" },
+					items = function()
+						local loaded_chats = codecompanion.buf_get_chat()
+						local open_chats = {}
+
+						for _, data in ipairs(loaded_chats) do
+							table.insert(open_chats, {
+								name = data.name,
+								interaction = "chat",
+								description = data.description,
+								bufnr = data.chat.bufnr,
+								callback = function()
+									codecompanion.close_last_chat()
+									data.chat.ui:open()
+								end,
+							})
+						end
+
+						return open_chats
+					end,
+				},
+			},
+			{
+				name = function()
+					return "Execution Buddy"
+				end,
+				interaction = "chat",
+				description = "Help user to get something done",
+				opts = {
+					index = 99,
+					rules = "default",
+					intro_message = "This chat is now preset to help you complete task.",
+				},
+				prompts = {
+					{
+						role = "system",
+						content = [[ Use deep logical thinking to aid the user on the task he is on. Investigate the current working directory or go online to learn more about the situation. Be short in your reply and keep using this mode until user dismiss the agent
+
+## Guidelines
+
+- Use @{get_changed_files} to understand what is changed
+- The next step is the first task on the list that is not checked off
+- If ./wip.md exists, check off the task once you completed it
+- If you are ensure of what is required for the next step, you can confirm with the user first
+]],
+					},
+					{
+						role = "user",
+						content = "@{full_stack_dev} @{web} Execute the next step in ./wip.md",
+					},
+				},
 			},
 		},
 		interactions = {
@@ -150,6 +238,18 @@ local function setup()
 
 	utils.keymap({ "n", "i" }, "<c-s-a>", function()
 		codecompanion.toggle()
+	end)
+	utils.keymap({ "n", "i", "v" }, "<c-space>", function()
+		codecompanion.actions({
+			-- Remove "interaction" column because I am using action to put some other non-chat related function and
+			-- they still need to be placed as "chat" for interaction
+			provider = {
+				name = "default",
+				opts = {
+					columns = { "name", "description" },
+				},
+			},
+		})
 	end)
 
 	local group_name = "lCodeCompanion"

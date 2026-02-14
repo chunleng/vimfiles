@@ -399,15 +399,4 @@ return {
 			end, { nargs = "?" })
 		end,
 	},
-	{
-		-- Autocompletion menu
-		-- https://github.com/danymat/neogen
-		-- https://github.com/zk-org/zk-nvim
-		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_c_space/",
-		name = "resolve_c_space",
-		dependencies = { "danymat/neogen", "zk-org/zk-nvim" },
-		config = function()
-			require("config.c-space-completion").setup()
-		end,
-	},
 }
