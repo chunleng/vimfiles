@@ -148,6 +148,7 @@ local function setup()
 					model = "gpt-4.1",
 				},
 				keymaps = {
+					close = { modes = { n = "<c-q>" } },
 					next_chat = { modes = { n = "<c-n>" } },
 					previous_chat = { modes = { n = "<c-p>" } },
 					send = { modes = { n = "<c-cr>", i = "<c-cr>" } },
