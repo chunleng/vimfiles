@@ -75,7 +75,11 @@ local function setup()
 					local current_chat = vim.tbl_filter(function(x)
 						return x.chat.bufnr == vim.api.nvim_get_current_buf()
 					end, codecompanion.buf_get_chat())[1]
-					return current_chat and "󰭻 " .. current_chat.description or ""
+					local adapter_name = current_chat.chat.adapter.name
+					local model_name = current_chat.chat.adapter.model.name
+					return current_chat
+							and "󰭻 " .. adapter_name .. "|" .. model_name .. ": " .. current_chat.description
+						or ""
 				end,
 			},
 		},
