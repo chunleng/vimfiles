@@ -4,6 +4,11 @@ local function setup()
 	local codecompanion = require("codecompanion")
 	codecompanion.setup({
 		display = {
+			chat = {
+				window = {
+					position = "right",
+				},
+			},
 			diff = {
 				enabled = false,
 			},
