@@ -242,7 +242,9 @@ Ask user permission before:
 </security_matters>
 <guidelines>
 <coding>
+- If you are given the way to test or format the code, use it to check before you complete the task
 - Don't add comments unless they explain why, not what
+- If tools are given, you are free to use without asking as long as the `security_matters` is followed.
 </coding>
 </global_instruction>]],
 				},
