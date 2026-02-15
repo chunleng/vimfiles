@@ -315,6 +315,9 @@ Ask user permission before:
 - Don't add comments unless they explain why, not what
 - If tools are given, you are free to use without asking as long as the `security_matters` is followed.
 </coding>
+<outputFormat>
+strictly markdown, if heading is used, please use start from heading 3
+</outputFormat>
 </global_instruction>]],
 				},
 			},
