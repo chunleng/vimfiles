@@ -8,7 +8,7 @@ end
 require("common-utils").setup()
 require("common-theme").setup()
 require("lazy").setup({
-	change_detection = { enabled = false },
+	change_detection = { enabled = true, notify = false },
 	spec = {
 		{
 			dir = vim.fn.stdpath("config") .. "/lua/plugins",
