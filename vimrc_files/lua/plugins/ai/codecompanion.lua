@@ -276,6 +276,21 @@ Ask user permission before:
 					make_slash_commands = true, -- Add MCP prompts as /slash commands
 				},
 			},
+			history = {
+				auto_save = true,
+				expiration_days = 7,
+				picker = "fzf-lua",
+				auto_generate_title = false,
+				continue_last_chat = false,
+				delete_on_clearing_chat = true,
+				opts = {
+					dir_to_save = vim.fn.stdpath("data") .. "/" .. vim.fn.getcwd(),
+				},
+				-- 	local path = vim.fn.getcwd() .. "/.vim/codecompanion_history/"
+				-- 	vim.cmd("silent !mkdir -p " .. path)
+				-- 	return path
+				-- end,
+			},
 		},
 		adapters = {
 			http = {
@@ -349,10 +364,12 @@ return {
 	-- https://github.com/olimorris/codecompanion.nvim
 	-- https://github.com/nvim-lua/plenary.nvim
 	-- https://github.com/ravitemer/mcphub.nvim
+	-- https://github.com/ravitemer/codecompanion-history.nvim
 	"olimorris/codecompanion.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"ravitemer/mcphub.nvim",
+		"ravitemer/codecompanion-history.nvim",
 	},
 	version = "*",
 	config = setup,
