@@ -319,9 +319,8 @@ Ask user permission before:
 				},
 			},
 		},
-		-- NOTE: The log_level is in `opts.opts`
 		opts = {
-			log_level = "TRACE", -- or "TRACE"
+			log_level = "ERROR",
 		},
 	})
 
