@@ -24,6 +24,7 @@ end
 
 local function setup()
 	local codecompanion = require("codecompanion")
+	local codecompanion_custom_config = require("mod.codecompanion.config")
 	codecompanion.setup({
 		display = {
 			chat = {
@@ -107,20 +108,32 @@ local function setup()
 					intro_message = "This chat is now preset to help you complete task.",
 				},
 				prompts = {
-					{
-						role = "system",
-						content = [[Use deep logical thinking to aid the user on the task he is on. Investigate the current working directory or go online to learn more about the situation. Be short in your reply and keep using this mode until user dismiss the agent
+					n = function()
+						local chat = codecompanion.chat({
+							auto_submit = false,
+							messages = {
+								{
+									role = "system",
+									content = [[Use deep logical thinking to aid the user on the task he is on. Investigate the current working directory or go online to learn more about the situation. Be short in your reply and keep using this mode until user dismiss the agent
 <guidelines>
 - Use @{get_changed_files} to understand what is changed
 - The next step is the first task on the list that is not checked off
 - If ./wip.md exists, check off the task once you completed it
 - If you are ensure of what is required for the next step, you can confirm with the user first
 </guidelines>]],
-					},
-					{
-						role = "user",
-						content = "@{full_stack_dev} @{web}\nExecute the next step in ./wip.md",
-					},
+								},
+								{
+									role = "user",
+									content = "@{full_stack_dev} @{web}\nExecute the next step in ./wip.md",
+								},
+							},
+						})
+						if chat then
+							chat:change_adapter(codecompanion_custom_config.reasoning_model.name)
+							chat:change_model({ model = codecompanion_custom_config.reasoning_model.model })
+						end
+						return chat
+					end,
 				},
 			},
 		},
