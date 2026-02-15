@@ -182,10 +182,20 @@ return {
 		on_attach = common_on_attach,
 	},
 	pyright = {
-		cmd = { "pyright" },
+		cmd = { "pyright-langserver", "--stdio" },
+		filetypes = { "python" },
 		on_attach = common_on_attach,
 		cmd_env = {
 			PATH = get_mason_path_with_nodejs(),
+		},
+		settings = {
+			python = {
+				analysis = {
+					autoSearchPaths = true,
+					useLibraryCodeForTypes = true,
+					diagnosticMode = "openFilesOnly",
+				},
+			},
 		},
 		root_markers = { "pyproject.toml", ".git" },
 	},
