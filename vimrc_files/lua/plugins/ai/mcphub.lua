@@ -16,13 +16,14 @@ local function build(plugin)
 end
 
 local function setup(plugin)
+	local mcp_json = vim.fn.fnamemodify(utils.find_file_upwards(".vim/mcp.json"), ":.")
 	require("mcphub").setup({
 		cmd = constant.NODEJS_PATH .. "/node",
 		cmdArgs = { plugin.dir .. "/bundled/mcp-hub/node_modules/mcp-hub/dist/cli.js" },
 		config = vim.fn.expand("~/.mcp.json"),
 		workspace = {
 			enabled = true,
-			look_for = { ".vim/mcp.json" },
+			look_for = { mcp_json },
 		},
 	})
 end

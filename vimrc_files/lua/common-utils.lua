@@ -350,4 +350,27 @@ function M.action_menu(arr)
 		end
 	end)
 end
+
+--- Search upwards until the file_pattern exist, return default if not found
+---@param filepath string
+---@param default? string
+---@return string
+function M.find_file_upwards(filepath, default)
+	local dir = vim.fn.expand("%:p:h")
+	local uv = vim.loop
+	local candidate = filepath
+	while dir do
+		if uv.fs_stat(candidate) then
+			return candidate
+		end
+		local parent = vim.fn.fnamemodify(dir, ":h")
+		if parent == dir then
+			break
+		end
+		dir = parent
+		candidate = "../" .. candidate
+	end
+	return default or filepath
+end
+
 return M

@@ -218,10 +218,9 @@ return {
 					{
 						choice = "MCP Setup",
 						func = function()
-							vim.cmd([[
-							silent !mkdir -p .vim
-							edit .vim/mcp.json
-						]])
+							local path = utils.find_file_upwards(".vim/mcp.json")
+							vim.cmd("silent !mkdir -p .vim")
+							vim.cmd("e " .. path)
 						end,
 					},
 					{
