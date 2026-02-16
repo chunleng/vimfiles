@@ -293,8 +293,15 @@ Or, perform a web search if needed
 						},
 					},
 					create_file = {
-						-- Not too different with insert_edit_into_file, so diasbling it
-						enabled = false,
+						callback = tool_execution_precheck.wrap(
+							require("codecompanion.interactions.chat.tools.builtin.create_file"),
+							function(_, args, _)
+								return tool_execution_precheck.validate_safe_filepath(args.filepath)
+							end
+						),
+						opts = {
+							require_approval_before = false,
+						},
 					},
 					delete_file = {
 						callback = tool_execution_precheck.wrap(
@@ -322,6 +329,7 @@ Or, perform a web search if needed
 							tools = {
 								"insert_edit_into_file",
 								"delete_file",
+								"create_file",
 								"file_search",
 								"get_changed_files",
 								"grep_search",

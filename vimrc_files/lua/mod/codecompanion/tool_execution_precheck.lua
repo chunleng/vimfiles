@@ -17,21 +17,21 @@ function M.validate_safe_filepath(path)
 	if absolute_path:sub(1, #cwd) ~= cwd then
 		return {
 			status = "error",
-			data = "Reading outside of current working directory is not allowed",
+			data = "File operation outside of current working directory is not allowed",
 		}
 	end
 
 	if relative_path:sub(1, 4) == ".vim" then
 		return {
 			status = "error",
-			data = ".vim cannot be access as it may consist of secret settings",
+			data = ".vim cannot be access/modified as it may consist of secret settings",
 		}
 	end
 
 	if vim.tbl_contains({ ".env", ".envrc" }, filename) then
 		return {
 			status = "error",
-			data = "secret files access are not allowed",
+			data = "secret files access/modification are not allowed",
 		}
 	end
 
