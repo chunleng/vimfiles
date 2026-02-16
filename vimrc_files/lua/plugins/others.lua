@@ -220,8 +220,6 @@ return {
 						func = function()
 							vim.cmd([[
 							silent !mkdir -p .vim
-							silent !touch .vim/mcp.json
-							silent !ln -sn .vim/mcp.json .mcp.json
 							edit .vim/mcp.json
 						]])
 						end,

@@ -22,7 +22,7 @@ local function setup(plugin)
 		config = vim.fn.expand("~/.mcp.json"),
 		workspace = {
 			enabled = true,
-			look_for = { ".mcp.json" },
+			look_for = { ".vim/mcp.json" },
 		},
 	})
 end
