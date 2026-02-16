@@ -124,13 +124,23 @@ local function setup()
 								},
 								{
 									role = "user",
-									content = "@{full_stack_dev} @{web}\nExecute the next step in ./wip.md",
+									content = "@{full_stack_dev} @{web}\nI have attached the contents of `wip.md`, execute the next step",
 								},
 							},
 						})
 						if chat then
 							chat:change_adapter(codecompanion_custom_config.reasoning_model.name)
 							chat:change_model({ model = codecompanion_custom_config.reasoning_model.model })
+							if vim.fn.filereadable("wip.md") then
+								local file =
+									require("codecompanion.interactions.chat.slash_commands.builtin.file").new({
+										Chat = chat,
+										config = {},
+										context = {},
+										opts = {},
+									})
+								file:output({ path = "wip.md" })
+							end
 						end
 						return chat
 					end,
