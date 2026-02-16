@@ -24,7 +24,7 @@ end
 
 local function setup()
 	local codecompanion = require("codecompanion")
-	local codecompanion_config = require("codecompanion.config").config
+	local codecompanion_config = require("codecompanion.config")
 	local codecompanion_custom_config = require("mod.codecompanion.config")
 	codecompanion.setup({
 		display = {
@@ -127,18 +127,20 @@ local function setup()
 								},
 								{
 									role = "user",
-									content = "@{full_stack_dev} @{web}\n"
-										.. (
-											wip_exist
-												and "I have attached the contents of `wip.md`, execute the next step"
-											or ""
-										),
+									content = wip_exist
+											and "I have attached the contents of `wip.md`, execute the next step"
+										or "",
 								},
 							},
 						})
 						if chat then
 							chat:change_adapter(codecompanion_custom_config.reasoning_model.name)
 							chat:change_model({ model = codecompanion_custom_config.reasoning_model.model })
+							chat.tool_registry:add_group(
+								"full_stack_dev",
+								codecompanion_config.config.interactions.chat.tools
+							)
+							chat.tool_registry:add_group("web", codecompanion_config.config.interactions.chat.tools)
 							if wip_exist then
 								local bufnr = vim.fn.bufnr("wip.md")
 								if bufnr == -1 then
@@ -151,7 +153,7 @@ local function setup()
 								local buffer =
 									require("codecompanion.interactions.chat.slash_commands.builtin.buffer").new({
 										Chat = chat,
-										config = codecompanion_config.interactions.chat.slash_commands["buffer"],
+										config = codecompanion_config.config.interactions.chat.slash_commands["buffer"],
 										context = {},
 										opts = {},
 									})
@@ -198,7 +200,7 @@ Or, perform a web search if needed
 								},
 								{
 									role = "user",
-									content = "@{web}\nWhat does the following line(s) do?\n\n```"
+									content = "What does the following line(s) do?\n\n```"
 										.. context.filetype
 										.. "\n"
 										.. text
@@ -214,6 +216,7 @@ Or, perform a web search if needed
 								opts = {},
 							})
 							file:output({ path = context.filename }, { silent = true })
+							chat.tool_registry:add_group("web", codecompanion_config.config.interactions.chat.tools)
 						end
 						return chat
 					end,
