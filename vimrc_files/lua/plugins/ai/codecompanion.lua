@@ -213,7 +213,7 @@ Or, perform a web search if needed
 								context = {},
 								opts = {},
 							})
-							file:output({ path = context.filename })
+							file:output({ path = context.filename }, { silent = true })
 						end
 						return chat
 					end,
