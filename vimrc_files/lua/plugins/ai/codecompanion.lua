@@ -272,7 +272,7 @@ Or, perform a web search if needed
 						callback = tool_execution_precheck.wrap(
 							require("codecompanion.interactions.chat.tools.builtin.read_file"),
 							function(_, args, _)
-								return tool_execution_precheck.validate_in_cwd(args.filepath)
+								return tool_execution_precheck.validate_safe_filepath(args.filepath)
 							end
 						),
 						opts = {
@@ -285,7 +285,7 @@ Or, perform a web search if needed
 							-- require("codecompanion.interactions.chat.tools.builtin.insert_edit_into_file"),
 							require("mod.codecompanion.insert_edit_into_file"),
 							function(_, args, _)
-								return tool_execution_precheck.validate_in_cwd(args.filepath)
+								return tool_execution_precheck.validate_safe_filepath(args.filepath)
 							end
 						),
 						opts = {
@@ -300,7 +300,7 @@ Or, perform a web search if needed
 						callback = tool_execution_precheck.wrap(
 							require("codecompanion.interactions.chat.tools.builtin.delete_file"),
 							function(_, args, _)
-								return tool_execution_precheck.validate_in_cwd(args.filepath)
+								return tool_execution_precheck.validate_safe_filepath(args.filepath)
 							end
 						),
 						opts = {
