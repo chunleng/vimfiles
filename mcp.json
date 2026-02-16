@@ -1,5 +1,39 @@
 {
-  "mcpServers": {},
+  "mcpServers": {
+    "todoist": {
+      "autoApprove": [
+        "find-activity",
+        "find-comments",
+        "find-completed-tasks",
+        "find-projects",
+        "find-tasks",
+        "find-tasks-by-date",
+        "search"
+      ],
+      "disabled": false,
+      "disabled_resources": [
+        "ui://widget/task-list-widget-1771061448316.html"
+      ],
+      "disabled_tools": [
+        "list-workspaces",
+        "user-info",
+        "update-sections",
+        "project-management",
+        "manage-assignments",
+        "find-sections",
+        "find-project-collaborators",
+        "fetch",
+        "fetch-object",
+        "get-overview",
+        "delete-object"
+      ],
+      "headers": {
+        "Authorization": "Bearer ${env:TODOIST_API_KEY}"
+      },
+      "type": "http",
+      "url": "https://ai.todoist.net/mcp"
+    }
+  },
   "nativeMCPServers": {
     "mcphub": {
       "disabled": true
