@@ -24,6 +24,7 @@ end
 
 local function setup()
 	local codecompanion = require("codecompanion")
+	local codecompanion_config = require("codecompanion.config").config
 	local codecompanion_custom_config = require("mod.codecompanion.config")
 	codecompanion.setup({
 		display = {
@@ -108,7 +109,9 @@ local function setup()
 					intro_message = "This chat is now preset to help you complete task.",
 				},
 				prompts = {
-					n = function()
+					n = function(context)
+						local path = vim.fn.fnamemodify("wip.md", ":p")
+						local wip_exist = vim.fn.filereadable(path) ~= 0
 						local chat = codecompanion.chat({
 							auto_submit = false,
 							messages = {
@@ -124,22 +127,36 @@ local function setup()
 								},
 								{
 									role = "user",
-									content = "@{full_stack_dev} @{web}\nI have attached the contents of `wip.md`, execute the next step",
+									content = "@{full_stack_dev} @{web}\n"
+										.. (
+											wip_exist
+												and "I have attached the contents of `wip.md`, execute the next step"
+											or ""
+										),
 								},
 							},
 						})
 						if chat then
 							chat:change_adapter(codecompanion_custom_config.reasoning_model.name)
 							chat:change_model({ model = codecompanion_custom_config.reasoning_model.model })
-							if vim.fn.filereadable("wip.md") then
-								local file =
-									require("codecompanion.interactions.chat.slash_commands.builtin.file").new({
+							if wip_exist then
+								local bufnr = vim.fn.bufnr("wip.md")
+								if bufnr == -1 then
+									vim.api.nvim_win_call(context.winnr, function()
+										vim.cmd("e " .. path)
+									end)
+									vim.api.bufnr = vim.fn.bufnr("wip.md")
+								end
+
+								local buffer =
+									require("codecompanion.interactions.chat.slash_commands.builtin.buffer").new({
 										Chat = chat,
-										config = {},
+										config = codecompanion_config.interactions.chat.slash_commands["buffer"],
 										context = {},
 										opts = {},
 									})
-								file:output({ path = "wip.md" })
+
+								buffer:output({ bufnr = bufnr, name = path, path = path }, { silent = true })
 							end
 						end
 						return chat
