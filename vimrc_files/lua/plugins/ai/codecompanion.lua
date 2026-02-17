@@ -477,7 +477,12 @@ strictly markdown, if heading is used, please use start from heading 3
 					"AGENTS.md",
 					".vim/AGENTS.md",
 				},
-				is_preset = true,
+			},
+			["bestpractice/terragrunt"] = {
+				description = "Best practice for terragrunt project",
+				files = {
+					"~/Dropbox/Notes/zettelkasten/permanent/terragrunt-common-practice.md",
+				},
 			},
 			opts = {
 				chat = {
