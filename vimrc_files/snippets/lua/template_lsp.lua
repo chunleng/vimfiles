@@ -157,33 +157,36 @@ table.insert(
 		{ trig = "----lsp/rust/init", dscr = "Template for rust lsp" },
 		fmta(
 			[[
-	local overrideCommand = {
-		"cargo",
-		"check",
-		"--quiet",
-		"--message-format=json",
-		-- "-p=ui",
-		-- "--target=wasm32-unknown-unknown",
-		-- "--features=backend",
-	}
-
-	vim.lsp.config("rust_analyzer", vim.tbl_extend("keep", {
-		settings = {
-			["rust-analyzer"] = {
-				check = {
-					overrideCommand = overrideCommand
-				},
-				cargo = {
-					buildScripts = {
-						overrideCommand = overrideCommand
-					}
-					-- Below needs to be adjusted to choose active cfg
-					-- features = { "backend" }
-					-- target = "wasm32-unknown-unknown"
-				}
-			},
-		},
-	}, require("mod.lsp_config").rust_analyzer))
+	vim.lsp.config(
+		"rust_analyzer",
+		vim.tbl_extend("keep", {
+			-- before_init = function(init_params, config)
+			-- 	local cwd = vim.fn.getcwd()
+			--
+			-- 	-- Out of the project files cargo will be left as is
+			-- 	if init_params.rootPath:sub(1, #cwd) ~= cwd then
+			-- 		config.settings["rust-analyzer"].cargo = {}
+			-- 		return
+			-- 	end
+			--
+			-- 	-- Default for all projects, we can manually switch this if we want to develop for a different feature or target
+			-- 	local cargo = {
+			-- 		features = {
+			-- 			"client",
+			-- 			"backend",
+			-- 		},
+			-- 		target = "wasm32-unknown-unknown"
+			-- 	}
+			-- 	-- Conditionally, we can also set different features/target for different workspace member
+			-- 	local path_from_root = init_params.rootPath:sub(#cwd + 1)
+			-- 	if path_from_root == "/tests/sample-test-backend" then
+			-- 		cargo.features = { "backend" }
+			-- 	end
+			-- 	config.settings["rust-analyzer"].cargo =
+			-- 		vim.tbl_extend("force", config.settings["rust-analyzer"].cargo or {}, cargo)
+			-- end,
+		}, require("mod.lsp_config").rust_analyzer)
+	)
 	vim.lsp.config("taplo", require("mod.lsp_config").taplo)
 	vim.lsp.enable({"rust_analyzer", "taplo"})
 

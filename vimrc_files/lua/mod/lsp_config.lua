@@ -204,6 +204,29 @@ return {
 		filetypes = { "rust" },
 		on_attach = common_on_attach,
 		capabilities = { textDocument = { completion = { completionItem = { snippetSupport = false } } } },
+		settings = {
+			["rust-analyzer"] = {
+				check = { workspace = false },
+			},
+		},
+		handlers = {
+			-- Silent unsupported function
+			["workspace/diagnostic/refresh"] = function()
+				return {}
+			end,
+		},
+		cmd_env = {
+			ASDF_RUST_VERSION = (function()
+				local handle = io.popen("cargo --version")
+				if handle then
+					local result = handle:read("*a")
+					handle:close()
+					local version = result:match("(%d+%.%d+%.%d+)")
+					return version
+				end
+				return ""
+			end)(),
+		},
 		root_markers = { "Cargo.toml", ".git" },
 	},
 	tailwindcss = {
