@@ -190,6 +190,7 @@ local function setup()
 									content = [[The user will post question or topic of interest
 Your job is to search online and gather information for the user
 <guidelines>
+- Think about how to change user's query into effective @{web_search}. If needed, make more @{web_search} to get to the result
 - Follow through links on the result if you think it can be helpful for the research
 - Summary of research should capture the essence of the research and you don't have to put too many details. The user can query later if needed
 - Use <outputFormat> when formatting the results of search, if not, you don't have to stick to the format
@@ -425,7 +426,8 @@ Ask user permission before:
 <coding>
 - If you are given the way to test or format the code, use it to check before you complete the task
 - Don't add comments unless they explain why, not what
-- If tools are given, you are free to use without asking as long as the `security_matters` is followed.
+- If tools are given, you are free to use without asking as long as the `security_matters` is followed
+- If @{cmd_runner} is provided, only use it after considering other available tools
 </coding>
 <outputFormat>
 strictly markdown, if heading is used, please use start from heading 3
