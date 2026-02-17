@@ -117,12 +117,16 @@ local function setup()
 							messages = {
 								{
 									role = "system",
-									content = [[Use deep logical thinking to aid the user on the task he is on. Investigate the current working directory or go online to learn more about the situation. Be short in your reply and keep using this mode until user dismiss the agent
+									content = [[Use deep logical thinking to aid the user on the task he is on. Investigate the current working directory or go online to learn more about the situation. Be short in your reply
 <guidelines>
 - Use @{get_changed_files} to understand what is changed
-- The next step is the first task on the list that is not checked off
-- If ./wip.md exists, check off the task once you completed it
-- If you are ensure of what is required for the next step, you can confirm with the user first
+- Perform execution until the user's request is achieved.
+- If completion criteria is not clear, come up with a reasonable criteria and confirm with the user
+- Don't ask permission to use tools unnecessarily
+- If ./wip.md exists
+	- Think deeply about the step's description and ask questions if there's ambiguity
+	- Check off the task once you completed it
+	- Never execute more than one step at once, unless the user specifies
 </guidelines>]],
 								},
 								{
