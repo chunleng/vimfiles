@@ -1,0 +1,3 @@
+return {
+	FILETYPE = "codecompanion",
+}
