@@ -132,7 +132,7 @@ local function setup()
 								{
 									role = "user",
 									content = wip_exist
-											and "I have attached the contents of `wip.md`, execute the next step"
+											and "I have attached the contents of `wip.md`, execute the next step, one step at a time"
 										or "",
 								},
 							},
