@@ -93,6 +93,11 @@ local function setup()
 					send = { modes = { n = "<c-cr>", i = "<c-cr>" } },
 					stop = { modes = { n = "<c-c>", i = "<c-c>" } },
 				},
+				slash_commands = {
+					terminal = { enabled = false }, -- Disable because it's not verbose
+					now = { enabled = false }, -- Disable because there're better ways
+					help = { enabled = false }, -- Too niche to vim
+				},
 				tools = {
 					memory = { opts = { require_approval_before = false } },
 					file_search = {
