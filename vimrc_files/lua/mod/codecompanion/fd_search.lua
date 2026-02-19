@@ -18,7 +18,7 @@ local function search(action)
 
 	local data = nil
 	local data_err = nil
-	local job_id = vim.fn.jobstart({ "fd", "--color=never", "--glob", "-p", cwd .. "/" .. query }, {
+	local job_id = vim.fn.jobstart({ "fd", "--follow", "--color=never", "--glob", "-p", cwd .. "/" .. query }, {
 		stdout_buffered = true,
 		stderr_buffered = true,
 		on_stdout = function(_, d, _)

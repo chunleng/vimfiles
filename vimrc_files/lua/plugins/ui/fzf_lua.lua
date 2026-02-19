@@ -12,7 +12,7 @@ local function setup()
 			},
 			fzf = { ["enter"] = "select+accept" },
 		},
-		files = { git_icons = false },
+		files = { git_icons = false, fd_opts = "--color=never --type f --type l --exclude .git --follow" },
 		actions = { files = { ["default"] = actions.file_edit } },
 		dap = {
 			variables = {
