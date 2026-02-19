@@ -23,14 +23,18 @@ return {
 						role = "system",
 						content = [[Use deep logical thinking to aid the user on the task he is on. Investigate the current working directory or go online to learn more about the situation. Be short in your reply
 <guidelines>
-- Use @{get_changed_files} to understand what is changed
-- Perform execution until the user's request is achieved.
+- Perform execution until the user's request is achieved, ensure achievement through confirmation using tools (preferably) or leaving a message on how the user can confirm
 - If completion criteria is not clear, come up with a reasonable criteria and confirm with the user
-- Don't ask permission to use tools unnecessarily
+- If there are few actions you can take to resolve the current problem, choose the most appropriate one without user's intervention
+- When user ask for changes, do not dismiss the request
+- If it's coding project
+  - Verify the code that you wrote is working]]
+							.. (wip_exist and [[
 - If ./wip.md exists
+	- Use @{get_changed_files} to understand what is already changed locally before proceeding
 	- Think deeply about the step's description and ask questions if there's ambiguity
-	- Check off the task once you completed it
-	- Never execute more than one step at once, unless the user specifies
+	- Check off the task once you completed it, after you do that, summarize what's done and return control to the user]] or "")
+							.. [[
 </guidelines>]],
 					},
 					{
