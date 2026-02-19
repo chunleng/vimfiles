@@ -1,5 +1,18 @@
 {
   "mcpServers": {
+    "sequential_thinking": {
+      "args": [
+        "-y",
+        "mcp-sequentialthinking-tools"
+      ],
+      "autoApprove": [
+        "sequentialthinking_tools"
+      ],
+      "command": "npx",
+      "env": {
+        "ASDF_NODEJS_VERSION": "24.10.0"
+      }
+    },
     "todoist": {
       "autoApprove": [
         "find-activity",

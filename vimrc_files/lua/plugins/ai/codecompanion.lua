@@ -174,7 +174,7 @@ local function setup()
 						},
 					},
 					opts = {
-						default_tools = { "read_only" },
+						default_tools = { "read_only", "sequential_thinking" },
 						system_prompt = {
 							enabled = false,
 						},
