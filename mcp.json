@@ -11,9 +11,7 @@
         "search"
       ],
       "disabled": false,
-      "disabled_resources": [
-        "ui://widget/task-list-widget-1771061448316.html"
-      ],
+      "disabled_resources": [],
       "disabled_tools": [
         "list-workspaces",
         "user-info",
