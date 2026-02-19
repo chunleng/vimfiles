@@ -99,7 +99,7 @@ local function setup()
 					help = { enabled = false }, -- Too niche to vim
 				},
 				tools = {
-					memory = { opts = { require_approval_before = false } },
+					memory = { enabled = false },
 					file_search = {
 						callback = require("mod.codecompanion.fd_search"),
 					},
