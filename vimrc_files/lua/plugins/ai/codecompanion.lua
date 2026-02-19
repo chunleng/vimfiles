@@ -97,6 +97,9 @@ local function setup()
 					terminal = { enabled = false }, -- Disable because it's not verbose
 					now = { enabled = false }, -- Disable because there're better ways
 					help = { enabled = false }, -- Too niche to vim
+					file_by_path = {
+						callback = "mod.ai.codecompanion.slash_commands.file_by_path",
+					},
 				},
 				tools = {
 					memory = { enabled = false },
