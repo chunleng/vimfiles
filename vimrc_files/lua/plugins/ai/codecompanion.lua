@@ -45,6 +45,7 @@ local function setup()
 		},
 		prompt_library = {
 			require("mod.ai.codecompanion.prompt_library.new_chat"),
+			require("mod.ai.codecompanion.prompt_library.open_history"),
 			require("mod.ai.codecompanion.prompt_library.rename_chat"),
 			require("mod.ai.codecompanion.prompt_library.execution_buddy"),
 			require("mod.ai.codecompanion.prompt_library.research"),
@@ -214,19 +215,14 @@ strictly markdown, if heading is used, please use start from heading 3
 				},
 			},
 			history = {
-				auto_save = true,
-				expiration_days = 7,
-				picker = "fzf-lua",
-				auto_generate_title = false,
-				continue_last_chat = false,
-				delete_on_clearing_chat = true,
 				opts = {
+					auto_generate_title = false,
+					auto_save = true,
+					expiration_days = 7,
+					picker = "fzf-lua",
+					continue_last_chat = false,
 					dir_to_save = vim.fn.stdpath("data") .. "/" .. vim.fn.getcwd(),
 				},
-				-- 	local path = vim.fn.getcwd() .. "/.vim/codecompanion_history/"
-				-- 	vim.cmd("silent !mkdir -p " .. path)
-				-- 	return path
-				-- end,
 			},
 		},
 		adapters = {
