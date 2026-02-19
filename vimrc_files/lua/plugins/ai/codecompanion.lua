@@ -224,7 +224,7 @@ strictly markdown, if heading is used, please use start from heading 3
 			},
 			history = {
 				opts = {
-					auto_generate_title = false,
+					auto_generate_title = true,
 					auto_save = true,
 					expiration_days = 7,
 					picker = "fzf-lua",
