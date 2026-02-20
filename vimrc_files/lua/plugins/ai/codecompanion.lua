@@ -50,6 +50,7 @@ local function setup()
 			require("mod.ai.codecompanion.prompt_library.execution_buddy"),
 			require("mod.ai.codecompanion.prompt_library.research"),
 			require("mod.ai.codecompanion.prompt_library.question"),
+			require("mod.ai.codecompanion.prompt_library.diagnostic"),
 		},
 		interactions = {
 			background = {
