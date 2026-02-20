@@ -81,7 +81,7 @@ local function setup()
 					end
 
 					local adapter_name = current_chat.chat.adapter.name
-					local model_name = current_chat.chat.adapter.model.name
+					local model_name = current_chat.chat.adapter.schema.model.default
 					return current_chat
 							and "󰭻 " .. adapter_name .. "|" .. (model_name or "") .. ": " .. current_chat.description
 						or ""
