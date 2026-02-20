@@ -44,10 +44,12 @@ return {
 							or "",
 					},
 				},
+				params = {
+					adapter = codecompanion_custom_config.reasoning_model.name,
+					model = codecompanion_custom_config.reasoning_model.model,
+				},
 			})
 			if chat then
-				chat:change_adapter(codecompanion_custom_config.reasoning_model.name)
-				chat:change_model({ model = codecompanion_custom_config.reasoning_model.model })
 				chat.tool_registry:add_group("full_stack_dev", codecompanion_config.config.interactions.chat.tools)
 				chat.tool_registry:add_group("web", codecompanion_config.config.interactions.chat.tools)
 				if wip_exist then
