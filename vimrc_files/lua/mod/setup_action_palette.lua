@@ -1,4 +1,3 @@
-local codecompanion = require("codecompanion")
 local codecompanion_config = require("codecompanion.config")
 local utils = require("common-utils")
 local neogen = require("neogen")
@@ -12,7 +11,7 @@ local prepend_prompts = {
 		condition = function(context)
 			return vim.tbl_contains(utils.programming_languages, context.filetype)
 		end,
-		opts = { stop_context_insertion = true },
+		opts = { stop_context_insertion = true, modes = { "n" } },
 		prompts = {
 			n = function()
 				neogen.generate({ type = "func" })
@@ -28,7 +27,7 @@ local prepend_prompts = {
 		condition = function(context)
 			return vim.tbl_contains(utils.programming_languages, context.filetype)
 		end,
-		opts = { stop_context_insertion = true },
+		opts = { stop_context_insertion = true, modes = { "n" } },
 		prompts = {
 			n = function()
 				return {}
@@ -44,7 +43,7 @@ local prepend_prompts = {
 		condition = function(context)
 			return vim.tbl_contains(utils.programming_languages, context.filetype)
 		end,
-		opts = { stop_context_insertion = true },
+		opts = { stop_context_insertion = true, modes = { "n" } },
 		prompts = {
 			n = function()
 				return {}
