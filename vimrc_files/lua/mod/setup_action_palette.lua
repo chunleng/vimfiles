@@ -9,9 +9,13 @@ local prepend_prompts = {
 		interaction = "chat",
 		description = "Add function docstring to current position using neogen",
 		condition = function(context)
-			return vim.tbl_contains(utils.programming_languages, context.filetype)
+			if context.mode == "n" then
+				return vim.tbl_contains(utils.programming_languages, context.filetype)
+			else
+				return false
+			end
 		end,
-		opts = { stop_context_insertion = true, modes = { "n" } },
+		opts = { stop_context_insertion = true },
 		prompts = {
 			n = function()
 				neogen.generate({ type = "func" })
@@ -25,9 +29,13 @@ local prepend_prompts = {
 		interaction = "chat",
 		description = "Add class docstring to current position using neogen",
 		condition = function(context)
-			return vim.tbl_contains(utils.programming_languages, context.filetype)
+			if context.mode == "n" then
+				return vim.tbl_contains(utils.programming_languages, context.filetype)
+			else
+				return false
+			end
 		end,
-		opts = { stop_context_insertion = true, modes = { "n" } },
+		opts = { stop_context_insertion = true },
 		prompts = {
 			n = function()
 				return {}
@@ -41,9 +49,13 @@ local prepend_prompts = {
 		interaction = "chat",
 		description = "Add file docstring to current position using neogen",
 		condition = function(context)
-			return vim.tbl_contains(utils.programming_languages, context.filetype)
+			if context.mode == "n" then
+				return vim.tbl_contains(utils.programming_languages, context.filetype)
+			else
+				return false
+			end
 		end,
-		opts = { stop_context_insertion = true, modes = { "n" } },
+		opts = { stop_context_insertion = true },
 		prompts = {
 			n = function()
 				return {}
