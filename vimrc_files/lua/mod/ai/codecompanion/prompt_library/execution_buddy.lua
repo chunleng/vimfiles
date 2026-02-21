@@ -8,11 +8,10 @@ local function new_execution_buddy_chat(context)
 	local content = ""
 
 	if wip_exist then
-		content = content .. "I have attached the contents of `wip.md`, execute the next step, one step at a time"
+		content = content .. "I have attached the contents of `wip.md`, execute the next step"
 	end
 	if context.mode == "v" or context.mode == "V" then
-		content = content
-			.. "\n```"
+		content = "Execute the following\n```"
 			.. context.filetype
 			.. "\n"
 			.. require("codecompanion.helpers.actions").get_code(context.start_line, context.end_line)
@@ -35,7 +34,7 @@ local function new_execution_buddy_chat(context)
 - If ./wip.md exists
 	- Use @{get_changed_files} to understand what is already changed locally before proceeding
 	- Think deeply about the step's description and ask questions if there's ambiguity
-	- Check off the task once you completed it, after you do that, summarize what's done and return control to the user]] or "")
+	- Check off the task once you completed it, after you check off any task, summarize what was done and DO NOT execute the next step. Ask user to confirm if the task is done correctly]] or "")
 					.. [[
 </guidelines>]],
 			},
