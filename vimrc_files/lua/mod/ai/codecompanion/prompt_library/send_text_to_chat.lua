@@ -5,10 +5,14 @@ return {
 	name = function()
 		return "Send selection to chat"
 	end,
-	opts = { stop_context_insertion = true, modes = { "v" } },
-	condition = function()
-		local last_chat = cc_chat.last_chat()
-		return last_chat and last_chat.ui:is_visible()
+	opts = { stop_context_insertion = true },
+	condition = function(context)
+		if context.mode == "v" or context.mode == "V" then
+			local last_chat = cc_chat.last_chat()
+			return last_chat and last_chat.ui:is_visible()
+		else
+			return false
+		end
 	end,
 	interaction = "chat",
 	description = "Create a new chat buffer to converse with an LLM",
