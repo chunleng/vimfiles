@@ -48,6 +48,7 @@ local function setup()
 			require("mod.ai.codecompanion.prompt_library.new_chat"),
 			require("mod.ai.codecompanion.prompt_library.open_history"),
 			require("mod.ai.codecompanion.prompt_library.rename_chat"),
+			require("mod.ai.codecompanion.prompt_library.feature_writer"),
 			require("mod.ai.codecompanion.prompt_library.execution_buddy"),
 			require("mod.ai.codecompanion.prompt_library.research"),
 			require("mod.ai.codecompanion.prompt_library.question"),
