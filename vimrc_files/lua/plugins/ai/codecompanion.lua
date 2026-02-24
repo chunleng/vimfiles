@@ -178,9 +178,14 @@ local function setup()
 								"read_file",
 							},
 						},
+						math = {
+							tools = {
+								"calculator__calculate",
+							},
+						},
 					},
 					opts = {
-						default_tools = { "read_only", "sequential_thinking" },
+						default_tools = { "read_only", "math" },
 						system_prompt = {
 							enabled = false,
 						},
@@ -190,11 +195,10 @@ local function setup()
 					system_prompt = [[<global_instruction>This setting sets a tone for all the conversation in this chat
 <guidelines>
 <coding>
+- Prioritize use of relevant tools to solve problem
 - If you are given the way to test or format the code, use it to check before you complete the task
 - Don't add comments unless they explain why, not what
 - If tools are given, you are free to use it without asking for permission
-- When encountering an issue, use @{sequential_thinking} to log down the problem and debug
-- @{sequential_thinking} is a hard tool to use, please think deeper on how to format it before calling
 - Before using @{cmd_runner}, always try using other tools first, especially @{file_search} for listing file and @{read_file} for checking file content
 </coding>
 <outputFormat>
