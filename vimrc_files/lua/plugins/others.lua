@@ -216,6 +216,25 @@ return {
 						end,
 					},
 					{
+						choice = "WIP.md",
+						func = function()
+							vim.cmd([[
+							silent !mkdir -p .vim
+							edit .vim/wip.md
+						]])
+						end,
+					},
+					{
+						choice = "AGENTS.md Local",
+						func = function()
+							vim.cmd([[
+							silent !mkdir -p .vim
+							silent !touch .vim/AGENTS.md
+							edit .vim/AGENTS.md
+						]])
+						end,
+					},
+					{
 						choice = "MCP Setup",
 						func = function()
 							local path = utils.find_file_upwards(".vim/mcp.json")
@@ -227,16 +246,6 @@ return {
 						choice = "MCPHub",
 						func = function()
 							vim.cmd("MCPHub")
-						end,
-					},
-					{
-						choice = "AGENTS.md Local",
-						func = function()
-							vim.cmd([[
-							silent !mkdir -p .vim
-							silent !touch .vim/AGENTS.md
-							edit .vim/AGENTS.md
-						]])
 						end,
 					},
 					{

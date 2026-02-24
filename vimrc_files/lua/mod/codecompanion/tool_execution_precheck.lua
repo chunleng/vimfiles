@@ -21,7 +21,7 @@ function M.validate_safe_filepath(path)
 		}
 	end
 
-	if relative_path:sub(1, 4) == ".vim" then
+	if relative_path:sub(1, 4) == ".vim" and relative_path ~= ".vim/wip.md" then
 		return {
 			status = "error",
 			data = ".vim cannot be access/modified as it may consist of secret settings",

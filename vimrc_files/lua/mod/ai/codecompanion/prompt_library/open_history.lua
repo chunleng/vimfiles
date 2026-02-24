@@ -3,7 +3,7 @@ return {
 		return "Open History"
 	end,
 	interaction = "chat",
-	description = "Open past CodeCompanion conversation",
+	description = "Open past conversation",
 	prompts = {
 		n = function()
 			vim.cmd("CodeCompanionHistory")
