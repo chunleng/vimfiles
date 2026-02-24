@@ -47,6 +47,16 @@ end
 
 local function setup()
 	setup_lsp_mappings()
+
+	-- Change rust_analyzer's default showMessage because it can be quite noisy
+	vim.lsp.handlers["window/showMessage"] = function(_, result, ctx)
+		local client = vim.lsp.get_client_by_id(ctx.client_id)
+		if client and client.name == "rust_analyzer" then
+			return
+		end
+		-- default behavior for others
+		vim.notify(result.message)
+	end
 end
 
 return {
