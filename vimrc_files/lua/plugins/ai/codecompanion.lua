@@ -73,10 +73,7 @@ local function setup()
 				},
 			},
 			chat = {
-				adapter = {
-					name = "copilot",
-					model = "gpt-4.1",
-				},
+				adapter = require("mod.codecompanion.config").chat_model,
 				keymaps = {
 					clear = false,
 					codeblock = false,
