@@ -25,15 +25,30 @@ local function configure_preferred_settings()
 	vim.g.mapleader = " "
 end
 
+local diagnostic_style = {
+	virtual_lines = {
+		virtual_lines = { current_line = true, severity = { min = vim.diagnostic.severity.INFO } },
+		underline = { min = vim.diagnostic.severity.INFO },
+		signs = false,
+		float = false,
+	},
+	virtual_lines_off = {
+		virtual_lines = false,
+		underline = { severity = { min = vim.diagnostic.severity.INFO } },
+		signs = false,
+		float = { source = true, min = vim.diagnostic.severity.INFO },
+	},
+}
+
 local function configure_preferred_mappings()
 	M.keymap("n", "<esc>", "<cmd>nohl<cr>")
 
 	M.keymap("n", "<leader>td", function()
 		local toggled_config = vim.diagnostic.config()["virtual_lines"]
 		if toggled_config then
-			vim.diagnostic.config({ virtual_lines = false })
+			vim.diagnostic.config(diagnostic_style.virtual_lines_off)
 		else
-			vim.diagnostic.config({ virtual_lines = { current_line = true } })
+			vim.diagnostic.config(diagnostic_style.virtual_lines)
 		end
 	end)
 	M.keymap("n", "<leader>tu", "<cmd>set termguicolors!<cr>")
@@ -239,11 +254,7 @@ local function configure_vim_diagnostics()
 		vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 	end
 
-	vim.diagnostic.config({
-		virtual_text = false,
-		float = { source = true },
-		signs = false,
-	})
+	vim.diagnostic.config(diagnostic_style.virtual_lines)
 end
 
 function M.setup()

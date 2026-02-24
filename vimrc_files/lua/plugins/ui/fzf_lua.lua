@@ -28,6 +28,7 @@ local function setup()
 		},
 		grep = { actions = { ["default"] = actions.file_edit_or_qf } },
 		lsp = { actions = { ["default"] = actions.file_edit_or_qf } },
+		diagnostics = { severity_limit = "INFO" },
 		hls = { normal = "FzfLuaFloat", border = "FzfLuaFloatBorder" },
 		fzf_colors = {
 			["bg"] = { "bg", "FzfLuaFloat" },

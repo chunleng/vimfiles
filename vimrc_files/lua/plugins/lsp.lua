@@ -25,10 +25,20 @@ local function setup_lsp_mappings()
 	utils.keymap("n", "<leader>cd", "<cmd>FzfLua lsp_document_diagnostics<cr>")
 	utils.keymap("n", "<leader>c?", "<cmd>FzfLua lsp_workspace_diagnostics<cr>")
 	utils.keymap("n", { "[d", "[<c-d>" }, function()
-		vim.diagnostic.jump({ count = -1, float = true })
+		local virtual_lines = vim.diagnostic.config()["virtual_lines"]
+		vim.diagnostic.jump({
+			count = -1,
+			float = not virtual_lines,
+			severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN, vim.diagnostic.severity.INFO },
+		})
 	end)
 	utils.keymap("n", { "]d", "]<c-d>" }, function()
-		vim.diagnostic.jump({ count = 1, float = true })
+		local virtual_lines = vim.diagnostic.config()["virtual_lines"]
+		vim.diagnostic.jump({
+			count = 1,
+			float = not virtual_lines,
+			severity = { vim.diagnostic.severity.ERROR, vim.diagnostic.severity.WARN, vim.diagnostic.severity.INFO },
+		})
 	end)
 	utils.keymap("i", { "<c-h>" }, function()
 		vim.lsp.buf.signature_help()
