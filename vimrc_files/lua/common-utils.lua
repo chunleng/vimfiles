@@ -28,13 +28,13 @@ end
 local diagnostic_style = {
 	virtual_lines = {
 		virtual_lines = { current_line = true, severity = { min = vim.diagnostic.severity.INFO } },
-		underline = { min = vim.diagnostic.severity.INFO },
+		underline = { min = vim.diagnostic.severity.HINT },
 		signs = false,
 		float = false,
 	},
 	virtual_lines_off = {
 		virtual_lines = false,
-		underline = { severity = { min = vim.diagnostic.severity.INFO } },
+		underline = { severity = { min = vim.diagnostic.severity.HINT } },
 		signs = false,
 		float = { source = true, min = vim.diagnostic.severity.INFO },
 	},
