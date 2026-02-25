@@ -21,7 +21,6 @@ local function setup()
 	theme.set_hl("ScrollbarInfoHandle", { fg = theme.blender.info, bg = theme.blender.scrollbar })
 	-- theme.set_hl("ScrollbarHint", { fg = theme.blender.hint })
 	theme.set_hl("ScrollbarHintHandle", { fg = theme.blender.scrollbar, bg = theme.blender.scrollbar })
-	theme.set_hl("ScrollbarWarnHandle", { bg = theme.blender.scrollbar })
 end
 
 return {
