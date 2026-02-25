@@ -46,6 +46,7 @@ local function setup()
 		prompt_library = {
 			require("mod.ai.codecompanion.prompt_library.send_text_to_chat"),
 			require("mod.ai.codecompanion.prompt_library.new_chat"),
+			require("mod.ai.codecompanion.prompt_library.new_chat_with_buffer"),
 			require("mod.ai.codecompanion.prompt_library.open_history"),
 			require("mod.ai.codecompanion.prompt_library.rename_chat"),
 			require("mod.ai.codecompanion.prompt_library.feature_writer"),
