@@ -22,6 +22,7 @@ local function new_coder_chat(context)
 				content = [[Use deep logical thinking to aid the user on the task he is on. Investigate the current working directory or go online to learn more about the situation.
 <guidelines>
 - Try breaking down and understanding the task, ask user questions if the decision is unclear
+- Avoid adding comments unless the code intent is ambiguous and the comment added explains why the code is inserted
 - Be short in your reply
 - Think about ways to confirm changes, this includes, in the order of high to low preference:
   - Writing test
