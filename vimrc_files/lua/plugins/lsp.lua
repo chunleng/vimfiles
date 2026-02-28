@@ -45,6 +45,62 @@ local function setup_lsp_mappings()
 	end)
 end
 
+local function defer_lsp_start(clients_to_restart, times_to_retry)
+	vim.defer_fn(function()
+		if #vim.lsp.get_clients() == 0 then
+			for _, client in ipairs(clients_to_restart) do
+				-- - if there an lsp.config, just re-enable as user might have updated the config and triggered the
+				--   restart
+				-- - user_lsp_config can be nil if it's set through means like null-ls
+				local user_lsp_config = vim.lsp.config[client.config.name]
+				if user_lsp_config then
+					vim.lsp.enable(client.config.name)
+				else
+					local client_id = vim.lsp.start(client.config)
+					if client_id then
+						for _, bufnr in ipairs(client.attached_buffers) do
+							vim.lsp.buf_attach_client(bufnr, client_id)
+						end
+					else
+						vim.notify(
+							"Failed to restart LSP: " .. client.config.name .. "@" .. client.config.root_dir,
+							vim.log.levels.ERROR
+						)
+					end
+				end
+			end
+		else
+			times_to_retry = times_to_retry - 1
+			if times_to_retry == 0 then
+				return
+			else
+				defer_lsp_start(clients_to_restart, times_to_retry)
+			end
+		end
+	end, 300)
+end
+
+---@param _args vim.api.keyset.create_user_command.command_args
+local function lsp_restart(_args)
+	local clients = vim.lsp.get_clients({})
+
+	if vim.tbl_isempty(clients) then
+		vim.notify("No active LSP clients found", vim.log.levels.WARN)
+		return
+	end
+
+	local clients_to_restart = {}
+	for _, client in ipairs(clients) do
+		table.insert(clients_to_restart, {
+			config = client.config,
+			attached_buffers = vim.tbl_keys(client.attached_buffers),
+		})
+		client:stop()
+	end
+
+	defer_lsp_start(clients_to_restart, 20)
+end
+
 local function setup()
 	setup_lsp_mappings()
 
@@ -57,6 +113,7 @@ local function setup()
 		-- default behavior for others
 		vim.notify(result.message)
 	end
+	vim.api.nvim_create_user_command("LspRestart", lsp_restart, {})
 end
 
 return {
