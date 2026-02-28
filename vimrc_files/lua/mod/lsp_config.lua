@@ -208,7 +208,6 @@ return {
 			["rust-analyzer"] = {
 				check = {
 					workspace = false,
-					allTargets = true,
 				},
 			},
 		},
