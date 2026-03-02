@@ -206,9 +206,9 @@ return {
 		capabilities = { textDocument = { completion = { completionItem = { snippetSupport = false } } } },
 		settings = {
 			["rust-analyzer"] = {
-				check = {
-					workspace = false,
-				},
+				check = { workspace = false },
+				checkOnSave = { enable = false },
+				diagnostics = { enable = false },
 			},
 		},
 		handlers = {

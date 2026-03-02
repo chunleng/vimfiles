@@ -157,46 +157,34 @@ table.insert(
 		{ trig = "----lsp/rust/init", dscr = "Template for rust lsp" },
 		fmta(
 			[[
+	local rust_config = {
+		["app/frontend"] = {
+			target = "wasm32-unknown-unknown",
+			features = { "web" },
+			noDefaultFeatures = true,
+		},
+		-- With example
+		["app//example"] = {},
+		-- Catchall
+		["*"] = {},
+	}
 	vim.lsp.config(
 		"rust_analyzer",
 		vim.tbl_extend("keep", {
-			-- before_init = function(init_params, config)
-			-- 	local cwd = vim.fn.getcwd()
-			--
-			-- 	-- Out of the project files cargo will be left as is
-			-- 	if init_params.rootPath:sub(1, #cwd) ~= cwd then
-			-- 		config.settings["rust-analyzer"].cargo = {}
-			-- 		return
-			-- 	end
-			--
-			-- 	-- Default for all projects, we can manually switch this if we want to develop for a different feature or target
-			-- 	local cargo = {
-			-- 		features = {
-			-- 			"client",
-			-- 			"backend",
-			-- 		},
-			-- 		target = "wasm32-unknown-unknown"
-			-- 	}
-			-- 	-- Conditionally, we can also set different features/target for different workspace member
-			-- 	local path_from_root = init_params.rootPath:sub(#cwd + 1)
-			-- 	if path_from_root == "/tests/sample-test-backend" then
-			-- 		cargo.features = { "backend" }
-			-- 	end
-			-- 	config.settings["rust-analyzer"].cargo =
-			-- 		vim.tbl_extend("force", config.settings["rust-analyzer"].cargo or {}, cargo)
-			-- end,
+			before_init = require("mod.lsp.rust_analyzer").override_check_parameters(rust_config),
 		}, require("mod.lsp_config").rust_analyzer)
 	)
 	vim.lsp.config("taplo", require("mod.lsp_config").taplo)
 	vim.lsp.enable({"rust_analyzer", "taplo"})
-
 	require("null-ls").setup({
-		root_dir = function() vim.fn.getcwd() end,
-		sources = {
+		root_dir = function()
+			vim.fn.getcwd()
+		end,
+		sources = vim.list_extend(require("mod.lsp.none_ls.sources").cargo_checks(rust_config), {
 			-- Activate when necessary
 			-- require("null-ls").builtins.formatting.leptosfmt
 			-- require("null-ls").builtins.formatting.dxfmt
-		}
+		}),
 	})
 ]],
 			{}
