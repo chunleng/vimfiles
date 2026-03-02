@@ -50,7 +50,26 @@
       "disabled": true
     },
     "neovim": {
-      "disabled": true
+      "disabled": false,
+      "disabled_prompts": [
+        "parrot"
+      ],
+      "disabled_resources": [
+        "neovim://buffer",
+        "neovim://workspace"
+      ],
+      "disabled_tools": [
+        "delete_items",
+        "edit_file",
+        "execute_command",
+        "execute_lua",
+        "find_files",
+        "list_directory",
+        "move_item",
+        "read_file",
+        "read_multiple_files",
+        "write_file"
+      ]
     }
   }
 }

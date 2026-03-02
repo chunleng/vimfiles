@@ -38,7 +38,7 @@ Your task is to focus on the error level diagnostics only
 					},
 					{
 						role = "user",
-						content = "#{lsp}\nSummarize the error for me",
+						content = "#{mcp:neovim://diagnostics/workspace}\nSummarize the error for me",
 					},
 				},
 			})
