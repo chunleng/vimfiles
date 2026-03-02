@@ -8,7 +8,7 @@ local function setup()
 	local codecompanion = require("codecompanion")
 
 	local count_diagnostic = function(type)
-		return #vim.diagnostic.get(nil, { severity = vim.diagnostic.severity[type] })
+		return vim.diagnostic.count(nil, { severity = vim.diagnostic.severity[type] })[type] or 0
 	end
 
 	navic.setup({ lsp = { auto_attach = true }, icons = utils.kind_icons })
@@ -42,27 +42,27 @@ local function setup()
 		{
 			LspError = {
 				provider = function()
-					return string.format("  %s ", tostring(count_diagnostic("ERROR")))
+					local error_count = count_diagnostic(vim.diagnostic.severity.ERROR)
+					if error_count > 0 then
+						return string.format("  %s ", tostring(error_count))
+					end
 				end,
 				highlight = "GalaxylineDiagnosticError",
 				separator = " ",
 				separator_highlight = "StatusLine",
-				condition = function()
-					return count_diagnostic("ERROR") > 0
-				end,
 			},
 		},
 		{
 			LspWarn = {
 				provider = function()
-					return string.format("  %s ", tostring(count_diagnostic("WARN")))
+					local warn_count = count_diagnostic(vim.diagnostic.severity.WARN)
+					if warn_count > 0 then
+						return string.format("  %s ", tostring(warn_count))
+					end
 				end,
 				highlight = "GalaxylineDiagnosticWarn",
 				separator = " ",
 				separator_highlight = "StatusLine",
-				condition = function()
-					return count_diagnostic("WARN") > 0
-				end,
 			},
 		},
 		{
