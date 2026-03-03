@@ -251,7 +251,8 @@ table.insert(
 		{ trig = "----lsp/toml/init", dscr = "Template for toml lsp" },
 		fmta(
 			[[
-	require("lspconfig").taplo.setup(require("config.lsp").default_setup.taplo)
+	vim.lsp.config("taplo", require("mod.lsp_config").taplo)
+	vim.lsp.enable({"taplo"})
 ]],
 			{}
 		)
@@ -264,7 +265,8 @@ table.insert(
 		{ trig = "----lsp/protobuf/init", dscr = "Template for protobuf lsp" },
 		fmta(
 			[[
-	require("lspconfig").protols.setup(require("config.lsp").default_setup.protols)
+	vim.lsp.config("protols", require("mod.lsp_config").protols)
+	vim.lsp.enable({"protols"})
 ]],
 			{}
 		)
@@ -277,7 +279,8 @@ table.insert(
 		{ trig = "----lsp/terraform/init", dscr = "Template for terraform lsp" },
 		fmta(
 			[[
-	require("lspconfig").terraform_ls.setup(require("config.lsp").default_setup.terraform_ls)
+	vim.lsp.config("terraform_ls", require("mod.lsp_config").terraform_ls)
+	vim.lsp.enable({"terraform_ls"})
 ]],
 			{}
 		)
