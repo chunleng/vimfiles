@@ -2,7 +2,7 @@ local M = {}
 local null_ls = require("null-ls")
 local helpers = require("null-ls.helpers")
 
----@param config {cwd: string, package: string?, target: string?, example: string?, features: table?, noDefaultFeatures: boolean?}
+---@param config {cwd: string, workspace_root: string?, package: string?, target: string?, example: string?, features: table?, noDefaultFeatures: boolean?}
 function M.cargo_check(config)
 	local cwd = vim.fn.fnamemodify(config.cwd, ":p")
 	local lsp_name = "cargo_check"
@@ -11,6 +11,11 @@ function M.cargo_check(config)
 	if config.package then
 		-- lsp_name = lsp_name .. ":" .. config.package
 		args = vim.list_extend(args, { "-p", config.package })
+	end
+	if not config.workspace_root then
+		local result = vim.fn.system("cargo metadata --no-deps --format-version 1 2>/dev/null")
+		local metadata = vim.fn.json_decode(result)
+		config.workspace_root = metadata.workspace_root
 	end
 	if config.example then
 		lsp_name = lsp_name .. ":" .. config.example
@@ -73,7 +78,7 @@ function M.cargo_check(config)
 				for _, span in ipairs(msg.spans) do
 					if span.is_primary then
 						return {
-							filename = vim.fn.getcwd() .. "/" .. span.file_name,
+							filename = config.workspace_root .. "/" .. span.file_name,
 							row = span.line_start,
 							col = span.column_start,
 							end_row = span.line_end,
