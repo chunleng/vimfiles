@@ -3,6 +3,12 @@ local function setup()
 	utils.keymap("n", "<c-s-g>", function()
 		utils.action_menu({
 			{
+				choice = "List Changed Files",
+				func = function()
+					vim.cmd("FzfLua git_status")
+				end,
+			},
+			{
 				choice = "File Blame",
 				func = function()
 					vim.cmd("Git blame --date=short")
