@@ -247,6 +247,13 @@ return {
 		filetypes = { "toml" },
 		root_markers = { ".git" },
 	},
+	terraform_ls = {
+		cmd = { "terraform-ls", "serve" },
+		filetypes = { "terraform" },
+		root_dir = function(_, on_dir)
+			on_dir(vim.fn.getcwd())
+		end,
+	},
 	ts_ls = {
 		cmd = { "typescript-language-server", "--stdio" },
 		filetypes = {

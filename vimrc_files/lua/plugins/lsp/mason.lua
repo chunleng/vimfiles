@@ -39,9 +39,8 @@ local function setup_mason_sync_command()
 			{ name = "rust-analyzer", version = "2026-02-23" },
 			{ name = "tailwindcss-language-server", version = "0.14.25" },
 			{ name = "taplo", version = "0.10.0" },
-			{ name = "terraform-ls", version = "v0.36.5" },
+			{ name = "terraform-ls", version = "v0.38.4" },
 			{ name = "typescript-language-server", version = "4.3.4" },
-			{ name = "vim-language-server", version = "2.3.1" },
 			{ name = "yaml-language-server", version = "1.18.0" },
 			{ name = "zk", version = "v0.15.1" },
 		}
@@ -57,7 +56,7 @@ end
 local function setup()
 	require("mason").setup({
 		registries = {
-			"github:mason-org/mason-registry@2025-07-14-wild-lightning",
+			"github:mason-org/mason-registry@2026-03-02-linear-cornet",
 		},
 	})
 

@@ -271,5 +271,18 @@ table.insert(
 	)
 )
 
+table.insert(
+	M,
+	s(
+		{ trig = "----lsp/terraform/init", dscr = "Template for terraform lsp" },
+		fmta(
+			[[
+	require("lspconfig").terraform_ls.setup(require("config.lsp").default_setup.terraform_ls)
+]],
+			{}
+		)
+	)
+)
+
 return M
 -- vim: noet
