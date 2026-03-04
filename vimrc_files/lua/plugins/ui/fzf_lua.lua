@@ -1,3 +1,24 @@
+local function setup_quick_replace()
+	local utils = require("common-utils")
+
+	-- Easy replace with selection
+	utils.keymap("x", "<c-r>", function()
+		local separator = ""
+		local left_key = vim.api.nvim_replace_termcodes("<left>", true, false, true)
+		-- TODO replace fzf-lua get_visual_selection function with
+		-- https://github.com/neovim/neovim/issues/16843
+		local feedkeys = (":%%s%s\\(%s\\)%s%sg%s%s"):format(
+			separator,
+			require("fzf-lua.utils").get_visual_selection(),
+			separator,
+			separator,
+			left_key,
+			left_key
+		)
+		vim.api.nvim_feedkeys(feedkeys, "n", false)
+	end)
+end
+
 local function setup()
 	local actions = require("fzf-lua.actions")
 	local fzf = require("fzf-lua")
@@ -69,6 +90,8 @@ local function setup()
 	theme.set_hl("FzfLuaCursorLine", { bg = 4, fg = theme.blender.fg_darker_1 })
 	theme.set_hl("FzfLuaCursorLineNr", { bg = 4, fg = theme.blender.fg_darker_1 })
 	fzf.register_ui_select()
+
+	setup_quick_replace()
 end
 
 return {

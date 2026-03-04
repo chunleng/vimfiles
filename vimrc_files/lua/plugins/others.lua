@@ -144,32 +144,6 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 	},
 	{
-		-- https://github.com/ibhagwan/fzf-lua
-		dir = vim.fn.stdpath("config") .. "/lua/lazy/quick_replace/",
-		name = "quick_replace",
-		dependencies = { "ibhagwan/fzf-lua" },
-		config = function()
-			local utils = require("common-utils")
-
-			-- Easy replace with selection
-			utils.keymap("x", "<c-r>", function()
-				local separator = ""
-				local left_key = vim.api.nvim_replace_termcodes("<left>", true, false, true)
-				-- TODO replace fzf-lua get_visual_selection function with
-				-- https://github.com/neovim/neovim/issues/16843
-				local feedkeys = (":%%s%s\\(%s\\)%s%sg%s%s"):format(
-					separator,
-					require("fzf-lua.utils").get_visual_selection(),
-					separator,
-					separator,
-					left_key,
-					left_key
-				)
-				vim.api.nvim_feedkeys(feedkeys, "n", false)
-			end)
-		end,
-	},
-	{
 		-- A more sane gf
 		-- https://github.com/nvim-tree/nvim-tree.lua
 		dir = vim.fn.stdpath("config") .. "/lua/lazy/resolve_gf/",
