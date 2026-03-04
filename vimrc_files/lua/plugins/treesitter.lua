@@ -64,6 +64,7 @@ return {
 			{ import = "plugins.treesitter.tree_sitter_rstml" },
 			{ import = "plugins.treesitter.playground" },
 			{ import = "plugins.treesitter.ts_context_commentstring" },
+			{ import = "plugins.treesitter.nvim_treesitter_context" },
 		},
 		config = setup,
 	},

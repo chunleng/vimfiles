@@ -265,13 +265,6 @@ return {
 		end,
 	},
 	{
-		-- https://github.com/nvim-treesitter/nvim-treesitter-context
-		"nvim-treesitter/nvim-treesitter-context",
-		config = function()
-			require("config.treesitter-context").setup()
-		end,
-	},
-	{
 		-- https://github.com/tpope/vim-projectionist
 		"tpope/vim-projectionist",
 		config = function()
