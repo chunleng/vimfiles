@@ -1,7 +1,6 @@
 local function setup()
 	require("scrollbar").setup({
 		set_highlights = false,
-		excluded_filetypes = { "blink-cmp-menu", "blink-cmp-documentation" },
 		marks = {
 			Error = { text = { "🬇", "▐" } },
 			Warn = { text = { "🬇", "▐" } },
