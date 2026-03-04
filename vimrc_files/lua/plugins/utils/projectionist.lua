@@ -1,6 +1,4 @@
-local M = {}
-
-function M.setup()
+local function setup()
 	local utils = require("common-utils")
 	utils.keymap("n", "<c-\\>", function()
 		if vim.fn.exists(":A") == 2 then
@@ -13,4 +11,10 @@ function M.setup()
 	end)
 end
 
-return M
+return {
+	{
+		-- https://github.com/tpope/vim-projectionist
+		"tpope/vim-projectionist",
+		config = setup,
+	},
+}

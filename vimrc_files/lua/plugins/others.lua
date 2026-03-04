@@ -117,13 +117,6 @@ return {
 		end,
 	},
 	{
-		-- https://github.com/tpope/vim-projectionist
-		"tpope/vim-projectionist",
-		config = function()
-			require("config.projectionist").setup()
-		end,
-	},
-	{
 		-- https://github.com/nvim-treesitter/nvim-treesitter
 		dir = vim.fn.stdpath("config") .. "/lua/lazy/stop_conceal/",
 		name = "stop_conceal",
