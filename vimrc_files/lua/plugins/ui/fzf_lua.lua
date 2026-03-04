@@ -59,20 +59,18 @@ local function setup()
 		fzf_args = "--select-1", -- auto-select when there is only one result
 		file_icon_padding = " ",
 	})
-	function _G.fzf_lua_search()
+	local utils = require("common-utils")
+	utils.keymap("n", "<enter>", ":FzfLua files<cr>")
+	utils.keymap("n", "<c-s-b>", "<cmd>FzfLua buffers<cr>")
+	utils.keymap("n", "<c-s-/>", ":FzfLua resume<cr>")
+	utils.keymap("n", "g/", function()
 		vim.ui.input({ prompt = "Search" }, function(response)
 			if response == nil then
 				return
 			end
 			require("fzf-lua.providers.grep").grep({ search = response })
 		end)
-	end
-	vim.cmd([[command! FzfLuaSearch call v:lua.fzf_lua_search()]])
-	local utils = require("common-utils")
-	utils.keymap("n", "<enter>", ":FzfLua files<cr>")
-	utils.keymap("n", "<c-s-b>", "<cmd>FzfLua buffers<cr>")
-	utils.keymap("n", "<c-s-/>", ":FzfLua resume<cr>")
-	utils.keymap("n", "g/", ":FzfLuaSearch<cr>")
+	end)
 	utils.keymap("x", "g/", ":<c-u>FzfLua grep_visual<cr>")
 	utils.keymap("n", "<c-s-h>", function()
 		vim.ui.select({ "help_tags", "man_pages" }, { prompt = "Help Menu" }, function(choice)
