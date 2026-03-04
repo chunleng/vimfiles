@@ -1,3 +1,22 @@
+local function setup_stop_conceal()
+	for _, lang in ipairs({
+		"json",
+		"jsonc",
+		"markdown",
+		"markdown_inline",
+	}) do
+		local queries = {}
+		for _, file in ipairs(require("vim.treesitter.query").get_files(lang, "highlights")) do
+			for _, line in ipairs(vim.fn.readfile(file)) do
+				local line_sub = line:gsub([[%(#set! conceal_lines ""%)]], "")
+				line_sub = line_sub:gsub([[%(#set! conceal ""%)]], "")
+				table.insert(queries, line_sub)
+			end
+		end
+		require("vim.treesitter.query").set(lang, "highlights", table.concat(queries, "\n"))
+	end
+end
+
 local function setup()
 	require("nvim-treesitter.configs").setup({
 		ensure_installed = {
@@ -53,6 +72,8 @@ local function setup()
 			},
 		},
 	})
+
+	setup_stop_conceal()
 end
 
 return {
