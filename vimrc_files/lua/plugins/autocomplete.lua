@@ -4,6 +4,7 @@ return {
 		dependencies = {
 			{ import = "plugins.autocomplete.luasnip" },
 			{ import = "plugins.autocomplete.neogen" },
+			{ import = "plugins.autocomplete.blink_cmp" },
 		},
 	},
 }
