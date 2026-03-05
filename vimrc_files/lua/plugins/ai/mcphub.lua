@@ -32,7 +32,9 @@ return {
 		-- https://github.com/ravitemer/mcphub.nvim
 		-- https://github.com/nvim-lua/plenary.nvim
 		{
-			"ravitemer/mcphub.nvim",
+			-- TODO Change back when PR is merged https://github.com/ravitemer/mcphub.nvim/pull/279
+			-- "ravitemer/mcphub.nvim",
+			"bahaaza/mcphub.nvim",
 			dependencies = {
 				"nvim-lua/plenary.nvim",
 			},

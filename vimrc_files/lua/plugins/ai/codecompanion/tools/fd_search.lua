@@ -100,18 +100,17 @@ return {
 
 		---The message which is shared with the user when asking for their approval
 		---@param self CodeCompanion.Tools.Tool
-		---@param _ CodeCompanion.Tools
+		---@param _ { tools: CodeCompanion.Tools }
 		---@return nil|string
 		prompt = function(self, _)
 			return fmt("Search the cwd for `%s`?", self.args.query)
 		end,
 
 		---@param self CodeCompanion.Tool.FileSearch
-		---@param tools CodeCompanion.Tools
-		---@param _ table The command that was executed
 		---@param stdout table The output from the command
-		success = function(self, tools, _, stdout)
-			local chat = tools.chat
+		---@param meta { tools: CodeCompanion.Tools, cmd: table }
+		success = function(self, stdout, meta)
+			local chat = meta.tools.chat
 			local query = self.args.query
 			local data = stdout[1]
 
@@ -131,11 +130,10 @@ return {
 		end,
 
 		---@param self CodeCompanion.Tool.FileSearch
-		---@param tools CodeCompanion.Tools
-		---@param _ table
 		---@param stderr table The error output from the command
-		error = function(self, tools, _, stderr)
-			local chat = tools.chat
+		---@param meta { tools: CodeCompanion.Tools, cmd: table }
+		error = function(self, stderr, meta)
+			local chat = meta.tools.chat
 			local query = self.args.query
 			local errors = vim.iter(stderr):flatten():join("\n")
 			log:debug("[File Search Tool] Error output: %s", stderr)

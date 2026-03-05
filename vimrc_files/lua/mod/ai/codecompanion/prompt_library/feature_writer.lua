@@ -51,6 +51,7 @@ local function new_feature_writer_chat(context)
 	if chat then
 		chat.tool_registry:add_group("files", codecompanion_config.config.interactions.chat.tools)
 		chat.tool_registry:add_group("web", codecompanion_config.config.interactions.chat.tools)
+		chat.tool_registry:add_single_tool("ask_questions", {})
 	end
 	return chat
 end

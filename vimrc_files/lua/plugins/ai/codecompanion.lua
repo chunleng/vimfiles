@@ -1,5 +1,4 @@
 local utils = require("common-utils")
-local tool_execution_precheck = require("mod.codecompanion.tool_execution_precheck")
 
 local function get_open_chats()
 	local codecompanion = require("codecompanion")
@@ -106,56 +105,39 @@ local function setup()
 				tools = {
 					memory = { enabled = false },
 					file_search = {
-						callback = require("mod.codecompanion.fd_search"),
+						path = "plugins.ai.codecompanion.tools.fd_search",
 					},
 					grep_search = { opts = { require_approval_before = false } },
 					read_file = {
-						callback = tool_execution_precheck.wrap(
-							require("codecompanion.interactions.chat.tools.builtin.read_file"),
-							function(_, args, _)
-								return tool_execution_precheck.validate_safe_filepath(args.filepath)
-							end
-						),
+						path = "plugins.ai.codecompanion.tools.read_file",
 						opts = {
 							require_approval_before = false,
 						},
 					},
 					insert_edit_into_file = {
-						callback = tool_execution_precheck.wrap(
-							-- TODO Sending a PR for error where buffer is not saved when diff is off
-							-- require("codecompanion.interactions.chat.tools.builtin.insert_edit_into_file"),
-							require("mod.codecompanion.insert_edit_into_file"),
-							function(_, args, _)
-								return tool_execution_precheck.validate_safe_filepath(args.filepath)
-							end
-						),
+						path = "plugins.ai.codecompanion.tools.insert_edit_into_file",
 						opts = {
 							require_confirmation_after = false,
 						},
 					},
 					create_file = {
-						callback = tool_execution_precheck.wrap(
-							require("codecompanion.interactions.chat.tools.builtin.create_file"),
-							function(_, args, _)
-								return tool_execution_precheck.validate_safe_filepath(args.filepath)
-							end
-						),
+						path = "plugins.ai.codecompanion.tools.create_file",
 						opts = {
 							require_approval_before = false,
 						},
 					},
 					delete_file = {
-						callback = tool_execution_precheck.wrap(
-							require("codecompanion.interactions.chat.tools.builtin.delete_file"),
-							function(_, args, _)
-								return tool_execution_precheck.validate_safe_filepath(args.filepath)
-							end
-						),
+						path = "plugins.ai.codecompanion.tools.delete_file",
 						opts = {
 							require_approval_before = false,
 						},
 					},
 					groups = {
+						agent = {
+							opts = {
+								ignore_system_prompt = false,
+							},
+						},
 						read_only = {
 							description = "Tools related to reading files",
 							prompt = "I'm giving you access to ${tools} to help you perform read-only file operations",
@@ -191,19 +173,21 @@ local function setup()
 					},
 				},
 				opts = {
-					system_prompt = [[<global_instruction>This setting sets a tone for all the conversation in this chat
+					system_prompt = function()
+						return [[<global_instruction>This setting sets a tone for all the conversation in this chat
 <guidelines>
 <coding>
 - Prioritize use of relevant tools to solve problem
 - If you are given the way to test or format the code, use it to check before you complete the task
 - Don't add comments unless they explain why, not what
 - If tools are given, you are free to use it without asking for permission
-- Before using @{cmd_runner}, always try using other tools first, especially @{file_search} for listing file and @{read_file} for checking file content
+- Before using @{run_command}, always try using other tools first, especially @{file_search} for listing file and @{read_file} for checking file content
 </coding>
 <outputFormat>
 strictly markdown, if heading is used, please use start from heading 3
 </outputFormat>
-</global_instruction>]],
+</global_instruction>]]
+					end,
 				},
 			},
 		},
