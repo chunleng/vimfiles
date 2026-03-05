@@ -132,6 +132,9 @@ local function setup()
 							require_approval_before = false,
 						},
 					},
+					run_command = {
+						path = "plugins.ai.codecompanion.tools.run_command",
+					},
 					groups = {
 						agent = {
 							opts = {
@@ -181,7 +184,6 @@ local function setup()
 - If you are given the way to test or format the code, use it to check before you complete the task
 - Don't add comments unless they explain why, not what
 - If tools are given, you are free to use it without asking for permission
-- Before using @{run_command}, always try using other tools first, especially @{file_search} for listing file and @{read_file} for checking file content
 </coding>
 <outputFormat>
 strictly markdown, if heading is used, please use start from heading 3
