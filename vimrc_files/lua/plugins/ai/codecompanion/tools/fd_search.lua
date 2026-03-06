@@ -3,10 +3,11 @@ local log = require("codecompanion.utils.log")
 local fmt = string.format
 
 ---Search the current working directory for files matching the glob pattern.
----@param action { query: string, max_results: number }
+---@param args { query: string, max_results: number }
+---@param opts { output_cb: function }
 ---@return { status: "success"|"error", data: string }
-local function search(action)
-	local query = action.query
+local function search(args, opts)
+	local query = args.query
 	if not query or query == "" then
 		return {
 			status = "error",
@@ -16,38 +17,28 @@ local function search(action)
 
 	local cwd = vim.fn.getcwd()
 
-	local data = nil
+	local data_success = nil
 	local data_err = nil
 	local job_id = vim.fn.jobstart({ "fd", "--follow", "--color=never", "--glob", "-p", cwd .. "/" .. query }, {
 		stdout_buffered = true,
 		stderr_buffered = true,
 		on_stdout = function(_, d, _)
 			table.remove(d) -- remove last line feed from output
-			data = d
+			data_success = d
 		end,
 		on_stderr = function(_, d, _)
 			table.remove(d) -- remove last line feed from output
 			data_err = d
 		end,
+		on_exit = function(_, code, _)
+			local status = code == 0 and "success" or "error"
+			local data = status == "success" and data_success or data_err
+			opts.output_cb({
+				status = status,
+				data = data,
+			})
+		end,
 	})
-	local res = vim.fn.jobwait({ job_id }, 5000)
-
-	if res[1] == 0 then
-		return {
-			status = "success",
-			data = data,
-		}
-	elseif res[1] == -1 then
-		return {
-			status = "error",
-			data = { "execution timeout" },
-		}
-	else
-		return {
-			status = "error",
-			data = data_err,
-		}
-	end
 end
 
 ---@class CodeCompanion.Tool.FileSearch: CodeCompanion.Tools.Tool
@@ -57,10 +48,10 @@ return {
 		---Execute the search commands
 		-----@param _ CodeCompanion.Tool.FileSearch
 		---@param args table The arguments from the LLM's tool call
-		-----@param _? any The output from the previous function call
+		---@param opts table The output from the previous function call
 		---@return { status: "success"|"error", data: string }
-		function(_, args, _)
-			return search(args)
+		function(_, args, opts)
+			return search(args, opts)
 		end,
 	},
 	schema = {
