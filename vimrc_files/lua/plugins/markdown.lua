@@ -6,6 +6,7 @@ return {
 			{ import = "plugins.markdown.markdown_preview" },
 			{ import = "plugins.markdown.fenced_code_block" },
 			{ import = "plugins.markdown.zk" },
+			{ import = "plugins.markdown.render_markdown" },
 		},
 	},
 }

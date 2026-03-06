@@ -3,6 +3,7 @@ local ft = {
 	"text",
 	"gitcommit",
 	"scratch",
+	"codecompanion",
 }
 
 local function setup()

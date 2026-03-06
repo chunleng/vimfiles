@@ -1,4 +1,4 @@
-local ft = { "markdown", "plantuml" }
+local ft = { "markdown", "plantuml", "codecompanion" }
 
 local function build()
 	vim.fn["mkdp#util#install"]()
@@ -8,7 +8,7 @@ local function setup()
 	local group_name = "MarkdownPreview"
 	vim.api.nvim_create_augroup(group_name, { clear = true })
 	vim.api.nvim_create_autocmd("FileType", {
-		pattern = "markdown",
+		pattern = ft,
 		callback = function()
 			local utils = require("common-utils")
 			utils.buf_keymap(0, { "n" }, "<leader>tm", "<cmd>MarkdownPreviewToggle<cr>", { silent = true })
