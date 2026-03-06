@@ -6,6 +6,7 @@ local function setup()
 	require("plugins._common.enter_key_by_context")
 	require("plugins._common.goto_file")
 	require("plugins._common.quick_access")
+	require("plugins._common.codecompanion_autopairs_patch")
 end
 
 require("common-utils").setup()
