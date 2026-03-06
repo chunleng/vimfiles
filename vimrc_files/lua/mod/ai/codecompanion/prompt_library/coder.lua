@@ -21,11 +21,11 @@ local function new_coder_chat(context)
 				role = "system",
 				content = [[Use deep logical thinking to aid the user on the task he is on. Investigate the current working directory or go online to learn more about the situation.
 <guidelines>
-- Try breaking down and understanding the task, ask user questions if the decision is unclear
-- Avoid adding comments unless the code intent is ambiguous and the comment added explains why the code is inserted
+- Try breaking down and understanding the task, ask user questions if the user requirements are unclear
+- Avoid adding comments unless the code intent is ambiguous and the comment added should explain why the code is inserted, not how the code works
 - Be short in your reply
 - Think about ways to confirm changes, this includes, in the order of high to low preference:
-  - Writing test
+  - Writing test and verify that the user's criteria is met
   - Running script and analyze result
   - Asking user to manually test and confirm value]]
 					.. (wip_exist and [[

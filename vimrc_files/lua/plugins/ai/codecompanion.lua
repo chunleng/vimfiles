@@ -137,8 +137,16 @@ local function setup()
 					},
 					groups = {
 						agent = {
+							system_prompt = function()
+								return [[<guidelines>
+- Achieve user's objective without minimal user intervention. e.g.
+  - If you are faced with choices, go with what you think is the best for the current situation
+  - If the objective is not met, instead of stopping, thinking about what to do next and repeat until user's condition is met
+</guidelines>]]
+							end,
 							opts = {
 								ignore_system_prompt = false,
+								ignore_tool_system_prompt = false,
 							},
 						},
 						read_only = {
@@ -177,17 +185,10 @@ local function setup()
 				},
 				opts = {
 					system_prompt = function()
-						return [[<global_instruction>This setting sets a tone for all the conversation in this chat
+						return [[<global_instruction>
 <guidelines>
-<coding>
-- Prioritize use of relevant tools to solve problem
-- If you are given the way to test or format the code, use it to check before you complete the task
-- Don't add comments unless they explain why, not what
-- If tools are given, you are free to use it without asking for permission
-</coding>
-<outputFormat>
-strictly markdown, if heading is used, please use start from heading 3
-</outputFormat>
+<tools>All tools available are free to use. Please do not ask permission when using them. Always seek the help of relevant tools before replying</tools>
+<outputFormat>strictly markdown, if heading is used, please refrain using `#` and `##` and start from heading 3</outputFormat>
 </global_instruction>]]
 					end,
 				},
