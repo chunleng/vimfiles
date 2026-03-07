@@ -287,5 +287,44 @@ table.insert(
 	)
 )
 
+table.insert(
+	M,
+	s(
+		{ trig = "----lsp/kubernetes/init", dscr = "Template for k8s lsp (yamlls)" },
+		fmta(
+			[[
+-- Since kubernetes version is complicated, it needs a specialized schema to ensure version correctness
+-- The setup is by no means an exhaustive list of yaml, so add more as needed
+-- https://github.com/yannh/kubernetes-json-schema/tree/master/v1.<>-standalone
+function k8s(kind)
+	return string.format(
+		"https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/v1.<>-standalone/%s.json",
+		kind
+	)
+end
+vim.lsp.config(
+	"yamlls",
+	vim.tbl_extend("keep", {
+		settings = {
+			yaml = {
+				schemas = {
+					["https://www.schemastore.org/kustomization.json"] = "k8s/**/kustomization.{yml,yaml}",
+					[k8s("deployment")] = "k8s/**/deployment.{yml,yaml}",
+					[k8s("service")] = "k8s/**/service.{yml,yaml}",
+					[k8s("pod")] = "k8s/**/pod.{yml,yaml}",
+					[k8s("configmap")] = "k8s/**/configmap.{yml,yaml}",
+					[k8s("patch")] = "k8s/**/patch/*.{yml,yaml}",
+				},
+			},
+		},
+	}, require("mod.lsp_config").yamlls)
+)
+vim.lsp.enable("yamlls")
+]],
+			{ i(1, "30.0"), l(l._1, 1) }
+		)
+	)
+)
+
 return M
 -- vim: noet
