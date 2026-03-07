@@ -30,7 +30,6 @@ local function setup_mason_sync_command()
 			{ name = "dockerfile-language-server", version = "0.14.0" },
 			{ name = "eslint-lsp", version = "4.10.0" },
 			{ name = "html-lsp", version = "4.10.0" },
-			{ name = "jdtls", version = "v1.46.1" },
 			{ name = "json-lsp", version = "4.10.0" },
 			{ name = "ltex-ls-plus", version = "18.6.1" },
 			{ name = "lua-language-server", version = "3.15.0" },
