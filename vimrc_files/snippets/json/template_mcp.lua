@@ -1,4 +1,5 @@
 local M = {}
+local constant = require("constant")
 
 table.insert(
 	M,
@@ -79,6 +80,37 @@ table.insert(
 	}
 ]],
 			{ i(0) }
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
+		{ trig = "----mcp/makefile", dscr = "Add local MCP for running Makefile" },
+		fmta(
+			string.format(
+				[[
+	"makefile": {
+		"command": "uvx",
+		"args": [
+			"mcp-server-make",
+			"--make-path",
+			"<>/Makefile",
+			"--working-dir",
+			"<>"
+		],
+		"env": {
+			"ASDF_PYTHON_VERSION": "%s",
+			"ASDF_UV_VERSION": "%s"
+		}
+	}
+
+]],
+				constant.PYTHON_VERSION,
+				constant.UV_VERSION
+			),
+			{ i(1, vim.fn.getcwd()), l(l._1, { 1 }) }
 		)
 	)
 )
