@@ -1,0 +1,9 @@
+--- @class Custom.Lsp.Rust.Config
+--- @field cwd string
+--- @field workspace_root string?
+--- @field public package string?
+--- @field target string?
+--- @field example string?
+--- @field features table?
+--- @field noDefaultFeatures boolean?}
+--- @field extraEnv table?}

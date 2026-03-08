@@ -2,7 +2,7 @@ local M = {}
 local null_ls = require("null-ls")
 local helpers = require("null-ls.helpers")
 
----@param config {cwd: string, workspace_root: string?, package: string?, target: string?, example: string?, features: table?, noDefaultFeatures: boolean?}
+---@param config Custom.Lsp.Rust.Config
 function M.cargo_check(config)
 	local cwd = vim.fn.fnamemodify(config.cwd, ":p")
 	local lsp_name = "cargo_check"
@@ -92,13 +92,15 @@ function M.cargo_check(config)
 
 				return nil
 			end,
+			env = config.extraEnv,
 		},
 		factory = helpers.generator_factory,
 	})
 end
 
+--- @param configs table<string, Custom.Lsp.Rust.Config>
 function M.cargo_checks(configs)
-	local configs = configs or {}
+	configs = configs or {}
 	local result = vim.fn.system("cargo metadata --no-deps --format-version 1 2>/dev/null")
 
 	if vim.v.shell_error ~= 0 then
