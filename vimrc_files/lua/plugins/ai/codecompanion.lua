@@ -99,7 +99,7 @@ local function setup()
 					now = { enabled = false }, -- Disable because there're better ways
 					help = { enabled = false }, -- Too niche to vim
 					file_by_path = {
-						callback = "mod.ai.codecompanion.slash_commands.file_by_path",
+						path = "mod.ai.codecompanion.slash_commands.file_by_path",
 					},
 				},
 				tools = {
