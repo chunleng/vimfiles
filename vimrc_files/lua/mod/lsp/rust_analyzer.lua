@@ -1,6 +1,6 @@
 local M = {}
 
---- @param rust_config table<string, Custom.Lsp.Rust.Config>
+--- @param rust_config table<string, Custom.Lsp.Rust.Config|false>
 function M.override_check_parameters(rust_config)
 	return function(init_params, config)
 		local cwd = vim.fn.getcwd()

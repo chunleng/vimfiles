@@ -98,7 +98,7 @@ function M.cargo_check(config)
 	})
 end
 
---- @param configs table<string, Custom.Lsp.Rust.Config>
+--- @param configs table<string, Custom.Lsp.Rust.Config|false>
 function M.cargo_checks(configs)
 	configs = configs or {}
 	local result = vim.fn.system("cargo metadata --no-deps --format-version 1 2>/dev/null")
@@ -118,32 +118,38 @@ function M.cargo_checks(configs)
 		for _, target in ipairs(pkg.targets) do
 			if target.kind then
 				if vim.tbl_contains(target.kind, "example") then
-					table.insert(
-						checks,
-						M.cargo_check(
-							vim.tbl_extend(
-								"force",
-								{ cwd = manifest_dir, package = pkg.name, example = target.name },
-								configs[manifest_dir .. "//" .. target.name] or configs["*"] or {}
+					local match_key = manifest_dir .. "//" .. target.name
+					-- Disable diagnostic if explicitly set to false
+					if configs[match_key] ~= false then
+						table.insert(
+							checks,
+							M.cargo_check(
+								vim.tbl_extend(
+									"force",
+									{ cwd = manifest_dir, package = pkg.name, example = target.name },
+									configs[match_key] or configs["*"] or {}
+								)
 							)
 						)
-					)
+					end
 				else
 					has_code_target = true
 				end
 			end
 		end
 		if has_code_target then
-			table.insert(
-				checks,
-				M.cargo_check(
-					vim.tbl_extend(
-						"force",
-						{ cwd = manifest_dir, package = pkg.name },
-						configs[manifest_dir] or configs["*"] or {}
+			if configs[manifest_dir] ~= false then
+				table.insert(
+					checks,
+					M.cargo_check(
+						vim.tbl_extend(
+							"force",
+							{ cwd = manifest_dir, package = pkg.name },
+							configs[manifest_dir] or configs["*"] or {}
+						)
 					)
 				)
-			)
+			end
 		end
 	end
 	return checks
