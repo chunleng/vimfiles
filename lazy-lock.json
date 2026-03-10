@@ -44,6 +44,7 @@
   "render-markdown.nvim": { "branch": "main", "commit": "907505549edc2f90c82fc429348af03ee8c3a825" },
   "schemastore.nvim": { "branch": "main", "commit": "e75f2362624698864957a694d80ca0c116bd24d3" },
   "scope.nvim": { "branch": "main", "commit": "6b4208f017da9b122d69ddc5841e040dffe7313c" },
+  "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
   "tree-sitter-rstml": { "branch": "main", "commit": "07a8e3b9bda09b648a6ccaca09e15dea3adf956f" },
   "undotree": { "branch": "main", "commit": "eab459ab87dd249617b5f7187bb69e614a083047" },
   "vim-dadbod": { "branch": "master", "commit": "7888cb7164d69783d3dce4e0283decd26b82538b" },

@@ -9,6 +9,7 @@ return {
 			{ import = "plugins.ui.scope" },
 			{ import = "plugins.ui.dressing" },
 			{ import = "plugins.ui.fzf_lua" },
+			{ import = "plugins.ui.todo_comments" },
 		},
 	},
 }
