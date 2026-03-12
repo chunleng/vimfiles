@@ -15,7 +15,7 @@ Markdown format for both header. Please output with triple backticks
   - `Summary`: [Required] 1-2 liners to summarize the change and the impact
   - `Changes`: [Required] What was changed, why and how
   - `Tests`: [Required] Test that was performed
-  - `Additional Resources`: [Optional] Might include related issues, documentation or any other resources to help reviewers understand the context
+  - `Additional Resources`: [Optional] Might include related issues, documentation or any other resources to help reviewers understand the context (Do not include the link of the current PR here)
   - `Future Work`: [Optional] Note on work that was plan but not done to keep the scope clear
 </outputComponent>
 </outputFormat>]]
