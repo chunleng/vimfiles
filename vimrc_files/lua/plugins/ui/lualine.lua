@@ -62,7 +62,9 @@ local function setup()
 					return navic.get_location()
 				end,
 			},
-			lualine_x = {},
+			lualine_x = {
+				require("codecompanion._extensions.spinner.styles.lualine").get_lualine_component(),
+			},
 			lualine_y = {
 				{
 					"lsp_status",

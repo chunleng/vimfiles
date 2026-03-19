@@ -7,6 +7,7 @@
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "bullets.vim": { "branch": "master", "commit": "448ad2a159c5f2540f6c9738f3bb9e6f15a41734" },
   "codecompanion-history.nvim": { "branch": "main", "commit": "bc1b4fe06eaaf0aa2399be742e843c22f7f1652a" },
+  "codecompanion-spinners.nvim": { "branch": "main", "commit": "86926cbf7554d69d40d2a5c3cf576063814a42d5" },
   "codecompanion.nvim": { "branch": "main", "commit": "f22fe1b04e47110a26abe70bad537cb9baf9c665" },
   "dressing.nvim": { "branch": "master", "commit": "2d7c2db2507fa3c4956142ee607431ddb2828639" },
   "fzf-lua": { "branch": "main", "commit": "9004cbb4c065a32b690e909c49903967b45301eb" },

@@ -217,6 +217,22 @@ local function setup()
 					dir_to_save = vim.fn.stdpath("data") .. "/" .. vim.fn.getcwd(),
 				},
 			},
+			spinner = {
+				opts = {
+					style = "lualine",
+					-- Because of the way the lualine formats it's display, I have configured to use spacing so that it
+					-- can reliably display the icon
+					default_icon = "",
+					content = {
+						thinking = { icon = "", message = "Thinking...", spacing = "   " },
+						receiving = { icon = "", message = "Receiving...", spacing = "   " },
+						done = { icon = "", message = "Done!", spacing = "   " },
+						cleared = { icon = "", message = "Chat cleared", spacing = "   " },
+						tools_started = { icon = "", message = "Running tools...", spacing = "   " },
+						tools_finished = { icon = "", message = "Processing tool output...", spacing = "   " },
+					},
+				},
+			},
 		},
 		adapters = {
 			http = {
@@ -295,11 +311,13 @@ return {
 	-- https://github.com/nvim-lua/plenary.nvim
 	-- https://github.com/ravitemer/mcphub.nvim
 	-- https://github.com/ravitemer/codecompanion-history.nvim
+	-- https://github.com/lalitmee/codecompanion-spinners.nvim
 	"olimorris/codecompanion.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"ravitemer/mcphub.nvim",
 		"ravitemer/codecompanion-history.nvim",
+		"lalitmee/codecompanion-spinners.nvim",
 	},
 	version = "*",
 	config = setup,
