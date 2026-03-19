@@ -149,6 +149,11 @@ local function setup()
 								ignore_tool_system_prompt = false,
 							},
 						},
+						query = {
+							description = "Tools related to asking questions",
+							prompt = "I'm giving you access to ${tools} that helps you communicate better with the user",
+							tools = { "ask_questions" },
+						},
 						read_only = {
 							description = "Tools related to reading files",
 							prompt = "I'm giving you access to ${tools} to help you perform read-only file operations",
@@ -177,7 +182,7 @@ local function setup()
 						},
 					},
 					opts = {
-						default_tools = { "read_only", "math" },
+						default_tools = { "read_only", "math", "query" },
 						system_prompt = {
 							enabled = false,
 						},
@@ -187,7 +192,12 @@ local function setup()
 					system_prompt = function()
 						return [[<global_instruction>
 <guidelines>
-<tools>All tools available are free to use. Please do not ask permission when using them. Always seek the help of relevant tools before replying</tools>
+<tools>
+	All tools available are free to use. Please do not ask permission when using them. Always seek the help of relevant tools before replying
+	e.g.
+		When you perform calculation, always use the @{calculator__calculate} tool
+		When you have question to the user, ask the question via @{ask_questions} tool
+</tools>
 <outputFormat>strictly markdown, if heading is used, please refrain using `#` and `##` and start from heading 3</outputFormat>
 </global_instruction>]]
 					end,
