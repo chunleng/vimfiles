@@ -52,7 +52,6 @@ local function setup()
 			require("mod.ai.codecompanion.prompt_library.coder"),
 			require("mod.ai.codecompanion.prompt_library.pull_request"),
 			require("mod.ai.codecompanion.prompt_library.research"),
-			require("mod.ai.codecompanion.prompt_library.question"),
 			require("mod.ai.codecompanion.prompt_library.diagnostic"),
 		},
 		interactions = {
