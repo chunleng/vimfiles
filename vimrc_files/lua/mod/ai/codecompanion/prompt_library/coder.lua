@@ -1,6 +1,6 @@
 local codecompanion = require("codecompanion")
 local codecompanion_config = require("codecompanion.config")
-local codecompanion_custom_config = require("mod.codecompanion.config")
+local codecompanion_model_list = require("mod.codecompanion.model_list")
 
 local function new_coder_chat(context)
 	local path = vim.fn.fnamemodify(".vim/wip.md", ":p")
@@ -39,10 +39,7 @@ local function new_coder_chat(context)
 				content = content,
 			},
 		},
-		params = {
-			adapter = codecompanion_custom_config.reasoning_model.name,
-			model = codecompanion_custom_config.reasoning_model.model,
-		},
+		params = codecompanion_model_list.coding,
 	})
 	if chat then
 		chat.tool_registry:add_group("agent", codecompanion_config.config.interactions.chat.tools)

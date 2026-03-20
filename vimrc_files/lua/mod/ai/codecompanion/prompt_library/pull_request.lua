@@ -1,6 +1,5 @@
 local codecompanion = require("codecompanion")
 local codecompanion_config = require("codecompanion.config")
-local codecompanion_custom_config = require("mod.codecompanion.config")
 
 local system_content = [[Work with the user to produce the information needed to describe the Pull Request
 <guidelines>
@@ -32,10 +31,6 @@ local function new_feature_writer_chat(context)
 				role = "user",
 				content = "PR link: \n",
 			},
-		},
-		params = {
-			adapter = codecompanion_custom_config.reasoning_model.name,
-			model = codecompanion_custom_config.reasoning_model.model,
 		},
 	})
 	if chat then

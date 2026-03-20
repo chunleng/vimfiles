@@ -1,6 +1,6 @@
 local codecompanion = require("codecompanion")
 local codecompanion_config = require("codecompanion.config")
-local codecompanion_custom_config = require("mod.codecompanion.config")
+local codecompanion_model_list = require("mod.codecompanion.model_list")
 
 local system_content = [[Use deep logical thinking to produce a feature write-up
 Investigate the current working directory or go online to learn more about the situation
@@ -43,10 +43,7 @@ local function new_feature_writer_chat(context)
 				content = "Output to ./docs/features/",
 			},
 		},
-		params = {
-			adapter = codecompanion_custom_config.reasoning_model.name,
-			model = codecompanion_custom_config.reasoning_model.model,
-		},
+		params = codecompanion_model_list.coding,
 	})
 	if chat then
 		chat.tool_registry:add_group("files", codecompanion_config.config.interactions.chat.tools)

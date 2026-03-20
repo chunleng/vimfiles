@@ -23,6 +23,7 @@ end
 
 local function setup()
 	local codecompanion = require("codecompanion")
+	local model_list = require("mod.codecompanion.model_list")
 	codecompanion.setup({
 		display = {
 			chat = {
@@ -73,7 +74,7 @@ local function setup()
 				},
 			},
 			chat = {
-				adapter = require("mod.codecompanion.config").chat_model,
+				adapter = model_list.general,
 				keymaps = {
 					clear = false,
 					codeblock = false,
@@ -92,6 +93,28 @@ local function setup()
 					previous_chat = { modes = { n = "<c-p>" } },
 					send = { modes = { n = "<c-cr>", i = "<c-cr>" } },
 					stop = { modes = { n = "<c-c>", i = "<c-c>" } },
+					change_adapter = { modes = { n = "gA" } },
+					change_preffered_adapter = {
+						modes = { n = "ga" },
+						index = 15,
+						callback = function(chat)
+							vim.ui.select(vim.tbl_keys(model_list), {
+
+								prompt = "Select a model",
+								format_item = function(item)
+									local model = model_list[item]
+									return string.format("%s: %s|%s", item, model.adapter, model.model)
+								end,
+							}, function(selected)
+								local model = model_list[selected]
+								if model then
+									chat:change_adapter(model.adapter)
+									chat:change_model({ model = model.model })
+								end
+							end)
+						end,
+						description = "[Adapter] Change to favorite adapter and model",
+					},
 				},
 				slash_commands = {
 					terminal = { enabled = false }, -- Disable because it's not verbose
