@@ -101,6 +101,15 @@ return {
 		end,
 
 		---@param self CodeCompanion.Tools.Tool
+		---@param stderr table The error output from the command
+		---@param meta { tools: CodeCompanion.Tools, cmd: table }
+		error = function(self, stderr, meta)
+			local chat = meta.tools.chat
+			local errors = vim.iter(stderr):flatten():join("\n")
+			chat:add_tool_output(self, errors)
+		end,
+
+		---@param self CodeCompanion.Tools.Tool
 		---@param stdout table|nil The output from the tool
 		---@param meta { tools: table, cmd: table }
 		---@return nil
