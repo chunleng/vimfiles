@@ -1,5 +1,6 @@
 local codecompanion = require("codecompanion")
 local codecompanion_config = require("codecompanion.config")
+local rules = require("codecompanion.interactions.chat.rules")
 
 return {
 	name = function()
@@ -42,6 +43,11 @@ Your task is to focus on the error level diagnostics only
 					},
 				},
 			})
+			if chat then
+				rules
+					.new({ name = "default", files = codecompanion_config.rules["default"].files })
+					:make({ chat = chat, force = true })
+			end
 			return chat
 		end,
 	},

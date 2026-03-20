@@ -319,7 +319,7 @@ local function setup()
 			},
 			opts = {
 				chat = {
-					autoload = "default", -- The rule groups to load
+					autoload = false, -- No default groups
 					enabled = true,
 				},
 			},

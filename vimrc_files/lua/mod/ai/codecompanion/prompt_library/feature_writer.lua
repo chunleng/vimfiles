@@ -1,6 +1,7 @@
 local codecompanion = require("codecompanion")
 local codecompanion_config = require("codecompanion.config")
 local codecompanion_model_list = require("mod.codecompanion.model_list")
+local rules = require("codecompanion.interactions.chat.rules")
 
 local system_content = [[Use deep logical thinking to produce a feature write-up
 Investigate the current working directory or go online to learn more about the situation
@@ -47,6 +48,9 @@ local function new_feature_writer_chat(context)
 	})
 	if chat then
 		chat.tool_registry:add_group("files", codecompanion_config.config.interactions.chat.tools)
+		rules
+			.new({ name = "default", files = codecompanion_config.rules["default"].files })
+			:make({ chat = chat, force = true })
 	end
 	return chat
 end

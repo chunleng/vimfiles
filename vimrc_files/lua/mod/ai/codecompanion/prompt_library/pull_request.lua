@@ -1,5 +1,6 @@
 local codecompanion = require("codecompanion")
 local codecompanion_config = require("codecompanion.config")
+local rules = require("codecompanion.interactions.chat.rules")
 
 local system_content = [[Work with the user to produce the information needed to describe the Pull Request
 <guidelines>
@@ -35,6 +36,9 @@ local function new_feature_writer_chat(context)
 	})
 	if chat then
 		chat.tool_registry:add_group("github", codecompanion_config.config.interactions.chat.tools)
+		rules
+			.new({ name = "default", files = codecompanion_config.rules["default"].files })
+			:make({ chat = chat, force = true })
 	end
 	return chat
 end

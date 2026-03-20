@@ -1,6 +1,7 @@
 local codecompanion = require("codecompanion")
 local codecompanion_config = require("codecompanion.config")
 local codecompanion_model_list = require("mod.codecompanion.model_list")
+local rules = require("codecompanion.interactions.chat.rules")
 
 local function new_coder_chat(context)
 	local path = vim.fn.fnamemodify(".vim/wip.md", ":p")
@@ -61,6 +62,9 @@ local function new_coder_chat(context)
 
 			buffer:output({ bufnr = bufnr, name = path, path = path }, { silent = true })
 		end
+		rules
+			.new({ name = "default", files = codecompanion_config.rules["default"].files })
+			:make({ chat = chat, force = true })
 	end
 	return chat
 end
