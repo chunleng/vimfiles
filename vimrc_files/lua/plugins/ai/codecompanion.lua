@@ -50,7 +50,8 @@ local function setup()
 			require("mod.ai.codecompanion.prompt_library.open_history"),
 			require("mod.ai.codecompanion.prompt_library.rename_chat"),
 			require("mod.ai.codecompanion.prompt_library.feature_writer"),
-			require("mod.ai.codecompanion.prompt_library.coder"),
+			require("mod.ai.codecompanion.prompt_library.coder").coder,
+			require("mod.ai.codecompanion.prompt_library.coder").coder_agent,
 			require("mod.ai.codecompanion.prompt_library.pull_request"),
 			require("mod.ai.codecompanion.prompt_library.diagnostic"),
 		},
@@ -165,6 +166,15 @@ local function setup()
   - If the objective is not met, instead of stopping, thinking about what to do next and repeat until user's condition is met
 </guidelines>]]
 							end,
+							tools = {
+								"insert_edit_into_file",
+								"delete_file",
+								"create_file",
+								"get_diagnostics",
+								"run_project_command",
+								"run_command",
+							},
+
 							opts = {
 								ignore_system_prompt = false,
 								ignore_tool_system_prompt = false,
