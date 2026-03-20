@@ -246,6 +246,32 @@ local function setup()
 		},
 		adapters = {
 			http = {
+				ollama_online = function()
+					return require("codecompanion.adapters").extend("ollama", {
+						env = {
+							url = "https://ollama.com",
+						},
+						headers = {
+							["Content-Type"] = "application/json",
+							Authorization = "Bearer " .. vim.fn.getenv("OLLAMA_API_KEY"),
+						},
+						handlers = {
+							chat_output = function(self, data, tools)
+								local original_func_output =
+									require("codecompanion.adapters.http.ollama").handlers.chat_output(
+										self,
+										data,
+										tools
+									)
+
+								if original_func_output then
+									original_func_output.output.reasoning = nil
+								end
+								return original_func_output
+							end,
+						},
+					})
+				end,
 				tavily = function()
 					return require("codecompanion.adapters").extend("tavily", {
 						env = {
