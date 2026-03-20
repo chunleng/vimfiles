@@ -203,7 +203,7 @@ local function setup()
 						},
 					},
 					opts = {
-						default_tools = { "read_only", "math", "query" },
+						default_tools = { "read_only", "math", "query", "web" },
 						system_prompt = {
 							enabled = false,
 						},
@@ -218,6 +218,7 @@ local function setup()
 	e.g.
 		When you perform calculation, always use the @{calculator__calculate} tool
 		When you have question to the user, ask the question via @{ask_questions} tool
+		When answer is likely outdated, check the answer validity via @{web_search} tool
 </tools>
 <outputFormat>strictly markdown, if heading is used, please refrain using `#` and `##` and start from heading 3</outputFormat>
 </global_instruction>]]

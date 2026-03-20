@@ -42,9 +42,6 @@ Your task is to focus on the error level diagnostics only
 					},
 				},
 			})
-			if chat then
-				chat.tool_registry:add_group("web", codecompanion_config.config.interactions.chat.tools)
-			end
 			return chat
 		end,
 	},

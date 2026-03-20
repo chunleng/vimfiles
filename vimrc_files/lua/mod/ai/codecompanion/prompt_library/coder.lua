@@ -43,7 +43,6 @@ local function new_coder_chat(context)
 	})
 	if chat then
 		chat.tool_registry:add_group("agent", codecompanion_config.config.interactions.chat.tools)
-		chat.tool_registry:add_group("web", codecompanion_config.config.interactions.chat.tools)
 		if wip_exist then
 			local bufnr = vim.fn.bufnr(".vim/wip.md")
 			if bufnr == -1 then
