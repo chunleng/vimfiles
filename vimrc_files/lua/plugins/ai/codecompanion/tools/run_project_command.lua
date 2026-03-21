@@ -4,6 +4,7 @@ local M = {}
 function M.with_whitelisted_commands(cmds)
 	local run_project_command = vim.deepcopy(require("plugins.ai.codecompanion.tools.run_command"))
 	run_project_command.name = "run_project_command"
+	run_project_command.system_prompt = nil
 	run_project_command.schema["function"].name = "run_project_command"
 
 	run_project_command.schema["function"].parameters.properties.cmd = {
