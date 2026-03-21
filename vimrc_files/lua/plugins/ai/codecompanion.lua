@@ -230,7 +230,7 @@ local function setup()
 		When you have question to the user, ask the question via @{ask_questions} tool
 		When answer is likely outdated, check the answer validity via @{web_search} tool
 </tools>
-<outputFormat>strictly markdown, if heading is used, please refrain using `#` and `##` and start from heading 3</outputFormat>
+<chatFormat>strictly markdown, if heading is used, please refrain using `#` and `##` and start from heading 3</chatFormat>
 </global_instruction>]]
 					end,
 				},
