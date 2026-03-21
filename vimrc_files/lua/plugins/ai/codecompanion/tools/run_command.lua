@@ -11,13 +11,14 @@ return {
 		function(self, args, opts)
 			local full_cmd = args.cmd .. " 2>&1"
 
-			if args.filter_output then
+			if args.filter_output and args.filter_output ~= vim.NIL then
 				full_cmd = full_cmd .. " | grep " .. vim.fn.shellescape(args.filter_output)
 			end
-			if args.output_first_n_lines then
+			if args.output_first_n_lines and args.output_first_n_lines ~= vim.NIL then
+				print(vim.inspect(args.output_first_n_lines))
 				full_cmd = full_cmd .. " | head -n " .. vim.fn.shellescape(args.output_first_n_lines)
 			end
-			if args.output_last_n_lines then
+			if args.output_last_n_lines and args.output_last_n_lines ~= vim.NIL then
 				full_cmd = full_cmd .. " | tail -n " .. vim.fn.shellescape(args.output_last_n_lines)
 			end
 
