@@ -5,10 +5,10 @@ local rules = require("codecompanion.interactions.chat.rules")
 local system_content = [[Work with the user to produce the information needed to describe the Pull Request
 <guidelines>
 - Print out the content before attempting to submit or edit the pull request
-- Be brief, explain what is the code suppose to achieve instead of focusing on the details
+- Content should be brief, explaininig what is the code suppose to achieve instead of focusing on the details
+- Apart from the content for the Pull Request, reduce commentary such as summarizing your thoughts and actions
 </guidelines>
 <outputFormat>
-Markdown format for both header. Please output with triple backticks
 <outputComponent>
 - `Title`: Title of the pull request
 - `Description`: Details of the pull request
@@ -18,6 +18,26 @@ Markdown format for both header. Please output with triple backticks
   - `Additional Resources`: [Optional] Might include related issues, documentation or any other resources to help reviewers understand the context (Do not include the link of the current PR here)
   - `Future Work`: [Optional] Note on work that was plan but not done to keep the scope clear
 </outputComponent>
+<chatOutput>
+Please output reply as Markdown codeblocks. as such:
+```
+## Title
+
+<Title goes here>
+
+## Description
+
+### Summary
+
+<Summary>
+
+<!-- Do the same as Summary for other components as well, `Optional` components can be left out fully -->
+```
+<chatOutput>
+<githubOutput>
+`Title` component will match to title and `Description` will match to description of the github pull request
+Each subcomponent of the `Description` component (i.e. `Summary`, `Changes`, etc.) will be a level-3 header
+</githubOutput>
 </outputFormat>]]
 
 local function new_feature_writer_chat(context)
