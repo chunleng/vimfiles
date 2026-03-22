@@ -52,6 +52,7 @@ local function setup()
 			require("mod.ai.codecompanion.prompt_library.feature_writer"),
 			require("mod.ai.codecompanion.prompt_library.coder").coder,
 			require("mod.ai.codecompanion.prompt_library.coder").coder_agent,
+			require("mod.ai.codecompanion.prompt_library.issue"),
 			require("mod.ai.codecompanion.prompt_library.pull_request"),
 			require("mod.ai.codecompanion.prompt_library.diagnostic"),
 		},
