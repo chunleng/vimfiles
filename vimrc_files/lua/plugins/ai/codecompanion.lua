@@ -126,6 +126,9 @@ local function setup()
 				},
 				tools = {
 					memory = { enabled = false },
+					time_now = {
+						path = "plugins.ai.codecompanion.tools.time_now",
+					},
 					file_search = {
 						path = "plugins.ai.codecompanion.tools.fd_search",
 					},
@@ -183,7 +186,7 @@ local function setup()
 						query = {
 							description = "Tools related to asking questions",
 							prompt = "I'm giving you access to ${tools} that helps you communicate better with the user",
-							tools = { "ask_questions" },
+							tools = { "ask_questions", "time_now" },
 						},
 						read_only = {
 							description = "Tools related to reading files",
