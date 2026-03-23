@@ -1,7 +1,7 @@
 local codecompanion_config = require("codecompanion.config")
 local utils = require("common-utils")
 local neogen = require("neogen")
-local prepend_prompts = {
+local new_prompts = {
 	{
 		name = function()
 			return "Docstring: function"
@@ -64,7 +64,10 @@ local prepend_prompts = {
 	},
 }
 
-vim.list_extend(prepend_prompts, codecompanion_config.prompt_library)
-codecompanion_config.prompt_library = prepend_prompts
+local result = {}
+vim.list_extend(result, vim.list_slice(codecompanion_config.prompt_library, 1, 3))
+vim.list_extend(result, new_prompts)
+vim.list_extend(result, vim.list_slice(codecompanion_config.prompt_library, 4, #codecompanion_config.prompt_library))
+codecompanion_config.prompt_library = result
 
 return {}
