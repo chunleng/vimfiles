@@ -130,6 +130,9 @@ local function setup()
 					time_now = {
 						path = "plugins.ai.codecompanion.tools.time_now",
 					},
+					wait = {
+						path = "plugins.ai.codecompanion.tools.wait",
+					},
 					file_search = {
 						path = "plugins.ai.codecompanion.tools.fd_search",
 					},
@@ -184,10 +187,10 @@ local function setup()
 								ignore_tool_system_prompt = false,
 							},
 						},
-						query = {
-							description = "Tools related to asking questions",
+						utils = {
+							description = "Utility tools",
 							prompt = "I'm giving you access to ${tools} that helps you communicate better with the user",
-							tools = { "ask_questions", "time_now" },
+							tools = { "ask_questions", "time_now", "wait" },
 						},
 						read_only = {
 							description = "Tools related to reading files",
@@ -217,7 +220,7 @@ local function setup()
 						},
 					},
 					opts = {
-						default_tools = { "read_only", "math", "query", "web" },
+						default_tools = { "read_only", "math", "utils", "web" },
 						system_prompt = {
 							enabled = false,
 						},
