@@ -64,6 +64,9 @@ local function setup()
 			},
 			lualine_x = {
 				require("codecompanion._extensions.spinner.styles.lualine").get_lualine_component(),
+				function()
+					return require("mod.ui.lualine.overrideable").generate_message()
+				end,
 			},
 			lualine_y = {
 				{
