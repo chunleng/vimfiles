@@ -21,13 +21,13 @@ local function coder_chat_generator(chat_type)
 		system_content = system_content:format(
 			"- Try breaking down and understanding the task, ask user questions if the user requirements are unclear"
 		)
-		chat_model = codecompanion_model_list.coding
+		chat_model = "coding"
 	elseif chat_type == "agent" then
 		system_content = system_content:format(
 			[[- Try breaking down and understanding the task, make assumptions when user requirements are unclear
 - Interrupt user as little as possible, tools such as @{ask_questions} and @{run_command} interrupts the user, so avoid using them unless absolute necessary ]]
 		)
-		chat_model = codecompanion_model_list.agentic
+		chat_model = "agentic"
 	end
 	return function(context)
 		local content = ""
@@ -51,7 +51,7 @@ local function coder_chat_generator(chat_type)
 					content = content,
 				},
 			},
-			params = chat_model,
+			params = codecompanion_model_list[chat_model],
 		})
 		if chat then
 			chat.tool_registry:add_group("agent", codecompanion_config.config.interactions.chat.tools)
