@@ -7,9 +7,13 @@ return {
 		---@param opts table The output from the previous function call
 		---@return { status: "success"|"error", data: string }
 		function(_, args, opts)
+			local format_string = "%a, %d %b %Y %H:%M:%S"
+			if args.format == "unix_timestamp" then
+				format_string = "!%s"
+			end
 			return {
 				status = "success",
-				data = os.date("%a, %d %b %Y %H:%M:%S", os.time()),
+				data = os.date(format_string, os.time()),
 			}
 		end,
 	},
@@ -18,6 +22,16 @@ return {
 		["function"] = {
 			name = "time_now",
 			description = "Get the current time in the user's timezone",
+			parameters = {
+				type = "object",
+				properties = {
+					format = {
+						enum = { "human_readable", "unix_timestamp" },
+						description = "The time in seconds to wait",
+					},
+				},
+				required = {},
+			},
 		},
 	},
 	output = {
