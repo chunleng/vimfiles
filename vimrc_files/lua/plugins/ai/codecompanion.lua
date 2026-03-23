@@ -133,6 +133,7 @@ local function setup()
 					wait = {
 						path = "plugins.ai.codecompanion.tools.wait",
 					},
+					speak = { path = "plugins.ai.codecompanion.tools.speak" },
 					file_search = {
 						path = "plugins.ai.codecompanion.tools.fd_search",
 					},
@@ -187,8 +188,8 @@ local function setup()
 								ignore_tool_system_prompt = false,
 							},
 						},
-						utils = {
-							description = "Utility tools",
+						core_utils = {
+							description = "Utility tools that does not generally cause trouble when used",
 							prompt = "I'm giving you access to ${tools} that helps you communicate better with the user",
 							tools = { "ask_questions", "time_now", "wait" },
 						},
@@ -220,7 +221,7 @@ local function setup()
 						},
 					},
 					opts = {
-						default_tools = { "read_only", "math", "utils", "web" },
+						default_tools = { "read_only", "math", "core_utils", "web" },
 						system_prompt = {
 							enabled = false,
 						},
