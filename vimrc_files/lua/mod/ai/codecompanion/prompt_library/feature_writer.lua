@@ -1,6 +1,6 @@
 local codecompanion = require("codecompanion")
 local codecompanion_config = require("codecompanion.config")
-local codecompanion_model_list = require("mod.codecompanion.model_list")
+local models = require("mod.global_constants").codecompanion.models
 local rules = require("codecompanion.interactions.chat.rules")
 
 local system_content = [[Use deep logical thinking to produce a feature write-up
@@ -44,7 +44,7 @@ local function new_feature_writer_chat(context)
 				content = "Output to ./docs/features/",
 			},
 		},
-		params = codecompanion_model_list.coding,
+		params = models.coding,
 	})
 	if chat then
 		chat.tool_registry:add_group("files", codecompanion_config.config.interactions.chat.tools)

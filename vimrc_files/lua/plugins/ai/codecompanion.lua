@@ -1,3 +1,4 @@
+local codecompanion_constants = require("mod.global_constants").codecompanion
 local utils = require("common-utils")
 
 local function get_open_chats()
@@ -23,7 +24,6 @@ end
 
 local function setup()
 	local codecompanion = require("codecompanion")
-	local model_list = require("mod.codecompanion.model_list")
 	codecompanion.setup({
 		display = {
 			chat = {
@@ -58,6 +58,7 @@ local function setup()
 		},
 		interactions = {
 			background = {
+				adapter = codecompanion_constants.models.cheap.adapter,
 				chat = {
 					callbacks = {
 						["on_ready"] = {
@@ -75,7 +76,7 @@ local function setup()
 				},
 			},
 			chat = {
-				adapter = model_list.general,
+				adapter = codecompanion_constants.models.general,
 				keymaps = {
 					clear = false,
 					codeblock = false,
@@ -99,15 +100,16 @@ local function setup()
 						modes = { n = "ga" },
 						index = 15,
 						callback = function(chat)
-							vim.ui.select(vim.tbl_keys(model_list), {
+							local models = codecompanion_constants.models
+							vim.ui.select(vim.tbl_keys(models), {
 
 								prompt = "Select a model",
 								format_item = function(item)
-									local model = model_list[item]
+									local model = models[item]
 									return string.format("%s: %s|%s", item, model.adapter, model.model)
 								end,
 							}, function(selected)
-								local model = model_list[selected]
+								local model = models[selected]
 								if model then
 									chat:change_adapter(model.adapter)
 									chat:change_model({ model = model.model })
@@ -260,6 +262,7 @@ local function setup()
 			history = {
 				opts = {
 					auto_generate_title = true,
+					title_generation_opts = codecompanion_constants.models.cheap,
 					auto_save = true,
 					expiration_days = 7,
 					picker = "fzf-lua",

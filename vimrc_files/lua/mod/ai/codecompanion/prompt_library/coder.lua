@@ -1,6 +1,6 @@
 local codecompanion = require("codecompanion")
 local codecompanion_config = require("codecompanion.config")
-local codecompanion_model_list = require("mod.codecompanion.model_list")
+local models = require("mod.global_constants").codecompanion.models
 local rules = require("codecompanion.interactions.chat.rules")
 
 --- @param chat_type "helper"|"agent"
@@ -21,13 +21,13 @@ local function coder_chat_generator(chat_type)
 		system_content = system_content:format(
 			"- Try breaking down and understanding the task, ask user questions if the user requirements are unclear"
 		)
-		chat_model = "coding"
+		chat_model = models.coding
 	elseif chat_type == "agent" then
 		system_content = system_content:format(
 			[[- Try breaking down and understanding the task, make assumptions when user requirements are unclear
 - Interrupt user as little as possible, tools such as @{ask_questions} and @{run_command} interrupts the user, so avoid using them unless absolute necessary ]]
 		)
-		chat_model = "agentic"
+		chat_model = models.agentic
 	end
 	return function(context)
 		local content = ""
@@ -51,7 +51,7 @@ local function coder_chat_generator(chat_type)
 					content = content,
 				},
 			},
-			params = codecompanion_model_list[chat_model],
+			params = chat_model,
 		})
 		if chat then
 			chat.tool_registry:add_group("agent", codecompanion_config.config.interactions.chat.tools)
