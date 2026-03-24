@@ -26,6 +26,7 @@ return {
 				type = "object",
 				properties = {
 					format = {
+						type = "string",
 						enum = { "human_readable", "unix_timestamp" },
 						description = "The time in seconds to wait",
 					},
