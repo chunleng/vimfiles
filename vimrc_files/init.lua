@@ -11,6 +11,7 @@ end
 
 require("common-utils").setup()
 require("common-theme").setup()
+require("plugins._common.resolve_global_constants")
 require("lazy").setup({
 	change_detection = { enabled = true, notify = false },
 	spec = {
