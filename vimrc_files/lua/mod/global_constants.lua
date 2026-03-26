@@ -29,6 +29,7 @@ return {
 		},
 	},
 	lualine = {
+		-- additional_status will be added to lualine_x
 		additional_status = function()
 			return ""
 		end,
