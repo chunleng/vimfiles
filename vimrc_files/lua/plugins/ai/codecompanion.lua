@@ -174,6 +174,9 @@ local function setup()
 					git_current_branch = {
 						path = "plugins.ai.codecompanion.tools.git_current_branch",
 					},
+					git_diff = {
+						path = "plugins.ai.codecompanion.tools.git_diff",
+					},
 					groups = {
 						agent = {
 							system_prompt = function()
@@ -206,7 +209,7 @@ local function setup()
 						git = {
 							description = "Tools to interact with git",
 							prompt = "I'm giving you access to ${tools} that can help you run git-related operations",
-							tools = { "git_current_branch", "get_changed_files" },
+							tools = { "git_current_branch", "get_changed_files", "git_diff" },
 						},
 						read_only = {
 							description = "Tools related to reading files",
