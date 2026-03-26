@@ -74,6 +74,12 @@ local function new_pr_chat(context)
 		rules
 			.new({ name = "default", files = codecompanion_config.rules["default"].files })
 			:make({ chat = chat, force = true })
+		rules
+			.new({
+				name = "bestpractice/git/conventional_commits",
+				files = codecompanion_config.rules["bestpractice/git/conventional_commits"].files,
+			})
+			:make({ chat = chat, force = true })
 	end
 	return chat
 end

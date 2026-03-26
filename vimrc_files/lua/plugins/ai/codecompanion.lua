@@ -353,6 +353,12 @@ local function setup()
 					"~/Dropbox/Notes/zettelkasten/permanent/terragrunt-common-practice.md",
 				},
 			},
+			["bestpractice/git/conventional_commits"] = {
+				description = "Best practice for Git's conventional commits",
+				files = {
+					"~/Dropbox/Notes/zettelkasten/permanent/conventional_commits.md",
+				},
+			},
 			opts = {
 				chat = {
 					autoload = false, -- No default groups
