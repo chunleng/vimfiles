@@ -133,6 +133,7 @@ local function setup()
 				},
 				tools = {
 					memory = { enabled = false },
+					get_changed_files = { enabled = false },
 					time_now = {
 						path = "plugins.ai.codecompanion.tools.time_now",
 					},
@@ -190,7 +191,6 @@ local function setup()
 								"insert_edit_into_file",
 								"delete_file",
 								"create_file",
-								"get_changed_files",
 								"get_diagnostics",
 								"run_project_command",
 								"run_command",
@@ -209,7 +209,7 @@ local function setup()
 						git = {
 							description = "Tools to interact with git",
 							prompt = "I'm giving you access to ${tools} that can help you run git-related operations",
-							tools = { "git_current_branch", "get_changed_files", "git_diff" },
+							tools = { "git_current_branch", "git_diff" },
 						},
 						read_only = {
 							description = "Tools related to reading files",
