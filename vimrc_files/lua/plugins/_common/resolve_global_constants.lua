@@ -2,9 +2,9 @@ local function compute_hash(content)
 	return vim.fn.sha256(vim.fn.json_encode(content))
 end
 
-local function check_approval(path, lua_content)
+local function check_approval(path)
 	local approval_file = vim.fn.stdpath("data") .. "/global_constants" .. path
-	local content_hash = compute_hash(lua_content)
+	local content_hash = compute_hash(vim.fn.readfile(path))
 
 	if vim.fn.filereadable(approval_file) == 1 then
 		local file_content = vim.fn.readfile(approval_file)[1]
@@ -36,7 +36,7 @@ local function find_global_overrides()
 		if vim.fn.filereadable(override_file) == 1 then
 			local success, lua_content_or_error = pcall(dofile, override_file)
 			if success then
-				if lua_content_or_error and check_approval(override_file, lua_content_or_error) then
+				if lua_content_or_error and check_approval(override_file) then
 					table.insert(results, lua_content_or_error)
 				end
 			else
