@@ -27,6 +27,16 @@ return {
 				model = "gpt-4.1",
 			},
 		},
+		git = {
+			tools = {},
+			groups = {},
+			meta = nil,
+		},
+		issue = {
+			tools = {},
+			groups = {},
+			meta = nil,
+		},
 	},
 	lualine = {
 		-- additional_status will be added to lualine_x

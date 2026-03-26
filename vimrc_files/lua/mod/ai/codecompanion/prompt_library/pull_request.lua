@@ -1,14 +1,15 @@
+local codecompanion_constant = require("mod.global_constants").codecompanion
 local codecompanion = require("codecompanion")
 local codecompanion_config = require("codecompanion.config")
 local rules = require("codecompanion.interactions.chat.rules")
 
-local system_content = [[Work with the user to produce the information needed to describe the Pull Request
+local system_content = [[Help the user with git management tool's pull request
 <guidelines>
-- Print out the content before attempting to submit or edit the pull request
+- Follow the <pullrequestFormat> if you are creating or editing an pull request
 - Content should be brief, explaininig what is the code suppose to achieve instead of focusing on the details
 - Apart from the content for the Pull Request, reduce commentary such as summarizing your thoughts and actions
 </guidelines>
-<outputFormat>
+<pullrequestFormat>
 <outputComponent>
 - `Title`: Title of the pull request
 - `Description`: Details of the pull request
@@ -34,28 +35,41 @@ Please output reply as Markdown codeblocks. as such:
 <!-- Do the same as Summary for other components as well, `Optional` components can be left out fully -->
 ```
 <chatOutput>
-<githubOutput>
-`Title` component will match to title and `Description` will match to description of the github pull request
+<gitManagementToolOutput>
+`Title` component will match to title and `Description` will match to description of the pull request
 Each subcomponent of the `Description` component (i.e. `Summary`, `Changes`, etc.) will be a level-3 header
-</githubOutput>
+</gitMangementToolOutput>
 </outputFormat>]]
 
-local function new_feature_writer_chat(context)
+local function new_pr_chat(context)
+	local messages = {
+		{
+			role = "system",
+			content = system_content,
+		},
+	}
+	if codecompanion_constant.git.meta then
+		table.insert(messages, {
+			role = "system",
+			content = "Use the following default information about the git management tool, unless user specifies: "
+				.. codecompanion_constant.git.meta,
+		})
+	end
+	table.insert(messages, {
+		role = "user",
+		content = "PR link: \n",
+	})
 	local chat = codecompanion.chat({
 		auto_submit = false,
-		messages = {
-			{
-				role = "system",
-				content = system_content,
-			},
-			{
-				role = "user",
-				content = "PR link: \n",
-			},
-		},
+		messages = messages,
 	})
 	if chat then
-		chat.tool_registry:add_group("github", codecompanion_config.config.interactions.chat.tools)
+		for _, tool in ipairs(codecompanion_constant.git.tools) do
+			chat.tool_registry:add_single_tool(tool, codecompanion_config.config.interactions.chat.tools)
+		end
+		for _, group in ipairs(codecompanion_constant.git.groups) do
+			chat.tool_registry:add_group(group, codecompanion_config.config.interactions.chat.tools)
+		end
 		rules
 			.new({ name = "default", files = codecompanion_config.rules["default"].files })
 			:make({ chat = chat, force = true })
@@ -75,6 +89,6 @@ return {
 		modes = { "n" },
 	},
 	prompts = {
-		n = new_feature_writer_chat,
+		n = new_pr_chat,
 	},
 }
