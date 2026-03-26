@@ -171,6 +171,9 @@ local function setup()
 					run_command = {
 						path = "plugins.ai.codecompanion.tools.run_command",
 					},
+					git_current_branch = {
+						path = "plugins.ai.codecompanion.tools.git_current_branch",
+					},
 					groups = {
 						agent = {
 							system_prompt = function()
@@ -184,6 +187,7 @@ local function setup()
 								"insert_edit_into_file",
 								"delete_file",
 								"create_file",
+								"get_changed_files",
 								"get_diagnostics",
 								"run_project_command",
 								"run_command",
@@ -199,10 +203,15 @@ local function setup()
 							prompt = "I'm giving you access to ${tools} that helps you communicate better with the user",
 							tools = { "ask_questions", "time_now", "wait" },
 						},
+						git = {
+							description = "Tools to interact with git",
+							prompt = "I'm giving you access to ${tools} that can help you run git-related operations",
+							tools = { "git_current_branch", "get_changed_files" },
+						},
 						read_only = {
 							description = "Tools related to reading files",
 							prompt = "I'm giving you access to ${tools} to help you perform read-only file operations",
-							tools = { "file_search", "get_changed_files", "grep_search", "read_file" },
+							tools = { "file_search", "grep_search", "read_file" },
 						},
 						web = {
 							description = "Tools related to web access",
@@ -215,7 +224,6 @@ local function setup()
 								"delete_file",
 								"create_file",
 								"file_search",
-								"get_changed_files",
 								"grep_search",
 								"read_file",
 							},

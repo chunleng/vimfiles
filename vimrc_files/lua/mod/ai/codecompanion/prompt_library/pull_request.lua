@@ -70,6 +70,7 @@ local function new_pr_chat(context)
 		for _, group in ipairs(codecompanion_constant.git.groups) do
 			chat.tool_registry:add_group(group, codecompanion_config.config.interactions.chat.tools)
 		end
+		chat.tool_registry:add_group("git", codecompanion_config.config.interactions.chat.tools)
 		rules
 			.new({ name = "default", files = codecompanion_config.rules["default"].files })
 			:make({ chat = chat, force = true })
