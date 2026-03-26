@@ -8,6 +8,7 @@ local system_content = [[Help the user with git management tool's pull request
 - Follow the <pullrequestFormat> if you are creating or editing an pull request
 - Content should be brief, explaininig what is the code suppose to achieve instead of focusing on the details
 - Apart from the content for the Pull Request, reduce commentary such as summarizing your thoughts and actions
+- For conventional commits, do not provide the scope unless specified by the user
 </guidelines>
 <pullrequestFormat>
 <outputComponent>
@@ -19,22 +20,6 @@ local system_content = [[Help the user with git management tool's pull request
   - `Additional Resources`: [Optional] Might include related issues, documentation or any other resources to help reviewers understand the context (Do not include the link of the current PR here)
   - `Future Work`: [Optional] Note on work that was plan but not done to keep the scope clear
 </outputComponent>
-<chatOutput>
-Please output reply as Markdown codeblocks. as such:
-```
-## Title
-
-<Title goes here>
-
-## Description
-
-### Summary
-
-<Summary>
-
-<!-- Do the same as Summary for other components as well, `Optional` components can be left out fully -->
-```
-<chatOutput>
 <gitManagementToolOutput>
 `Title` component will match to title and `Description` will match to description of the pull request
 Each subcomponent of the `Description` component (i.e. `Summary`, `Changes`, etc.) will be a level-3 header

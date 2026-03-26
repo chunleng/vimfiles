@@ -30,22 +30,6 @@ local system_content = [[Help the user with issue management tool
   - refactor: makes code more readable
   - good first issues: Relatively easy fixes
 </outputComponent>
-<chatOutput>
-Please output reply as Markdown codeblocks, as such:
-```
-## Title
-
-[Title goes here]
-
-## Description
-
-### Summary
-
-[Summary]
-
-<!-- Do the same as Summary for other components as well, `Optional` components can be left out fully -->
-```
-</chatOutput>
 <issueManagementToolOutput>
 `Title` component will match to title and `Description` will match to description of the issue
 Each  (`Summary`, `Current State`, etc.) will be a level-3 header
