@@ -1,3 +1,5 @@
+local lualine_constants = require("mod.global_constants").lualine
+
 local function setup()
 	local codecompanion = require("codecompanion")
 	local navic = require("nvim-navic")
@@ -64,9 +66,7 @@ local function setup()
 			},
 			lualine_x = {
 				require("codecompanion._extensions.spinner.styles.lualine").get_lualine_component(),
-				function()
-					return require("mod.ui.lualine.overrideable").generate_message()
-				end,
+				lualine_constants.additional_status,
 			},
 			lualine_y = {
 				{

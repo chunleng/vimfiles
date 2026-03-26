@@ -28,4 +28,9 @@ return {
 			},
 		},
 	},
+	lualine = {
+		additional_status = function()
+			return ""
+		end,
+	},
 }
