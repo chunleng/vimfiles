@@ -40,7 +40,7 @@ local function find_global_overrides()
 					table.insert(results, lua_content_or_error)
 				end
 			else
-				error(lua_content_or_error)
+				vim.notify(lua_content_or_error, vim.log.levels.ERROR)
 			end
 		end
 		current_path = vim.fn.fnamemodify(current_path, ":h")
