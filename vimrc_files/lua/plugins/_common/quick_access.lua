@@ -12,6 +12,16 @@ utils.keymap("n", "<c-s-r>", function()
 			end,
 		},
 		{
+			choice = "Vim Global Constant",
+			func = function()
+				vim.cmd([[
+				silent !mkdir -p .vim
+				silent !test -f .vim/global_override.lua || echo "return {\n}" > .vim/global_override.lua
+				edit .vim/global_override.lua
+			]])
+			end,
+		},
+		{
 			choice = "WIP.md",
 			func = function()
 				vim.cmd([[
