@@ -37,6 +37,9 @@ return {
 			groups = {},
 			meta = nil,
 		},
+		whitelist = {
+			additional_readable_directory = {},
+		},
 	},
 	lualine = {
 		-- additional_status will be added to lualine_x
