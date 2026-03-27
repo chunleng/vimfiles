@@ -6,9 +6,11 @@ local rules = require("codecompanion.interactions.chat.rules")
 --- @param chat_type "helper"|"agent"
 local function coder_chat_generator(chat_type)
 	local system_content =
-		[[Use deep logical thinking to aid the user. If needed, investigate the current working directory to gather the necessary information.
+		[[Use deep logical thinking to aid the user. The task that user give can be complex in nature so offload operations whenever you can
 <guidelines>
 %s
+- Properly think through the next step before you perform them, if it can be broken down and executed in parallel by tools, break it down
+- Offload operations that are likely to give you too much information or when there're specialized subagent tools to use. DO NOT attempt to perform such output heavy operations by yourself
 - Avoid adding comments unless the code intent is ambiguous and the comment added should explain why the code is inserted, not how the code works
 - Be short in your reply
 - Think about ways to confirm changes, this includes, in the order of high to low preference:
@@ -55,6 +57,7 @@ local function coder_chat_generator(chat_type)
 		})
 		if chat then
 			chat.tool_registry:add_group("agent", codecompanion_config.config.interactions.chat.tools)
+			chat.tool_registry:add_group("subagent", codecompanion_config.config.interactions.chat.tools)
 			rules
 				.new({ name = "default", files = codecompanion_config.rules["default"].files })
 				:make({ chat = chat, force = true })

@@ -178,6 +178,14 @@ local function setup()
 					git_diff = {
 						path = "plugins.ai.codecompanion.tools.git_diff",
 					},
+					subagent__generic = {
+						path = "plugins.ai.codecompanion.tools.subagent__generic",
+						visible = false,
+					},
+					reply_agent = {
+						path = "plugins.ai.codecompanion.tools.reply_agent",
+						visible = false,
+					},
 					groups = {
 						agent = {
 							system_prompt = function()
@@ -200,6 +208,53 @@ local function setup()
 								ignore_system_prompt = false,
 								ignore_tool_system_prompt = false,
 							},
+						},
+						subagent = {
+							description = "Tools to spawn a LLM agent to help perform tasks",
+							prompt = "I'm giving you access to ${tools} that helps you spawn LLM agent to help you offload task to",
+							system_prompt = [[When given subagent tool, you are advised to offload operations that are likely to give you too much information or when there're specialized subagent tools for it
+<examples>
+<webSearchExample>
+**SCENARIO**: Search for solution to printing log in rust
+**WHY OFFLOAD**: Browsing and searching the web for answer requires going through data before reaching to a conclusion
+**HOW TO OFFLOAD**: I want to know how to print logs in rust, please search the web for alternatives and decide on which is best for easy to setup. Return me a short summary on what to use and how to use it.
+**HOW NOT TO OFFLOAD**: I want to know how to print logs in rust, search the web for how
+**WHY NOT**: This does not make it easier than searching by yourself
+</webSearchExample>
+<webScrapingExample>
+**SCENARIO**: Finding out which GitHub repository has most stars
+**WHY OFFLOAD**: Going to pages to get answer can be expensive, therefore it's much easier to offload it
+**HOW TO OFFLOAD**: (Open one subagent per website) Open https://github.com/abc/xyz and tell me the how many people starred the repository. Return me just the integer of star count
+**HOW NOT TO OFFLOAD**: Tell me how many people starred the following repositories: https://github.com/abc/xyz, https://github.com/abc/uvw, ...
+**WHY NOT**: Always parallelize when the task can be parallelized.
+</webScrapingExample>
+<searchCodeExample>
+**SCENARIO**: Find out where the codes are being used.
+**WHY OFFLOAD**: Keyword search has a high chance to load unnecessary context that is going to distract you from your main task
+**HOW TO OFFLOAD**: Search for where `foo` function of the `Bar` struct and return me `<path>:<line_no>` of both the definition and the reference code
+**HOW NOT TO OFFLOAD**: Search for `foo` function
+**WHY NOT**: Always take the chance to filter off unnecessary result. Let subagent know the format of return so that you can understand easily
+</searchCodeExample>
+<fileSearchExample>
+**SCENARIO**: Locating a file by name
+**WHY OFFLOAD**: Multiple files can be found and we don't want to spend the context to check them
+**HOW TO OFFLOAD**: Find `README.md` that is used to guide user on how to setup the workspace for this repository. Return me the ONE file that fit the criteria most.
+**HOW NOT TO OFFLOAD**: Find where `README.md` is
+**WHY NOT**: If you don't state the purpose, the subagent might give you inaccurate result when multiple files is returned
+</fileSearchExample>
+<summaryExample>
+**SCENARIO**: Summarize files in the folder
+**WHY OFFLOAD**: Divide and conquer makes task faster
+**HOW TO OFFLOAD**: Offload to several agents, each agent summarizes a few files each. The main agent reads the summary and produce the final summary
+**HOW NOT TO OFFLOAD**: Offload all files to a single agent
+**WHY NOT**: The main agent is not useful in the entire process and simply wait for answer
+</summaryExample>
+</examples>
+<guidelines>
+- Instead of giving multiple tasks to one subagent, give one task to each subagent to perform
+- If you can, parallelize your call to subagent
+</guidelines>]],
+							tools = { "subagent__generic" },
 						},
 						core_utils = {
 							description = "Utility tools that does not generally cause trouble when used",
