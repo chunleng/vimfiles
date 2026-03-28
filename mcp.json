@@ -21,9 +21,13 @@
         "find-projects",
         "find-tasks",
         "find-tasks-by-date",
-        "search"
+        "search",
+        "find-labels"
       ],
       "disabled": false,
+      "disabled_prompts": [
+        "productivity-analysis"
+      ],
       "disabled_resources": [],
       "disabled_tools": [
         "list-workspaces",
@@ -36,7 +40,17 @@
         "fetch",
         "fetch-object",
         "get-overview",
-        "delete-object"
+        "delete-object",
+        "add-filters",
+        "view-attachment",
+        "update-filters",
+        "find-filters",
+        "get-productivity-stats",
+        "reorder-objects",
+        "add-sections",
+        "add-projects",
+        "project-move",
+        "update-projects"
       ],
       "headers": {
         "Authorization": "Bearer ${env:TODOIST_API_KEY}"
