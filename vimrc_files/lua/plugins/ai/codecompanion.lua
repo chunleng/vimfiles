@@ -470,7 +470,8 @@ return {
 	"olimorris/codecompanion.nvim",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"ravitemer/mcphub.nvim",
+		-- Fix codecompanion 19.0 upgrade, to rollback when ravitemer/mcphub.nvim is updated
+		"bahaaza/mcphub.nvim",
 		"ravitemer/codecompanion-history.nvim",
 		"lalitmee/codecompanion-spinners.nvim",
 	},
