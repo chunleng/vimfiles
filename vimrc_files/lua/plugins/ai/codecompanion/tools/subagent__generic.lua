@@ -60,17 +60,20 @@ return {
 			chat = codecompanion.chat({
 				auto_submit = false,
 				hidden = true,
-				params = codecompanion_constants.models.cheap,
+				params = codecompanion_constants.models.fast,
 				messages = {
 					{
 						role = "system",
-						content = "You are called to perform a task for another LLM. Keep your response brief and do not add any commentary such as summarizing your thoughts and action. Once you are ready to answer, use the @{reply_agent} and reply using the session_id `"
-							.. generated_session_id
-							.. "` with the answer",
+						content = [[You are called to perform a task for another LLM
+Keep your response brief and do not add any commentary such as summarizing your thoughts and action]],
 					},
-					-- TODO find out how to use chat.tool_registry:add_single_tool. At the point of writing, having
-					-- another block to modify the chat caused errors
-					{ role = "user", content = args.prompt },
+					{
+						role = "user",
+						content = args.prompt .. string.format(
+							"\nInstead of outputting, use @{reply_agent} to reply with the session_id `%s`",
+							generated_session_id
+						),
+					},
 				},
 			})
 			if chat then

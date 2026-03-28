@@ -26,6 +26,11 @@ return {
 				adapter = "copilot",
 				model = "gpt-4.1",
 			},
+			fast = {
+				name = "ollama_online",
+				adapter = "ollama_online",
+				model = "gemini-3-flash-preview",
+			},
 		},
 		git = {
 			tools = {},
