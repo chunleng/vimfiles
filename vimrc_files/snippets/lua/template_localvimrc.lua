@@ -108,26 +108,5 @@ table.insert(
 	)
 )
 
-table.insert(
-	M,
-	s(
-		{ trig = "----codecompanion/run_project_command", dscr = "Template for setting up a whitelisted run_command" },
-		fmta(
-			[[
-require("codecompanion.config").config.interactions.chat.tools.run_project_command = {
-	callback = function()
-		local cmds = {
-			<>
-		}
-		return require("plugins.ai.codecompanion.tools.run_project_command").with_whitelisted_commands(cmds)
-	end,
-}
-	
-]],
-			{ i(0, '"make"') }
-		)
-	)
-)
-
 return M
 -- vim: noet

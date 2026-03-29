@@ -44,6 +44,7 @@ return {
 		},
 		whitelist = {
 			additional_readable_directory = {},
+			allowed_commands = nil,
 		},
 	},
 	lualine = {

@@ -186,6 +186,15 @@ local function setup()
 						path = "plugins.ai.codecompanion.tools.reply_agent",
 						visible = false,
 					},
+					run_project_command = codecompanion_constants.whitelist.allowed_commands
+							and {
+								callback = function()
+									return require("plugins.ai.codecompanion.tools.run_project_command").with_whitelisted_commands(
+										codecompanion_constants.whitelist.allowed_commands
+									)
+								end,
+							}
+						or nil,
 					groups = {
 						agent = {
 							system_prompt = function()
