@@ -4,7 +4,7 @@ return {
 			general = {
 				name = "ollama_online",
 				adapter = "ollama_online",
-				model = "glm-5",
+				model = "glm-5.1",
 			},
 			coding = {
 				name = "copilot",
