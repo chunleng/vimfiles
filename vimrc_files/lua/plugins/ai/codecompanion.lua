@@ -283,7 +283,7 @@ local function setup()
 						web = {
 							description = "Tools related to web access",
 							prompt = "I'm giving you access to ${tools} to help you perform operations on the web",
-							tools = { "web_search", "fetch_webpage" },
+							tools = { "tavily__tavily_skill", "tavily__tavily_search", "fetch_webpage" },
 						},
 						files = {
 							tools = {
@@ -317,7 +317,7 @@ local function setup()
 	e.g.
 		When you perform calculation, always use the @{calculator__calculate} tool
 		When you have question to the user, ask the question via @{ask_questions} tool
-		When answer is likely outdated, check the answer validity via @{web_search} tool
+		When answer is likely outdated, check the answer validity via @{tavily} tool
 </tools>
 <chatFormat>strictly markdown, if heading is used, please refrain using `#` and `##` and start from heading 3. Reply in English, even if user speaks in another language, unless user states so otherwise</chatFormat>
 </global_instruction>]]
@@ -391,13 +391,6 @@ local function setup()
 								end
 								return original_func_output
 							end,
-						},
-					})
-				end,
-				tavily = function()
-					return require("codecompanion.adapters").extend("tavily", {
-						env = {
-							api_key = vim.fn.getenv("TAVILY_API_KEY"),
 						},
 					})
 				end,

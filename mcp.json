@@ -57,6 +57,19 @@
       },
       "type": "http",
       "url": "https://ai.todoist.net/mcp"
+    },
+    "tavily": {
+      "autoApprove": [
+        "tavily_search",
+        "tavily_skill"
+      ],
+      "disabled_tools": [
+        "tavily_crawl",
+        "tavily_extract",
+        "tavily_map",
+        "tavily_research"
+      ],
+      "url": "https://mcp.tavily.com/mcp/?tavilyApiKey=${env:TAVILY_API_KEY}"
     }
   },
   "nativeMCPServers": {
