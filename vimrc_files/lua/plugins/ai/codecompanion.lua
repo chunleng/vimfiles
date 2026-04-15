@@ -404,6 +404,12 @@ local function setup()
 					".vim/AGENTS.md",
 				},
 			},
+			["caveman mode"] = {
+				description = "Make chat speak like a caveman",
+				files = {
+					vim.fn.expand("<script>:h") .. "/lua/plugins/ai/codecompanion/rules/caveman.md",
+				},
+			},
 			["bestpractice/terragrunt"] = {
 				description = "Best practice for terragrunt project",
 				files = {
