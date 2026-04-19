@@ -320,6 +320,7 @@ function M.setup()
 	})
 
 	M.set_hl("Normal", { fg = 15 })
+	M.set_hl("CursorIM", {}) -- Reset for IME (Japanese, Chinese), as I can't seem to make any highlight work properly with Kitty
 	M.set_hl("NonText", { fg = 10 })
 	M.set_hl("Whitespace", { fg = M.blender.bg_lighter_2 })
 	M.set_hl("WinSeparator", { fg = M.blender.bg_lighter_2 })
