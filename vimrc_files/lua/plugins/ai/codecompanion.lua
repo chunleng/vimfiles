@@ -434,9 +434,6 @@ local function setup()
 		},
 	})
 
-	utils.keymap({ "n", "i" }, "<c-s-a>", function()
-		codecompanion.toggle()
-	end)
 	utils.keymap({ "n", "i", "v" }, "<c-space>", function()
 		codecompanion.actions({
 			-- Remove "interaction" column because I am using action to put some other non-chat related function and

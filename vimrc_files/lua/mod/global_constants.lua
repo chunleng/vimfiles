@@ -47,6 +47,9 @@ return {
 			allowed_commands = nil,
 		},
 	},
+	tenon = {
+		project_agents = vim.empty_dict(),
+	},
 	lualine = {
 		-- additional_status will be added to lualine_x
 		additional_status = function()
