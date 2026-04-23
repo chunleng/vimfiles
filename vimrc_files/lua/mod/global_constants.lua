@@ -49,6 +49,22 @@ return {
 	},
 	tenon = {
 		project_agents = vim.empty_dict(),
+		models = {
+			alt_enabled = vim.env.TENON_MODEL_ALT or "alt_1",
+			alt_1 = {
+				standard = { connector = "ollama_cloud", name = "glm-5.1" },
+				cheap = { connector = "ollama_cloud", name = "nemotron-3-super" },
+				thinker = { connector = "ollama_cloud", name = "glm-5.1" },
+			},
+			alt_2 = {
+				standard = { connector = "zai", name = "glm-5-turbo" },
+				cheap = { connector = "zai", name = "glm-4.5-air" },
+				thinker = { connector = "zai", name = "glm-5.1" },
+			},
+		},
+		tools = {
+			whitelist_commands = {},
+		},
 	},
 	lualine = {
 		-- additional_status will be added to lualine_x

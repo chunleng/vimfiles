@@ -12,7 +12,7 @@ local function setup()
 		-- * glm-4.5-air
 		agents = vim.tbl_extend("force", {
 			generic = {
-				model = { connector = "zai", name = "glm-5-turbo" },
+				model = tenon_constant.models[tenon_constant.models.alt_enabled].standard,
 				tool_names = {
 					"fetch_webpage",
 					"list_files",
@@ -25,7 +25,7 @@ local function setup()
 				default = true,
 			},
 			developer = {
-				model = { connector = "zai", name = "glm-5.1" },
+				model = tenon_constant.models[tenon_constant.models.alt_enabled].thinker,
 				tool_names = {
 					"create_file",
 					"edit_file",
@@ -35,6 +35,7 @@ local function setup()
 					"remove_path",
 					"search_text",
 					"web_search",
+					"run",
 					"think",
 				},
 				behavior = {
@@ -72,7 +73,7 @@ Explain:
 				},
 			},
 			prompt_engineer = {
-				model = { connector = "zai", name = "glm-5.1" },
+				model = tenon_constant.models[tenon_constant.models.alt_enabled].thinker,
 				tool_names = {
 					"fetch_webpage",
 					"web_search",
@@ -102,8 +103,23 @@ Explain:
 		}, tenon_constant.project_agents),
 		tools = {
 			fetch_webpage = {
-				model = { connector = "zai", name = "glm-4.5-air" },
+				model = tenon_constant.models[tenon_constant.models.alt_enabled].cheap,
 			},
+			run = {
+				whitelist = tenon_constant.tools.whitelist_commands,
+			},
+		},
+		models = {
+			{ connector = "ollama_cloud", name = "glm-5.1" },
+			{ connector = "ollama_cloud", name = "glm-5" },
+			{ connector = "ollama_cloud", name = "kimi-k2.6" },
+			{ connector = "ollama_cloud", name = "gemma4:31b" },
+			{ connector = "ollama_cloud", name = "nemotron-3-super" },
+			{ connector = "zai", name = "glm-5.1" },
+			{ connector = "zai", name = "glm-5-turbo" },
+			{ connector = "zai", name = "glm-5" },
+			{ connector = "zai", name = "glm-4.7" },
+			{ connector = "zai", name = "glm-4.5-air" },
 		},
 	})
 	utils.keymap({ "n", "i" }, "<c-s-a>", function()
