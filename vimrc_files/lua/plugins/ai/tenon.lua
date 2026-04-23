@@ -78,6 +78,8 @@ Explain:
 					"fetch_webpage",
 					"web_search",
 					"think",
+					"read_file",
+					"edit_file",
 				},
 				behavior = {
 					{
