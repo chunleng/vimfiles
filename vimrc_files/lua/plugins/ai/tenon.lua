@@ -108,7 +108,7 @@ Explain:
 				model = tenon_constant.models[tenon_constant.models.alt_enabled].cheap,
 			},
 			run = {
-				whitelist = tenon_constant.tools.whitelist_commands,
+				whitelist = vim.list_extend({ "git diff *" }, tenon_constant.tools.whitelist_commands),
 			},
 		},
 		models = {
