@@ -33,6 +33,7 @@ local function setup()
 					"list_files",
 					"read_file",
 					"remove_path",
+					"move_path",
 					"search_text",
 					"web_search",
 					"run",
