@@ -106,7 +106,7 @@ Explain:
 		}, tenon_constant.project_agents),
 		tools = {
 			fetch_webpage = {
-				model = tenon_constant.models[tenon_constant.models.alt_enabled].cheap,
+				model = tenon_constant.models[tenon_constant.models.alt_enabled].fast,
 			},
 			run = {
 				whitelist = vim.list_extend({ "git diff *" }, tenon_constant.tools.whitelist_commands),
@@ -118,6 +118,7 @@ Explain:
 			{ connector = "ollama_cloud", name = "kimi-k2.6" },
 			{ connector = "ollama_cloud", name = "gemma4:31b" },
 			{ connector = "ollama_cloud", name = "nemotron-3-super" },
+			{ connector = "ollama_cloud", name = "deepseek-v4-flash" },
 			{ connector = "zai", name = "glm-5.1" },
 			{ connector = "zai", name = "glm-5-turbo" },
 			{ connector = "zai", name = "glm-5" },
