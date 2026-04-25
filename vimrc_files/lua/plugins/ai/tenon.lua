@@ -112,6 +112,9 @@ Explain:
 				whitelist = vim.list_extend({ "git diff *" }, tenon_constant.tools.whitelist_commands),
 			},
 		},
+		history = {
+			directory = vim.fn.getcwd() .. "/.vim/history",
+		},
 		models = {
 			{ connector = "ollama_cloud", name = "glm-5.1" },
 			{ connector = "ollama_cloud", name = "glm-5" },
