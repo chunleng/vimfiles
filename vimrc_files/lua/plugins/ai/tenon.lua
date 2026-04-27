@@ -80,6 +80,7 @@ Explain:
 					"fetch_webpage",
 					"web_search",
 					"think",
+					"create_file",
 					"read_file",
 					"edit_file",
 				},
