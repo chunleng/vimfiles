@@ -4,6 +4,7 @@ local function setup()
 	local tenon = require("tenon")
 	local tenon_constant = require("mod.global_constants").tenon
 	tenon.setup({
+		connectors = tenon_constant.connectors,
 		-- Z.ai models
 		-- * glm-5.1
 		-- * glm-5-turbo
@@ -12,7 +13,7 @@ local function setup()
 		-- * glm-4.5-air
 		agents = vim.tbl_extend("force", {
 			generic = {
-				model = tenon_constant.models[tenon_constant.models.alt_enabled].standard,
+				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].standard,
 				tool_names = {
 					"fetch_webpage",
 					"list_files",
@@ -25,7 +26,7 @@ local function setup()
 				default = true,
 			},
 			developer = {
-				model = tenon_constant.models[tenon_constant.models.alt_enabled].thinker,
+				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].thinker,
 				tool_names = {
 					"create_file",
 					"edit_file",
@@ -74,7 +75,7 @@ Explain:
 				},
 			},
 			prompt_engineer = {
-				model = tenon_constant.models[tenon_constant.models.alt_enabled].thinker,
+				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].thinker,
 				tool_names = {
 					"fetch_webpage",
 					"web_search",
@@ -106,7 +107,7 @@ Explain:
 		}, tenon_constant.project_agents),
 		tools = {
 			fetch_webpage = {
-				model = tenon_constant.models[tenon_constant.models.alt_enabled].fast,
+				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].fast,
 			},
 			run = {
 				whitelist = vim.list_extend({ "git diff *" }, tenon_constant.tools.whitelist_commands),
@@ -115,18 +116,9 @@ Explain:
 		history = {
 			directory = vim.fn.getcwd() .. "/.vim/history",
 		},
-		models = {
-			{ connector = "ollama_cloud", name = "glm-5.1" },
-			{ connector = "ollama_cloud", name = "glm-5" },
-			{ connector = "ollama_cloud", name = "kimi-k2.6" },
-			{ connector = "ollama_cloud", name = "gemma4:31b" },
-			{ connector = "ollama_cloud", name = "nemotron-3-super" },
-			{ connector = "ollama_cloud", name = "deepseek-v4-flash" },
-			{ connector = "zai", name = "glm-5.1" },
-			{ connector = "zai", name = "glm-5-turbo" },
-			{ connector = "zai", name = "glm-5" },
-			{ connector = "zai", name = "glm-4.7" },
-			{ connector = "zai", name = "glm-4.5-air" },
+		models = tenon_constant.models,
+		title = {
+			model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].fast,
 		},
 	})
 	utils.keymap({ "n", "i" }, "<c-s-a>", function()
