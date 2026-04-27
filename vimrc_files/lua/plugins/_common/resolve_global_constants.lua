@@ -27,35 +27,42 @@ local function check_approval(path)
 	return approved
 end
 
-local function find_global_overrides()
+local function find_global_override_files()
 	local results = {}
 	local current_path = vim.fn.getcwd()
 
 	while current_path ~= "/" do
 		local override_file = current_path .. "/.vim/global_override.lua"
 		if vim.fn.filereadable(override_file) == 1 then
-			local success, lua_content_or_error = pcall(dofile, override_file)
-			if success then
-				if lua_content_or_error and check_approval(override_file) then
-					table.insert(results, lua_content_or_error)
-				end
-			else
-				vim.notify(lua_content_or_error, vim.log.levels.ERROR)
-			end
+			table.insert(results, override_file)
 		end
 		current_path = vim.fn.fnamemodify(current_path, ":h")
 	end
 
-	return results
+	-- Return result from the higher path, so that lower path can resolve with variable from a higher path
+	return vim.iter(results):rev():totable()
 end
 
-local new_global_constants = {}
-local overrides = find_global_overrides()
-for _, override in ipairs(overrides) do
-	new_global_constants = vim.tbl_deep_extend("keep", new_global_constants, override)
+local function resolve_override_file(override_file)
+	local success, lua_content_or_error = pcall(dofile, override_file)
+	if success then
+		if lua_content_or_error and check_approval(override_file) then
+			return lua_content_or_error
+		end
+	else
+		vim.notify(lua_content_or_error, vim.log.levels.ERROR)
+	end
+	return nil
 end
 
-package.loaded["mod.global_constants"] =
-	vim.tbl_deep_extend("keep", new_global_constants, require("mod.global_constants"))
+local override_files = find_global_override_files()
+
+for _, override_file in ipairs(override_files) do
+	local override = resolve_override_file(override_file)
+	if override then
+		-- We
+		package.loaded["mod.global_constants"] = vim.tbl_deep_extend("force", require("mod.global_constants"), override)
+	end
+end
 
 return {}
