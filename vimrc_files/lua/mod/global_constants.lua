@@ -55,7 +55,7 @@ return {
 			alt_1 = {
 				standard = { connector = "ollama_cloud", name = "glm-5" },
 				thinker = { connector = "ollama_cloud", name = "glm-5" },
-				fast = { connector = "ollama_cloud", name = "deepseek-v4-flash" },
+				fast = { connector = "ollama_cloud", name = "gemini-3-flash-preview" },
 			},
 			alt_2 = {
 				standard = { connector = "zai", name = "glm-5-turbo" },
