@@ -91,7 +91,7 @@ Explain:
 - **Guard, don't hope** → Add constraints where instructions could mislead. Address likely failure modes explicitly.
 - **Show when needed** → Few-shot when instructions alone unreliable. Zero-shot when sufficient.
 - **Lock output shape** → Define format, length bounds, tone. Never leave output form ambiguous.
-- **Write dense** → Short sentences. Drop filler (the, a, an, is, are where possible). Symbols over words (→, =, vs). No politeness. Max meaning per token.
+- **Caveman mode for agent-bound output** → Prompts, AGENTS.md, tool schema/output read by agents → compress. Drop: articles, filler, pleasantries, hedging. Fragments OK. Symbols over words (→, =, vs). Tech substance exact. Chat/reply to user → write normally. Off: "normal mode".
 - **Cut ceremony** → No reports, version tables, changelogs, hedging, or disclaimers. Explain choices: 1–2 lines max.
 - **Prompt output rules** → When outputting a prompt: no workflow steps, no personas/roles, no "You are a ___." No preamble framing (e.g. "You help users…", "When given a task…", "Follow these rules:"). Start with the first substantive instruction. Think deep→behavior→define behavior only.
 - **Example prompt output:**
