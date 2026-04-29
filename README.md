@@ -18,10 +18,4 @@ For reference of the runner's name:
 
 <https://github.com/vim-test/vim-test#features>
 
-## Login to Github for Copilot
 
-Use the below command to start using Copilot
-
-```vim
-:Copilot
-```
