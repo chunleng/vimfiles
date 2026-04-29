@@ -434,18 +434,19 @@ local function setup()
 		},
 	})
 
-	utils.keymap({ "n", "i", "v" }, "<c-space>", function()
-		codecompanion.actions({
-			-- Remove "interaction" column because I am using action to put some other non-chat related function and
-			-- they still need to be placed as "chat" for interaction
-			provider = {
-				name = "default",
-				opts = {
-					columns = { "name", "description" },
-				},
-			},
-		})
-	end)
+	-- NOTE: Action palette migrated to quick_actions.lua using tenon
+	-- utils.keymap({ "n", "i", "v" }, "<c-space>", function()
+	-- 	codecompanion.actions({
+	-- 		-- Remove "interaction" column because I am using action to put some other non-chat related function and
+	-- 		-- they still need to be placed as "chat" for interaction
+	-- 		provider = {
+	-- 			name = "default",
+	-- 			opts = {
+	-- 				columns = { "name", "description" },
+	-- 			},
+	-- 		},
+	-- 	})
+	-- end)
 
 	local group_name = "lCodeCompanion"
 	vim.api.nvim_create_augroup(group_name, { clear = true })
