@@ -6,6 +6,27 @@ local M = {}
 -- Each action has: name, description, condition (optional), callback
 local actions = {
 	{
+		name = "New chat",
+		description = "Start a new tenon chat",
+		callback = function()
+			local tenon = require("tenon")
+			tenon.open()
+			vim.schedule(function()
+				tenon.keymap.new_chat()
+			end)
+		end,
+	},
+	{
+		name = "New chat with agent",
+		description = "Start a new chat with specific agent",
+		callback = function()
+			local tenon = require("tenon")
+			tenon.open()
+			tenon.keymap.new_chat()
+			tenon.keymap.select_agent()
+		end,
+	},
+	{
 		name = "Docstring: function",
 		description = "Add function docstring using neogen",
 		condition = function()
@@ -33,27 +54,6 @@ local actions = {
 		end,
 		callback = function()
 			require("neogen").generate({ type = "file" })
-		end,
-	},
-	{
-		name = "New chat",
-		description = "Start a new tenon chat",
-		callback = function()
-			local tenon = require("tenon")
-			tenon.open()
-			vim.schedule(function()
-				tenon.keymap.new_chat()
-			end)
-		end,
-	},
-	{
-		name = "New chat with agent",
-		description = "Start a new chat with specific agent",
-		callback = function()
-			local tenon = require("tenon")
-			tenon.open()
-			tenon.keymap.new_chat()
-			tenon.keymap.select_agent()
 		end,
 	},
 	{
