@@ -72,9 +72,8 @@ return {
 	{
 		-- https://github.com/nvim-lualine/lualine.nvim
 		-- https://github.com/SmiteshP/nvim-navic
-		-- https://github.com/olimorris/codecompanion.nvim
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "SmiteshP/nvim-navic", "olimorris/codecompanion.nvim" },
+		dependencies = { "SmiteshP/nvim-navic" },
 		config = setup,
 	},
 }

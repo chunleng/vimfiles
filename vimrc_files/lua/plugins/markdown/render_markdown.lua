@@ -1,5 +1,5 @@
--- Keeping filetype to codecompanion because I need to read more than I write on it
-local ft = { "codecompanion" }
+-- Keeping this plugin in case I still want to use it in the future
+local ft = {}
 return {
 	-- https://github.com/MeanderingProgrammer/render-markdown.nvim.git
 	"MeanderingProgrammer/render-markdown.nvim",

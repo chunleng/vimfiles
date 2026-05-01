@@ -1,4 +1,4 @@
-local ft = { "markdown", "plantuml", "codecompanion" }
+local ft = { "markdown", "plantuml" }
 
 local function build()
 	vim.fn["mkdp#util#install"]()
