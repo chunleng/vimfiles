@@ -1,7 +1,6 @@
 local lualine_constants = require("mod.global_constants").lualine
 
 local function setup()
-	local codecompanion = require("codecompanion")
 	local navic = require("nvim-navic")
 	local theme = require("common-theme")
 	local utils = require("common-utils")
@@ -42,32 +41,10 @@ local function setup()
 			lualine_b = {},
 			lualine_c = {
 				function()
-					if vim.o.ft ~= "codecompanion" then
-						return ""
-					end
-
-					local current_chat = vim.tbl_filter(function(x)
-						return x.chat.bufnr == vim.api.nvim_get_current_buf()
-					end, codecompanion.buf_get_chat())[1]
-
-					if current_chat == nil then
-						return ""
-					end
-
-					local adapter_name = current_chat.chat.adapter.name
-					local model_name = current_chat.chat.adapter.schema.model.default
-					return current_chat
-							and "󰭻 " .. adapter_name .. "|" .. (model_name or "") .. ": " .. current_chat.description
-						or ""
-				end,
-				function()
 					return navic.get_location()
 				end,
 			},
-			lualine_x = {
-				require("codecompanion._extensions.spinner.styles.lualine").get_lualine_component(),
-				lualine_constants.additional_status,
-			},
+			lualine_x = {},
 			lualine_y = {
 				{
 					"lsp_status",
