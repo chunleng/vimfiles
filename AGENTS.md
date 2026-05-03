@@ -2,7 +2,11 @@
 
 lazy.nvim setup.
 
-## Dev
+## Dev Guide
+
+- Neovim lua → prefer neovim API
+
+## Dev Workflow
 
 - Edit Lua → `stylua .`
 
