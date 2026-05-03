@@ -6,6 +6,18 @@ local M = {}
 -- Each action has: name, description, condition (optional), callback
 local actions = {
 	{
+		name = "Send selected text to chat",
+		description = "Add the selected text to chat, with proper information about selection",
+		condition = function(ctx)
+			return ctx.mode == "v" or ctx.mode == "V" or ctx.mode == "\22"
+		end,
+		callback = function(ctx)
+			local tenon = require("tenon")
+			tenon.open()
+			tenon.action.insert_selection(ctx.bufnr, ctx.start_line, ctx.start_col, ctx.end_line, ctx.end_col)
+		end,
+	},
+	{
 		name = "New chat",
 		description = "Start a new tenon chat",
 		callback = function()
@@ -65,14 +77,71 @@ local actions = {
 	},
 }
 
+--- Capture launch context (mode, buffer, selection bounds)
+---@return table context {bufnr, mode, start_line, start_col, end_line, end_col}
+local function capture_context()
+	local mode = vim.fn.mode()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local start_line, start_col, end_line, end_col
+
+	if mode == "v" or mode == "\22" then
+		-- Character-wise visual - get selection bounds
+		local pos = vim.fn.getpos("v")
+		start_line = pos[2]
+		start_col = pos[3]
+		local end_pos = vim.fn.getpos(".")
+		end_line = end_pos[2]
+		end_col = end_pos[3]
+
+		-- Ensure start is before end
+		if start_line > end_line or (start_line == end_line and start_col > end_col) then
+			start_line, end_line = end_line, start_line
+			start_col, end_col = end_col, start_col
+		end
+	elseif mode == "V" then
+		-- Line-wise visual - columns are ignored
+		local pos = vim.fn.getpos("v")
+		start_line = pos[2]
+		local end_pos = vim.fn.getpos(".")
+		end_line = end_pos[2]
+
+		-- Ensure start is before end
+		if start_line > end_line then
+			start_line, end_line = end_line, start_line
+		end
+
+		start_col = nil
+		end_col = nil
+	else
+		-- Normal/insert mode - cursor position
+		local pos = vim.api.nvim_win_get_cursor(0)
+		start_line = pos[1]
+		start_col = pos[2] + 1 -- nvim_win_get_cursor returns 0-based col
+		end_line = start_line
+		end_col = start_col
+	end
+
+	return {
+		bufnr = bufnr,
+		mode = mode,
+		start_line = start_line,
+		start_col = start_col,
+		end_line = end_line,
+		end_col = end_col,
+	}
+end
+
 --- Show the quick actions using fzf-lua
 function M.show()
 	local fzf = require("fzf-lua")
 
+	-- Capture launch context before fzf takes over
+	local context = capture_context()
+
 	-- Filter actions by condition
 	local available = {}
 	for _, action in ipairs(actions) do
-		if not action.condition or action.condition() then
+		if not action.condition or action.condition(context) then
 			table.insert(available, action)
 		end
 	end
@@ -104,7 +173,7 @@ function M.show()
 					local selected_name = vim.trim(vim.split(selected_text, " │ ")[1])
 					for _, action in ipairs(available) do
 						if action.name == selected_name then
-							action.callback()
+							action.callback(context)
 							break
 						end
 					end
@@ -114,6 +183,6 @@ function M.show()
 	})
 end
 
-utils.keymap({ "n", "i" }, "<c-space>", M.show)
+utils.keymap({ "n", "i", "x" }, "<c-space>", M.show)
 
 return {}
