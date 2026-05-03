@@ -1,3 +1,12 @@
+-- Helper: move current buffer to target position via repeated moves
+local function move_buffer_to(current_index, target_index)
+	local moves = current_index - target_index
+	local move_cmd = moves > 0 and "BufferLineMovePrev" or "BufferLineMoveNext"
+	for _ = 1, math.abs(moves) do
+		vim.cmd(move_cmd)
+	end
+end
+
 local function setup()
 	local bufdelete = require("bufdelete")
 	local bufferline = require("bufferline")
@@ -43,8 +52,33 @@ local function setup()
 	utils.keymap({ "n", "x" }, "gp", function()
 		local bufnr = vim.api.nvim_get_current_buf()
 		local is_pinned = vim.tbl_get(pinned, bufnr) or false
-		pinned[bufnr] = not is_pinned
-		bufferline.groups.toggle_pin()
+
+		-- Find current buffer's index in bufferline
+		local elements = bufferline.get_elements().elements
+		local current_index = nil
+		for i, element in ipairs(elements) do
+			if element.id == bufnr then
+				current_index = i
+				break
+			end
+		end
+		if not current_index then
+			return
+		end
+
+		if is_pinned then
+			-- Unpinning: move to position right after remaining pinned buffers
+			local pinned_count = vim.tbl_count(pinned)
+			pinned[bufnr] = nil
+			move_buffer_to(current_index, pinned_count)
+			bufferline.groups.toggle_pin()
+		else
+			-- Pinning: move to position after last pinned buffer
+			local pinned_count = vim.tbl_count(pinned)
+			move_buffer_to(current_index, pinned_count + 1)
+			pinned[bufnr] = true
+			bufferline.groups.toggle_pin()
+		end
 	end)
 	utils.keymap({ "n", "x" }, "<leader>bh", "<cmd>confirm BufferLineCloseLeft<cr>")
 	utils.keymap({ "n", "x" }, "<leader>bl", "<cmd>confirm BufferLineCloseRight<cr>")
