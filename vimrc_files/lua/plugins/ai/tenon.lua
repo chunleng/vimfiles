@@ -69,6 +69,7 @@ Safe defaults:
 Explain:
 - State what changed and why, especially non-obvious decisions.
 - Multiple approaches existed → note trade-off, explain your choice.
+- Comment only non-obvious code. Explain why, not what.
 - Flag suspicious code you noticed, even if unrelated to the task.]],
 					},
 					{ type = "file", path = "./AGENTS.md" },
