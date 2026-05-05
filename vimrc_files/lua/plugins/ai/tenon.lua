@@ -150,7 +150,7 @@ Explain:
 				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].fast,
 			},
 			run = {
-				whitelist = vim.list_extend({ "git diff *" }, tenon_constant.tools.whitelist_commands),
+				whitelist = vim.list_extend({ "git diff *", "git show *" }, tenon_constant.tools.whitelist_commands),
 				check_models = {
 					tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].fast,
 					tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].standard,
