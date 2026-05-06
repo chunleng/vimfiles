@@ -72,7 +72,7 @@ Explain:
 - Comment only non-obvious code. Explain why, not what.
 - Flag suspicious code you noticed, even if unrelated to the task.]],
 					},
-					{ type = "file", path = "./AGENTS.md" },
+					{ type = "knowledge", name = "AGENTS.md" },
 				},
 			},
 			prompt_engineer = {
@@ -145,7 +145,7 @@ Explain:
       - Linter silence = accepted. Example: nesting depth, function length.
     - **Output** → No blockers → "LGTM!" only. No remarks.]],
 					},
-					{ type = "file", path = "./AGENTS.md" },
+					{ type = "knowledge", name = "AGENTS.md" },
 				},
 			},
 		}, tenon_constant.project_agents),
