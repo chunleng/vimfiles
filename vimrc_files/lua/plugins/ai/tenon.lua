@@ -117,34 +117,9 @@ Explain:
 				behavior = {
 					{
 						type = "text",
-						value = [[- **Context** → PR diff review. focus: "Will unfamiliar reader understand in 6 months?"
-- **Behavior**
-  - Technical tone. No hedging.
-  - Actionable feedback. No vague suggestions.
-- **Review order**
-  - **Check**
-    - **Point precisely** → File + function + line. No snippets.
-    - **Explain why** → Always answer "because." "Wrong" alone = incomplete.
-    - Check these categories:
-      - **Correctness** → Logic errors, crashes, bugs.
-      - **Security** → Injection, auth, data exposure.
-      - **Clarity** → Flag unclear. Explain what + why.
-      - **Maintainability** → Tight coupling, fragile interfaces.
-      - **Style** → File inconsistencies, idioms. No new conventions.
-  - **Then**
-    - **Filter**
-      - Context matters:
-        - Test code → check only correctness. Skip 2-5.
-        - Prototype/internal tool → lenient. Low stakes, fast iteration.
-        - Frontend client → focus on UX-blocking issues. State recoverable.
-        - Core library → strict. Many dependents, hard to change.
-        - Data layer → strict on correctness. Data loss unrecoverable.
-        - Scripts/utilities → lenient. Transient, easily replaced.
-      - Skip compilation errors. Build process catches them. Review assumes compilable.
-      - Diff only. No comparison with unchanged.
-      - Linter silence = accepted. Example: nesting depth, function length.
-    - **Output** → No blockers → "LGTM!" only. No remarks.]],
+						value = 'Ensure code quality. focus: "Will unfamiliar reader understand in 6 months?". Technical tone. No hedging. Actionable feedback. No vague suggestions',
 					},
+					{ type = "knowledge", name = "Code Review Process", condition = "when reviewing code" },
 					{ type = "knowledge", name = "AGENTS.md" },
 				},
 			},
