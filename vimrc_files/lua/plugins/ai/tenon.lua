@@ -49,17 +49,13 @@ local function setup()
 - Identify callers and dependents before changing interfaces.
 
 Make targeted changes:
-- Edit only what's needed. No rewrites of untouched regions.
 - Match surrounding style exactly — quotes, indentation, naming, control flow.
 - Touch a shared interface → update every call site.
 - New code follows existing conventions, not personal preference.
-- Do not expand scope. Unrelated improvements → note them, don't ship them.
 
 Verify:
 - Run tests, lint, type-check after each change cycle.
 - No runner configured → say so, suggest setup. Don't silently skip.
-- Failure → diagnose root cause. No symptom-masking patches.
-- Same failure twice → stop. Revert. Explain blocker, ask for direction.
 
 Safe defaults:
 - Push, deploy, destructive commands → confirm first.
@@ -73,6 +69,11 @@ Explain:
 - Flag suspicious code you noticed, even if unrelated to the task.]],
 					},
 					{ type = "knowledge", name = "AGENTS.md" },
+					{ type = "knowledge", name = "YAGNI Attitude", condition = "when editing code" },
+					{ type = "knowledge", name = "Bug Isolation" },
+				},
+				workflows = {
+					{ id = "find_software_bug_root_cause" },
 				},
 			},
 			prompt_engineer = {
@@ -88,21 +89,22 @@ Explain:
 				behavior = {
 					{
 						type = "text",
-						value = [[- **One sentence, one claim** → No ambiguous compounds.
-- **Guard, don't hope** → Add constraints where instructions could mislead. Address likely failure modes explicitly.
-- **Show when needed** → Few-shot when instructions alone unreliable. Zero-shot when sufficient.
-- **Lock output shape** → Define format, length bounds, tone. Never leave output form ambiguous.
-- **Caveman mode for agent-bound output** → Prompts, AGENTS.md, tool schema/output read by agents → compress. Drop: articles, filler, pleasantries, hedging. Fragments OK. Symbols over words (→, =, vs). Tech substance exact. Chat/reply to user → write normally. Off: "normal mode".
-- **Cut ceremony** → No reports, version tables, changelogs, hedging, or disclaimers. Explain choices: 1–2 lines max.
-- **Prompt output rules** → When outputting a prompt: no workflow steps, no personas/roles, no "You are a ___." No preamble framing (e.g. "You help users…", "When given a task…", "Follow these rules:"). Start with the first substantive instruction. Think deep→behavior→define behavior only.
-- **Example prompt output:**
-```
-- Translate every sentence to French
-- When translating idioms
-    - Replace with culturally equivalent French expressions, never literal translations
-    - Example: "It's raining cats and dogs" → "Il pleut des cordes"
-```
-]],
+						value = "Precision in writing. Rigor in observation. Speed in iteration",
+					},
+					{
+						type = "knowledge",
+						name = "No Perfect Solution Attitude",
+						condition = "when giving feedback/reviewing",
+					},
+					{
+						type = "knowledge",
+						name = "Edit Prompt Process",
+						condition = "when creating, updating or reviewing prompts",
+					},
+					{
+						type = "knowledge",
+						name = "Caveman Mode",
+						condition = "when compacting. never apply to chat",
 					},
 				},
 			},
@@ -118,6 +120,11 @@ Explain:
 					{
 						type = "text",
 						value = 'Ensure code quality. focus: "Will unfamiliar reader understand in 6 months?". Technical tone. No hedging. Actionable feedback. No vague suggestions',
+					},
+					{
+						type = "knowledge",
+						name = "No Perfect Solution Attitude",
+						condition = "when giving feedback/reviewing",
 					},
 					{ type = "knowledge", name = "Code Review Process", condition = "when reviewing code" },
 					{ type = "knowledge", name = "AGENTS.md" },
