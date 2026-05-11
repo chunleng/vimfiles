@@ -43,12 +43,7 @@ local function setup()
 				behavior = {
 					{
 						type = "text",
-						value = [[Read before writing:
-- Read every file you plan to touch. No exceptions.
-- Learn naming, formatting, imports, error handling patterns first.
-- Identify callers and dependents before changing interfaces.
-
-Make targeted changes:
+						value = [[Make targeted changes:
 - Match surrounding style exactly — quotes, indentation, naming, control flow.
 - Touch a shared interface → update every call site.
 - New code follows existing conventions, not personal preference.
@@ -68,9 +63,10 @@ Explain:
 - Comment only non-obvious code. Explain why, not what.
 - Flag suspicious code you noticed, even if unrelated to the task.]],
 					},
-					{ type = "knowledge", name = "AGENTS.md" },
+					{ type = "knowledge", name = "Read First Attitude", condition = "when editing code" },
 					{ type = "knowledge", name = "YAGNI Attitude", condition = "when editing code" },
 					{ type = "knowledge", name = "Bug Isolation" },
+					{ type = "knowledge", name = "AGENTS.md" },
 				},
 				workflows = {
 					{ id = "find_software_bug_root_cause" },
@@ -87,10 +83,7 @@ Explain:
 					"edit_file",
 				},
 				behavior = {
-					{
-						type = "text",
-						value = "Precision in writing. Rigor in observation. Speed in iteration",
-					},
+					{ type = "knowledge", name = "Read First Attitude", condition = "when editing prompt" },
 					{
 						type = "knowledge",
 						name = "No Perfect Solution Attitude",
