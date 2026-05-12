@@ -40,7 +40,7 @@ local function setup()
 					"run",
 					"think",
 				},
-				behavior = {
+				directive = {
 					{
 						type = "text",
 						value = [[Make targeted changes:
@@ -63,10 +63,10 @@ Explain:
 - Comment only non-obvious code. Explain why, not what.
 - Flag suspicious code you noticed, even if unrelated to the task.]],
 					},
-					{ type = "knowledge", name = "Read First Attitude", condition = "when editing code" },
-					{ type = "knowledge", name = "YAGNI Attitude", condition = "when editing code" },
-					{ type = "knowledge", name = "Bug Isolation" },
-					{ type = "knowledge", name = "AGENTS.md" },
+					{ type = "system", name = "Read First Attitude", condition = "when editing code" },
+					{ type = "system", name = "YAGNI Attitude", condition = "when editing code" },
+					{ type = "system", name = "Bug Isolation" },
+					{ type = "system", name = "AGENTS.md" },
 				},
 				workflows = {
 					{ id = "find_software_bug_root_cause" },
@@ -84,21 +84,21 @@ Explain:
 					"search_text",
 					"list_files",
 				},
-				behavior = {
-					{ type = "knowledge", name = "Prompting Basics" },
+				directive = {
+					{ type = "system", name = "Prompting Basics" },
 					{
-						type = "knowledge",
+						type = "system",
 						name = "Prompt Editing Basics",
 						condition = "when dealing with prompt/text-to-LLM related operations",
 					},
-					{ type = "knowledge", name = "Read First Attitude", condition = "when editing prompt" },
+					{ type = "system", name = "Read First Attitude", condition = "when editing prompt" },
 					{
-						type = "knowledge",
+						type = "system",
 						name = "No Perfect Solution Attitude",
 						condition = "when giving feedback/reviewing",
 					},
 					{
-						type = "knowledge",
+						type = "system",
 						name = "Caveman Mode",
 						condition = "when compacting or asked to. never apply to chat",
 					},
@@ -115,18 +115,18 @@ Explain:
 					"search_text",
 					"think",
 				},
-				behavior = {
+				directive = {
 					{
 						type = "text",
 						value = 'Ensure code quality. focus: "Will unfamiliar reader understand in 6 months?". Technical tone. No hedging. Actionable feedback. No vague suggestions',
 					},
 					{
-						type = "knowledge",
+						type = "system",
 						name = "No Perfect Solution Attitude",
 						condition = "when giving feedback/reviewing",
 					},
-					{ type = "knowledge", name = "Code Review Process", condition = "when reviewing code" },
-					{ type = "knowledge", name = "AGENTS.md" },
+					{ type = "system", name = "Code Review Process", condition = "when reviewing code" },
+					{ type = "system", name = "AGENTS.md" },
 				},
 			},
 		}, tenon_constant.project_agents),
