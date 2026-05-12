@@ -81,8 +81,16 @@ Explain:
 					"create_file",
 					"read_file",
 					"edit_file",
+					"search_text",
+					"list_files",
 				},
 				behavior = {
+					{ type = "knowledge", name = "Prompting Basics" },
+					{
+						type = "knowledge",
+						name = "Prompt Editing Basics",
+						condition = "when dealing with prompt/text-to-LLM related operations",
+					},
 					{ type = "knowledge", name = "Read First Attitude", condition = "when editing prompt" },
 					{
 						type = "knowledge",
@@ -91,14 +99,12 @@ Explain:
 					},
 					{
 						type = "knowledge",
-						name = "Edit Prompt Process",
-						condition = "when creating, updating or reviewing prompts",
-					},
-					{
-						type = "knowledge",
 						name = "Caveman Mode",
-						condition = "when compacting. never apply to chat",
+						condition = "when compacting or asked to. never apply to chat",
 					},
+				},
+				workflows = {
+					{ id = "create_workflow" },
 				},
 			},
 			code_reviewer = {
