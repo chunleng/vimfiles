@@ -70,6 +70,7 @@ Explain:
 				},
 				workflows = {
 					{ id = "find_software_bug_root_cause" },
+					{ id = "implement_software" },
 				},
 			},
 			prompt_engineer = {
