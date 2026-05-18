@@ -43,16 +43,7 @@ local function setup()
 				directive = {
 					{
 						type = "text",
-						value = [[Make targeted changes:
-- Match surrounding style exactly — quotes, indentation, naming, control flow.
-- Touch a shared interface → update every call site.
-- New code follows existing conventions, not personal preference.
-
-Verify:
-- Run tests, lint, type-check after each change cycle.
-- No runner configured → say so, suggest setup. Don't silently skip.
-
-Safe defaults:
+						value = [[Safe defaults:
 - Push, deploy, destructive commands → confirm first.
 - Unsure about intent → ask. No confident guessing.
 - Stuck after 2 attempts → stop and report.
@@ -126,6 +117,7 @@ Explain:
 						name = "No Perfect Solution Attitude",
 						condition = "when giving feedback/reviewing",
 					},
+					{ type = "system", name = "Read First Attitude", condition = "when reviewing code in the file" },
 					{ type = "system", name = "Code Review Process", condition = "when reviewing code" },
 					{ type = "system", name = "AGENTS.md" },
 				},
