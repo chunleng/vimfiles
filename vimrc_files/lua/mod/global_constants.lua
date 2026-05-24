@@ -7,7 +7,7 @@ return {
 			alt_1 = {
 				standard = { connector = "ollama_cloud", name = "glm-5" },
 				thinker = { connector = "ollama_cloud", name = "glm-5" },
-				fast = { connector = "ollama_cloud", name = "gemini-3-flash-preview" },
+				fast = { connector = "ollama_cloud", name = "deepseek-v4-flash" },
 			},
 			alt_2 = {
 				standard = { connector = "zai", name = "glm-5-turbo" },
@@ -24,6 +24,7 @@ return {
 			{ connector = "ollama_cloud", name = "nemotron-3-nano:30b" },
 			{ connector = "ollama_cloud", name = "deepseek-v4-pro" },
 			{ connector = "ollama_cloud", name = "deepseek-v4-flash" },
+			{ connector = "ollama_cloud", name = "qwen3.5" },
 			{ connector = "zai", name = "glm-5.1" },
 			{ connector = "zai", name = "glm-5-turbo" },
 			{ connector = "zai", name = "glm-5" },

@@ -43,17 +43,11 @@ local function setup()
 				directive = {
 					{
 						type = "text",
-						value = [[Safe defaults:
-- Push, deploy, destructive commands → confirm first.
-- Unsure about intent → ask. No confident guessing.
-- Stuck after 2 attempts → stop and report.
-
-Explain:
-- State what changed and why, especially non-obvious decisions.
-- Multiple approaches existed → note trade-off, explain your choice.
-- Comment only non-obvious code. Explain why, not what.
-- Flag suspicious code you noticed, even if unrelated to the task.]],
+						value = [[Explain:
+- State what changed and why, especially non-obvious decisions.]],
 					},
+					{ type = "system", name = "Coding Basics" },
+					{ type = "system", name = "Code Comment Basics" },
 					{ type = "system", name = "Read First Attitude", condition = "when editing code" },
 					{ type = "system", name = "YAGNI Attitude", condition = "when editing code" },
 					{ type = "system", name = "Bug Isolation" },
@@ -61,7 +55,10 @@ Explain:
 				},
 				workflows = {
 					{ id = "find_software_bug_root_cause" },
-					{ id = "implement_software" },
+					{ id = "plan_refactoring" },
+					{ id = "plan_software_change" },
+					{ id = "implement_code" },
+					{ id = "implement_code_together" },
 				},
 			},
 			prompt_engineer = {
@@ -78,25 +75,16 @@ Explain:
 				},
 				directive = {
 					{ type = "system", name = "Prompting Basics" },
-					{
-						type = "system",
-						name = "Prompt Editing Basics",
-						condition = "when dealing with prompt/text-to-LLM related operations",
-					},
 					{ type = "system", name = "Read First Attitude", condition = "when editing prompt" },
 					{
 						type = "system",
 						name = "No Perfect Solution Attitude",
 						condition = "when giving feedback/reviewing",
 					},
-					{
-						type = "system",
-						name = "Caveman Mode",
-						condition = "when compacting or asked to. never apply to chat",
-					},
 				},
 				workflows = {
 					{ id = "create_workflow" },
+					{ id = "compact_text" },
 				},
 			},
 			code_reviewer = {
