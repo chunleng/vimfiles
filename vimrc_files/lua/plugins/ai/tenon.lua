@@ -41,16 +41,10 @@ local function setup()
 					"think",
 				},
 				directive = {
-					{
-						type = "text",
-						value = [[Explain:
-- State what changed and why, especially non-obvious decisions.]],
-					},
-					{ type = "system", name = "Coding Basics" },
 					{ type = "system", name = "Code Comment Basics" },
 					{ type = "system", name = "Read First Attitude", condition = "when editing code" },
 					{ type = "system", name = "YAGNI Attitude", condition = "when editing code" },
-					{ type = "system", name = "Bug Isolation" },
+					{ type = "system", name = "Bug Isolation", condition = "when trying to understand cause of a bug" },
 					{ type = "system", name = "AGENTS.md" },
 				},
 				workflows = {
