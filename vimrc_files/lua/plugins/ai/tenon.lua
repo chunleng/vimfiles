@@ -3,6 +3,31 @@ local utils = require("common-utils")
 local function setup()
 	local tenon = require("tenon")
 	local tenon_constant = require("mod.global_constants").tenon
+
+	local developer_base_agent = {
+		model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].thinker,
+		tool_names = {
+			"think",
+			"list_files",
+			"read_file",
+			"search_text",
+			"web_search",
+			"fetch_webpage",
+			"move_path",
+			"remove_path",
+			"create_file",
+			"edit_file",
+			"run",
+		},
+		directive = {
+			{ type = "system", name = "AGENTS.md" },
+			{ type = "system", name = "Read First Attitude", condition = "when making code changes" },
+			{ type = "system", name = "YAGNI Attitude", condition = "when making code changes" },
+			{ type = "system", name = "Code Comment Basics", condition = "when making code changes" },
+			{ type = "system", name = "Testing Basics", condition = "when making test code changes" },
+			{ type = "system", name = "Bug Isolation", condition = "when trying to understand cause of a bug" },
+		},
+	}
 	tenon.setup({
 		connectors = tenon_constant.connectors,
 		-- Z.ai models
@@ -25,36 +50,22 @@ local function setup()
 				},
 				default = true,
 			},
-			developer = {
-				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].thinker,
-				tool_names = {
-					"create_file",
-					"edit_file",
-					"fetch_webpage",
-					"list_files",
-					"read_file",
-					"remove_path",
-					"move_path",
-					"search_text",
-					"web_search",
-					"run",
-					"think",
+			assistant_developer = vim.tbl_deep_extend("keep", {
+				workflows = {
+					{ id = "find_software_bug_root_cause", condition = "when user asks explicitly" },
+					{ id = "plan_refactoring", condition = "when user asks explicitly" },
+					{ id = "plan_software_change", condition = "when user asks explicitly" },
+					{ id = "implement_code_together", condition = "when user ask to collaborate or when coding" },
 				},
-				directive = {
-					{ type = "system", name = "Code Comment Basics" },
-					{ type = "system", name = "Read First Attitude", condition = "when editing code" },
-					{ type = "system", name = "YAGNI Attitude", condition = "when editing code" },
-					{ type = "system", name = "Bug Isolation", condition = "when trying to understand cause of a bug" },
-					{ type = "system", name = "AGENTS.md" },
-				},
+			}, developer_base_agent),
+			developer = vim.tbl_deep_extend("keep", {
 				workflows = {
 					{ id = "find_software_bug_root_cause" },
 					{ id = "plan_refactoring" },
 					{ id = "plan_software_change" },
 					{ id = "implement_code" },
-					{ id = "implement_code_together" },
 				},
-			},
+			}, developer_base_agent),
 			prompt_engineer = {
 				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].thinker,
 				tool_names = {
