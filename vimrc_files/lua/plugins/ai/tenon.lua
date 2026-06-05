@@ -52,9 +52,6 @@ local function setup()
 			},
 			assistant_developer = vim.tbl_deep_extend("keep", {
 				workflows = {
-					{ id = "find_software_bug_root_cause", condition = "when user asks explicitly" },
-					{ id = "plan_refactoring", condition = "when user asks explicitly" },
-					{ id = "plan_software_change", condition = "when user asks explicitly" },
 					{ id = "implement_code_together", condition = "when user ask to collaborate or when coding" },
 				},
 			}, developer_base_agent),
