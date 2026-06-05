@@ -20,6 +20,8 @@ return {
 			{ connector = "ollama_cloud", name = "glm-5" },
 			{ connector = "ollama_cloud", name = "kimi-k2.6" },
 			{ connector = "ollama_cloud", name = "gemma4:31b" },
+			{ connector = "ollama_cloud", name = "minimax-m3" },
+			{ connector = "ollama_cloud", name = "nemotron-3-ultra" },
 			{ connector = "ollama_cloud", name = "nemotron-3-super" },
 			{ connector = "ollama_cloud", name = "nemotron-3-nano:30b" },
 			{ connector = "ollama_cloud", name = "deepseek-v4-pro" },
