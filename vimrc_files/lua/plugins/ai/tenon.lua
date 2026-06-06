@@ -21,6 +21,7 @@ local function setup()
 		},
 		directive = {
 			{ type = "system", name = "AGENTS.md" },
+			{ type = "system", name = "Reduce Commentary" },
 			{ type = "system", name = "Read First Attitude", condition = "when making code changes" },
 			{ type = "system", name = "YAGNI Attitude", condition = "when making code changes" },
 			{ type = "system", name = "Code Comment Basics", condition = "when making code changes" },
