@@ -44,7 +44,9 @@ local function setup()
 					return navic.get_location()
 				end,
 			},
-			lualine_x = {},
+			lualine_x = {
+				lualine_constants.additional_status,
+			},
 			lualine_y = {
 				{
 					"lsp_status",
