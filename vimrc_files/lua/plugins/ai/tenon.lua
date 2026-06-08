@@ -47,7 +47,6 @@ local function setup()
 					"search_text",
 					"web_search",
 					"think",
-					"calculator",
 				},
 				default = true,
 			},

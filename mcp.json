@@ -1,18 +1,5 @@
 {
   "mcpServers": {
-    "calculator": {
-      "args": [
-        "mcp-server-calculator"
-      ],
-      "autoApprove": [
-        "calculate"
-      ],
-      "command": "uvx",
-      "env": {
-        "ASDF_PYTHON_VERSION": "3.12.11",
-        "ASDF_UV_VERSION": "0.10.4"
-      }
-    },
     "todoist": {
       "autoApprove": [
         "find-activity",
