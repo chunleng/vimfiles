@@ -52,7 +52,10 @@ local function setup()
 			},
 			assistant_developer = vim.tbl_deep_extend("keep", {
 				workflows = {
-					{ id = "implement_code_together", condition = "when user ask to collaborate or when coding" },
+					{
+						id = "implement_code_together",
+						condition = "any request that has shows intention of code change",
+					},
 				},
 			}, developer_base_agent),
 			developer = vim.tbl_deep_extend("keep", {
