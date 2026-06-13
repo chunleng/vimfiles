@@ -6,6 +6,7 @@ local function setup()
 	local developer = require("plugins.ai.tenon.agents.developer")
 	local prompt_engineer = require("plugins.ai.tenon.agents.prompt_engineer")
 	local code_reviewer = require("plugins.ai.tenon.agents.code_reviewer")
+	local technical_writer = require("plugins.ai.tenon.agents.technical_writer")
 
 	tenon.setup({
 		connectors = tenon_constant.connectors,
@@ -32,6 +33,7 @@ local function setup()
 			developer = developer.get_developer_agent(),
 			prompt_engineer = prompt_engineer.get_prompt_engineer_agent(),
 			code_reviewer = code_reviewer.get_code_reviewer_agent(),
+			technical_writer = technical_writer.get_technical_writer_agent(),
 		}, tenon_constant.project_agents),
 		tools = {
 			fetch_webpage = {
