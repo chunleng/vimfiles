@@ -5,6 +5,7 @@ lazy.nvim setup.
 ## Dev Guide
 
 - Neovim lua → prefer neovim API
+- Test is not needed for this repository
 
 ## Dev Workflow
 
