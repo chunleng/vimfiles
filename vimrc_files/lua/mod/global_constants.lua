@@ -5,8 +5,8 @@ return {
 		model_routing = {
 			alt_enabled = vim.env.TENON_MODEL_ALT or "alt_1",
 			alt_1 = {
-				standard = { connector = "ollama_cloud", name = "glm-5" },
-				thinker = { connector = "ollama_cloud", name = "glm-5" },
+				standard = { connector = "ollama_cloud", name = "glm-5.1" },
+				thinker = { connector = "zai", name = "glm-5.2" },
 				fast = { connector = "ollama_cloud", name = "deepseek-v4-flash" },
 			},
 			alt_2 = {
@@ -29,6 +29,7 @@ return {
 			{ connector = "ollama_cloud", name = "deepseek-v4-pro" },
 			{ connector = "ollama_cloud", name = "deepseek-v4-flash" },
 			{ connector = "ollama_cloud", name = "qwen3.5" },
+			{ connector = "zai", name = "glm-5.2" },
 			{ connector = "zai", name = "glm-5.1" },
 			{ connector = "zai", name = "glm-5-turbo" },
 			{ connector = "zai", name = "glm-5" },
