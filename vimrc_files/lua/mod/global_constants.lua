@@ -16,6 +16,7 @@ return {
 			},
 		},
 		models = {
+			{ connector = "ollama_cloud", name = "glm-5.2" },
 			{ connector = "ollama_cloud", name = "glm-5.1" },
 			{ connector = "ollama_cloud", name = "glm-5" },
 			{ connector = "ollama_cloud", name = "kimi-k2.7-code" },
