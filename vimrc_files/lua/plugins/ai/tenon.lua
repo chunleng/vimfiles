@@ -23,6 +23,7 @@ local function setup()
 					"fetch_webpage",
 					"list_files",
 					"read_file",
+					"analyze_image",
 					"search_text",
 					"web_search",
 					"think",

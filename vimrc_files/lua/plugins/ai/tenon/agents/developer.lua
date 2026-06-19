@@ -4,6 +4,7 @@ local function get_developer_base_agent()
 			"think",
 			"list_files",
 			"read_file",
+			"analyze_image",
 			"search_text",
 			"web_search",
 			"fetch_webpage",
