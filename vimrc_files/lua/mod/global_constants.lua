@@ -8,11 +8,13 @@ return {
 				standard = { connector = "ollama_cloud", name = "glm-5.1" },
 				thinker = { connector = "zai", name = "glm-5.2" },
 				fast = { connector = "ollama_cloud", name = "deepseek-v4-flash" },
+				vision = { connector = "ollama_cloud", name = "qwen3.5" },
 			},
 			alt_2 = {
 				standard = { connector = "zai", name = "glm-5-turbo" },
 				thinker = { connector = "zai", name = "glm-5" },
 				fast = { connector = "zai", name = "glm-4.5-air" },
+				vision = { connector = "ollama_cloud", name = "qwen3.5" },
 			},
 		},
 		models = {

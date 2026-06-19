@@ -39,6 +39,9 @@ local function setup()
 			fetch_webpage = {
 				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].fast,
 			},
+			analyze_image = {
+				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].vision,
+			},
 			run = {
 				whitelist = vim.list_extend(
 					{ "git diff *", "git show *", "git status *" },
