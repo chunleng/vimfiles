@@ -31,13 +31,9 @@ utils.keymap("n", "<c-s-r>", function()
 			end,
 		},
 		{
-			choice = "AGENTS.md Local",
+			choice = "AGENTS.local.md",
 			func = function()
-				vim.cmd([[
-				silent !mkdir -p .vim
-				silent !touch .vim/AGENTS.md
-				edit .vim/AGENTS.md
-			]])
+				vim.cmd.edit("AGENTS.local.md")
 			end,
 		},
 		{
