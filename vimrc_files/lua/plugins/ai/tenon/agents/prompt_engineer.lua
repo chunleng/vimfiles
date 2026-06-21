@@ -14,6 +14,7 @@ local function get_prompt_engineer_agent()
 		},
 		directive = {
 			{ type = "system", name = "Prompting Basics" },
+			{ type = "system", name = "Prompt Editing Basics", condition = "when editing prompt" },
 			{ type = "system", name = "Read First Attitude", condition = "when editing prompt" },
 			{
 				type = "system",
