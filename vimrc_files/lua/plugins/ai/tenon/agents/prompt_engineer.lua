@@ -23,6 +23,7 @@ local function get_prompt_engineer_agent()
 		},
 		workflows = {
 			{ id = "create_workflow" },
+			{ id = "create_directive" },
 			{ id = "compact_prompt" },
 		},
 	}
