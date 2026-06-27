@@ -135,11 +135,11 @@ local function configure_preferred_mappings()
 		local filename = vim.fn.expand("%:p")
 		local cwd = vim.fn.getcwd()
 		local cwd_prefix = cwd:sub(-1) == "/" and cwd or cwd .. "/"
-		local relative_filename = vim.fn.fnamemodify(filename, ':~:.')
+		local relative_filename = vim.fn.fnamemodify(filename, ":~:.")
 		if filename == relative_filename then
 			vim.fn.setreg("+", filename)
 		elseif filename:sub(1, #cwd_prefix) == cwd_prefix then
-			vim.fn.setreg("+", vim.fn.fnamemodify(filename, ":."))
+			vim.fn.setreg("+", "./" .. vim.fn.fnamemodify(filename, ":."))
 		else
 			vim.fn.setreg("+", filename)
 		end
