@@ -31,12 +31,7 @@ local function get_developer_agent()
 	local tenon_constant = require("mod.global_constants").tenon
 	return vim.tbl_deep_extend("keep", {
 		model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].thinker,
-		workflows = {
-			{ id = "find_software_bug_root_cause" },
-			{ id = "plan_refactoring" },
-			{ id = "plan_software_change" },
-			{ id = "implement_code" },
-		},
+		workflows = { "find_software_bug_root_cause", "plan_refactoring", "plan_software_change", "implement_code" },
 	}, base)
 end
 
@@ -45,12 +40,7 @@ local function get_assistant_developer_agent()
 	local tenon_constant = require("mod.global_constants").tenon
 	return vim.tbl_deep_extend("keep", {
 		model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].standard,
-		workflows = {
-			{
-				id = "implement_code_together",
-				condition = "any request that has shows intention of code change",
-			},
-		},
+		workflows = { "implement_code_together" },
 	}, base)
 end
 
