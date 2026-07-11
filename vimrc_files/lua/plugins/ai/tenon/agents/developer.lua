@@ -12,7 +12,7 @@ local function get_developer_base_agent()
 			"remove_path",
 			"create_file",
 			"edit_file",
-			"run",
+			"run_command",
 		},
 		directive = {
 			{ type = "system", name = "AGENTS.md" },

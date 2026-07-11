@@ -43,7 +43,7 @@ local function setup()
 			analyze_image = {
 				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].vision,
 			},
-			run = {
+			run_command = {
 				whitelist = vim.list_extend(
 					{ "git diff *", "git show *", "git status *" },
 					tenon_constant.tools.whitelist_commands
