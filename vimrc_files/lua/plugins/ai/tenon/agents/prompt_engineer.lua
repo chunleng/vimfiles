@@ -3,14 +3,16 @@ local function get_prompt_engineer_agent()
 	return {
 		model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].thinker,
 		tool_names = {
-			"fetch_webpage",
-			"web_search",
 			"think",
-			"create_file",
-			"read_file",
-			"edit_file",
-			"search_text",
 			"list_files",
+			"read_file",
+			"search_text",
+			"web_search",
+			"fetch_webpage",
+			"move_path",
+			"remove_path",
+			"create_file",
+			"edit_file",
 		},
 		directive = {
 			{ type = "system", name = "Prompting Basics" },

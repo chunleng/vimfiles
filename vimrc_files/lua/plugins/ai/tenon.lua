@@ -20,13 +20,13 @@ local function setup()
 			generic = {
 				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].standard,
 				tool_names = {
-					"fetch_webpage",
+					"think",
 					"list_files",
 					"read_file",
 					"analyze_image",
 					"search_text",
 					"web_search",
-					"think",
+					"fetch_webpage",
 				},
 				default = true,
 			},
