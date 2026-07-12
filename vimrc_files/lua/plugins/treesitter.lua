@@ -1,7 +1,6 @@
 local function setup_stop_conceal()
 	for _, lang in ipairs({
 		"json",
-		"jsonc",
 		"markdown",
 		"markdown_inline",
 	}) do
@@ -18,60 +17,56 @@ local function setup_stop_conceal()
 end
 
 local function setup()
-	require("nvim-treesitter.configs").setup({
-		ensure_installed = {
-			"bash",
-			"cmake",
-			"comment",
-			"css",
-			"csv",
-			"diff",
-			"dockerfile",
-			"editorconfig",
-			"git_config",
-			"git_rebase",
-			"gitattributes",
-			"gitcommit",
-			"gitignore",
-			"glimmer_javascript",
-			"glimmer_typescript",
-			"html",
-			"java",
-			"javascript",
-			"jsdoc",
-			"json",
-			"jsonc",
-			"lua",
-			"luadoc",
-			"make",
-			"markdown",
-			"markdown_inline",
-			"proto",
-			"python",
-			"regex",
-			"ruby",
-			"rust",
-			"sql",
-			"ssh_config",
-			"terraform",
-			"toml",
-			"typescript",
-			"vim",
-			"xml",
-			"yaml",
-		},
-		highlight = { enable = true },
-		playground = { enable = true },
-		endwise = { enable = true },
-		incremental_selection = {
-			enable = true,
-			keymaps = {
-				node_incremental = "<enter>",
-				scope_incremental = "+",
-				node_decremental = "-",
-			},
-		},
+	require("nvim-treesitter").install({
+		"bash",
+		"cmake",
+		"comment",
+		"css",
+		"csv",
+		"diff",
+		"dockerfile",
+		"editorconfig",
+		"git_config",
+		"git_rebase",
+		"gitattributes",
+		"gitcommit",
+		"gitignore",
+		"glimmer_javascript",
+		"glimmer_typescript",
+		"html",
+		"java",
+		"javascript",
+		"jsdoc",
+		"json",
+		"lua",
+		"luadoc",
+		"make",
+		"markdown",
+		"markdown_inline",
+		"proto",
+		"python",
+		"regex",
+		"ruby",
+		"rust",
+		"sql",
+		"ssh_config",
+		"terraform",
+		"toml",
+		"typescript",
+		"vim",
+		"xml",
+		"yaml",
 	})
+
+	vim.api.nvim_create_autocmd("FileType", {
+		callback = function()
+			pcall(vim.treesitter.start)
+		end,
+	})
+
+	vim.keymap.set("x", "<enter>", "an", { remap = true, desc = "Treesitter expand node" })
+	vim.keymap.set("x", "+", "an", { remap = true, desc = "Treesitter expand node" })
+	vim.keymap.set("x", "-", "in", { remap = true, desc = "Treesitter inner node" })
 
 	setup_stop_conceal()
 end
@@ -83,7 +78,6 @@ return {
 			{ import = "plugins.treesitter.treesitter" },
 			{ import = "plugins.treesitter.autopairs" },
 			{ import = "plugins.treesitter.tree_sitter_rstml" },
-			{ import = "plugins.treesitter.playground" },
 			{ import = "plugins.treesitter.ts_context_commentstring" },
 			{ import = "plugins.treesitter.nvim_treesitter_context" },
 		},
