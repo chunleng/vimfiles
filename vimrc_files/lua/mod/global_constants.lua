@@ -24,9 +24,6 @@ return {
 			{ connector = "ollama_cloud", name = "kimi-k2.6" },
 			{ connector = "ollama_cloud", name = "gemma4:31b" },
 			{ connector = "ollama_cloud", name = "minimax-m3" },
-			{ connector = "ollama_cloud", name = "nemotron-3-ultra" },
-			{ connector = "ollama_cloud", name = "nemotron-3-super" },
-			{ connector = "ollama_cloud", name = "nemotron-3-nano:30b" },
 			{ connector = "ollama_cloud", name = "deepseek-v4-pro" },
 			{ connector = "ollama_cloud", name = "deepseek-v4-flash" },
 			{ connector = "ollama_cloud", name = "qwen3.5" },
@@ -34,8 +31,6 @@ return {
 			{ connector = "zai", name = "glm-5.1" },
 			{ connector = "zai", name = "glm-5-turbo" },
 			{ connector = "zai", name = "glm-5" },
-			{ connector = "zai", name = "glm-4.7" },
-			{ connector = "zai", name = "glm-4.5-air" },
 		},
 		tools = {
 			whitelist_commands = {},
