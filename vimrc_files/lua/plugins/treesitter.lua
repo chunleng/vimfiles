@@ -68,6 +68,11 @@ local function setup()
 	vim.keymap.set("x", "+", "an", { remap = true, desc = "Treesitter expand node" })
 	vim.keymap.set("x", "-", "in", { remap = true, desc = "Treesitter inner node" })
 
+	local context_file = vim.api.nvim_get_runtime_file("queries/rust/context.scm", false)[1]
+	if context_file then
+		vim.treesitter.query.set("rust_with_rstml", "context", table.concat(vim.fn.readfile(context_file), "\n"))
+	end
+
 	setup_stop_conceal()
 end
 
