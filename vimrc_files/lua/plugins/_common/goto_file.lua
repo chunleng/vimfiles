@@ -1,6 +1,25 @@
 local utils = require("common-utils")
 local tree_api = require("nvim-tree.api")
 
+-- Open a file path, respecting winfixbuf: if the current window has
+-- winfixbuf set, find the first window without it; if none exists, split.
+local function open_path(path)
+	if not vim.wo.winfixbuf then
+		vim.cmd(":e " .. path)
+		return
+	end
+
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		if not vim.wo[win].winfixbuf then
+			vim.api.nvim_set_current_win(win)
+			vim.cmd(":e " .. path)
+			return
+		end
+	end
+
+	vim.cmd("vsplit " .. path)
+end
+
 -- Custom gf that opens files via :e, directories in nvim-tree,
 -- and prompts to create non-existent paths.
 local function goto_file()
@@ -20,14 +39,14 @@ local function goto_file()
 	end
 
 	if vim.fn.filereadable(path) == 1 then
-		vim.cmd(":e " .. path)
+		open_path(path)
 	elseif vim.fn.isdirectory(path) == 1 then
 		tree_api.tree.open()
 		tree_api.tree.find_file(path)
 	else
 		local response = vim.fn.confirm('Create "' .. path .. '"?')
 		if response == 1 then
-			vim.cmd(":e " .. path)
+			open_path(path)
 		end
 	end
 end
