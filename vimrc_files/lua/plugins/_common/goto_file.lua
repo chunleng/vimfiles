@@ -1,12 +1,22 @@
 local utils = require("common-utils")
 local tree_api = require("nvim-tree.api")
 
--- Customize Goto File feature
-utils.keymap("n", "gf", function()
-	local path = vim.fn.expand("<cfile>")
+-- Custom gf that opens files via :e, directories in nvim-tree,
+-- and prompts to create non-existent paths.
+local function goto_file()
+	local mode = vim.fn.mode()
+	local path
+	if mode:match("^[vV]") or mode == "\22" then
+		local region = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."))
+		path = table.concat(region, "\n")
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "x", false)
+	else
+		path = vim.fn.expand("<cfile>")
+	end
 
 	if not path:match("^/") then
-		path = vim.fn.expand("%:h") .. "/" .. path
+		local base = vim.api.nvim_buf_get_name(0) ~= "" and vim.fn.expand("%:h") or vim.fn.getcwd()
+		path = base .. "/" .. path
 	end
 
 	if vim.fn.filereadable(path) == 1 then
@@ -20,7 +30,8 @@ utils.keymap("n", "gf", function()
 			vim.cmd(":e " .. path)
 		end
 	end
-end)
--- utils.keymap("x", "gf", "<cmd>e %:h/<cword><cr>")
+end
+
+utils.keymap({ "n", "x" }, "gf", goto_file)
 
 return {}
