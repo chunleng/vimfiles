@@ -117,6 +117,48 @@ local function configure_preferred_mappings()
 		vim.fn.eval('feedkeys("]")')
 	end)
 
+	-- Surround previous WORD with backticks (insert mode equivalent of ysiW`)
+	M.keymap("i", "<c-#>", function()
+		local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+		local line = vim.api.nvim_buf_get_lines(0, row - 1, row, false)[1]
+		if not line or col == 0 then
+			return
+		end
+
+		-- col is 0-indexed; line:sub(col, col) gives the char before cursor (1-indexed)
+		local c = col
+
+		-- Skip whitespace backwards to reach the previous word
+		while c > 0 and line:sub(c, c):match("%s") do
+			c = c - 1
+		end
+		if c == 0 then
+			return
+		end
+
+		local word_end = c
+
+		-- Find word start
+		local word_start = c
+		while word_start > 0 and not line:sub(word_start, word_start):match("%s") do
+			word_start = word_start - 1
+		end
+		word_start = word_start + 1
+
+		-- Extend forward to cover the full WORD (matches iW behavior)
+		local len = #line
+		while word_end < len and not line:sub(word_end + 1, word_end + 1):match("%s") do
+			word_end = word_end + 1
+		end
+
+		-- Insert closing backtick first (higher position) so opening backtick doesn't shift it
+		vim.api.nvim_buf_set_text(0, row - 1, word_end, row - 1, word_end, { "`" })
+		vim.api.nvim_buf_set_text(0, row - 1, word_start - 1, row - 1, word_start - 1, { "`" })
+
+		-- Cursor ends up after the closing backtick
+		vim.api.nvim_win_set_cursor(0, { row, word_end + 2 })
+	end)
+
 	-- Yank
 	M.keymap("i", "<c-y>", '<esc>0"*y$gi')
 	-- TODO resolve for mode n,x There's linebreak behind, which shouldn't be there
