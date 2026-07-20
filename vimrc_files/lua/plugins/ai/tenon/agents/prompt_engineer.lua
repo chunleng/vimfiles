@@ -3,7 +3,6 @@ local function get_prompt_engineer_agent()
 	return {
 		model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].thinker,
 		tool_names = {
-			"think",
 			"list_files",
 			"read_file",
 			"search_text",

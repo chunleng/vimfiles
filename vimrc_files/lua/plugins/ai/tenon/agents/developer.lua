@@ -1,7 +1,6 @@
 local function get_developer_base_agent()
 	return {
 		tool_names = {
-			"think",
 			"list_files",
 			"read_file",
 			"analyze_image",

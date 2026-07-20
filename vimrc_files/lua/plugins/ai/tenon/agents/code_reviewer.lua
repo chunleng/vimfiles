@@ -6,7 +6,6 @@ local function get_code_reviewer_agent()
 			"list_files",
 			"read_file",
 			"search_text",
-			"think",
 		},
 		directive = {
 			{

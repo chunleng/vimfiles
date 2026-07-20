@@ -3,7 +3,6 @@ local function get_technical_writer_agent()
 	return {
 		model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].standard,
 		tool_names = {
-			"think",
 			"list_files",
 			"read_file",
 			"analyze_image",
