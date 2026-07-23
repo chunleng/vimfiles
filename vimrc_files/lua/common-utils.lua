@@ -136,6 +136,7 @@ local function configure_preferred_mappings()
 			return
 		end
 
+		-- The cursor marks the end of the text to surround.
 		local word_end = c
 
 		-- Find word start
@@ -144,12 +145,6 @@ local function configure_preferred_mappings()
 			word_start = word_start - 1
 		end
 		word_start = word_start + 1
-
-		-- Extend forward to cover the full WORD (matches iW behavior)
-		local len = #line
-		while word_end < len and not line:sub(word_end + 1, word_end + 1):match("%s") do
-			word_end = word_end + 1
-		end
 
 		-- Insert closing backtick first (higher position) so opening backtick doesn't shift it
 		vim.api.nvim_buf_set_text(0, row - 1, word_end, row - 1, word_end, { "`" })
