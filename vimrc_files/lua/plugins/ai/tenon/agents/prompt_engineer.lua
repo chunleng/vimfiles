@@ -23,7 +23,7 @@ local function get_prompt_engineer_agent()
 				condition = "when giving feedback/reviewing",
 			},
 		},
-		workflows = { "create_workflow", "create_directive", "compact_prompt" },
+		workflows = { "edit_workflow", "edit_directive", "compact_prompt" },
 	}
 end
 

@@ -18,9 +18,9 @@ local function get_code_reviewer_agent()
 				condition = "when giving feedback/reviewing",
 			},
 			{ type = "system", name = "Read First Attitude", condition = "when reviewing code in the file" },
-			{ type = "system", name = "Code Review Process", condition = "when reviewing code" },
 			{ type = "system", name = "AGENTS.md" },
 		},
+		workflows = { "review_code" },
 	}
 end
 
