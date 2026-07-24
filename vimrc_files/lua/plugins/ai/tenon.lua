@@ -18,7 +18,7 @@ local function setup()
 		-- * glm-4.5-air
 		agents = vim.tbl_extend("force", {
 			generic = {
-				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].standard,
+				model = tenon_constant.model_type.standard,
 				tool_names = {
 					"think",
 					"list_files",
@@ -38,10 +38,10 @@ local function setup()
 		}, tenon_constant.project_agents),
 		tools = {
 			fetch_webpage = {
-				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].fast,
+				model = tenon_constant.model_type.fast,
 			},
 			analyze_image = {
-				model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].vision,
+				model = tenon_constant.model_type.vision,
 			},
 			run_command = {
 				whitelist = vim.list_extend(
@@ -49,8 +49,8 @@ local function setup()
 					tenon_constant.tools.whitelist_commands
 				),
 				check_models = {
-					tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].fast,
-					tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].standard,
+					tenon_constant.model_type.fast,
+					tenon_constant.model_type.standard,
 				},
 			},
 		},
@@ -59,7 +59,7 @@ local function setup()
 		},
 		models = tenon_constant.models,
 		title = {
-			model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].fast,
+			model = tenon_constant.model_type.fast,
 		},
 	})
 	utils.keymap({ "n", "i" }, "<c-s-a>", function()

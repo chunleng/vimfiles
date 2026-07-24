@@ -1,7 +1,7 @@
 local function get_code_reviewer_agent()
 	local tenon_constant = require("mod.global_constants").tenon
 	return {
-		model = tenon_constant.model_routing[tenon_constant.model_routing.alt_enabled].thinker,
+		model = tenon_constant.model_type.thinker,
 		tool_names = {
 			"list_files",
 			"read_file",
