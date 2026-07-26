@@ -18,7 +18,7 @@ local function get_technical_writer_agent()
 			{ type = "system", name = "Situation Sensitivity" },
 			{ type = "system", name = "Read First Attitude", condition = "when editing documentation" },
 		},
-		workflows = { "create_pr_description", "edit_document" },
+		workflows = { "create_pr_description", "create_software_specification" },
 	}
 end
 
