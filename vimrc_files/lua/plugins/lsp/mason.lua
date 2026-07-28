@@ -34,8 +34,8 @@ local function setup_mason_sync_command()
 			{ name = "ltex-ls-plus", version = "18.6.1" },
 			{ name = "lua-language-server", version = "3.15.0" },
 			{ name = "protols", version = "0.12.7" },
-			{ name = "pyright", version = "1.1.403" },
-			{ name = "rust-analyzer", version = "2026-02-23" },
+			{ name = "pyright", version = "1.1.411" },
+			{ name = "rust-analyzer", version = "2026-07-20" },
 			{ name = "tailwindcss-language-server", version = "0.14.25" },
 			{ name = "taplo", version = "0.10.0" },
 			{ name = "terraform-ls", version = "v0.38.4" },
@@ -55,7 +55,7 @@ end
 local function setup()
 	require("mason").setup({
 		registries = {
-			"github:mason-org/mason-registry@2026-03-02-linear-cornet",
+			"github:mason-org/mason-registry@2026-07-28-superb-quiet",
 		},
 	})
 
