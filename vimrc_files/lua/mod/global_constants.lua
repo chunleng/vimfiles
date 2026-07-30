@@ -12,47 +12,47 @@ return {
 			["glm-5.2"] = {
 				connector = "ollama_cloud",
 				name = "glm-5.2",
-				default_parameters = { think = "medium", temperature = 0 },
+				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
 			},
 			["glm-5.1"] = {
 				connector = "ollama_cloud",
 				name = "glm-5.1",
-				default_parameters = { think = "medium", temperature = 0 },
+				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
 			},
 			["kimi-k2.7-code"] = {
 				connector = "ollama_cloud",
 				name = "kimi-k2.7-code",
-				default_parameters = { think = "high", temperature = 0, top_p = 0.01 },
+				default_parameters = { think = "high", temperature = 0, top_p = 1 },
 			},
 			["kimi-k2.6"] = {
 				connector = "ollama_cloud",
 				name = "kimi-k2.6",
-				default_parameters = { think = "medium", temperature = 0, top_p = 0.01 },
+				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
 			},
 			["gemma4:31b"] = {
 				connector = "ollama_cloud",
 				name = "gemma4:31b",
-				default_parameters = { think = "high", temperature = 0, top_p = 0.01 },
+				default_parameters = { think = "high", temperature = 0, top_p = 1 },
 			},
 			["minimax-m3"] = {
 				connector = "ollama_cloud",
 				name = "minimax-m3",
-				default_parameters = { think = "high", temperature = 0, top_p = 0.01 },
+				default_parameters = { think = "high", temperature = 0, top_p = 1 },
 			},
 			["deepseek-v4-pro"] = {
 				connector = "ollama_cloud",
 				name = "deepseek-v4-pro",
-				default_parameters = { think = "high", temperature = 0, top_p = 0.01 },
+				default_parameters = { think = "high", temperature = 0, top_p = 1 },
 			},
 			["deepseek-v4-flash"] = {
 				connector = "ollama_cloud",
 				name = "deepseek-v4-flash",
-				default_parameters = { think = false, temperature = 0 },
+				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
 			},
 			["qwen3.5"] = {
 				connector = "ollama_cloud",
 				name = "qwen3.5",
-				default_parameters = { think = "max", temperature = 0 },
+				default_parameters = { think = "max", temperature = 0, top_p = 1 },
 			},
 			["glm-5.2-zai"] = {
 				connector = "zai",
