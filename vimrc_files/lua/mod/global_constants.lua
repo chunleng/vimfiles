@@ -1,6 +1,19 @@
 return {
 	tenon = {
-		connectors = nil, -- Use default
+		connectors = {
+			ollama_cloud = {
+				type = "ollama",
+				base_url = "https://ollama.com",
+				bearer = { env = "OLLAMA_API_KEY" },
+			},
+			zai = {
+				type = "anthropic",
+				base_url = "https://api.z.ai/api/anthropic",
+				api_key = {
+					env = "ZAI_API_KEY",
+				},
+			},
+		},
 		project_agents = vim.empty_dict(),
 		model_type = {
 			standard = "glm-5.2",
