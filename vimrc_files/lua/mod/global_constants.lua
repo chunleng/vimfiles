@@ -42,14 +42,9 @@ return {
 				name = "kimi-k2.6",
 				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
 			},
-			["gemma4:31b"] = {
+			["gemma4"] = {
 				connector = "ollama_cloud",
-				name = "gemma4:31b",
-				default_parameters = { think = "high", temperature = 0, top_p = 1 },
-			},
-			["minimax-m3"] = {
-				connector = "ollama_cloud",
-				name = "minimax-m3",
+				name = "gemma4",
 				default_parameters = { think = "high", temperature = 0, top_p = 1 },
 			},
 			["deepseek-v4-pro"] = {
@@ -59,7 +54,7 @@ return {
 			},
 			["deepseek-v4-flash"] = {
 				connector = "ollama_cloud",
-				name = "deepseek-v4-flash",
+				name = "deepseek-v4-flash:0731",
 				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
 			},
 			["qwen3.5"] = {
