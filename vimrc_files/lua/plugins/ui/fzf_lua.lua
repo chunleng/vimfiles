@@ -33,7 +33,7 @@ local function setup()
 			},
 			fzf = { ["enter"] = "select+accept" },
 		},
-		files = { git_icons = false, fd_opts = "--color=never --type f --type l --exclude .git --follow" },
+		files = { git_icons = false, fd_opts = "--type f --type l --exclude .git --follow" },
 		actions = { files = { ["default"] = actions.file_edit } },
 		dap = {
 			variables = {
@@ -50,11 +50,17 @@ local function setup()
 		grep = { actions = { ["default"] = actions.file_edit_or_qf } },
 		lsp = { actions = { ["default"] = actions.file_edit_or_qf } },
 		diagnostics = { severity_limit = "INFO" },
-		hls = { normal = "FzfLuaFloat", border = "FzfLuaFloatBorder" },
 		fzf_colors = {
+			["fg"] = { "fg", "Normal" },
+			["fg+"] = { "bg", "Normal" },
+			["hl"] = { "fg", "FzfLuaFzfInfo" },
+			["hl+"] = { "fg", "FzfLuaFzfInfo" },
 			["bg"] = { "bg", "FzfLuaFloat" },
 			["bg+"] = { "bg", "FzfLuaCursor" },
 			["gutter"] = { "bg", "FzfLuaFloat" },
+			["prompt"] = { "fg", "FzfLuaFzfPrompt" },
+			["info"] = { "fg", "FzfLuaFzfInfo" },
+			["marker"] = { "fg", "FzfLuaFzfMarker" },
 		},
 		fzf_args = "--select-1", -- auto-select when there is only one result
 		file_icon_padding = " ",
@@ -85,8 +91,14 @@ local function setup()
 	theme.set_hl("FzfLuaPreviewBorder", { link = "FloatBorder" })
 	theme.set_hl("FzfLuaPreviewNormal", { link = "NormalFloat" })
 	theme.set_hl("FzfLuaPreviewTitle", { link = "NormalFloat" })
-	theme.set_hl("FzfLuaCursorLine", { bg = 4, fg = theme.blender.fg_darker_1 })
-	theme.set_hl("FzfLuaCursorLineNr", { bg = 4, fg = theme.blender.fg_darker_1 })
+	theme.set_hl("FzfLuaFzfPrompt", { fg = 4 })
+	theme.set_hl("FzfLuaFzfInfo", { fg = 4 })
+	theme.set_hl("FzfLuaFzfMarker", { fg = 4 })
+
+	theme.set_hl("FzfLuaNormal", { link = "NormalFloat" })
+	theme.set_hl("FzfLuaTitle", { bold = true, bg = 236 })
+	theme.set_hl("FzfLuaBorder", { link = "FloatBorder" })
+
 	fzf.register_ui_select()
 
 	setup_quick_replace()
