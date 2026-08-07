@@ -7,6 +7,7 @@ local function setup()
 	local prompt_engineer = require("plugins.ai.tenon.agents.prompt_engineer")
 	local code_reviewer = require("plugins.ai.tenon.agents.code_reviewer")
 	local technical_writer = require("plugins.ai.tenon.agents.technical_writer")
+	local researcher = require("plugins.ai.tenon.agents.researcher")
 
 	tenon.setup({
 		connectors = tenon_constant.connectors,
@@ -17,24 +18,12 @@ local function setup()
 		-- * glm-4.7
 		-- * glm-4.5-air
 		agents = vim.tbl_extend("force", {
-			generic = {
-				model = tenon_constant.model_type.standard,
-				tool_names = {
-					"think",
-					"list_files",
-					"read_file",
-					"analyze_image",
-					"search_text",
-					"web_search",
-					"fetch_webpage",
-				},
-				default = true,
-			},
 			assistant_developer = developer.get_assistant_developer_agent(),
 			developer = developer.get_developer_agent(),
 			prompt_engineer = prompt_engineer.get_prompt_engineer_agent(),
 			code_reviewer = code_reviewer.get_code_reviewer_agent(),
 			technical_writer = technical_writer.get_technical_writer_agent(),
+			researcher = vim.tbl_extend("force", researcher.get_researcher_agent(), { default = true }),
 		}, tenon_constant.project_agents),
 		tools = {
 			fetch_webpage = {
