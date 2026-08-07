@@ -89,6 +89,19 @@ table.insert(
 table.insert(
 	M,
 	s(
+		{ trig = "N", dscr = "Null" },
+		fmta(
+			[[
+	null
+]],
+			{}
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
 		{ trig = "variable", dscr = "Terraform variable" },
 		fmta(
 			[[
