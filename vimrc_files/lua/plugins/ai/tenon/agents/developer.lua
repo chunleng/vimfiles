@@ -9,7 +9,6 @@ local function get_developer_base_agent()
 			"fetch_webpage",
 			"move_path",
 			"remove_path",
-			"create_file",
 			"edit_file",
 			"run_command",
 		},
