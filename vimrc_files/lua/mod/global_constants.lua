@@ -16,7 +16,7 @@ return {
 		},
 		project_agents = vim.empty_dict(),
 		model_type = {
-			standard = "glm-5.2",
+			standard = "deepseek-v4-flash-max",
 			thinker = "glm-5.2-zai",
 			fast = "deepseek-v4-flash",
 			vision = "qwen3.5",
@@ -56,6 +56,11 @@ return {
 				connector = "ollama_cloud",
 				name = "deepseek-v4-flash:0731",
 				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
+			},
+			["deepseek-v4-flash-max"] = {
+				connector = "ollama_cloud",
+				name = "deepseek-v4-flash:0731",
+				default_parameters = { think = "max", temperature = 0, top_p = 1 },
 			},
 			["qwen3.5"] = {
 				connector = "ollama_cloud",
