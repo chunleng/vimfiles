@@ -146,6 +146,16 @@ local function configure_preferred_mappings()
 		end
 		word_start = word_start + 1
 
+		local word = line:sub(word_start, word_end)
+
+		-- Toggle: if the matched word already has backticks, remove them instead of adding
+		if word:match("`") then
+			local stripped = word:gsub("`", "")
+			vim.api.nvim_buf_set_text(0, row - 1, word_start - 1, row - 1, word_end, { stripped })
+			vim.api.nvim_win_set_cursor(0, { row, word_start - 1 + #stripped })
+			return
+		end
+
 		-- Insert closing backtick first (higher position) so opening backtick doesn't shift it
 		vim.api.nvim_buf_set_text(0, row - 1, word_end, row - 1, word_end, { "`" })
 		vim.api.nvim_buf_set_text(0, row - 1, word_start - 1, row - 1, word_start - 1, { "`" })
