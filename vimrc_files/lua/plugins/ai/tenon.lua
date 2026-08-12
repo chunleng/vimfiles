@@ -42,12 +42,7 @@ local function setup()
 					tenon_constant.model_type.standard,
 				},
 			},
-			web_search = {
-				provider = "brave",
-				api_key = { env = "BRAVE_API_KEY" },
-				-- provider = "langsearch",
-				-- api_key = { env = "LANGSEARCH_API_KEY" },
-			},
+			web_search = tenon_constant.tools.web_search_provider,
 		},
 		history = {
 			directory = vim.fn.getcwd() .. "/.vim/history",

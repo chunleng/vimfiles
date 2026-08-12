@@ -79,6 +79,12 @@ return {
 		},
 		tools = {
 			whitelist_commands = {},
+			web_search_provider = {
+				provider = "brave",
+				api_key = { env = "BRAVE_API_KEY" },
+				-- provider = "langsearch",
+				-- api_key = { env = "LANGSEARCH_API_KEY" },
+			},
 		},
 	},
 	lualine = {
