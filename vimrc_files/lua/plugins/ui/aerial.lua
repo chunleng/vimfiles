@@ -25,7 +25,6 @@ local function setup()
 		"Field",
 	}
 	local data_kind = { "Module", "Array" }
-	local opened = nil
 
 	require("aerial").setup({
 		attach_mode = "global",
@@ -67,12 +66,6 @@ local function setup()
 				vim.cmd([[wincmd p]])
 			end,
 		},
-		on_attach = function(bufnr)
-			if os.getenv("NOAERIAL") ~= "1" and opened ~= 1 then
-				require("aerial").open({ focus = false })
-				opened = 1
-			end
-		end,
 	})
 
 	local utils = require("common-utils")
