@@ -32,15 +32,15 @@ return {
 				name = "glm-5.1",
 				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
 			},
+			["kimi-k3"] = {
+				connector = "ollama_cloud",
+				name = "kimi-k3",
+				default_parameters = { think = "high", temperature = 0, top_p = 1 },
+			},
 			["kimi-k2.7-code"] = {
 				connector = "ollama_cloud",
 				name = "kimi-k2.7-code",
 				default_parameters = { think = "high", temperature = 0, top_p = 1 },
-			},
-			["kimi-k2.6"] = {
-				connector = "ollama_cloud",
-				name = "kimi-k2.6",
-				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
 			},
 			["gemma4"] = {
 				connector = "ollama_cloud",
