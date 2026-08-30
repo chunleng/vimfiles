@@ -18,8 +18,8 @@ return {
 		model_type = {
 			standard = "glm-5.3-flash",
 			thinker = "glm-5.3-flash-high",
-			fast = "deepseek-v4-flash",
-			vision = "qwen3.5",
+			fast = "glm-5.3-flash",
+			vision = "glm-5.3-flash",
 		},
 		models = {
 			["glm-5.3-flash-high"] = {
@@ -32,15 +32,15 @@ return {
 				name = "glm-5.3-flash",
 				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
 			},
+			["glm-5.3"] = {
+				connector = "ollama_cloud",
+				name = "glm-5.3",
+				default_parameters = { think = "high", temperature = 0, top_p = 1 },
+			},
 			["glm-5.2"] = {
 				connector = "ollama_cloud",
 				name = "glm-5.2",
-				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
-			},
-			["glm-5.1"] = {
-				connector = "ollama_cloud",
-				name = "glm-5.1",
-				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
+				default_parameters = { think = "high", temperature = 0, top_p = 1 },
 			},
 			["kimi-k3"] = {
 				connector = "ollama_cloud",
