@@ -17,7 +17,7 @@ local function get_technical_writer_agent()
 			{ type = "system", name = "AGENTS.md" },
 			{ type = "system", name = "Read First Attitude", condition = "when editing documentation" },
 		},
-		workflows = { "create_pr_description", "create_software_specification" },
+		choreos = { "create_pr_description", "create_software_specification", "assess_project_doc_needs" },
 	}
 end
 

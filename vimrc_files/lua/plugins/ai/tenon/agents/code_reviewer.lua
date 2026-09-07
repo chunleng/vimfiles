@@ -20,7 +20,7 @@ local function get_code_reviewer_agent()
 			{ type = "system", name = "Read First Attitude", condition = "when reviewing code in the file" },
 			{ type = "system", name = "AGENTS.md" },
 		},
-		workflows = { "review_code" },
+		choreos = { "review_code" },
 	}
 end
 

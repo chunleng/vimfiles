@@ -30,7 +30,7 @@ local function get_developer_agent()
 	local tenon_constant = require("mod.global_constants").tenon
 	return vim.tbl_deep_extend("keep", {
 		model = tenon_constant.model_type.thinker,
-		workflows = { "find_software_bug_root_cause", "analyze_software_change", "implement_code" },
+		choreos = { "find_software_bug_root_cause", "analyze_software_change", "implement_code" },
 	}, base)
 end
 
@@ -39,7 +39,7 @@ local function get_assistant_developer_agent()
 	local tenon_constant = require("mod.global_constants").tenon
 	return vim.tbl_deep_extend("keep", {
 		model = tenon_constant.model_type.standard,
-		workflows = { "implement_code_together" },
+		choreos = { "implement_code_together" },
 	}, base)
 end
 
