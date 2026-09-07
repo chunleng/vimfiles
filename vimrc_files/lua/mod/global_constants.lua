@@ -16,8 +16,8 @@ return {
 		},
 		project_agents = vim.empty_dict(),
 		model_type = {
-			standard = "glm-5.3-flash",
-			thinker = "glm-5.3-flash-high",
+			standard = "glm-5.3-flash-high",
+			thinker = "glm-5.3",
 			fast = "glm-5.3-flash",
 			vision = "glm-5.3-flash",
 		},
