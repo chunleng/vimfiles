@@ -14,7 +14,7 @@ local function get_technical_writer_agent()
 			"edit_file",
 		},
 		directive = {
-			{ type = "system", name = "Situation Sensitivity" },
+			{ type = "system", name = "AGENTS.md" },
 			{ type = "system", name = "Read First Attitude", condition = "when editing documentation" },
 		},
 		workflows = { "create_pr_description", "create_software_specification" },
