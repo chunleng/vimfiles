@@ -78,7 +78,23 @@ table.insert(
 		{ trig = "----lsp/json/init", dscr = "Template for json lsp" },
 		fmta(
 			[[
-	vim.lsp.config("jsonls", require("mod.lsp_config").jsonls)
+	vim.lsp.config(
+		"jsonls",
+		vim.tbl_extend("keep", {
+			settings = {
+				json = {
+					schemas = {
+						{
+							-- name = "Optional name",
+							-- description = "Optional description",
+							fileMatch = { "**/*.json" },
+							url = "https://www.schemastore.org/..."
+						}
+					}
+				}
+			},
+		}, require("mod.lsp_config").jsonls)
+	)
 	vim.lsp.enable("jsonls")
 ]],
 			{}
