@@ -67,6 +67,11 @@ return {
 				name = "deepseek-v4-flash:0731",
 				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
 			},
+			["deepseek-v4.1-flash"] = {
+				connector = "ollama_cloud",
+				name = "deepseek-v4.1-flash",
+				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
+			},
 			["qwen3.5"] = {
 				connector = "ollama_cloud",
 				name = "qwen3.5",
