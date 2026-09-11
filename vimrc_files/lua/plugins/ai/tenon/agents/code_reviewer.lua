@@ -10,6 +10,7 @@ local function get_code_reviewer_agent()
 		directive = {
 			{
 				type = "text",
+				id = "Code Quality",
 				value = 'Ensure code quality. focus: "Will unfamiliar reader understand in 6 months?". Technical tone. No hedging. Actionable feedback. No vague suggestions',
 			},
 			{
