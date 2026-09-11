@@ -242,6 +242,12 @@ return {
 			on_dir(vim.fn.getcwd())
 		end,
 	},
+	ty = {
+		cmd = { "ty", "server" },
+		filetypes = { "python" },
+		on_attach = common_on_attach,
+		root_markers = { "pyproject.toml", ".git" },
+	},
 	ts_ls = {
 		cmd = { "typescript-language-server", "--stdio" },
 		filetypes = {

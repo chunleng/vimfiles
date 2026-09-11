@@ -39,6 +39,7 @@ local function setup_mason_sync_command()
 			{ name = "tailwindcss-language-server", version = "0.14.25" },
 			{ name = "taplo", version = "0.10.0" },
 			{ name = "terraform-ls", version = "v0.38.4" },
+			{ name = "ty", version = "0.0.63" },
 			{ name = "typescript-language-server", version = "4.3.4" },
 			{ name = "yaml-language-server", version = "1.18.0" },
 			{ name = "zk", version = "v0.15.1" },

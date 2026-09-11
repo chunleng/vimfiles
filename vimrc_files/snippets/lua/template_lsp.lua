@@ -144,6 +144,35 @@ table.insert(
 		{ trig = "----lsp/python/init", dscr = "Template for python lsp" },
 		fmta(
 			[[
+	vim.lsp.config("ty", require("mod.lsp_config").ty)
+	vim.lsp.config("taplo", require("mod.lsp_config").taplo)
+	vim.lsp.enable({"ty", "taplo"})
+
+	require("null-ls").setup({
+		root_dir = function() vim.fn.getcwd() end,
+		sources = {
+			-- require("null-ls").builtins.formatting.yapf,
+			-- require("null-ls").builtins.formatting.black,
+			-- require("null-ls").builtins.formatting.isort,
+			-- require("null-ls").builtins.diagnostics.pylint,
+			-- require("null-ls").builtins.diagnostics.mypy,
+			-- require("none-ls.formatting.ruff"),
+			-- require("none-ls.formatting.ruff_format"),
+			-- require("none-ls.diagnostics.ruff"),
+		}
+	})
+]],
+			{}
+		)
+	)
+)
+
+table.insert(
+	M,
+	s(
+		{ trig = "----lsp/python/pyright/init", dscr = "Template for python lsp (pyright)" },
+		fmta(
+			[[
 	vim.lsp.config("pyright", require("mod.lsp_config").pyright)
 	vim.lsp.config("taplo", require("mod.lsp_config").taplo)
 	vim.lsp.enable({"pyright", "taplo"})
