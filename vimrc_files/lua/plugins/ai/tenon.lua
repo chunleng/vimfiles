@@ -11,12 +11,6 @@ local function setup()
 
 	tenon.setup({
 		connectors = tenon_constant.connectors,
-		-- Z.ai models
-		-- * glm-5.1
-		-- * glm-5-turbo
-		-- * glm-5
-		-- * glm-4.7
-		-- * glm-4.5-air
 		agents = vim.tbl_extend("force", {
 			assistant_developer = developer.get_assistant_developer_agent(),
 			developer = developer.get_developer_agent(),
