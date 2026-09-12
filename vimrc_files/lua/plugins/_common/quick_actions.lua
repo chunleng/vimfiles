@@ -24,7 +24,7 @@ local actions = {
 			local tenon = require("tenon")
 			tenon.open()
 			vim.schedule(function()
-				tenon.keymap.new_chat()
+				tenon.action.new_chat()
 			end)
 		end,
 	},
@@ -34,8 +34,8 @@ local actions = {
 		callback = function()
 			local tenon = require("tenon")
 			tenon.open()
-			tenon.keymap.new_chat()
-			tenon.keymap.select_agent()
+			tenon.action.new_chat()
+			tenon.action.select_agent()
 		end,
 	},
 	{
@@ -72,7 +72,7 @@ local actions = {
 		name = "Open history",
 		description = "Load a chat from history",
 		callback = function()
-			require("tenon").keymap.select_history()
+			require("tenon").action.select_history()
 		end,
 	},
 }
