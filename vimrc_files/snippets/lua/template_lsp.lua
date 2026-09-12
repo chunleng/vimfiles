@@ -132,6 +132,13 @@ table.insert(
 			require("null-ls").builtins.diagnostics.markdownlint
 		}
 	})
+	vim.api.nvim_create_autocmd("BufWritePost", {
+		pattern = "*.md",
+		callback = function(args)
+			os.execute("markdownlint -f -q " .. vim.fn.expand("%"))
+			vim.cmd("edit")
+		end,
+	})
 ]],
 			{}
 		)
