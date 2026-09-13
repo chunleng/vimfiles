@@ -15,8 +15,9 @@ function M.override_check_parameters(rust_config)
 		local path_from_root = init_params.rootPath:sub(#cwd + 2)
 		local override = rust_config[path_from_root] or rust_config["*"]
 		if override then
-			config.settings["rust-analyzer"].cargo =
-				vim.tbl_extend("force", config.settings["rust-analyzer"].cargo or {}, override)
+			local cargo = config.settings["rust-analyzer"].cargo or {}
+			cargo.extraArgs = vim.list_extend(cargo.extraArgs or {}, { "--tests" })
+			config.settings["rust-analyzer"].cargo = vim.tbl_extend("force", cargo, override)
 		end
 	end
 end
