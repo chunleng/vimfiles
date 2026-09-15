@@ -18,6 +18,36 @@ local actions = {
 		end,
 	},
 	{
+		name = "Insert project file",
+		description = "Pick a file and insert its path at the cursor",
+		condition = function(ctx)
+			return ctx.mode == "i"
+		end,
+		callback = function()
+			local fzf = require("fzf-lua")
+			vim.schedule(function()
+				fzf.files({
+					actions = {
+						["default"] = function(selected)
+							local path = fzf.path.entry_to_file(selected[1]).path
+							if not path or path == "" then
+								return
+							end
+							vim.schedule(function()
+								local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+								vim.api.nvim_buf_set_text(0, row - 1, col, row - 1, col, { path })
+								vim.defer_fn(function()
+									vim.cmd("startinsert")
+									vim.api.nvim_win_set_cursor(0, { row, col + #path })
+								end, 10)
+							end)
+						end,
+					},
+				})
+			end)
+		end,
+	},
+	{
 		name = "New chat",
 		description = "Start a new tenon chat",
 		callback = function()
