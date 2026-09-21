@@ -13,6 +13,13 @@ return {
 					env = "ZAI_API_KEY",
 				},
 			},
+			agnes = {
+				type = "openai_completion",
+				base_url = "https://apihub.agnes-ai.com/v1",
+				api_key = {
+					env = "AGNES_API_KEY",
+				},
+			},
 		},
 		project_agents = vim.empty_dict(),
 		model_type = {
@@ -93,6 +100,18 @@ return {
 					thinking = { type = "enabled", budget_tokens = 10000 },
 					max_tokens = 16000,
 					temperature = 0,
+				},
+			},
+			["agnes-3.0-flash"] = {
+				connector = "agnes",
+				name = "agnes-3.0-flash",
+				default_parameters = {
+					top_p = 1,
+					temperature = 0,
+					stream = true,
+					chat_template_kwargs = {
+						reasoning_effort = "high",
+					},
 				},
 			},
 		},
