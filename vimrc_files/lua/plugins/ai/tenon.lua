@@ -38,6 +38,18 @@ local function setup()
 			},
 			web_search = tenon_constant.tools.web_search_provider,
 		},
+		hooks = {
+			{
+				name = "Send Notification",
+				command = 'terminal-notifier -title "Tenon" -message "Tenon chat needs your attention: $TENON_CHAT_TITLE" -group "tenon" -sound default',
+				type = "needs_attention",
+			},
+			{
+				name = "Say Something",
+				command = "say 'Hey! Can you take a look over here?' -r 200",
+				type = "needs_attention",
+			},
+		},
 		history = {
 			directory = vim.fn.getcwd() .. "/.vim/history",
 		},
