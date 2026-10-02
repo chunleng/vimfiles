@@ -25,6 +25,18 @@ return {
 		config = function()
 			local utils = require("common-utils")
 			local kulala = require("kulala")
+
+			-- Silence the tree-sitter parser setup messages (printed via Logger.notify in terminal Neovim)
+			local logger = require("kulala.logger")
+			local silenced_messages = { "Setting up tree-sitter ...", "Tree-sitter parser is ready!" }
+			local original_notify = logger.notify
+			logger.notify = function(message, ...)
+				if vim.list_contains(silenced_messages, message) then
+					return
+				end
+				return original_notify(message, ...)
+			end
+
 			kulala.setup({
 				ui = {
 					default_view = "headers_body",
