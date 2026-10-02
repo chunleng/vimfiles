@@ -110,9 +110,15 @@ table.insert(
 			[[
 	vim.lsp.config("lua_ls", require("mod.lsp_config").lua_ls)
 	vim.lsp.enable("lua_ls")
-	require("null-ls").setup({ sources = {
-		require("null-ls").builtins.formatting.stylua,
-	} })
+	require("conform").formatters_by_ft.lua = { "stylua" },
+
+	-- If stylua is versioned via ASDF, resolve the binary from a specific
+	-- .tool-versions file (default here: .vim/.tool-versions)
+	-- require("conform").formatters.stylua = {
+	-- 	command = vim.fn.trim(vim.fn.system(
+	-- 		"ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=.vim/.tool-versions asdf which stylua"
+	-- 	)),
+	-- }
 ]],
 			{}
 		)
@@ -158,16 +164,18 @@ table.insert(
 	require("null-ls").setup({
 		root_dir = function() vim.fn.getcwd() end,
 		sources = {
-			-- require("null-ls").builtins.formatting.yapf,
-			-- require("null-ls").builtins.formatting.black,
-			-- require("null-ls").builtins.formatting.isort,
 			-- require("null-ls").builtins.diagnostics.pylint,
 			-- require("null-ls").builtins.diagnostics.mypy,
-			-- require("none-ls.formatting.ruff"),
-			-- require("none-ls.formatting.ruff_format"),
 			-- require("none-ls.diagnostics.ruff"),
 		}
 	})
+	-- Formatting via conform; activate as needed
+	-- require("conform").formatters_by_ft.python = {
+	-- 	"ruff_format",
+	-- 	"black",
+	-- 	"yapf",
+	-- 	"isort",
+	-- }
 ]],
 			{}
 		)
@@ -187,16 +195,18 @@ table.insert(
 	require("null-ls").setup({
 		root_dir = function() vim.fn.getcwd() end,
 		sources = {
-			-- require("null-ls").builtins.formatting.yapf,
-			-- require("null-ls").builtins.formatting.black,
-			-- require("null-ls").builtins.formatting.isort,
 			-- require("null-ls").builtins.diagnostics.pylint,
 			-- require("null-ls").builtins.diagnostics.mypy,
-			-- require("none-ls.formatting.ruff"),
-			-- require("none-ls.formatting.ruff_format"),
 			-- require("none-ls.diagnostics.ruff"),
 		}
 	})
+	-- Formatting via conform; activate as needed
+	-- require("conform").formatters_by_ft.python = {
+	-- 	"ruff_format",
+	-- 	"black",
+	-- 	"yapf",
+	-- 	"isort",
+	-- }
 ]],
 			{}
 		)
@@ -228,14 +238,17 @@ table.insert(
 	)
 	vim.lsp.config("taplo", require("mod.lsp_config").taplo)
 	vim.lsp.enable({"rust_analyzer", "taplo"})
+	require("conform").formatters_by_ft.rust = {
+		"rustfmt",
+		-- "leptosfmt",
+		-- "dxfmt",
+	}
 	require("null-ls").setup({
 		root_dir = function()
 			vim.fn.getcwd()
 		end,
 		sources = vim.list_extend(require("mod.lsp.none_ls.sources").cargo_checks(rust_config), {
 			-- Activate when necessary
-			-- require("null-ls").builtins.formatting.leptosfmt
-			-- require("null-ls").builtins.formatting.dxfmt
 		}),
 	})
 ]],

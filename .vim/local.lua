@@ -24,6 +24,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 vim.lsp.config("lua_ls", require("mod.lsp_config").lua_ls)
 vim.lsp.enable("lua_ls")
-require("null-ls").setup({ sources = {
-	require("null-ls").builtins.formatting.stylua,
-} })
+require("conform").formatters_by_ft = {
+	lua = { "stylua" },
+}

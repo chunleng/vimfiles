@@ -6,6 +6,7 @@
   "bufdelete.nvim": { "branch": "master", "commit": "f6bcea78afb3060b198125256f897040538bcb81" },
   "bufferline.nvim": { "branch": "main", "commit": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3" },
   "bullets.vim": { "branch": "master", "commit": "448ad2a159c5f2540f6c9738f3bb9e6f15a41734" },
+  "conform.nvim": { "branch": "master", "commit": "016802de402556da54c36bd7359b441266b01cdd" },
   "dressing.nvim": { "branch": "master", "commit": "2d7c2db2507fa3c4956142ee607431ddb2828639" },
   "fzf-lua": { "branch": "main", "commit": "eab53acb3fd36479f084f854b4418d02b5c70382" },
   "gitlinker.nvim": { "branch": "master", "commit": "a1b74070bbd5e50128190c85b09f1431ea5fbd83" },

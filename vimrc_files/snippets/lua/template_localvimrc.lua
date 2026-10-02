@@ -23,17 +23,15 @@ table.insert(
 	--------------------------------
 	-- Load once per vim instance --
 	--------------------------------
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		pattern = "*",
-		callback = function(args)
-			local filename = args.file or ""
-			-- Uncomment following to exclude filetype
-			-- if not filename:match("%.ext$") then
-			vim.cmd("silent! lua vim.lsp.buf.format({ timeout_ms = 5000 })")
-			-- end
 
-		end,
-	})
+	require("conform").formatters_by_ft = {
+		lua = { "stylua" },
+	}
+	require("conform").formatters.stylua = {
+		command = vim.fn.trim(vim.fn.system(
+			"ASDF_DEFAULT_TOOL_VERSIONS_FILENAME=.vim/.tool-versions asdf which stylua"
+		)),
+	}
 ]],
 			{}
 		)
