@@ -30,7 +30,7 @@ local function get_developer_agent()
 	local tenon_constant = require("mod.global_constants").tenon
 	return vim.tbl_deep_extend("keep", {
 		model = tenon_constant.model_type.thinker,
-		choreos = { "find_software_bug_root_cause", "analyze_software_change", "implement_code" },
+		choreos = { "find_software_bug_root_cause", "analyze_software_request", "implement_code" },
 	}, base)
 end
 
