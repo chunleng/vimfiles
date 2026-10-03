@@ -6,13 +6,6 @@ return {
 				base_url = "https://ollama.com",
 				bearer = { env = "OLLAMA_API_KEY" },
 			},
-			zai = {
-				type = "anthropic",
-				base_url = "https://api.z.ai/api/anthropic",
-				api_key = {
-					env = "ZAI_API_KEY",
-				},
-			},
 			agnes = {
 				type = "openai_completion",
 				base_url = "https://apihub.agnes-ai.com/v1",
@@ -78,24 +71,6 @@ return {
 				connector = "ollama_cloud",
 				name = "deepseek-v4.1-flash",
 				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
-			},
-			["glm-5.2-zai"] = {
-				connector = "zai",
-				name = "glm-5.2",
-				default_parameters = {
-					thinking = { type = "enabled", budget_tokens = 10000 },
-					max_tokens = 16000,
-					temperature = 0,
-				},
-			},
-			["glm-5.3-zai"] = {
-				connector = "zai",
-				name = "glm-5.3",
-				default_parameters = {
-					thinking = { type = "enabled", budget_tokens = 10000 },
-					max_tokens = 16000,
-					temperature = 0,
-				},
 			},
 			["agnes-3.0-flash"] = {
 				connector = "agnes",
