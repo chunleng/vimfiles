@@ -19,6 +19,7 @@ local function get_developer_base_agent()
 			{ type = "system", name = "Read First Attitude", condition = "when making code changes" },
 			{ type = "system", name = "YAGNI Attitude", condition = "when making code changes" },
 			{ type = "system", name = "Code Comment Basics", condition = "when making code changes" },
+			{ type = "system", name = "Respect Writing Intent", condition = "when updating comment or docstring" },
 			{ type = "system", name = "Testing Basics", condition = "when making test code changes" },
 			{ type = "system", name = "Bug Isolation", condition = "when trying to understand cause of a bug" },
 		},

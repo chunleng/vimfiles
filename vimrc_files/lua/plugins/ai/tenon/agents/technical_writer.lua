@@ -16,6 +16,7 @@ local function get_technical_writer_agent()
 		directive = {
 			{ type = "system", name = "AGENTS.md" },
 			{ type = "system", name = "Read First Attitude", condition = "when editing documentation" },
+			{ type = "system", name = "Respect Writing Intent", condition = "when editing documentation" },
 		},
 		choreos = {
 			"create_pr_description",
