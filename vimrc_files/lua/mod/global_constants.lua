@@ -44,6 +44,12 @@ return {
 				name = "glm-5.2",
 				default_parameters = { think = "high", temperature = 0, top_p = 1 },
 			},
+			["mistral-large-4"] = {
+				connector = "ollama_cloud",
+				name = "mistral-large-4",
+				vision = true,
+				default_parameters = { think = "high", temperature = 0, top_p = 1 },
+			},
 			["kimi-k3"] = {
 				connector = "ollama_cloud",
 				name = "kimi-k3",
