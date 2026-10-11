@@ -324,6 +324,8 @@ function M.setup()
 	M.set_hl("NonText", { fg = 10 })
 	M.set_hl("Whitespace", { fg = M.blender.bg_lighter_2 })
 	M.set_hl("WinSeparator", { fg = M.blender.bg_lighter_2 })
+	M.set_hl("WinBar", { bg = M.blender.bg_lighter_1, fg = 6, bold = true })
+	M.set_hl("WinBarNC", { bg = M.blender.bg_lighter_1, fg = 6, bold = true })
 	M.set_hl("ColorColumn", { bg = M.blender.void })
 	M.set_hl("CursorLine", { bg = M.blender.bg_lighter_1 })
 	M.set_hl("Folded", {
