@@ -9,13 +9,6 @@ return {
 				base_url = "https://ollama.com",
 				bearer = { env = "OLLAMA_API_KEY" },
 			},
-			agnes = {
-				type = "openai_completion",
-				base_url = "https://apihub.agnes-ai.com/v1",
-				api_key = {
-					env = "AGNES_API_KEY",
-				},
-			},
 		},
 		project_agents = vim.empty_dict(),
 		model_type = {
@@ -25,6 +18,11 @@ return {
 			vision = "glm-5.3-flash",
 		},
 		models = {
+			["beam-1.0"] = {
+				connector = "ollama_cloud",
+				name = "beam",
+				default_parameters = { think = "high", temperature = 0, top_p = 1 },
+			},
 			["glm-5.3-flash-high"] = {
 				connector = "ollama_cloud",
 				name = "glm-5.3-flash",
@@ -53,15 +51,15 @@ return {
 				vision = true,
 				default_parameters = { think = "high", temperature = 0, top_p = 1 },
 			},
-			["kimi-k3"] = {
+			["minimax-m3.1-flash"] = {
 				connector = "ollama_cloud",
-				name = "kimi-k3",
+				name = "minimax-m3.1-flash",
 				vision = true,
 				default_parameters = { think = "high", temperature = 0, top_p = 1 },
 			},
-			["kimi-k2.7-code"] = {
+			["kimi-k3"] = {
 				connector = "ollama_cloud",
-				name = "kimi-k2.7-code",
+				name = "kimi-k3",
 				vision = true,
 				default_parameters = { think = "high", temperature = 0, top_p = 1 },
 			},
@@ -78,22 +76,14 @@ return {
 			},
 			["deepseek-v4.1-flash"] = {
 				connector = "ollama_cloud",
-				name = "deepseek-v4.1-flash",
+				name = "deepseek-v4.1-flash:1017",
 				vision = true,
-				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
+				default_parameters = { think = "high", temperature = 0, top_p = 1 },
 			},
-			["agnes-3.0-flash"] = {
-				connector = "agnes",
-				name = "agnes-3.0-flash",
-				vision = true,
-				default_parameters = {
-					top_p = 1,
-					temperature = 0,
-					stream = true,
-					chat_template_kwargs = {
-						reasoning_effort = "high",
-					},
-				},
+			["nemotron-3-nano"] = {
+				connector = "ollama_cloud",
+				name = "nemotron-3-nano:30b",
+				default_parameters = { think = "medium", temperature = 0, top_p = 1 },
 			},
 		},
 		tools = {
