@@ -22,6 +22,7 @@ end
 local function setup()
 	local actions = require("fzf-lua.actions")
 	local fzf = require("fzf-lua")
+	local git_constant = require("mod.global_constants").git
 	fzf.setup({
 		keymap = {
 			builtin = {
@@ -33,7 +34,7 @@ local function setup()
 			},
 			fzf = { ["enter"] = "select+accept" },
 		},
-		files = { git_icons = false, fd_opts = "--type f --type l --exclude .git --follow" },
+		files = { git_icons = git_constant.enable, fd_opts = "--type f --type l --exclude .git --follow" },
 		actions = { files = { ["default"] = actions.file_edit } },
 		dap = {
 			variables = {

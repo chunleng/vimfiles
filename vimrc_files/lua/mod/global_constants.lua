@@ -1,4 +1,7 @@
 return {
+	git = {
+		enable = true,
+	},
 	tenon = {
 		connectors = {
 			ollama_cloud = {

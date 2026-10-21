@@ -1,5 +1,6 @@
 local function setup()
 	local api = require("nvim-tree.api")
+	local git_constant = require("mod.global_constants").git
 	require("nvim-tree").setup({
 		disable_netrw = false,
 		hijack_cursor = true,
@@ -94,6 +95,9 @@ local function setup()
 			utils.buf_keymap(bufnr, "n", ">>", "10<c-w>>")
 			utils.buf_keymap(bufnr, "n", "<<", "10<c-w><")
 		end,
+		git = {
+			enable = git_constant.enable,
+		},
 	})
 
 	local theme = require("common-theme")
