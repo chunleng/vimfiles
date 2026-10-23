@@ -33,6 +33,10 @@ local function goto_file()
 		path = vim.fn.expand("<cfile>")
 	end
 
+	if path == "~" or path:sub(1, 2) == "~/" then
+		path = vim.fn.expand("~") .. path:sub(2)
+	end
+
 	if not path:match("^/") then
 		local base = vim.api.nvim_buf_get_name(0) ~= "" and vim.fn.expand("%:h") or vim.fn.getcwd()
 		path = base .. "/" .. path
