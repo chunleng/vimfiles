@@ -23,8 +23,8 @@ local function setup()
 			fetch_webpage = {
 				model = tenon_constant.model_type.fast,
 			},
-			analyze_image = {
-				model = tenon_constant.model_type.vision,
+			read_image = {
+				fallback_model = tenon_constant.model_type.vision,
 			},
 			run_command = {
 				whitelist = vim.list_extend(
