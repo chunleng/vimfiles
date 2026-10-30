@@ -55,13 +55,33 @@ local function resolve_override_file(override_file)
 	return nil
 end
 
+local function remove_deletions(merged, override)
+	local result = merged
+	for key, value in pairs(override) do
+		local replacement = merged[key]
+		if value == vim.NIL then
+			replacement = nil
+		elseif type(value) == "table" and type(replacement) == "table" then
+			replacement = remove_deletions(replacement, value)
+		end
+
+		if replacement ~= merged[key] then
+			if result == merged then
+				result = vim.tbl_extend("force", merged, {})
+			end
+			result[key] = replacement
+		end
+	end
+	return result
+end
+
 local override_files = find_global_override_files()
 
 for _, override_file in ipairs(override_files) do
 	local override = resolve_override_file(override_file)
 	if override then
-		-- We
-		package.loaded["mod.global_constants"] = vim.tbl_deep_extend("force", require("mod.global_constants"), override)
+		local merged = vim.tbl_deep_extend("force", require("mod.global_constants"), override)
+		package.loaded["mod.global_constants"] = remove_deletions(merged, override)
 	end
 end
 
