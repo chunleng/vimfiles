@@ -5,7 +5,6 @@ local function get_researcher_agent()
 		tool_names = {
 			"list_files",
 			"read_file",
-			"analyze_image",
 			"search_text",
 			"web_search",
 			"fetch_webpage",

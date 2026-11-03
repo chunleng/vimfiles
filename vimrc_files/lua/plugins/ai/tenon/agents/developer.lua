@@ -3,7 +3,6 @@ local function get_developer_base_agent()
 		tool_names = {
 			"list_files",
 			"read_file",
-			"analyze_image",
 			"search_dependency_code",
 			"search_text",
 			"web_search",
