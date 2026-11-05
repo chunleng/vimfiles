@@ -32,10 +32,12 @@ return {
 			["mistral-large-4"] = { connector = "ollama_cloud", name = "mistral-large-4", vision = true },
 			["minimax-m3.1-flash"] = { connector = "ollama_cloud", name = "minimax-m3.1-flash", vision = true },
 			-- https://huggingface.co/moonshotai/Kimi-K3 recommends temperature=1.0 and top_p=0.95 for kimi-k3
-			["kimi-k3"] = { connector = "ollama_cloud", name = "kimi-k3", vision = true },
+			["kimi-k3.1)"] = { connector = "ollama_cloud", name = "kimi-k3.1-pro", vision = true },
 			["gemma4"] = { connector = "ollama_cloud", name = "gemma4", vision = true },
 			["deepseek-v4-pro"] = { connector = "ollama_cloud", name = "deepseek-v4-pro:0813" },
 			["deepseek-v4.1-flash"] = { connector = "ollama_cloud", name = "deepseek-v4.1-flash:1017", vision = true },
+			["mimo-v2.6-flash"] = { connector = "ollama_cloud", name = "mimo-v2.6-flash", vision = true },
+			["mimo-v2.6-pro"] = { connector = "ollama_cloud", name = "mimo-v2.6-pro", vision = true },
 			["nemotron-3-nano"] = { connector = "ollama_cloud", name = "nemotron-3-nano:30b" },
 		},
 		tools = {
