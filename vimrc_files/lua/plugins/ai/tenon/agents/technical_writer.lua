@@ -19,7 +19,7 @@ local function get_technical_writer_agent()
 		},
 		choreos = {
 			"create_pr_description",
-			"create_software_specification",
+			"edit_software_specification",
 			"assess_project_doc_needs",
 			"edit_howto_document",
 			"edit_reference_document",
