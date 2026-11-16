@@ -26,6 +26,7 @@ return {
 		},
 		models = {
 			["beam-1.0"] = { connector = "ollama_cloud", name = "beam" },
+			["inkling-2-small"] = { connector = "ollama_cloud", name = "inkling-2-small", vision = true },
 			-- https://docs.z.ai/guides/vlm/glm-5.3-flash recommends temperature=1.0 and top_p=0.95 for glm-5.3-flash
 			["glm-5.3-flash"] = { connector = "ollama_cloud", name = "glm-5.3-flash", vision = true },
 			["glm-5.3"] = { connector = "ollama_cloud", name = "glm-5.3" },
