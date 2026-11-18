@@ -7,7 +7,7 @@ return {
 			ollama_cloud = {
 				type = "ollama",
 				base_url = "https://ollama.com",
-				bearer = { env = "OLLAMA_API_KEY" },
+				api_key = { env = "OLLAMA_API_KEY" },
 				parameters = {
 					think = { default_value = "medium", options = { false, "low", "medium", "high", "max" } },
 					-- Recommended default for temperature/top_p is 1.0/0.95 for modern models, it's usually what is
