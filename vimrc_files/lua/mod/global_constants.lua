@@ -37,6 +37,24 @@ return {
 					},
 				},
 			},
+			subq = {
+				type = "openai_completion",
+				base_url = "https://api.subq.ai/v1",
+				api_key = { env = "SUBQ_API_KEY" },
+				parameters = {
+					reasoning_effort = {
+						default_value = "high",
+						options = {
+							"low",
+							"high",
+							"max",
+						},
+					},
+					store = {
+						default_value = "false",
+					},
+				},
+			},
 		},
 		project_agents = vim.empty_dict(),
 		model_type = {
@@ -51,6 +69,7 @@ return {
 			-- ["gpt-6.2-astra"] = { connector = "openrouter_openai", name = "openai/gpt-6.2-astra" },
 			-- ["gpt-6.2-sol"] = { connector = "openrouter_openai", name = "openai/gpt-6.2-sol" },
 			["gpt-6.1-sol"] = { connector = "openrouter_openai", name = "openai/gpt-6.1-sol" },
+			["subq-savant-1.4"] = { connector = "subq", name = "subq-savant-1.4" },
 			["beam-1.0"] = { connector = "ollama_cloud", name = "beam" },
 			["inkling-2-small"] = { connector = "ollama_cloud", name = "inkling-2-small", vision = true },
 			-- https://docs.z.ai/guides/vlm/glm-5.3-flash recommends temperature=1.0 and top_p=0.95 for glm-5.3-flash
