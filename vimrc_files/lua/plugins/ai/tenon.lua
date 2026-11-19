@@ -50,9 +50,7 @@ local function setup()
 				type = "needs_attention",
 			},
 		},
-		history = {
-			directory = vim.fn.getcwd() .. "/.vim/history",
-		},
+		directory = ".vim/tenon",
 		models = tenon_constant.models,
 		title = {
 			model = tenon_constant.model_type.fast,
