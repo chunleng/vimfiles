@@ -27,10 +27,11 @@ local function setup()
 				fallback_model = tenon_constant.model_type.vision,
 			},
 			run_command = {
-				whitelist = vim.list_extend(
-					{ "git diff *", "git show *", "git status *" },
-					tenon_constant.tools.whitelist_commands
-				),
+				whitelist = vim.list_extend({
+					{ argv = { "git", "diff" }, match = "prefix" },
+					{ argv = { "git", "show" }, match = "prefix" },
+					{ argv = { "git", "status" }, match = "prefix" },
+				}, tenon_constant.tools.whitelist_commands),
 				check_models = {
 					tenon_constant.model_type.fast,
 					tenon_constant.model_type.standard,
