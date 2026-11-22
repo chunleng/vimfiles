@@ -77,6 +77,7 @@ return {
 			["glm-5.3"] = { connector = "ollama_cloud", name = "glm-5.3" },
 			["mistral-large-4"] = { connector = "ollama_cloud", name = "mistral-large-4", vision = true },
 			["minimax-m3.1-flash"] = { connector = "ollama_cloud", name = "minimax-m3.1-flash", vision = true },
+			["hy4"] = { connector = "ollama_cloud", name = "hy4", vision = true },
 			-- https://huggingface.co/moonshotai/Kimi-K3 recommends temperature=1.0 and top_p=0.95 for kimi-k3
 			["kimi-k3.1"] = { connector = "ollama_cloud", name = "kimi-k3.1-pro", vision = true },
 			["gemma4"] = { connector = "ollama_cloud", name = "gemma4", vision = true },
