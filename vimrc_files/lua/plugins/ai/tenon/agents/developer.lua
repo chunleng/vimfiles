@@ -21,6 +21,7 @@ local function get_developer_base_agent()
 			{ type = "system", name = "Testing Basics", condition = "when editing test code" },
 			{ type = "system", name = "Bug Isolation", condition = "when trying to understand cause of a bug" },
 		},
+		project_skills = true,
 	}
 end
 
